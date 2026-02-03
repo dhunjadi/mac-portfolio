@@ -1,5 +1,4 @@
 function App() {
-  console.log("fsfds");
   return <h1>App</h1>;
 }
 
