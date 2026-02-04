@@ -1,0 +1,14 @@
+.c-dock {
+  width: 100%;
+  position: fixed;
+  bottom: 1rem;
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: saturate(180%) blur(0.5rem);
+  }
+}
