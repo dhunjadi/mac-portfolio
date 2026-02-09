@@ -1,5 +1,8 @@
 @use "./base/base.scss";
 
+// Screens
+@use "./screens/turnOnScreen.scss";
+
 // Components
 @use "./components/menuBar.scss";
 @use "./components/dock.scss";
