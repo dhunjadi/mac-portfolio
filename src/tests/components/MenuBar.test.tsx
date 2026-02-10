@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
-import MenuBar from "../components/MenuBar";
+import MenuBar from "../../components/MenuBar";
 
 test("MenuBar renders Apple icon and date", () => {
   render(<MenuBar />);

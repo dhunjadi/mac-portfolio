@@ -22,7 +22,7 @@ const TurnOnScreen = () => {
     <div className="s-turnOn">
       <FontAwesomeIcon icon={faApple} size="10x" color="white" />
 
-      <div className="s-turnOn__loader">
+      <div className="s-turnOn__loader" data-testid="boot-loader">
         <div className="s-turnOn__loader_progress" />
       </div>
     </div>

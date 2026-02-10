@@ -1,3 +1,5 @@
+@import "../abstracts/mixins.scss";
+
 $bar-bg: #353535;
 $progress-color: white;
 $bar-height: 0.5rem;
@@ -14,14 +16,16 @@ $animation-duration: 3s;
   align-items: center;
   gap: 5rem;
 
-  padding: 0 20%;
-
   &__loader {
-    width: 100%;
+    width: 25rem;
     height: $bar-height;
     background-color: $bar-bg;
     border-radius: 1rem;
     overflow: hidden;
+
+    @include respond(iPad) {
+      width: 30rem;
+    }
 
     &_progress {
       width: 0;
