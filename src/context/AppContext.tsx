@@ -4,6 +4,8 @@ import { LS_KEY } from "../data/constants";
 export interface AppContextType {
   isTurnedOn: boolean;
   setIsTurnedOn: React.Dispatch<React.SetStateAction<boolean>>;
+  showMenuBarAndDock: boolean;
+  setShowMenuBarAndDock: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -17,6 +19,7 @@ export function AppContextProvider({
   const [isTurnedOn, setIsTurnedOn] = useState<boolean>(() => {
     return localStorage.getItem(LS_KEY) === "true";
   });
+  const [showMenuBarAndDock, setShowMenuBarAndDock] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(LS_KEY, String(isTurnedOn));
@@ -26,8 +29,10 @@ export function AppContextProvider({
     () => ({
       isTurnedOn,
       setIsTurnedOn,
+      showMenuBarAndDock,
+      setShowMenuBarAndDock,
     }),
-    [isTurnedOn],
+    [isTurnedOn, showMenuBarAndDock],
   );
 
   return (

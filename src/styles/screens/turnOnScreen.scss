@@ -1,4 +1,4 @@
-@import "../abstracts/mixins.scss";
+@use "../abstracts/mixins" as *;
 
 $bar-bg: #353535;
 $progress-color: white;
