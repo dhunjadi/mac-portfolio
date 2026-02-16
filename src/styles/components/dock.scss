@@ -1,10 +1,28 @@
 @use "../abstracts/mixins" as *;
 
 .c-dock {
-  width: 100%;
+  --dock-items: 1;
+  --dock-gap: 0.35rem;
+  --dock-padding-x: 1rem;
+  --icon-max-size: 6rem;
+  --icon-min-size: 2.2rem;
+  --dock-outer-margin: 2rem;
+
+  width: fit-content;
+  max-width: calc(100vw - var(--dock-outer-margin));
   position: fixed;
   bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+
   display: flex;
+  gap: var(--dock-gap);
+  align-items: center;
+  padding: 0 var(--dock-padding-x);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: saturate(180%) blur(0.5rem);
   justify-content: center;
 
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -13,20 +31,24 @@
     transform: translateY(calc(200%));
   }
 
-  &__container {
-    display: flex;
-    padding: 0 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 1rem;
-    background-color: rgba(0, 0, 0, 0.25);
-    backdrop-filter: saturate(180%) blur(0.5rem);
+  img {
+    width: clamp(
+      var(--icon-min-size),
+      calc(
+        (
+            100vw - var(--dock-outer-margin) - (var(--dock-padding-x) * 2) -
+              ((var(--dock-items) - 1) * var(--dock-gap))
+          ) /
+          var(--dock-items)
+      ),
+      var(--icon-max-size)
+    );
+    height: auto;
+    flex: 0 0 auto;
 
-    svg {
-      max-width: 100%;
-
-      @include respond(md) {
-        font-size: 3rem;
-      }
+    @include respond(md) {
+      --icon-max-size: 3rem;
+      --icon-min-size: 1.8rem;
     }
   }
 }
