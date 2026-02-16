@@ -16,19 +16,20 @@
   transform: translateX(-50%);
 
   display: flex;
-  gap: var(--dock-gap);
+  justify-content: center;
   align-items: center;
+  gap: var(--dock-gap);
+
   padding: 0 var(--dock-padding-x);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.25);
   backdrop-filter: saturate(180%) blur(0.5rem);
-  justify-content: center;
 
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
   &.hidden {
-    transform: translateY(calc(200%));
+    transform: translate(-50%, 200%);
   }
 
   img {
@@ -45,6 +46,7 @@
     );
     height: auto;
     flex: 0 0 auto;
+    transform-origin: center bottom;
 
     @include respond(md) {
       --icon-max-size: 3rem;
