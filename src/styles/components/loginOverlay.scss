@@ -1,3 +1,5 @@
+@use "../abstracts/mixins" as *;
+
 .c-loginOverlay {
   width: 100vw;
   height: 100vh;
@@ -34,23 +36,33 @@
     }
 
     &_input {
-      position: relative;
+      display: flex;
+      align-items: center;
+      background-color: #656565;
+      border-radius: 999rem;
+      padding: 0 0.5rem 0 1rem;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
 
-      input {
-        background-color: #656565;
-        border-radius: 99rem;
-        color: white;
-        padding: 0.5rem;
-        outline: none;
-        border: none;
-      }
+    &_input input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      padding: 0.8rem 0;
+      font-size: 1.2rem;
+    }
 
-      img {
-        position: absolute;
-        width: 2rem;
-        right: 0;
-        top: 0;
-        transform: translate(-25%, 25%);
+    &_input img {
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+
+      @include respond(md) {
+        width: 1.8rem;
+        height: 1.8rem;
       }
     }
   }
@@ -73,6 +85,11 @@
         background: #656565;
         border-radius: 50%;
         padding: 0.5rem;
+
+        @include respond(xs) {
+          width: 2.5rem;
+          padding: 0.3rem;
+        }
       }
 
       button {

@@ -13,7 +13,11 @@ const MenuBar = ({ hideAppleLogo, isVisible }: MenuBarProps) => {
   return (
     <div className={`c-menuBar ${isVisible ? "" : "hidden"}`}>
       {!hideAppleLogo && (
-        <FontAwesomeIcon icon={faApple} size="2x" color="white" />
+        <FontAwesomeIcon
+          icon={faApple}
+          color="white"
+          className="c-menuBar__appleLogo"
+        />
       )}
       <strong className="c-menuBar__date">{date}</strong>
     </div>

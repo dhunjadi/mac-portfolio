@@ -1,12 +1,36 @@
 @mixin respond($breakpoint) {
-  @if $breakpoint == iPad {
-    @media (min-width: 600px) {
+  @if $breakpoint == xs {
+    @media (min-width: 36em) {
       @content;
     }
   }
 
-  @if $breakpoint == desktop {
-    @media (min-width: 1200px) {
+  @if $breakpoint == sm {
+    @media (min-width: 48em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == md {
+    @media (min-width: 62em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == lg {
+    @media (min-width: 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == xl {
+    @media (min-width: 87.5em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == xxl {
+    @media (min-width: 100em) {
       @content;
     }
   }

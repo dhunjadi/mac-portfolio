@@ -1,3 +1,5 @@
+@use "../abstracts/mixins" as *;
+
 *,
 *::before,
 *::after {
@@ -9,6 +11,30 @@
 html {
   font-size: 62.5%;
   font-family: "Nunito", sans-serif;
+
+  @include respond(xs) {
+    font-size: 75%;
+  }
+
+  @include respond(sm) {
+    font-size: 87.5%;
+  }
+
+  @include respond(md) {
+    font-size: 100%;
+  }
+
+  @include respond(lg) {
+    font-size: 112.5%;
+  }
+
+  @include respond(xl) {
+    font-size: 125%;
+  }
+
+  @include respond(xxl) {
+    font-size: 137.5%;
+  }
 }
 
 .background {
