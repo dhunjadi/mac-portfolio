@@ -31,8 +31,36 @@
     align-items: center;
     font-size: 2rem;
 
+    @include respond(sm) {
+      font-size: 1.75rem;
+    }
+
+    @include respond(lg) {
+      font-size: 1.5rem;
+    }
+
     &_img {
       width: 15rem;
+
+      @include respond(sm) {
+        width: 12rem;
+      }
+
+      @include respond(md) {
+        width: 11rem;
+      }
+
+      @include respond(lg) {
+        width: 10rem;
+      }
+
+      @include respond(xl) {
+        width: 9rem;
+      }
+
+      @include respond(xxl) {
+        width: 8rem;
+      }
     }
 
     &_input {
@@ -43,6 +71,10 @@
       padding: 0 0.5rem 0 1rem;
       gap: 0.8rem;
       margin-top: 2rem;
+
+      @include respond(lg) {
+        margin-top: 1rem;
+      }
     }
 
     &_input input {
@@ -53,6 +85,11 @@
       color: white;
       padding: 0.8rem 0;
       font-size: 1.2rem;
+
+      @include respond(lg) {
+        padding: 0.5rem 0;
+        font-size: 1rem;
+      }
     }
 
     &_input img {
@@ -63,6 +100,11 @@
       @include respond(md) {
         width: 1.8rem;
         height: 1.8rem;
+      }
+
+      @include respond(lg) {
+        width: 1.5rem;
+        height: 1.5rem;
       }
     }
   }
@@ -89,6 +131,11 @@
         @include respond(xs) {
           width: 2.5rem;
           padding: 0.3rem;
+        }
+
+        @include respond(lg) {
+          width: 2rem;
+          padding: 0.2rem;
         }
       }
 
