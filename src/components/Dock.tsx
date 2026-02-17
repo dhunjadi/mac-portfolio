@@ -2,12 +2,11 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { useMotionValue } from "framer-motion";
 import appleLogo from "/icons/apple-logo.svg";
 import DockIcon from "./DockIcon";
+import { useLoginStore } from "../stores/loginStore";
 
-type DockProps = {
-  isVisible?: boolean;
-};
+const Dock = () => {
+  const isLoggedIn = useLoginStore((state) => state.isLogegdIn);
 
-const Dock = ({ isVisible }: DockProps) => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ const Dock = ({ isVisible }: DockProps) => {
 
   return (
     <div
-      className={`c-dock ${isVisible ? "" : "hidden"}`}
+      className={`c-dock ${isLoggedIn ? "" : "hidden"}`}
       style={dockStyle}
       onMouseMove={(e) => {
         if (isDesktop) mouseX.set(e.clientX);

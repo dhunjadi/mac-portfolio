@@ -1,8 +1,8 @@
 import { Outlet, Navigate } from "react-router";
-import { useAppContext } from "../hooks/useAppContext";
+import { useTurnOnStore } from "../stores/turnOnStore";
 
 const ProtectedRoute = () => {
-  const { isTurnedOn } = useAppContext();
+  const isTurnedOn = useTurnOnStore((state) => state.isTurnedOn);
 
   return isTurnedOn ? <Outlet /> : <Navigate to="/turn-on" />;
 };

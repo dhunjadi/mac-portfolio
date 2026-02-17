@@ -4,15 +4,16 @@ import powerOffIcon from "/icons/power-off.svg";
 import restartIcon from "/icons/restart.svg";
 import sleepIcon from "/icons/sleep.svg";
 import arrowRightCircle from "/icons/arrow-right-circle.svg";
-import { useAppContext } from "../hooks/useAppContext";
+import { useLoginStore } from "../stores/loginStore";
 
 const LoginOverlay = () => {
-  const { showMenuBarAndDock, setShowMenuBarAndDock } = useAppContext();
+  const isLoggedIn = useLoginStore((state) => state.isLogegdIn);
+  const login = useLoginStore((state) => state.login);
 
   const [password, setPassword] = useState("");
 
   return (
-    <div className={`c-loginOverlay ${showMenuBarAndDock ? "hidden" : ""}`}>
+    <div className={`c-loginOverlay ${isLoggedIn ? "hidden" : ""}`}>
       <div className="c-loginOverlay__userInfo">
         <div className="c-loginOverlay__userInfo_img">
           <img src={userIcon} alt="user icon" />
@@ -30,13 +31,13 @@ const LoginOverlay = () => {
             placeholder="Enter anything..."
             onKeyDown={(e) => {
               if (e.key === "Enter" && password.length > 0) {
-                setShowMenuBarAndDock(true);
+                login();
               }
             }}
           />
           {password.length > 0 && (
             <img
-              onClick={() => setShowMenuBarAndDock(true)}
+              onClick={() => login()}
               src={arrowRightCircle}
               alt="right arrow inside a circle"
             />

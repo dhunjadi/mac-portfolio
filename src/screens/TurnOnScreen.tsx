@@ -1,22 +1,22 @@
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useAppContext } from "../hooks/useAppContext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { appRoutes } from "../data/appRoutes";
+import { useTurnOnStore } from "../stores/turnOnStore";
 
 const TurnOnScreen = () => {
-  const { setIsTurnedOn } = useAppContext();
+  const turnOn = useTurnOnStore((state) => state.turnOn);
   const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsTurnedOn(true);
+      turnOn();
       navigate(appRoutes.home);
     }, 3500);
 
     return () => clearTimeout(timer);
-  }, [setIsTurnedOn, navigate]);
+  }, [turnOn, navigate]);
 
   return (
     <div className="s-turnOn">
