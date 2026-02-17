@@ -1,0 +1,85 @@
+@use "../abstracts/mixins" as *;
+
+.c-windowWrapper {
+  width: min(50rem, calc(100vw - 2rem));
+  position: fixed;
+  top: 5.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  border-radius: 1.2rem;
+  @include glass-dark;
+
+  overflow: hidden;
+
+  &__titleBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1rem;
+    position: relative;
+
+    &_buttons {
+      position: absolute;
+      left: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      button {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+
+        @include respond(md) {
+          width: 0.75rem;
+          height: 0.75rem;
+        }
+      }
+
+      [class="--close"] {
+        background: #ff5f57;
+        position: relative;
+
+        &:hover::after {
+          content: "\00D7";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1rem;
+        }
+      }
+
+      [class="--minimize"] {
+        background: #febc2e;
+
+        &:hover::after {
+          content: "\2212";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1rem;
+        }
+      }
+
+      [class="--maximize"] {
+        background: #28c840;
+      }
+    }
+
+    &_title {
+      font-size: 1.4rem;
+      line-height: 1;
+      color: white;
+      font-weight: 600;
+    }
+  }
+
+  &__content {
+    padding: 1.6rem;
+  }
+}

@@ -1,9 +1,11 @@
+import type { AppleMenuDropdownItem } from "../types";
+
 type AppleMenuDropdownProps = {
-  onSelect: (action: string) => void;
+  onSelect: (action: AppleMenuDropdownItem) => void;
 };
 
-const menuItems = [
-  "About This Mac",
+const menuItems: AppleMenuDropdownItem[] = [
+  "About This Dev",
   "Calculator",
   "Weather",
   "System Preferences",

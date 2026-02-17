@@ -9,3 +9,7 @@
 @use "./components/dock.scss";
 @use "./components/loginOverlay.scss";
 @use "./components/appleMenuDropdown.scss";
+@use "./components/windowWrapper.scss";
+
+// Windows
+@use "./components/windows/aboutThisDevWindow.scss";

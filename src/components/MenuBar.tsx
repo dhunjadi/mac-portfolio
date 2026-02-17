@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import dayjs from "dayjs";
 import { useLoginStore } from "../stores/loginStore";
+import { useWindowStore } from "../stores/windowStore";
 import AppleMenuDropdown from "./AppleMenuDropdown";
+import type { AppleMenuDropdownItem } from "../types";
 
 type MenuBarProps = {
   hideAppleLogo?: boolean;
@@ -11,6 +13,7 @@ type MenuBarProps = {
 
 const MenuBar = ({ hideAppleLogo }: MenuBarProps) => {
   const isLoggedIn = useLoginStore((state) => state.isLogegdIn);
+  const openAboutWindow = useWindowStore((state) => state.openAboutWindow);
   const [isAppleMenuOpen, setIsAppleMenuOpen] = useState(false);
   const appleMenuRef = useRef<HTMLDivElement | null>(null);
   const date = dayjs().format("ddd D MMM HH:mm");
@@ -33,7 +36,14 @@ const MenuBar = ({ hideAppleLogo }: MenuBarProps) => {
     };
   }, [isAppleMenuOpen]);
 
-  const handleAppleMenuSelect = (item: string) => {
+  const handleAppleMenuSelect = (item: AppleMenuDropdownItem) => {
+    if (item === "About This Dev") {
+      openAboutWindow();
+      setIsAppleMenuOpen(false);
+      return;
+    }
+
+    // Temporary placeholder until each menu item opens its app window.
     // eslint-disable-next-line no-console
     console.log(item);
     setIsAppleMenuOpen(false);
