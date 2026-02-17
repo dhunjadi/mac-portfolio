@@ -1,0 +1,46 @@
+@use "../abstracts/mixins" as *;
+
+.c-appleMenuDropdown {
+  width: fit-content;
+  position: absolute;
+  top: calc(100%);
+  left: 0;
+  z-index: 50;
+  @include glass-dark;
+  border-radius: 0.25rem;
+
+  overflow: hidden;
+  padding: 0.125rem 0.25rem;
+
+  &__item {
+    width: 100%;
+    border: 0;
+    border-radius: 0.25rem;
+    background: transparent;
+    text-align: left;
+    font-size: 1.2rem;
+    color: white;
+    padding: 0.125rem 0.7rem;
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+
+    white-space: nowrap;
+
+    @include respond(md) {
+      font-size: 0.75rem;
+    }
+
+    @include respond(lg) {
+      font-size: 0.625rem;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: white;
+      background: linear-gradient(180deg, #1185ff, #0a66da);
+      outline: none;
+    }
+  }
+}
