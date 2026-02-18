@@ -1,0 +1,22 @@
+@use "../base/animations.scss" as *;
+
+.c-dockIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__img {
+    padding-bottom: 4px;
+
+    &.isActive {
+      animation: bounce 1s ease-in-out 0s 3;
+    }
+  }
+  &__activeIndicator {
+    background-color: white;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+  }
+}

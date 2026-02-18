@@ -5,14 +5,21 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { useRef } from "react";
+import { useWindowStore } from "../stores/windowStore";
+import type { AppleMenuDropdownItem } from "../types";
 
 type DockIconProps = {
   icon: string;
+  id: string;
   mouseX: MotionValue<number>;
+  onClick: () => void;
 };
 
-const DockIcon = ({ icon, mouseX }: DockIconProps) => {
+const DockIcon = ({ icon, id, mouseX, onClick }: DockIconProps) => {
   const iconRef = useRef<HTMLImageElement>(null);
+  const openedWindows = useWindowStore((state) => state.openedWindowsIds);
+
+  const isActive = openedWindows.includes(id as AppleMenuDropdownItem);
 
   const distanceFromCursor = useTransform(mouseX, (cursorX) => {
     if (cursorX === Number.NEGATIVE_INFINITY) return Number.POSITIVE_INFINITY;
@@ -37,12 +44,17 @@ const DockIcon = ({ icon, mouseX }: DockIconProps) => {
   });
 
   return (
-    <motion.img
-      ref={iconRef}
-      src={icon}
-      alt="dock icon"
-      style={{ scale: iconScale }}
-    />
+    <div className="c-dockIcon">
+      <motion.img
+        ref={iconRef}
+        src={icon}
+        alt="dock icon"
+        style={{ scale: iconScale }}
+        onClick={onClick}
+        className={`c-dockIcon__img ${isActive && "isActive"}`}
+      />
+      {isActive && <div className="c-dockIcon__activeIndicator" />}
+    </div>
   );
 };
 

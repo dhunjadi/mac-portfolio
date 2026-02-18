@@ -6,10 +6,13 @@ import { useWindowStore } from "../stores/windowStore";
 import CalculatorWindow from "../components/windows/CalculatorWindow";
 
 const HomeScreen = () => {
-  const isAboutWindowOpen = useWindowStore((state) => state.isAboutWindowOpen);
-  const isCalculatorWindowOpen = useWindowStore(
-    (state) => state.isCalculatorWindowOpen,
+  const isAboutWindowOpen = useWindowStore((s) =>
+    s.openedWindowsIds.includes("about"),
   );
+  const isCalculatorWindowOpen = useWindowStore((s) =>
+    s.openedWindowsIds.includes("calculator"),
+  );
+
   const closeWindow = useWindowStore((state) => state.closeWindow);
 
   return (
