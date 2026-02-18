@@ -4,11 +4,13 @@ type AppleMenuDropdownProps = {
   onSelect: (action: AppleMenuDropdownItem) => void;
 };
 
-const menuItems: AppleMenuDropdownItem[] = [
-  "About This Dev",
-  "Calculator",
-  "Weather",
-  "System Preferences",
+type MenuItem = { id: AppleMenuDropdownItem; label: string };
+
+const menuItems: MenuItem[] = [
+  { id: "about", label: "About This Dev" },
+  { id: "calculator", label: "Calculator" },
+  { id: "weather", label: "Weather" },
+  { id: "settings", label: "Setting" },
 ];
 
 const AppleMenuDropdown = ({ onSelect }: AppleMenuDropdownProps) => {
@@ -16,13 +18,13 @@ const AppleMenuDropdown = ({ onSelect }: AppleMenuDropdownProps) => {
     <div className="c-appleMenuDropdown" role="menu" aria-label="Apple menu">
       {menuItems.map((item) => (
         <button
-          key={item}
+          key={item.id}
           type="button"
           role="menuitem"
           className="c-appleMenuDropdown__item"
-          onClick={() => onSelect(item)}
+          onClick={() => onSelect(item.id)}
         >
-          {item}
+          {item.label}
         </button>
       ))}
     </div>

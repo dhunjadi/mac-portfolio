@@ -6,14 +6,16 @@ import { useWindowStore } from "../stores/windowStore";
 
 const HomeScreen = () => {
   const isAboutWindowOpen = useWindowStore((state) => state.isAboutWindowOpen);
-  const closeAboutWindow = useWindowStore((state) => state.closeAboutWindow);
+  const closeWindow = useWindowStore((state) => state.closeWindow);
 
   return (
     <div className="s-home">
       <LoginOverlay />
       <MenuBar />
       <main>
-        {isAboutWindowOpen && <AboutThisDevWindow onClose={closeAboutWindow} />}
+        {isAboutWindowOpen && (
+          <AboutThisDevWindow onClose={() => closeWindow("about")} />
+        )}
       </main>
       <Dock />
     </div>

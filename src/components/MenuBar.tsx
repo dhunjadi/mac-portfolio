@@ -13,7 +13,7 @@ type MenuBarProps = {
 
 const MenuBar = ({ hideAppleLogo }: MenuBarProps) => {
   const isLoggedIn = useLoginStore((state) => state.isLogegdIn);
-  const openAboutWindow = useWindowStore((state) => state.openAboutWindow);
+  const openWidow = useWindowStore((state) => state.openWindow);
   const [isAppleMenuOpen, setIsAppleMenuOpen] = useState(false);
   const appleMenuRef = useRef<HTMLDivElement | null>(null);
   const date = dayjs().format("ddd D MMM HH:mm");
@@ -37,11 +37,7 @@ const MenuBar = ({ hideAppleLogo }: MenuBarProps) => {
   }, [isAppleMenuOpen]);
 
   const handleAppleMenuSelect = (item: AppleMenuDropdownItem) => {
-    if (item === "About This Dev") {
-      openAboutWindow();
-      setIsAppleMenuOpen(false);
-      return;
-    }
+    openWidow(item);
 
     // Temporary placeholder until each menu item opens its app window.
     // eslint-disable-next-line no-console

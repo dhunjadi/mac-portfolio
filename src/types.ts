@@ -1,5 +1,5 @@
 export type AppleMenuDropdownItem =
-  | "About This Dev"
-  | "Calculator"
-  | "Weather"
-  | "System Preferences";
+  | "about"
+  | "calculator"
+  | "weather"
+  | "settings";
