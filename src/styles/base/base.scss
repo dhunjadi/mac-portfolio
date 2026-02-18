@@ -9,30 +9,30 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 62.5%; // 1rem = 10px
   font-family: "Nunito", sans-serif;
 
   @include respond(xs) {
-    font-size: 75%;
+    font-size: 75%; // 1rem = 12px
   }
 
   @include respond(sm) {
-    font-size: 87.5%;
+    font-size: 87.5%; // 1rem = 14px
   }
 
   @include respond(md) {
-    font-size: 100%;
+    font-size: 100%; // 1rem = 16px
   }
 
   @include respond(lg) {
-    font-size: 112.5%;
+    font-size: 112.5%; // 1rem = 18px
   }
 
   @include respond(xl) {
-    font-size: 125%;
+    font-size: 125%; // 1rem = 20px
   }
 
   @include respond(xxl) {
-    font-size: 137.5%;
+    font-size: 137.5%; // 1rem = 22px
   }
 }
