@@ -23,6 +23,7 @@ const WindowWrapper = ({
         </div>
 
         <strong className="c-windowWrapper__titleBar_title">{title}</strong>
+        <strong className="c-windowWrapper__titleBar_empty">&nbsp;</strong>
       </div>
 
       <div className="c-windowWrapper__content">{children}</div>

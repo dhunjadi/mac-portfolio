@@ -8,11 +8,7 @@ type AboutThisDevWindowProps = {
 
 const AboutThisDevWindow = ({ onClose }: AboutThisDevWindowProps) => {
   return (
-    <WindowWrapper
-      title="About This Developer"
-      onClose={onClose}
-      className="w-aboutThisDev"
-    >
+    <WindowWrapper title="" onClose={onClose} className="w-aboutThisDev">
       <div className="w-aboutThisDev__header">
         <div className="w-aboutThisDev__header_logo" aria-hidden>
           <FontAwesomeIcon icon={faApple} />
