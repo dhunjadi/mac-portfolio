@@ -68,6 +68,17 @@
 
       [class="--maximize"] {
         background: #28c840;
+        position: relative;
+
+        &:hover::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: url("/icons/maximize.svg");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 70%;
+        }
       }
     }
 

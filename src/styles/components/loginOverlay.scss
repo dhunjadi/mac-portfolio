@@ -1,9 +1,9 @@
 @use "../abstracts/mixins" as *;
 
 .c-loginOverlay {
-  width: 100vw;
-  height: 100vh;
-  z-index: 99999999;
+  position: absolute;
+  inset: 0;
+  z-index: 9;
 
   opacity: 1;
 
@@ -11,6 +11,10 @@
 
   &.hidden {
     opacity: 0;
+  }
+
+  &.invisible {
+    visibility: hidden;
   }
 
   display: flex;

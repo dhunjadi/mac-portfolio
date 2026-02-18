@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import userIcon from "/icons/user.svg";
 import powerOffIcon from "/icons/power-off.svg";
 import restartIcon from "/icons/restart.svg";
@@ -11,9 +11,19 @@ const LoginOverlay = () => {
   const login = useLoginStore((state) => state.login);
 
   const [password, setPassword] = useState("");
+  const [isInvisible, setIsInvisible] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      const timer = setTimeout(() => setIsInvisible(true), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoggedIn]);
 
   return (
-    <div className={`c-loginOverlay ${isLoggedIn ? "hidden" : ""}`}>
+    <div
+      className={`c-loginOverlay ${isLoggedIn ? "hidden" : ""} ${isInvisible ? "invisible" : ""}`}
+    >
       <div className="c-loginOverlay__userInfo">
         <div className="c-loginOverlay__userInfo_img">
           <img src={userIcon} alt="user icon" />
