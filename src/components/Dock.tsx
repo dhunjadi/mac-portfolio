@@ -3,6 +3,7 @@ import { useMotionValue } from "framer-motion";
 import appleLogo from "/icons/apple-logo.svg";
 import finderIcon from "/icons/finder.png";
 import calculatorIcon from "/icons/calculator.png";
+import infoIcon from "/icons/info.svg";
 import DockIcon from "./DockIcon";
 import { useLoginStore } from "../stores/loginStore";
 import { useWindowStore } from "../stores/windowStore";
@@ -29,12 +30,12 @@ const Dock = () => {
 
   const icons = [
     { id: "finder", icon: finderIcon, onClick: () => {} },
+    { id: "about", icon: infoIcon, onClick: () => openWidow("about") },
     {
       id: "calculator",
       icon: calculatorIcon,
       onClick: () => openWidow("calculator"),
     },
-    { id: "apple", icon: appleLogo, onClick: () => {} },
     { id: "apple", icon: appleLogo, onClick: () => {} },
   ];
   const mouseX = useMotionValue(Number.NEGATIVE_INFINITY);

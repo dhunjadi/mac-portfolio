@@ -1,5 +1,6 @@
 import {
   motion,
+  useAnimationControls,
   useSpring,
   useTransform,
   type MotionValue,
@@ -17,6 +18,7 @@ type DockIconProps = {
 
 const DockIcon = ({ icon, id, mouseX, onClick }: DockIconProps) => {
   const iconRef = useRef<HTMLImageElement>(null);
+  const controls = useAnimationControls();
   const openedWindows = useWindowStore((state) => state.openedWindowsIds);
 
   const isActive = openedWindows.includes(id as AppleMenuDropdownItem);
@@ -43,16 +45,28 @@ const DockIcon = ({ icon, id, mouseX, onClick }: DockIconProps) => {
     stiffness: 200,
   });
 
+  const handleClick = async () => {
+    onClick();
+
+    await controls.start({
+      y: [0, -30, 0, -30, 0, -30, 0],
+      transition: { duration: 3, ease: "easeInOut" },
+    });
+  };
+
   return (
     <div className="c-dockIcon">
-      <motion.img
-        ref={iconRef}
-        src={icon}
-        alt="dock icon"
-        style={{ scale: iconScale }}
-        onClick={onClick}
-        className={`c-dockIcon__img ${isActive && "isActive"}`}
-      />
+      <motion.div whileHover={{ y: -6 }}>
+        <motion.img
+          ref={iconRef}
+          src={icon}
+          alt="dock icon"
+          style={{ scale: iconScale }}
+          animate={controls}
+          onClick={isActive ? undefined : handleClick}
+        />
+      </motion.div>
+
       {isActive && <div className="c-dockIcon__activeIndicator" />}
     </div>
   );
