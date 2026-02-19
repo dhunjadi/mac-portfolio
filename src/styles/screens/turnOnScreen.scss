@@ -1,14 +1,16 @@
 @use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+@use "../base/animations.scss" as *;
 
-$bar-bg: #353535;
-$progress-color: white;
+$bar-bg: $color-dark-800;
+$progress-color: $color-white;
 $bar-height: 0.25rem;
 $animation-duration: 3s;
 
 .s-turnOn {
   min-height: 100vh;
-  background-color: black;
-  color: white;
+  background-color: $color-black;
+  color: $color-white;
 
   display: flex;
   flex-direction: column;
@@ -33,14 +35,5 @@ $animation-duration: 3s;
       background-color: $progress-color;
       animation: boot-up-loading $animation-duration linear forwards;
     }
-  }
-}
-
-@keyframes boot-up-loading {
-  from {
-    width: 0%;
-  }
-  to {
-    width: 100%;
   }
 }

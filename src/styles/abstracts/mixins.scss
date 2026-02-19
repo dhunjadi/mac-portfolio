@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 @mixin respond($breakpoint) {
   @if $breakpoint == xs {
     @media (min-width: 36em) {
@@ -37,8 +39,8 @@
 }
 
 @mixin glass-dark {
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: $color-glass-bg;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid $color-glass-border;
 }

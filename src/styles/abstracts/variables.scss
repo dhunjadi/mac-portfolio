@@ -1,0 +1,28 @@
+$color-white: #fff;
+$color-black: #000;
+
+$color-dark-900: #2d2d2d;
+$color-dark-800: #333;
+$color-dark-700: #4e4e4e;
+$color-dark-600: #656565;
+
+$color-glass-bg: rgba(0, 0, 0, 0.25);
+$color-glass-border: rgba(255, 255, 255, 0.25);
+$color-overlay-bg: rgba(0, 0, 0, 0.2);
+$color-overlay-border: rgba(255, 255, 255, 0.3);
+$color-hover-bg: rgba(255, 255, 255, 0.2);
+$color-button-border: rgba(0, 0, 0, 0.2);
+
+$color-mac-close: #ff5f57;
+$color-mac-minimize: #febc2e;
+$color-mac-maximize: #28c840;
+
+$color-accent-orange: #ff7a00;
+$color-accent-blue-500: #1185ff;
+$color-accent-blue-600: #0a66da;
+
+$gradient-accent-blue: linear-gradient(
+  180deg,
+  $color-accent-blue-500,
+  $color-accent-blue-600
+);

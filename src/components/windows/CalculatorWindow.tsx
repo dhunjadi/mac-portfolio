@@ -6,7 +6,12 @@ type CalculatorWindowProps = {
 
 const CalculatorWindow = ({ onClose }: CalculatorWindowProps) => {
   return (
-    <WindowWrapper className="w-calculator" onClose={onClose}>
+    <WindowWrapper
+      className="w-calculator"
+      onClose={onClose}
+      disableMinimize
+      disableMaximize
+    >
       <div className="w-calculator__display">0</div>
 
       <div className="w-calculator__keys">

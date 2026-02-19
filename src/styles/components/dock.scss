@@ -1,4 +1,5 @@
 @use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
 
 .c-dock {
   --dock-items: 1;
@@ -21,9 +22,9 @@
   gap: var(--dock-gap);
 
   padding: 0 var(--dock-padding-x);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid $color-glass-border;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: $color-glass-bg;
   backdrop-filter: saturate(180%) blur(0.5rem);
 
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);

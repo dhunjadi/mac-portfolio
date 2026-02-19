@@ -8,3 +8,12 @@
     transform: translateY(-30px);
   }
 }
+
+@keyframes boot-up-loading {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
