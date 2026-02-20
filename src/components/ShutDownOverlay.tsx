@@ -5,8 +5,6 @@ import { useShutDownStore } from "../stores/shutDownStore";
 const ShutDownOverlay = () => {
   const isShutDown = useShutDownStore((state) => state.isShutDown);
 
-  console.log(isShutDown);
-
   const [isInvisible, setIsInvisible] = useState(true);
 
   useEffect(() => {
