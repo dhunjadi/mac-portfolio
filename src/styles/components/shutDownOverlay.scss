@@ -7,16 +7,7 @@
   z-index: 9;
 
   opacity: 1;
-
   transition: opacity 0.5s ease;
-
-  &.hidden {
-    opacity: 0;
-  }
-
-  &.invisible {
-    visibility: hidden;
-  }
 
   display: flex;
   flex-direction: column;
@@ -25,4 +16,14 @@
 
   background: black;
   border: 1px solid $color-overlay-border;
+
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__icon {
+    width: 5rem;
+    align-self: center;
+  }
 }

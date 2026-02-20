@@ -38,6 +38,7 @@ const ShutDownModal = () => {
         width: 320,
         height: 200,
       }}
+      cancel=".c-shutDownModal__buttons"
     >
       <div className="c-shutDownModal">
         <div className="c-shutDownModal__body">
