@@ -13,6 +13,7 @@ const AboutThisDevWindow = ({ onClose }: AboutThisDevWindowProps) => {
       className="w-aboutThisDev"
       disableMinimize
       disableMaximize
+      disableResizing
     >
       <div className="w-aboutThisDev__header">
         <div className="w-aboutThisDev__header_logo" aria-hidden>

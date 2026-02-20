@@ -11,6 +11,7 @@ const CalculatorWindow = ({ onClose }: CalculatorWindowProps) => {
       onClose={onClose}
       disableMinimize
       disableMaximize
+      disableResizing
     >
       <div className="w-calculator__display">0</div>
 
