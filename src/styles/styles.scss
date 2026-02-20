@@ -11,6 +11,8 @@
 @use "./components/appleMenuDropdown.scss";
 @use "./components/windowWrapper.scss";
 @use "./components/dockIcon.scss";
+@use "./components/shutDownModal.scss";
+@use "./components/shutDownOverlay.scss";
 
 // Windows
 @use "./components/windows/aboutThisDevWindow.scss";

@@ -11,6 +11,7 @@ const menuItems: MenuItem[] = [
   { id: "calculator", label: "Calculator" },
   { id: "weather", label: "Weather" },
   { id: "settings", label: "Setting" },
+  { id: "shut-down", label: "Shut Down..." },
 ];
 
 const AppleMenuDropdown = ({ onSelect }: AppleMenuDropdownProps) => {

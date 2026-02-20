@@ -38,10 +38,6 @@ const MenuBar = ({ hideAppleLogo }: MenuBarProps) => {
 
   const handleAppleMenuSelect = (item: AppleMenuDropdownItem) => {
     openWidow(item);
-
-    // Temporary placeholder until each menu item opens its app window.
-    // eslint-disable-next-line no-console
-    console.log(item);
     setIsAppleMenuOpen(false);
   };
 

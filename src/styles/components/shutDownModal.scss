@@ -1,0 +1,78 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.c-shutDownModal {
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-dark-800;
+  border-radius: 8px;
+  border: 1px solid $color-glass-border;
+  padding: 10px 16px;
+
+  @include respond(sm) {
+    width: 30rem;
+  }
+
+  @include respond(lg) {
+    width: 18rem;
+  }
+
+  &__body {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    @include respond(lg) {
+      flex-direction: row;
+      align-items: initial;
+    }
+
+    &_icon {
+      width: 80px;
+
+      img {
+        max-width: 100%;
+        background: $color-dark-600;
+        border-radius: 50%;
+        padding: 5px;
+      }
+    }
+
+    &_text {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      font-size: 16px;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    @include respond(sm) {
+      justify-content: flex-end;
+    }
+
+    button {
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: none;
+      color: white;
+
+      &:first-child {
+        background-color: $color-dark-600;
+      }
+
+      &:last-child {
+        background-color: $color-accent-blue-500;
+      }
+    }
+  }
+}
