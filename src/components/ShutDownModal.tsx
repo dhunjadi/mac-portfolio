@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import shutDownIcon from "/icons/power-off.svg";
 import { Rnd } from "react-rnd";
-import { useWindowStore } from "../stores/windowStore";
-import { useShutDownStore } from "../stores/shutDownStore";
-import { useLoginStore } from "../stores/loginStore";
+import { useWindowActions } from "../stores/windowStore";
+import { useShutDownActions } from "../stores/shutDownStore";
+import { useLoginActions } from "../stores/loginStore";
 
 const ShutDownModal = () => {
-  const closeWindow = useWindowStore((state) => state.closeWindow);
-  const shutDown = useShutDownStore((state) => state.shutDown);
-  const logout = useLoginStore((state) => state.logout);
+  const { closeWindow } = useWindowActions();
+  const { shutDown } = useShutDownActions();
+  const { logout } = useLoginActions();
 
   const [remainingTime, setRemainingTime] = useState(60);
 
@@ -33,10 +33,10 @@ const ShutDownModal = () => {
   return (
     <Rnd
       default={{
-        x: 0,
-        y: 0,
-        width: 320,
-        height: 200,
+        x: 100,
+        y: 100,
+        width: "fit-content",
+        height: "fit-content",
       }}
       cancel=".c-shutDownModal__buttons"
     >

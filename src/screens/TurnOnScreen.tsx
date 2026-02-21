@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { appRoutes } from "../data/appRoutes";
-import { useTurnOnStore } from "../stores/turnOnStore";
+import { useTurnOnActions } from "../stores/turnOnStore";
 
 const TurnOnScreen = () => {
-  const turnOn = useTurnOnStore((state) => state.turnOn);
+  const { turnOn } = useTurnOnActions();
   const navigate = useNavigate();
 
   useEffect(() => {

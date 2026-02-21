@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router";
-import { useShutDownStore } from "../stores/shutDownStore";
+import { useShutDown, useShutDownActions } from "../stores/shutDownStore";
 import powerIcon from "/icons/power-off.svg";
 import { appRoutes } from "../data/appRoutes";
 
 const ShutDownOverlay = () => {
-  const isShutDown = useShutDownStore((state) => state.isShutDown);
-  const turnOn = useShutDownStore((state) => state.turnOn);
+  const isShutDown = useShutDown();
+  const { turnOn } = useShutDownActions();
   const navigate = useNavigate();
 
   const handleTurnOn = () => {

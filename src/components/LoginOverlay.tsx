@@ -4,11 +4,11 @@ import powerOffIcon from "/icons/power-off.svg";
 import restartIcon from "/icons/restart.svg";
 import sleepIcon from "/icons/sleep.svg";
 import arrowRightCircle from "/icons/arrow-right-circle.svg";
-import { useLoginStore } from "../stores/loginStore";
+import { useLogin, useLoginActions } from "../stores/loginStore";
 
 const LoginOverlay = () => {
-  const isLoggedIn = useLoginStore((state) => state.isLogegdIn);
-  const login = useLoginStore((state) => state.login);
+  const isLoggedIn = useLogin();
+  const { login } = useLoginActions();
 
   const [password, setPassword] = useState("");
   const [isInvisible, setIsInvisible] = useState(false);

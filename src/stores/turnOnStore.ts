@@ -1,13 +1,23 @@
 import { create } from "zustand";
 
-type TurnOnStore = {
-  isTurnedOn: boolean;
+type TurnOnActions = {
   turnOn: () => void;
 };
 
-export const useTurnOnStore = create<TurnOnStore>((set) => ({
+type TurnOnStore = {
+  isTurnedOn: boolean;
+  actions: TurnOnActions;
+};
+
+const useTurnOnStore = create<TurnOnStore>((set) => ({
   isTurnedOn: false,
-  turnOn: () => {
-    set(() => ({ isTurnedOn: true }));
+  actions: {
+    turnOn: () => {
+      set(() => ({ isTurnedOn: true }));
+    },
   },
 }));
+
+export const useTurnOn = () => useTurnOnStore((state) => state.isTurnedOn);
+
+export const useTurnOnActions = () => useTurnOnStore((state) => state.actions);

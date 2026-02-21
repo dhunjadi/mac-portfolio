@@ -6,7 +6,7 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { useRef } from "react";
-import { useWindowStore } from "../stores/windowStore";
+import { useOpenedWindows } from "../stores/windowStore";
 import type { AppleMenuDropdownItem } from "../types";
 
 type DockIconProps = {
@@ -19,7 +19,7 @@ type DockIconProps = {
 const DockIcon = ({ icon, id, mouseX, onClick }: DockIconProps) => {
   const iconRef = useRef<HTMLImageElement>(null);
   const controls = useAnimationControls();
-  const openedWindows = useWindowStore((state) => state.openedWindowsIds);
+  const openedWindows = useOpenedWindows();
 
   const isActive = openedWindows.includes(id as AppleMenuDropdownItem);
 

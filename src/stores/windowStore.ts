@@ -1,32 +1,45 @@
 import { create } from "zustand";
 import type { AppleMenuDropdownItem } from "../types";
 
-type WindowStore = {
-  openedWindowsIds: AppleMenuDropdownItem[];
-
+type WindowActions = {
   openWindow: (id: AppleMenuDropdownItem) => void;
   closeWindow: (id: AppleMenuDropdownItem) => void;
   isWindowOpen: (id: AppleMenuDropdownItem) => boolean;
 };
 
-export const useWindowStore = create<WindowStore>((set, get) => ({
+type WindowStore = {
+  openedWindowsIds: AppleMenuDropdownItem[];
+  actions: WindowActions;
+};
+
+const useWindowStore = create<WindowStore>((set, get) => ({
   openedWindowsIds: [],
 
-  openWindow: (id) =>
-    set((state) => ({
-      openedWindowsIds: state.openedWindowsIds.includes(id)
-        ? state.openedWindowsIds
-        : [...state.openedWindowsIds, id],
-    })),
+  actions: {
+    openWindow: (id) =>
+      set((state) => ({
+        openedWindowsIds: state.openedWindowsIds.includes(id)
+          ? state.openedWindowsIds
+          : [...state.openedWindowsIds, id],
+      })),
 
-  closeWindow: (id) =>
-    set((state) => ({
-      openedWindowsIds: state.openedWindowsIds.filter(
-        (windowId) => windowId !== id,
-      ),
-    })),
+    closeWindow: (id) =>
+      set((state) => ({
+        openedWindowsIds: state.openedWindowsIds.filter(
+          (windowId) => windowId !== id,
+        ),
+      })),
 
-  isWindowOpen: (id) => {
-    return get().openedWindowsIds.includes(id);
+    isWindowOpen: (id) => {
+      return get().openedWindowsIds.includes(id);
+    },
   },
 }));
+
+export const useOpenedWindows = () =>
+  useWindowStore((state) => state.openedWindowsIds);
+
+export const useOpenedWindow = (id: AppleMenuDropdownItem) =>
+  useWindowStore((state) => state.openedWindowsIds.includes(id));
+
+export const useWindowActions = () => useWindowStore((state) => state.actions);

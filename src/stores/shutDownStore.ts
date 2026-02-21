@@ -1,17 +1,28 @@
 import { create } from "zustand";
 
-type ShutDownStore = {
-  isShutDown: boolean;
+type ShutDownActions = {
   shutDown: () => void;
   turnOn: () => void;
 };
 
-export const useShutDownStore = create<ShutDownStore>((set) => ({
+type ShutDownStore = {
+  isShutDown: boolean;
+  actions: ShutDownActions;
+};
+
+const useShutDownStore = create<ShutDownStore>((set) => ({
   isShutDown: false,
-  shutDown: () => {
-    set(() => ({ isShutDown: true }));
-  },
-  turnOn: () => {
-    set(() => ({ isShutDown: false }));
+  actions: {
+    shutDown: () => {
+      set(() => ({ isShutDown: true }));
+    },
+    turnOn: () => {
+      set(() => ({ isShutDown: false }));
+    },
   },
 }));
+
+export const useShutDown = () => useShutDownStore((state) => state.isShutDown);
+
+export const useShutDownActions = () =>
+  useShutDownStore((state) => state.actions);

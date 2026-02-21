@@ -5,13 +5,13 @@ import finderIcon from "/icons/finder.png";
 import calculatorIcon from "/icons/calculator.png";
 import infoIcon from "/icons/info.svg";
 import DockIcon from "./DockIcon";
-import { useLoginStore } from "../stores/loginStore";
-import { useWindowStore } from "../stores/windowStore";
+import { useLogin } from "../stores/loginStore";
+import { useWindowActions } from "../stores/windowStore";
 
 const Dock = () => {
-  const isLoggedIn = useLoginStore((state) => state.isLogegdIn);
+  const isLoggedIn = useLogin();
 
-  const openWidow = useWindowStore((state) => state.openWindow);
+  const { openWindow } = useWindowActions();
 
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
@@ -30,11 +30,11 @@ const Dock = () => {
 
   const icons = [
     { id: "finder", icon: finderIcon, onClick: () => {} },
-    { id: "about", icon: infoIcon, onClick: () => openWidow("about") },
+    { id: "about", icon: infoIcon, onClick: () => openWindow("about") },
     {
       id: "calculator",
       icon: calculatorIcon,
-      onClick: () => openWidow("calculator"),
+      onClick: () => openWindow("calculator"),
     },
     { id: "apple", icon: appleLogo, onClick: () => {} },
   ];
