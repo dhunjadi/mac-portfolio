@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
-import CalculatorWindow from "../../components/windows/CalculatorWindow";
+import CalculatorWindow from "../../../components/windows/CalculatorWindow";
 import userEvent from "@testing-library/user-event";
 
 describe("CalculatorWindow", () => {
@@ -13,9 +13,9 @@ describe("CalculatorWindow", () => {
   });
 
   test("adds 2 + 2", async () => {
-    const onClick = vi.fn();
+    const onClose = vi.fn();
     const user = userEvent.setup();
-    render(<CalculatorWindow onClose={onClick} />);
+    render(<CalculatorWindow onClose={onClose} />);
 
     const buttonTwo = screen.getByText("2");
     const buttonPlus = screen.getByText("+");
@@ -36,9 +36,9 @@ describe("CalculatorWindow", () => {
   });
 
   test("resets (AC)", async () => {
-    const onClick = vi.fn();
+    const onClose = vi.fn();
     const user = userEvent.setup();
-    render(<CalculatorWindow onClose={onClick} />);
+    render(<CalculatorWindow onClose={onClose} />);
 
     const buttonTwo = screen.getByText("2");
     const buttonPlus = screen.getByText("+");
