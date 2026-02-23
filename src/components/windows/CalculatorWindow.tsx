@@ -164,6 +164,7 @@ const CalculatorWindow = ({ onClose }: CalculatorWindowProps) => {
             className="w-calculator__display-text"
             ref={textRef}
             style={{ transform: `scale(${scale})` }}
+            role="result"
           >
             {currentValue}
           </span>
