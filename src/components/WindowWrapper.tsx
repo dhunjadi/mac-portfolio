@@ -28,6 +28,7 @@ const WindowWrapper = ({
       }}
       dragHandleClassName="c-windowWrapper__titleBar"
       enableResizing={disableResizing ? false : true}
+      cancel=".c-windowWrapper__titleBar_buttons"
     >
       <section className={`c-windowWrapper ${className}`.trim()}>
         <div className="c-windowWrapper__titleBar">

@@ -44,6 +44,7 @@ const LoginOverlay = () => {
                 login();
               }
             }}
+            autoFocus
           />
           {password.length > 0 && (
             <img
