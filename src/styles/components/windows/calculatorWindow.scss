@@ -1,33 +1,53 @@
 @use "../../abstracts/variables" as *;
 
-$calculator-key-size: 50px;
+$calculator-key-size: 60px;
 
 .w-calculator {
-  width: fit-content;
+  width: 240px;
+  background-color: $color-dark-700;
+  display: flex;
+  flex-direction: column;
 
   &__display {
     background-color: $color-dark-900;
     color: $color-white;
-    text-align: end;
-    font-size: 48px;
-    padding: 0 8px;
+    height: 80px;
+    padding: 0 12px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    overflow: hidden;
+
+    &-text {
+      font-size: 48px;
+      font-weight: 300;
+      white-space: nowrap;
+      transform-origin: right bottom;
+      padding-bottom: 8px;
+    }
   }
 
   &__keys {
     display: grid;
-    grid-template-columns: repeat(4, $calculator-key-size);
+    grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: $calculator-key-size;
+    gap: 1px;
+    background-color: $color-dark-800;
 
     &_key {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      height: 100%;
       background-color: $color-dark-700;
       color: $color-white;
       font-size: 20px;
-      border: 1px solid $color-dark-800;
+      border: none;
+      outline: none;
+      cursor: default;
+
+      &:active {
+        filter: brightness(1.3);
+      }
 
       &--fn {
         background-color: $color-dark-800;
@@ -35,10 +55,16 @@ $calculator-key-size: 50px;
 
       &--operator {
         background-color: $color-accent-orange;
+        font-size: 1.5rem;
+
+        &:active {
+          filter: brightness(0.7);
+        }
       }
 
       &--span2 {
         grid-column: span 2;
+        text-align: center;
       }
     }
   }
