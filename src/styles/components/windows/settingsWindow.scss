@@ -6,6 +6,11 @@
   width: 35rem;
   display: flex;
 
+  .c-windowWrapper--maximized & {
+    width: 100%;
+    height: 100%;
+  }
+
   &__sideBar {
     display: flex;
     flex-direction: column;
