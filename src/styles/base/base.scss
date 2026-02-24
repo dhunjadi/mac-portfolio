@@ -17,26 +17,32 @@ html {
   font-family: "Nunito", sans-serif;
 
   @include respond(xs) {
+    // 36em
     font-size: 75%; // 1rem = 12px
   }
 
   @include respond(sm) {
+    // 48em
     font-size: 87.5%; // 1rem = 14px
   }
 
   @include respond(md) {
+    // 62em
     font-size: 100%; // 1rem = 16px
   }
 
   @include respond(lg) {
+    // 75em
     font-size: 112.5%; // 1rem = 18px
   }
 
   @include respond(xl) {
+    // 87.5em
     font-size: 125%; // 1rem = 20px
   }
 
   @include respond(xxl) {
+    // 100em
     font-size: 137.5%; // 1rem = 22px
   }
 }

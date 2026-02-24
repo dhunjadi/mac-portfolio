@@ -1,12 +1,12 @@
 import { useEffect, useState, type CSSProperties } from "react";
 import { useMotionValue } from "framer-motion";
-import appleLogo from "/icons/apple-logo.svg";
 import finderIcon from "/icons/finder.png";
 import calculatorIcon from "/icons/calculator.png";
 import infoIcon from "/icons/info.svg";
 import DockIcon from "./DockIcon";
 import { useLogin } from "../stores/loginStore";
 import { useWindowActions } from "../stores/windowStore";
+import settingsIcon from "/icons/settings.svg";
 
 const Dock = () => {
   const isLoggedIn = useLogin();
@@ -36,7 +36,11 @@ const Dock = () => {
       icon: calculatorIcon,
       onClick: () => openWindow("calculator"),
     },
-    { id: "apple", icon: appleLogo, onClick: () => {} },
+    {
+      id: "settings",
+      icon: settingsIcon,
+      onClick: () => openWindow("settings"),
+    },
   ];
   const mouseX = useMotionValue(Number.NEGATIVE_INFINITY);
   const dockStyle = {

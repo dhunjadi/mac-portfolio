@@ -26,6 +26,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
               type="text"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
+              placeholder="Search"
             />
           </div>
 
@@ -41,11 +42,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
             {settingsCategories.map((item) => (
               <li
                 key={item.id}
-                className={
-                  item.id === selectedCategoryId
-                    ? "w-settings__sideBar_category w-settings__sideBar_category--active"
-                    : "w-settings__sideBar_category"
-                }
+                className={item.id === selectedCategoryId ? "active" : ""}
                 onClick={() => setSelectedCategoryId(item.id)}
               >
                 <img src={item.icon} alt="item icon" />

@@ -3,13 +3,14 @@
 
 .w-settings {
   height: 500px;
-  width: 100%;
+  width: 35rem;
   display: flex;
 
   &__sideBar {
     display: flex;
     flex-direction: column;
     flex: 0 0 30%;
+    padding: 0 1rem 1rem 1rem;
 
     &_searchInput {
       position: relative;
@@ -18,6 +19,17 @@
         color: white;
         border-radius: 4px;
         @include glass-dark;
+        padding: 0.2rem 1.75rem;
+
+        font-size: 1.2rem;
+
+        @include respond(sm) {
+          font-size: 12px;
+        }
+
+        @include respond(md) {
+          padding-left: 24px;
+        }
       }
 
       &::after {
@@ -26,9 +38,16 @@
         top: 50%;
         left: 8px;
         transform: translateY(-50%);
-        width: 14px;
-        height: 14px;
+        width: 0.75rem;
+        height: 0.75rem;
         background: url("/icons/search-icon.svg") center/contain no-repeat;
+
+        @include respond(xl) {
+          width: 12px;
+          height: 12px;
+
+          transform: translateY(-35%);
+        }
       }
     }
 
@@ -38,11 +57,21 @@
       color: white;
       margin: 10px 0;
 
+      font-size: 1.2rem;
+
+      @include respond(sm) {
+        font-size: 12px;
+      }
+
       gap: 1rem;
 
       img {
         max-width: 100%;
         width: 4rem;
+
+        @include respond(sm) {
+          width: 40px;
+        }
       }
 
       &--text {
@@ -59,22 +88,38 @@
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
+
+      @include respond(sm) {
+        gap: 4px;
+      }
     }
 
-    &_category {
+    li {
       display: flex;
       align-items: center;
+      justify-content: flex-start;
       gap: 0.5rem;
       color: white;
       cursor: pointer;
-      border-radius: 0.8rem;
+      border-radius: 8px;
       padding: 0.5rem 0.8rem;
+      font-size: 1.2rem;
 
-      img {
-        width: 3rem;
+      @include respond(sm) {
+        font-size: 12px;
+        gap: 4px;
+        padding: 5px 8px;
       }
 
-      &--active {
+      img {
+        width: 1.4rem;
+
+        @include respond(sm) {
+          width: 14px;
+        }
+      }
+
+      &.active {
         background-color: $color-accent-blue-500;
       }
     }
