@@ -6,11 +6,13 @@ import { useOpenedWindow, useWindowActions } from "../stores/windowStore";
 import CalculatorWindow from "../components/windows/CalculatorWindow";
 import ShutDownModal from "../components/ShutDownModal";
 import ShutDownOverlay from "../components/ShutDownOverlay";
+import SettingsWindow from "../components/windows/SettingsWindow";
 
 const HomeScreen = () => {
   const isAboutWindowOpen = useOpenedWindow("about");
   const isCalculatorWindowOpen = useOpenedWindow("calculator");
   const isShutDownModalOpen = useOpenedWindow("shut-down");
+  const isSettingsWindowOpen = useOpenedWindow("settings");
 
   const { closeWindow } = useWindowActions();
 
@@ -29,6 +31,10 @@ const HomeScreen = () => {
         )}
 
         {isShutDownModalOpen && <ShutDownModal />}
+
+        {isSettingsWindowOpen && (
+          <SettingsWindow onClose={() => closeWindow("settings")} />
+        )}
       </main>
       <Dock />
     </div>

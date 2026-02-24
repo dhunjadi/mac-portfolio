@@ -10,7 +10,7 @@ const menuItems: MenuItem[] = [
   { id: "about", label: "About This Dev" },
   { id: "calculator", label: "Calculator" },
   { id: "weather", label: "Weather" },
-  { id: "settings", label: "Setting" },
+  { id: "settings", label: "Settings" },
   { id: "shut-down", label: "Shut Down..." },
 ];
 

@@ -1,0 +1,95 @@
+@use "../../abstracts/mixins.scss" as *;
+@use "../../abstracts/variables" as *;
+
+.w-settings {
+  height: 500px;
+  width: 100%;
+  display: flex;
+
+  &__sideBar {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 30%;
+
+    &_searchInput {
+      position: relative;
+      input {
+        width: 100%;
+        color: white;
+        border-radius: 4px;
+        @include glass-dark;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 8px;
+        transform: translateY(-50%);
+        width: 14px;
+        height: 14px;
+        background: url("/icons/search-icon.svg") center/contain no-repeat;
+      }
+    }
+
+    &_userInfo {
+      display: flex;
+      align-items: center;
+      color: white;
+      margin: 10px 0;
+
+      gap: 1rem;
+
+      img {
+        max-width: 100%;
+        width: 4rem;
+      }
+
+      &--text {
+        display: flex;
+        flex-direction: column;
+
+        small {
+          color: $color-dark-600;
+        }
+      }
+    }
+
+    &_categories {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    &_category {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+      cursor: pointer;
+      border-radius: 0.8rem;
+      padding: 0.5rem 0.8rem;
+
+      img {
+        width: 3rem;
+      }
+
+      &--active {
+        background-color: $color-accent-blue-500;
+      }
+    }
+  }
+
+  &__content {
+    color: white;
+    background-color: $color-dark-900;
+    flex: 1;
+    padding: 24px;
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 600;
+    }
+  }
+}
