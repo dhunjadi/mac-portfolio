@@ -6,7 +6,7 @@ import { appRoutes } from "./data/appRoutes";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/mac-portfolio">
       <Routes>
         <Route path={appRoutes.turnOn} element={<TurnOnScreen />} />
         <Route element={<ProtectedRoute />}>
