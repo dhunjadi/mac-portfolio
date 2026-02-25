@@ -7,17 +7,19 @@ import CalculatorWindow from "../components/windows/CalculatorWindow";
 import ShutDownModal from "../components/ShutDownModal";
 import ShutDownOverlay from "../components/ShutDownOverlay";
 import SettingsWindow from "../components/windows/SettingsWindow";
+import { useWallpaper } from "../stores/settingsStore";
 
 const HomeScreen = () => {
   const isAboutWindowOpen = useOpenedWindow("about");
   const isCalculatorWindowOpen = useOpenedWindow("calculator");
   const isShutDownModalOpen = useOpenedWindow("shut-down");
   const isSettingsWindowOpen = useOpenedWindow("settings");
+  const wallpaper = useWallpaper();
 
   const { closeWindow } = useWindowActions();
 
   return (
-    <div className="s-home">
+    <div className="s-home" style={{ backgroundImage: `url(${wallpaper})` }}>
       <LoginOverlay />
       <ShutDownOverlay />
       <MenuBar />

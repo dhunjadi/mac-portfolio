@@ -2,6 +2,8 @@ import { useState } from "react";
 import WindowWrapper from "../WindowWrapper";
 import userIcon from "/icons/user-icon.svg";
 import { settingsCategories } from "../../data/settingsCategories";
+import AppearancePanel from "../AppearancePanel";
+import WallpaperPanel from "../WallpaperPanel";
 
 type SettingsWindowProps = {
   onClose: () => void;
@@ -13,9 +15,11 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
     settingsCategories[0]?.id ?? "",
   );
 
-  const selectedCategory = settingsCategories.find(
-    (category) => category.id === selectedCategoryId,
-  );
+  const renderPanelByCategoryId = (categoryId: string) => {
+    if (categoryId === "appearance") return <AppearancePanel />;
+    if (categoryId === "wallpaper") return <WallpaperPanel />;
+    return <></>;
+  };
 
   return (
     <WindowWrapper onClose={onClose}>
@@ -53,7 +57,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
         </div>
 
         <div className="w-settings__content">
-          <h1>{selectedCategory?.label}</h1>
+          {renderPanelByCategoryId(selectedCategoryId)}
         </div>
       </div>
     </WindowWrapper>

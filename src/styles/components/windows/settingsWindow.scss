@@ -130,11 +130,42 @@
     background-color: $color-dark-900;
     flex: 1;
     padding: 24px;
+    overflow: auto;
 
     h1 {
       margin: 0;
       font-size: 32px;
       font-weight: 600;
+    }
+  }
+
+  &__panel {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    p {
+      color: $color-dark-600;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: $color-accent-blue-500;
     }
   }
 }
