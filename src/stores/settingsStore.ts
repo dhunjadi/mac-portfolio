@@ -1,9 +1,5 @@
 import { create } from "zustand";
-
-const wallpaperOptions: readonly string[] = [
-  `${import.meta.env.BASE_URL}26-Tahoe-Beach-Dusk.jpg`,
-  `${import.meta.env.BASE_URL}macos-monterey-stock-black-dark-mode-layers-5k-6016x6016-5889.jpg`,
-];
+import { wallpaperOptions, wallpaperPreviews } from "../data/wallpapers";
 
 type SettingsActions = {
   setGlassAlpha: (glassAlpha: number) => void;
@@ -14,6 +10,7 @@ type SettingsStore = {
   glassAlpha: number;
   wallpaper: string;
   wallpaperOptions: readonly string[];
+  wallpaperPreviews: readonly string[];
   actions: SettingsActions;
 };
 
@@ -23,6 +20,7 @@ const useSettingsStore = create<SettingsStore>((set) => ({
   glassAlpha: 0.25,
   wallpaper: wallpaperOptions[0],
   wallpaperOptions,
+  wallpaperPreviews,
   actions: {
     setGlassAlpha: (glassAlpha) =>
       set(() => ({ glassAlpha: clampGlassAlpha(glassAlpha) })),
@@ -37,6 +35,8 @@ export const useWallpaper = () => useSettingsStore((state) => state.wallpaper);
 
 export const useWallpaperOptions = () =>
   useSettingsStore((state) => state.wallpaperOptions);
+export const useWallpaperPreviews = () =>
+  useSettingsStore((state) => state.wallpaperPreviews);
 
 export const useSettingsActions = () =>
   useSettingsStore((state) => state.actions);
