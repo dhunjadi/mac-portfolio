@@ -19,7 +19,12 @@ const WallpaperPanel = () => {
           <button
             key={option}
             className={option === wallpaper ? "active" : ""}
-            onClick={() => setWallpaper(option)}
+            onClick={() => {
+              const withoutPreview = option
+                .replace("/previews", "")
+                .replace("-preview", "");
+              setWallpaper(withoutPreview);
+            }}
             style={{ backgroundImage: `url(${option})` }}
           />
         ))}
