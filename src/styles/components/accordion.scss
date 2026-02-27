@@ -1,0 +1,54 @@
+@use "../abstracts/variables" as *;
+
+.c-accordion {
+  overflow: auto;
+  scrollbar-color: $color-dark-700 $color-dark-900;
+  scrollbar-width: thin;
+
+  &__panel {
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.3s ease;
+
+    &_content {
+      padding: 0 0.75rem 0.7rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+  }
+
+  &__trigger {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    list-style: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 0.625rem 0.75rem 0.625rem 1rem;
+    position: relative;
+    user-select: none;
+
+    &::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(50%, -50%);
+      font-size: 0.75rem;
+    }
+  }
+
+  &__item--open .c-accordion__trigger::before {
+    content: "▾";
+  }
+
+  &__item--open .c-accordion__panel {
+    opacity: 1;
+  }
+}

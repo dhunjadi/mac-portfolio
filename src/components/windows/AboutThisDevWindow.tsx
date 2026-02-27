@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import WindowWrapper from "../WindowWrapper";
 import { experienceItems } from "../../data/experienceItems";
+import { Accordion, AccordionItem } from "../Accordion";
 
 type AboutThisDevWindowProps = {
   onClose: () => void;
@@ -41,52 +42,52 @@ const AboutThisDevWindow = ({ onClose }: AboutThisDevWindowProps) => {
           </a>
         </div>
 
-        <div className="w-aboutThisDev__accordion">
-          <details>
-            <summary>Experience (Last Three)</summary>
-            <div className="w-aboutThisDev__accordion_content">
-              {experienceItems.map((item) => (
-                <article key={`${item.company}-${item.period}`}>
-                  <h3>{item.title}</h3>
-                  <p>{item.company}</p>
-                  <small>{item.period}</small>
-                  <ul>
-                    {item.highlights.map((highlight) => (
-                      <li key={highlight}>{highlight}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </details>
+        <Accordion className="w-aboutThisDev__accordion">
+          <AccordionItem
+            title="Experience (Last Three)"
+            contentClassName="w-aboutThisDev__accordion_content"
+          >
+            {experienceItems.map((item) => (
+              <article key={`${item.company}-${item.period}`}>
+                <h3>{item.title}</h3>
+                <p>{item.company}</p>
+                <small>{item.period}</small>
+                <ul>
+                  {item.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </AccordionItem>
 
-          <details>
-            <summary>Skills</summary>
-            <div className="w-aboutThisDev__accordion_content">
-              <p>
-                HTML, CSS, JavaScript, React, React Native, Next.js, TypeScript,
-                Redux, Zustand, TanStack Query
-              </p>
-            </div>
-          </details>
+          <AccordionItem
+            title="Skills"
+            contentClassName="w-aboutThisDev__accordion_content"
+          >
+            <p>
+              HTML, CSS, JavaScript, React, React Native, Next.js, TypeScript,
+              Redux, Zustand, TanStack Query
+            </p>
+          </AccordionItem>
 
-          <details>
-            <summary>Education & Languages</summary>
-            <div className="w-aboutThisDev__accordion_content">
-              <p>
-                <strong>Electrical Engineering Technician</strong>
-                <br />
-                Elektrotehnicka skola Zagreb (2008 - 2012)
-              </p>
-              <p>
-                <strong>MBA</strong>
-                <br />
-                Karlovac University of Applied Sciences (2014 - 2020)
-              </p>
-              <p>Croatian, English</p>
-            </div>
-          </details>
-        </div>
+          <AccordionItem
+            title="Education & Languages"
+            contentClassName="w-aboutThisDev__accordion_content"
+          >
+            <p>
+              <strong>Electrical Engineering Technician</strong>
+              <br />
+              Elektrotehnicka skola Zagreb (2008 - 2012)
+            </p>
+            <p>
+              <strong>MBA</strong>
+              <br />
+              Karlovac University of Applied Sciences (2014 - 2020)
+            </p>
+            <p>Croatian, English</p>
+          </AccordionItem>
+        </Accordion>
       </div>
     </WindowWrapper>
   );

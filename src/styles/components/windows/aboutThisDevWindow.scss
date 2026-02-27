@@ -68,84 +68,45 @@
   &__accordion {
     margin: 0.75rem 0.6rem 0.6rem 0.6rem;
     max-height: min(24rem, calc(100vh - 12rem));
-    overflow: auto;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.12);
     background-color: rgba(0, 0, 0, 0.18);
-    scrollbar-color: $color-dark-700 $color-dark-900;
-    scrollbar-width: thin;
 
-    details + details {
+    .c-accordion__item + .c-accordion__item {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    summary {
-      list-style: none;
-      cursor: pointer;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      padding: 0.625rem 0.75rem;
-      position: relative;
-      user-select: none;
+    .c-accordion__panel {
+      &_content {
+        article {
+          background-color: rgba(var(--glass-rgb), 0.04);
+          border: 1px solid rgba(var(--glass-rgb), 0.08);
+          border-radius: 8px;
+          padding: 0.5rem;
+        }
 
-      &::marker {
-        content: "";
-      }
+        h3 {
+          font-size: 1rem;
+          margin-bottom: 0.125rem;
+        }
 
-      &::before {
-        content: "▸";
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translate(50%, -50%);
-        font-size: 0.75rem;
-      }
-    }
+        p {
+          font-size: 0.875rem;
+          margin-bottom: 0.25rem;
+        }
 
-    details[open] summary::before {
-      content: "▾";
-    }
+        ul {
+          padding-left: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
 
-    &_content {
-      padding: 0 0.75rem 0.7rem 0.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.625rem;
-
-      article {
-        background-color: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 8px;
-        padding: 0.5rem;
-      }
-
-      h3 {
-        font-size: 1rem;
-        margin-bottom: 0.125rem;
-      }
-
-      p {
-        font-size: 0.875rem;
-        margin-bottom: 0.25rem;
-      }
-
-      small {
-        font-size: 0.75rem;
-      }
-
-      ul {
-        padding-left: 1rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-      }
-
-      li {
-        font-size: 0.75rem;
-      }
-
-      > p {
-        font-size: 0.75rem;
+        li,
+        > p,
+        small {
+          font-size: 0.75rem;
+        }
       }
     }
   }
