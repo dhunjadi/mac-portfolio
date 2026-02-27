@@ -9,9 +9,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $color-glass-bg;
-  backdrop-filter: saturate(180%) blur(0.5rem);
-  -webkit-backdrop-filter: saturate(180%) blur(0.5rem);
+  background-color: rgb(0 0 0 / var(--glass-alpha, 0.25));
+  backdrop-filter: saturate(180%) blur(var(--blur-intensity));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--blur-intensity));
   padding: 0.25rem 0.5rem;
 
   transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);

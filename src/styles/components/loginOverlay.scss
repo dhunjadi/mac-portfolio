@@ -24,8 +24,8 @@
   color: $color-white;
 
   background: $color-overlay-bg;
-  backdrop-filter: blur(5.5px);
-  -webkit-backdrop-filter: blur(5.5px);
+  backdrop-filter: blur(var(--blur-intensity));
+  -webkit-backdrop-filter: blur(var(--blur-intensity));
   border: 1px solid $color-overlay-border;
 
   &__userInfo {

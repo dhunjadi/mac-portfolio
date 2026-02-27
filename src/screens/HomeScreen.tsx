@@ -7,7 +7,8 @@ import CalculatorWindow from "../components/windows/CalculatorWindow";
 import ShutDownModal from "../components/ShutDownModal";
 import ShutDownOverlay from "../components/ShutDownOverlay";
 import SettingsWindow from "../components/windows/SettingsWindow";
-import { useWallpaper } from "../stores/settingsStore";
+import { useBlur, useGlassAlpha, useWallpaper } from "../stores/settingsStore";
+import { useEffect } from "react";
 
 const HomeScreen = () => {
   const isAboutWindowOpen = useOpenedWindow("about");
@@ -15,8 +16,21 @@ const HomeScreen = () => {
   const isShutDownModalOpen = useOpenedWindow("shut-down");
   const isSettingsWindowOpen = useOpenedWindow("settings");
   const wallpaper = useWallpaper();
+  const glassAlpha = useGlassAlpha();
+  const blurIntensity = useBlur();
 
   const { closeWindow } = useWindowActions();
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--glass-alpha",
+      glassAlpha.toString(),
+    );
+    document.documentElement.style.setProperty(
+      "--blur-intensity",
+      `${blurIntensity}px`,
+    );
+  }, [blurIntensity, glassAlpha]);
 
   return (
     <div className="s-home" style={{ backgroundImage: `url(${wallpaper})` }}>

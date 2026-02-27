@@ -4,32 +4,38 @@ import { wallpaperOptions, wallpaperPreviews } from "../data/wallpapers";
 type SettingsActions = {
   setGlassAlpha: (glassAlpha: number) => void;
   setWallpaper: (wallpaper: string) => void;
+  setBlur: (value: number) => void;
 };
 
 type SettingsStore = {
   glassAlpha: number;
+  blur: number;
   wallpaper: string;
   wallpaperOptions: readonly string[];
   wallpaperPreviews: readonly string[];
   actions: SettingsActions;
 };
 
-const clampGlassAlpha = (value: number) => Math.max(0.1, Math.min(0.6, value));
+const clampValue = (value: number) => Math.max(0.1, Math.min(1, value));
 
 const useSettingsStore = create<SettingsStore>((set) => ({
   glassAlpha: 0.25,
+  blur: 16,
   wallpaper: wallpaperOptions[0],
   wallpaperOptions,
   wallpaperPreviews,
   actions: {
     setGlassAlpha: (glassAlpha) =>
-      set(() => ({ glassAlpha: clampGlassAlpha(glassAlpha) })),
+      set(() => ({ glassAlpha: clampValue(glassAlpha) })),
+    setBlur: (value) => set(() => ({ blur: value })),
     setWallpaper: (wallpaper) => set(() => ({ wallpaper })),
   },
 }));
 
 export const useGlassAlpha = () =>
   useSettingsStore((state) => state.glassAlpha);
+
+export const useBlur = () => useSettingsStore((state) => state.blur);
 
 export const useWallpaper = () => useSettingsStore((state) => state.wallpaper);
 
