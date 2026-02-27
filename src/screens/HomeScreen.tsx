@@ -7,8 +7,26 @@ import CalculatorWindow from "../components/windows/CalculatorWindow";
 import ShutDownModal from "../components/ShutDownModal";
 import ShutDownOverlay from "../components/ShutDownOverlay";
 import SettingsWindow from "../components/windows/SettingsWindow";
-import { useBlur, useGlassAlpha, useWallpaper } from "../stores/settingsStore";
+import {
+  useBlur,
+  useGlassAlpha,
+  useGlassColor,
+  useWallpaper,
+} from "../stores/settingsStore";
 import { useEffect } from "react";
+
+const hexToRgb = (hexColor: string) => {
+  const matched = /^#([0-9a-fA-F]{6})$/.exec(hexColor);
+
+  if (!matched) return "0 0 0";
+
+  const color = matched[1];
+  const red = parseInt(color.slice(0, 2), 16);
+  const green = parseInt(color.slice(2, 4), 16);
+  const blue = parseInt(color.slice(4, 6), 16);
+
+  return `${red} ${green} ${blue}`;
+};
 
 const HomeScreen = () => {
   const isAboutWindowOpen = useOpenedWindow("about");
@@ -18,6 +36,7 @@ const HomeScreen = () => {
   const wallpaper = useWallpaper();
   const glassAlpha = useGlassAlpha();
   const blurIntensity = useBlur();
+  const glassColor = useGlassColor();
 
   const { closeWindow } = useWindowActions();
 
@@ -30,7 +49,11 @@ const HomeScreen = () => {
       "--blur-intensity",
       `${blurIntensity}px`,
     );
-  }, [blurIntensity, glassAlpha]);
+    document.documentElement.style.setProperty(
+      "--glass-rgb",
+      hexToRgb(glassColor),
+    );
+  }, [blurIntensity, glassAlpha, glassColor]);
 
   return (
     <div className="s-home" style={{ backgroundImage: `url(${wallpaper})` }}>
