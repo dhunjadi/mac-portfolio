@@ -13,7 +13,7 @@ import {
   useGlassColor,
   useWallpaper,
 } from "../stores/settingsStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const hexToRgb = (hexColor: string) => {
   const matched = /^#([0-9a-fA-F]{6})$/.exec(hexColor);
@@ -37,8 +37,9 @@ const HomeScreen = () => {
   const glassAlpha = useGlassAlpha();
   const blurIntensity = useBlur();
   const glassColor = useGlassColor();
-
   const { closeWindow } = useWindowActions();
+
+  const [displayedWallpaper, setDisplayedWallpaper] = useState(wallpaper);
 
   useEffect(() => {
     document.documentElement.style.setProperty(
@@ -55,8 +56,32 @@ const HomeScreen = () => {
     );
   }, [blurIntensity, glassAlpha, glassColor]);
 
+  useEffect(() => {
+    if (wallpaper === displayedWallpaper) return;
+
+    let isCancelled = false;
+    const image = new Image();
+
+    image.onload = () => {
+      if (!isCancelled) setDisplayedWallpaper(wallpaper);
+    };
+
+    image.onerror = () => {
+      if (!isCancelled) setDisplayedWallpaper(wallpaper);
+    };
+
+    image.src = wallpaper;
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [wallpaper, displayedWallpaper]);
+
   return (
-    <div className="s-home" style={{ backgroundImage: `url(${wallpaper})` }}>
+    <div
+      className="s-home"
+      style={{ backgroundImage: `url(${displayedWallpaper})` }}
+    >
       <LoginOverlay />
       <ShutDownOverlay />
       <MenuBar />

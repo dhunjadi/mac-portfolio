@@ -15,19 +15,19 @@ const WallpaperPanel = () => {
       <p className="c-wallpaperPanel__subTitle">Choose a background image</p>
 
       <div className="c-wallpaperPanel__grid">
-        {wallpaperPreviews.map((option) => (
-          <button
-            key={option}
-            className={option === wallpaper ? "active" : ""}
-            onClick={() => {
-              const withoutPreview = option
-                .replace("/previews", "")
-                .replace("-preview", "");
-              setWallpaper(withoutPreview);
-            }}
-            style={{ backgroundImage: `url(${option})` }}
-          />
-        ))}
+        {wallpaperPreviews.map((option) => {
+          const fullSizeWallpaper = option.replace("/previews", "");
+          return (
+            <button
+              key={option}
+              className={fullSizeWallpaper === wallpaper ? "active" : ""}
+              onClick={() => {
+                setWallpaper(fullSizeWallpaper);
+              }}
+              style={{ backgroundImage: `url(${option})` }}
+            />
+          );
+        })}
       </div>
     </section>
   );
