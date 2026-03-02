@@ -1,21 +1,10 @@
+import { colorOptions } from "../data/colorOptions";
 import {
   useBlur,
   useGlassAlpha,
   useGlassColor,
   useSettingsActions,
 } from "../stores/settingsStore";
-
-const colorOptions = [
-  "#000000",
-  "#0A84FF",
-  "#AF52DE",
-  "#FF2D55",
-  "#FF4D5A",
-  "#FF9F0A",
-  "#FFD60A",
-  "#30D158",
-  "#8E8E93",
-];
 
 const AppearancePanel = () => {
   const glassAlpha = useGlassAlpha();

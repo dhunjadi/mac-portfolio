@@ -1,20 +1,20 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import CalculatorWindow from "../../../components/windows/CalculatorWindow";
 import userEvent from "@testing-library/user-event";
 
 describe("CalculatorWindow", () => {
-  test("renders correctly", () => {
-    const onClick = vi.fn();
-    render(<CalculatorWindow onClose={onClick} />);
+  const onClose = vi.fn();
+  const user = userEvent.setup();
+
+  it("renders correctly", () => {
+    render(<CalculatorWindow onClose={onClose} />);
 
     const buttons = screen.getAllByRole("button");
     expect(buttons).toHaveLength(22);
   });
 
-  test("adds 2 + 2", async () => {
-    const onClose = vi.fn();
-    const user = userEvent.setup();
+  it("adds 2 + 2", async () => {
     render(<CalculatorWindow onClose={onClose} />);
 
     const buttonTwo = screen.getByText("2");
@@ -35,9 +35,7 @@ describe("CalculatorWindow", () => {
     expect(result).toHaveTextContent("4");
   });
 
-  test("resets (AC)", async () => {
-    const onClose = vi.fn();
-    const user = userEvent.setup();
+  it("resets (AC)", async () => {
     render(<CalculatorWindow onClose={onClose} />);
 
     const buttonTwo = screen.getByText("2");
