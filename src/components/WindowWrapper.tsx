@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { Rnd } from "react-rnd";
 
 type WindowWrapperProps = {
@@ -18,6 +18,14 @@ const WindowWrapper = ({
   disableMaximize,
   disableResizing,
 }: WindowWrapperProps) => {
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      onClose();
+    }, 500);
+  };
   return (
     <Rnd
       default={{
@@ -30,10 +38,12 @@ const WindowWrapper = ({
       enableResizing={disableResizing ? false : true}
       cancel=".c-windowWrapper__titleBar_buttons"
     >
-      <section className={`c-windowWrapper ${className}`.trim()}>
+      <section
+        className={`c-windowWrapper ${className} ${isClosing ? "closed" : ""}`}
+      >
         <div className="c-windowWrapper__titleBar">
           <div className="c-windowWrapper__titleBar_buttons">
-            <button className="--close" onClick={onClose} />
+            <button className="--close" onClick={handleClose} />
             <button className="--minimize" disabled={disableMinimize} />
             <button className="--maximize" disabled={disableMaximize} />
           </div>
