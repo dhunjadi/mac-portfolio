@@ -98,7 +98,6 @@
       border: none;
       background: none;
       border-radius: 8px;
-      gap: 0.5rem;
 
       &.active {
         background-color: $color-accent-blue-500;
@@ -109,7 +108,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-
+      gap: 0.5rem;
       color: white;
       cursor: pointer;
       padding: 0.5rem 0.8rem;

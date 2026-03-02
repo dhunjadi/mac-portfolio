@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import WindowWrapper from "../../components/WindowWrapper";
 
 describe("WindowWrapper", () => {
-  test("renders correctly", () => {
+  it("renders correctly", () => {
     const onClose = vi.fn();
     render(<WindowWrapper onClose={onClose}> </WindowWrapper>);
 

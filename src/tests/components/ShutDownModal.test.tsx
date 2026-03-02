@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, test } from "vitest";
+import { describe, expect, it } from "vitest";
 import ShutDownModal from "../../components/ShutDownModal";
 
 describe("ShutDownModal", () => {
-  test("renders correctly", () => {
+  it("renders correctly", () => {
     render(<ShutDownModal />);
 
     const img = screen.getByRole("img", { name: "power on/off icon" });

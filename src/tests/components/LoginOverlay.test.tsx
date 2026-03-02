@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, test } from "vitest";
+import { describe, expect, it } from "vitest";
 import LoginOverlay from "../../components/LoginOverlay";
 import userEvent from "@testing-library/user-event";
 
 describe("LoginOverlay", () => {
-  test("renders correctly", () => {
+  it("renders correctly", () => {
     render(<LoginOverlay />);
 
     const img = screen.getByRole("img", { name: "user icon" });
@@ -14,7 +14,7 @@ describe("LoginOverlay", () => {
     expect(passwordInput).toBeInTheDocument();
   });
 
-  test("input handles user interactions", async () => {
+  it("input handles user interactions", async () => {
     const user = userEvent.setup();
     render(<LoginOverlay />);
 
