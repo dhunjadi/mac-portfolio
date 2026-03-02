@@ -4,9 +4,7 @@
 .c-windowWrapper {
   width: fit-content;
   position: fixed;
-  top: 5.5rem;
-  left: 50%;
-  transform: translateX(-50%);
+
   z-index: 99;
   border-radius: 12px;
   @include glass-dark;

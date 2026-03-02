@@ -21,10 +21,10 @@ const WindowWrapper = ({
   return (
     <Rnd
       default={{
-        x: 0,
-        y: 0,
-        width: 320,
-        height: 200,
+        x: 10,
+        y: 50,
+        width: "fit-content",
+        height: "fit-content",
       }}
       dragHandleClassName="c-windowWrapper__titleBar"
       enableResizing={disableResizing ? false : true}

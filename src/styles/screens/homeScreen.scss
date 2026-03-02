@@ -1,4 +1,6 @@
 .s-home {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -6,4 +8,8 @@
   background-size: cover;
 
   transition: background-image 0.3s ease-in-out;
+
+  main {
+    flex: 1;
+  }
 }
