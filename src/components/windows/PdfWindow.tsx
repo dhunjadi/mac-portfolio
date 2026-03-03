@@ -8,7 +8,7 @@ type PdfWindowProps = {
   onClose: () => void;
 };
 
-const PDF_FILE_PATH = "/resume.pdf";
+const PDF_FILE_PATH = `${import.meta.env.BASE_URL}resume.pdf`;
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
