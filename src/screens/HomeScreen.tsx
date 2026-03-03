@@ -7,6 +7,8 @@ import CalculatorWindow from "../components/windows/CalculatorWindow";
 import ShutDownModal from "../components/ShutDownModal";
 import ShutDownOverlay from "../components/ShutDownOverlay";
 import SettingsWindow from "../components/windows/SettingsWindow";
+import PdfWindow from "../components/windows/PdfWindow";
+import DesktopPdfIcon from "../components/DesktopPdfIcon";
 import {
   useBlur,
   useGlassAlpha,
@@ -14,6 +16,8 @@ import {
   useWallpaper,
 } from "../stores/settingsStore";
 import { useEffect, useState } from "react";
+import { useLogin } from "../stores/loginStore";
+import { useShutDown } from "../stores/shutDownStore";
 
 const hexToRgb = (hexColor: string) => {
   const matched = /^#([0-9a-fA-F]{6})$/.exec(hexColor);
@@ -33,11 +37,14 @@ const HomeScreen = () => {
   const isCalculatorWindowOpen = useOpenedWindow("calculator");
   const isShutDownModalOpen = useOpenedWindow("shut-down");
   const isSettingsWindowOpen = useOpenedWindow("settings");
+  const isPdfWindowOpen = useOpenedWindow("pdf");
   const wallpaper = useWallpaper();
   const glassAlpha = useGlassAlpha();
   const blurIntensity = useBlur();
   const glassColor = useGlassColor();
-  const { closeWindow } = useWindowActions();
+  const isLoggedIn = useLogin();
+  const isShutDown = useShutDown();
+  const { closeWindow, openWindow } = useWindowActions();
 
   const [displayedWallpaper, setDisplayedWallpaper] = useState(wallpaper);
 
@@ -86,6 +93,10 @@ const HomeScreen = () => {
       <ShutDownOverlay />
       <MenuBar />
       <main>
+        {isLoggedIn && !isShutDown && (
+          <DesktopPdfIcon onOpen={() => openWindow("pdf")} />
+        )}
+
         {isAboutWindowOpen && (
           <AboutThisDevWindow onClose={() => closeWindow("about")} />
         )}
@@ -99,6 +110,8 @@ const HomeScreen = () => {
         {isSettingsWindowOpen && (
           <SettingsWindow onClose={() => closeWindow("settings")} />
         )}
+
+        {isPdfWindowOpen && <PdfWindow onClose={() => closeWindow("pdf")} />}
       </main>
       <Dock />
     </div>

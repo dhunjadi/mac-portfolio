@@ -34,6 +34,7 @@ const WindowWrapper = ({
         width: "fit-content",
         height: "fit-content",
       }}
+      style={{ zIndex: 99 }} // needs to be set inline to hide desktop icons
       dragHandleClassName="c-windowWrapper__titleBar"
       enableResizing={disableResizing ? false : true}
       cancel=".c-windowWrapper__titleBar_buttons"
