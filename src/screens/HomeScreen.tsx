@@ -1,13 +1,9 @@
 import MenuBar from "../components/MenuBar";
 import Dock from "../components/Dock";
 import LoginOverlay from "../components/LoginOverlay";
-import AboutThisDevWindow from "../components/windows/AboutThisDevWindow";
 import { useOpenedWindow, useWindowActions } from "../stores/windowStore";
-import CalculatorWindow from "../components/windows/CalculatorWindow";
 import ShutDownModal from "../components/ShutDownModal";
 import ShutDownOverlay from "../components/ShutDownOverlay";
-import SettingsWindow from "../components/windows/SettingsWindow";
-import PdfWindow from "../components/windows/PdfWindow";
 import DesktopPdfIcon from "../components/DesktopPdfIcon";
 import {
   useBlur,
@@ -15,9 +11,18 @@ import {
   useGlassColor,
   useWallpaper,
 } from "../stores/settingsStore";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useLogin } from "../stores/loginStore";
 import { useShutDown } from "../stores/shutDownStore";
+
+const AboutThisDevWindow = lazy(
+  () => import("../components/windows/AboutThisDevWindow"),
+);
+const CalculatorWindow = lazy(
+  () => import("../components/windows/CalculatorWindow"),
+);
+const SettingsWindow = lazy(() => import("../components/windows/SettingsWindow"));
+const PdfWindow = lazy(() => import("../components/windows/PdfWindow"));
 
 const hexToRgb = (hexColor: string) => {
   const matched = /^#([0-9a-fA-F]{6})$/.exec(hexColor);
@@ -98,20 +103,30 @@ const HomeScreen = () => {
         )}
 
         {isAboutWindowOpen && (
-          <AboutThisDevWindow onClose={() => closeWindow("about")} />
+          <Suspense fallback={null}>
+            <AboutThisDevWindow onClose={() => closeWindow("about")} />
+          </Suspense>
         )}
 
         {isCalculatorWindowOpen && (
-          <CalculatorWindow onClose={() => closeWindow("calculator")} />
+          <Suspense fallback={null}>
+            <CalculatorWindow onClose={() => closeWindow("calculator")} />
+          </Suspense>
         )}
 
         {isShutDownModalOpen && <ShutDownModal />}
 
         {isSettingsWindowOpen && (
-          <SettingsWindow onClose={() => closeWindow("settings")} />
+          <Suspense fallback={null}>
+            <SettingsWindow onClose={() => closeWindow("settings")} />
+          </Suspense>
         )}
 
-        {isPdfWindowOpen && <PdfWindow onClose={() => closeWindow("pdf")} />}
+        {isPdfWindowOpen && (
+          <Suspense fallback={null}>
+            <PdfWindow onClose={() => closeWindow("pdf")} />
+          </Suspense>
+        )}
       </main>
       <Dock />
     </div>
