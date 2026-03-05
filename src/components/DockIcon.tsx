@@ -61,13 +61,22 @@ const DockIcon = ({ icon, id, mouseX, onClick }: DockIconProps) => {
           ref={iconRef}
           src={icon}
           alt="dock icon"
-          style={{ scale: iconScale }}
+          draggable={false}
+          style={{
+            scale: iconScale,
+            userSelect: "none",
+          }}
           animate={controls}
           onClick={isActive ? undefined : handleClick}
         />
       </motion.div>
 
-      {isActive && <div className="c-dockIcon__activeIndicator" />}
+      {isActive && (
+        <motion.div
+          layoutId={`${id}-indicator`}
+          className="c-dockIcon__activeIndicator"
+        />
+      )}
     </div>
   );
 };
