@@ -3,6 +3,7 @@ import finderIcon from "/icons/finder.png";
 import calculatorIcon from "/icons/calculator.png";
 import infoIcon from "/icons/info.svg";
 import settingsIcon from "/icons/settings.svg";
+import weatherIcon from "/icons/weather.png";
 
 export type DockIcon = {
   id: string;
@@ -25,6 +26,7 @@ const useDockStore = create<DockStore>((set) => ({
     { id: "about", icon: infoIcon, action: "about" },
     { id: "calculator", icon: calculatorIcon, action: "calculator" },
     { id: "settings", icon: settingsIcon, action: "settings" },
+    { id: "weather", icon: weatherIcon, action: "weather" },
   ],
   actions: {
     moveIcon: (newItems) => set({ icons: newItems }),

@@ -20,7 +20,7 @@ body {
 
 html {
   font-size: 62.5%; // 1rem = 10px
-  font-family: "Nunito", sans-serif;
+  font-family: -apple-system, "SF Pro Display", "Helvetica Neue", sans-serif;
 
   @include respond(xs) {
     // 36em

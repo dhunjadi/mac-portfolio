@@ -1,0 +1,237 @@
+@use "../../abstracts/mixins.scss" as *;
+@use "../../abstracts/variables" as *;
+
+.w-weather {
+  width: 320px;
+  height: min(76vh, 48rem);
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 0 0 12px 12px;
+  scrollbar-width: none;
+  background: linear-gradient(
+    180deg,
+    #3a7bd5 0%,
+    #4a90e2 20%,
+    #5ba3f0 45%,
+    #4080cc 70%,
+    #2a5fa8 100%
+  );
+  background-attachment: local;
+  color: #fff;
+  font-family: -apple-system, "SF Pro Display", "Helvetica Neue", sans-serif;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__hero {
+    position: relative;
+    text-align: center;
+    padding: 28px 16px 24px;
+
+    &_city {
+      font-size: 22px;
+      margin: 0 0 4px;
+    }
+
+    &_temperature {
+      font-size: 80px;
+      font-weight: 100;
+      line-height: 1;
+      letter-spacing: -2px;
+      margin: 0;
+    }
+
+    &_condition {
+      font-size: 16px;
+      font-weight: 500;
+      margin: 6px 0 4px;
+    }
+
+    &_highLowTemp {
+      font-size: 15px;
+      margin: 0;
+    }
+  }
+
+  &__panels {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 12px 16px;
+
+    &_panel {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      padding: 12px 14px;
+
+      header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 10px;
+
+        // icon
+        span:nth-child(1) {
+          font-size: 11px;
+          opacity: 0.8;
+        }
+
+        // label
+        span:nth-child(2) {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.6px;
+          text-transform: uppercase;
+          opacity: 0.75;
+        }
+      }
+
+      hr {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        margin: 0 0 12px;
+      }
+
+      &--hourly {
+        display: flex;
+        gap: 4px;
+        overflow-x: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        div {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 5px;
+          min-width: 50px;
+          flex-shrink: 0;
+
+          // time
+          span:nth-child(1) {
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0.9;
+          }
+
+          // icon
+          span:nth-child(2) {
+            font-size: 22px;
+            line-height: 1;
+          }
+
+          // temperature
+          span:nth-child(3) {
+            font-size: 14px;
+            font-weight: 500;
+          }
+        }
+      }
+
+      &--forecast {
+        div {
+          display: grid;
+          grid-template-columns: 46px 26px 28px 1fr 28px;
+          align-items: center;
+          gap: 6px;
+          padding: 5px 0;
+
+          &:not(:last-child) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          }
+
+          // day label
+          span:nth-child(1) {
+            font-size: 15px;
+            font-weight: 500;
+          }
+
+          // icon
+          span:nth-child(2) {
+            font-size: 20px;
+            text-align: center;
+          }
+
+          // low temp
+          span:nth-child(3) {
+            font-size: 14px;
+            opacity: 0.6;
+            text-align: right;
+          }
+
+          // bar track (4th child, a div)
+          div {
+            position: relative;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            padding: 0;
+            border: none;
+            display: block;
+
+            // bar fill (nested div)
+            div {
+              position: absolute;
+              top: 0;
+              height: 100%;
+              border-radius: 2px;
+              background: linear-gradient(90deg, #4fa3e0 0%, #74c0f5 100%);
+            }
+          }
+
+          // high temp
+          span:nth-child(5) {
+            font-size: 14px;
+            font-weight: 500;
+            text-align: right;
+          }
+        }
+      }
+
+      &--conditions {
+        // outer grid
+        & > div {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+
+          // condition item
+          div {
+            display: flex;
+            flex-direction: column;
+
+            // label
+            span:nth-child(1) {
+              font-size: 11px;
+              opacity: 0.7;
+            }
+
+            // value
+            span:nth-child(2) {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    font-size: 15px;
+    opacity: 0.7;
+  }
+}

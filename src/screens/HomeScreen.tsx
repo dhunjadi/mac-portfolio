@@ -21,8 +21,12 @@ const AboutThisDevWindow = lazy(
 const CalculatorWindow = lazy(
   () => import("../components/windows/CalculatorWindow"),
 );
-const SettingsWindow = lazy(() => import("../components/windows/SettingsWindow"));
+const SettingsWindow = lazy(
+  () => import("../components/windows/SettingsWindow"),
+);
 const PdfWindow = lazy(() => import("../components/windows/PdfWindow"));
+
+const WeatherWindow = lazy(() => import("../components/windows/WeatherWindow"));
 
 const hexToRgb = (hexColor: string) => {
   const matched = /^#([0-9a-fA-F]{6})$/.exec(hexColor);
@@ -43,6 +47,7 @@ const HomeScreen = () => {
   const isShutDownModalOpen = useOpenedWindow("shut-down");
   const isSettingsWindowOpen = useOpenedWindow("settings");
   const isPdfWindowOpen = useOpenedWindow("pdf");
+  const isWeatherWindowOpen = useOpenedWindow("weather");
   const wallpaper = useWallpaper();
   const glassAlpha = useGlassAlpha();
   const blurIntensity = useBlur();
@@ -125,6 +130,12 @@ const HomeScreen = () => {
         {isPdfWindowOpen && (
           <Suspense fallback={null}>
             <PdfWindow onClose={() => closeWindow("pdf")} />
+          </Suspense>
+        )}
+
+        {isWeatherWindowOpen && (
+          <Suspense fallback={null}>
+            <WeatherWindow onClose={() => closeWindow("weather")} />
           </Suspense>
         )}
       </main>
