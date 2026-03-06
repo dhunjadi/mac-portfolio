@@ -16,11 +16,14 @@ const ShutDownModal = () => {
     const interval = setInterval(() => {
       if (remainingTime > 0) {
         setRemainingTime((prev) => prev - 1);
+      } else {
+        closeWindow("shut-down");
+        shutDown();
       }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [remainingTime]);
+  }, [closeWindow, remainingTime, shutDown]);
 
   const handleShutDown = () => {
     closeWindow("shut-down");
@@ -39,6 +42,7 @@ const ShutDownModal = () => {
         height: "fit-content",
       }}
       cancel=".c-shutDownModal__buttons"
+      style={{ zIndex: 99 }} // needs to be set inline to hide desktop icons
     >
       <div className="c-shutDownModal">
         <div className="c-shutDownModal__body">
@@ -54,13 +58,12 @@ const ShutDownModal = () => {
             </p>
             <p>
               <small>
-                If you do nothing, the computer will shut down automatically in
+                If you do nothing, the computer will shut down automatically in{" "}
                 {remainingTime} seconds
               </small>
             </p>
           </div>
         </div>
-
         <div className="c-shutDownModal__buttons">
           <button
             className="isSecondary"
