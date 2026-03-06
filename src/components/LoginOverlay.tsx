@@ -5,76 +5,82 @@ import restartIcon from "/icons/restart.svg";
 import sleepIcon from "/icons/sleep.svg";
 import arrowRightCircle from "/icons/arrow-right-circle.svg";
 import { useLogin, useLoginActions } from "../stores/loginStore";
+import { useShutDownActions } from "../stores/shutDownStore";
 
 const LoginOverlay = () => {
   const isLoggedIn = useLogin();
   const { login } = useLoginActions();
+  const { shutDown } = useShutDownActions();
 
   const [password, setPassword] = useState("");
   const [isInvisible, setIsInvisible] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn) {
-      const timer = setTimeout(() => setIsInvisible(true), 500);
+      const timer = setTimeout(() => setIsInvisible(true), 600);
       return () => clearTimeout(timer);
     }
   }, [isLoggedIn]);
 
+  const handleLogin = () => {
+    if (password.length > 0) {
+      login();
+    }
+  };
+
+  const bottomButtons = [
+    { icon: powerOffIcon, label: "Shut Down", onClick: () => shutDown() },
+    { icon: restartIcon, label: "Restart", onClick: () => {} },
+    { icon: sleepIcon, label: "Sleep", onClick: () => {} },
+  ];
+
   return (
     <div
-      className={`c-loginOverlay ${isLoggedIn ? "hidden" : ""} ${isInvisible ? "invisible" : ""}`}
+      className={`
+        c-loginOverlay
+        ${isLoggedIn ? "is-hidden" : ""}
+        ${isInvisible ? "is-invisible" : ""}`}
     >
       <div className="c-loginOverlay__userInfo">
-        <div className="c-loginOverlay__userInfo_img">
+        <div className="c-loginOverlay__userInfo_avatar">
           <img src={userIcon} alt="user icon" />
         </div>
 
-        <div className="c-loginOverlay__userInfo_name">
-          <strong>Dario Hunjadi</strong>
-        </div>
+        <div className="c-loginOverlay__userInfo_name">Dario Hunjadi</div>
 
         <div className="c-loginOverlay__userInfo_input">
           <input
-            type="text"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter anything..."
             onKeyDown={(e) => {
-              if (e.key === "Enter" && password.length > 0) {
-                login();
-              }
+              if (e.key === "Enter") handleLogin();
             }}
             autoFocus
           />
-          {password.length > 0 && (
-            <img
-              onClick={() => login()}
-              src={arrowRightCircle}
-              alt="right arrow inside a circle"
-            />
-          )}
+
+          <button
+            className={`
+              
+             ${password.length === 0 ? "is-hidden" : ""}`}
+            onClick={handleLogin}
+            aria-label="Log in"
+          >
+            <img src={arrowRightCircle} alt="right arrow inside a circle" />
+          </button>
         </div>
       </div>
 
       <div className="c-loginOverlay__buttonGroup">
-        <div className="c-loginOverlay__buttonGroup_group">
-          <button>
-            <img src={powerOffIcon} alt="shut down icon" />
-          </button>
-          <strong>Shut Down</strong>
-        </div>
-        <div className="c-loginOverlay__buttonGroup_group">
-          <button>
-            <img src={restartIcon} alt="restart icon" />
-          </button>
-          <strong>Restart</strong>
-        </div>
-        <div className="c-loginOverlay__buttonGroup_group">
-          <button>
-            <img src={sleepIcon} alt="sleep icon" />
-          </button>
-          <strong>Sleep</strong>
-        </div>
+        {bottomButtons.map(({ icon, label, onClick }) => (
+          <div className="c-loginOverlay__buttonGroup_group" key={label}>
+            <button aria-label={label} onClick={onClick}>
+              <img src={icon} alt={label} />
+            </button>
+            <span>{label}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
