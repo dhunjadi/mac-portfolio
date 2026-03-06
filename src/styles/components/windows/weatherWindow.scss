@@ -1,13 +1,16 @@
 @use "../../abstracts/mixins.scss" as *;
 @use "../../abstracts/variables" as *;
 
+// Not using rem in md screen size to prevent scaling
+// I like tablet look of this window on dektop screen size
+
 .w-weather {
-  width: 320px;
-  height: min(76vh, 48rem);
+  width: 32rem;
+  max-height: calc(100vh - 14rem);
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
-  border-radius: 0 0 12px 12px;
+  border-radius: 0 0 1.2rem 1.2rem;
   scrollbar-width: none;
   background: linear-gradient(
     180deg,
@@ -25,84 +28,173 @@
     display: none;
   }
 
+  @include respond(md) {
+    width: 600px;
+    max-height: calc(100vh - 112px);
+  }
+
   &__hero {
     position: relative;
+    z-index: 1;
     text-align: center;
-    padding: 28px 16px 24px;
+    padding: 2rem 1.6rem 1.6rem;
+    animation: fadeSlideUp 0.6s ease both;
+
+    @include respond(md) {
+      padding: 16px 16px 12px;
+    }
 
     &_city {
-      font-size: 22px;
-      margin: 0 0 4px;
+      // city
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      margin: 0 0 0.2rem;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+
+      @include respond(md) {
+        font-size: 20px;
+      }
     }
 
     &_temperature {
-      font-size: 80px;
+      font-size: 7rem;
       font-weight: 100;
       line-height: 1;
-      letter-spacing: -2px;
+      letter-spacing: -0.04em;
       margin: 0;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+      @include respond(md) {
+        font-size: 64px;
+      }
     }
 
     &_condition {
-      font-size: 16px;
+      font-size: 1.4rem;
       font-weight: 500;
-      margin: 6px 0 4px;
+      margin: 0.4rem 0 0.2rem;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+      @include respond(md) {
+        font-size: 14px;
+      }
     }
 
     &_highLowTemp {
-      font-size: 15px;
+      font-size: 1.3rem;
+      font-weight: 400;
+      opacity: 0.9;
       margin: 0;
+
+      @include respond(md) {
+        font-size: 13px;
+      }
     }
   }
 
+  // ─── Panels ─────────────────────────────────────────────
   &__panels {
     position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 0 12px 16px;
+    gap: 1rem;
+    padding: 0 1rem 1.2rem;
+    animation: fadeSlideUp 0.7s ease 0.15s both;
+
+    @include respond(md) {
+      gap: 10px;
+      padding: 0 10px 12px;
+    }
+
+    &_row {
+      display: contents;
+
+      @include respond(md) {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 10px;
+        align-items: start;
+      }
+    }
+
+    &_side {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      @include respond(md) {
+        gap: 10px;
+      }
+    }
 
     &_panel {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(20px) saturate(1.4);
       -webkit-backdrop-filter: blur(20px) saturate(1.4);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 14px;
-      padding: 12px 14px;
+      border-radius: 1.2rem;
+      padding: 1rem 1.2rem;
+
+      @include respond(md) {
+        border-radius: 12px;
+        padding: 10px 12px;
+      }
 
       header {
         display: flex;
         align-items: center;
-        gap: 6px;
-        margin-bottom: 10px;
+        gap: 0.5rem;
+        margin-bottom: 0.8rem;
 
-        // icon
-        span:nth-child(1) {
-          font-size: 11px;
-          opacity: 0.8;
+        @include respond(md) {
+          gap: 5px;
+          margin-bottom: 8px;
         }
 
-        // label
+        span:nth-child(1) {
+          font-size: 1rem;
+          opacity: 0.8;
+
+          @include respond(md) {
+            font-size: 10px;
+          }
+        }
+
         span:nth-child(2) {
-          font-size: 11px;
+          font-size: 1rem;
           font-weight: 600;
-          letter-spacing: 0.6px;
+          letter-spacing: 0.06em;
           text-transform: uppercase;
           opacity: 0.75;
+
+          @include respond(md) {
+            font-size: 10px;
+          }
         }
       }
 
       hr {
         border: none;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
-        margin: 0 0 12px;
+        margin: 0 0 1rem;
+
+        @include respond(md) {
+          margin: 0 0 10px;
+        }
       }
 
       &--hourly {
         display: flex;
-        gap: 4px;
+        gap: 0.2rem;
         overflow-x: auto;
         scrollbar-width: none;
+        padding: 0.8rem 0.4rem;
+
+        @include respond(md) {
+          padding: 8px 4px;
+        }
 
         &::-webkit-scrollbar {
           display: none;
@@ -112,27 +204,41 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 5px;
-          min-width: 50px;
+          gap: 0.4rem;
+          min-width: 4.4rem; // 44px at base
           flex-shrink: 0;
 
-          // time
+          @include respond(md) {
+            min-width: 44px;
+            gap: 4px;
+          }
+
           span:nth-child(1) {
-            font-size: 12px;
+            font-size: 1.1rem;
             font-weight: 600;
             opacity: 0.9;
+
+            @include respond(md) {
+              font-size: 11px;
+            }
           }
 
-          // icon
           span:nth-child(2) {
-            font-size: 22px;
+            font-size: 2rem;
             line-height: 1;
+
+            @include respond(md) {
+              font-size: 20px;
+            }
           }
 
-          // temperature
           span:nth-child(3) {
-            font-size: 14px;
+            font-size: 1.2rem;
             font-weight: 500;
+
+            @include respond(md) {
+              font-size: 12px;
+            }
           }
         }
       }
@@ -140,35 +246,49 @@
       &--forecast {
         div {
           display: grid;
-          grid-template-columns: 46px 26px 28px 1fr 28px;
+          grid-template-columns: 4rem 2.2rem 2.4rem 1fr 2.4rem;
           align-items: center;
-          gap: 6px;
-          padding: 5px 0;
+          gap: 0.6rem;
+          padding: 0.4rem 0;
+
+          @include respond(md) {
+            grid-template-columns: 40px 22px 24px 1fr 24px;
+            gap: 6px;
+            padding: 4px 0;
+          }
 
           &:not(:last-child) {
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
           }
 
-          // day label
           span:nth-child(1) {
-            font-size: 15px;
+            font-size: 1.3rem;
             font-weight: 500;
+
+            @include respond(md) {
+              font-size: 13px;
+            }
           }
 
-          // icon
           span:nth-child(2) {
-            font-size: 20px;
+            font-size: 1.8rem;
             text-align: center;
+
+            @include respond(md) {
+              font-size: 18px;
+            }
           }
 
-          // low temp
           span:nth-child(3) {
-            font-size: 14px;
+            font-size: 1.2rem;
             opacity: 0.6;
             text-align: right;
+
+            @include respond(md) {
+              font-size: 12px;
+            }
           }
 
-          // bar track (4th child, a div)
           div {
             position: relative;
             height: 4px;
@@ -179,7 +299,6 @@
             border: none;
             display: block;
 
-            // bar fill (nested div)
             div {
               position: absolute;
               top: 0;
@@ -189,36 +308,54 @@
             }
           }
 
-          // high temp
           span:nth-child(5) {
-            font-size: 14px;
+            font-size: 1.2rem;
             font-weight: 500;
             text-align: right;
+
+            @include respond(md) {
+              font-size: 12px;
+            }
           }
         }
       }
 
       &--conditions {
-        // outer grid
         & > div {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 10px;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.8rem;
 
-          // condition item
+          @include respond(md) {
+            gap: 8px;
+          }
+
           div {
             display: flex;
             flex-direction: column;
+            gap: 0.2rem;
 
-            // label
-            span:nth-child(1) {
-              font-size: 11px;
-              opacity: 0.7;
+            @include respond(md) {
+              gap: 2px;
             }
 
-            // value
+            span:nth-child(1) {
+              font-size: 1rem;
+              opacity: 0.65;
+              letter-spacing: 0.02em;
+
+              @include respond(md) {
+                font-size: 10px;
+              }
+            }
+
             span:nth-child(2) {
-              font-size: 18px;
+              font-size: 1.6rem;
+              font-weight: 500;
+
+              @include respond(md) {
+                font-size: 16px;
+              }
             }
           }
         }
@@ -230,8 +367,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 200px;
-    font-size: 15px;
+    height: 16rem;
+    font-size: 1.4rem;
     opacity: 0.7;
+
+    @include respond(md) {
+      height: 160px;
+      font-size: 14px;
+    }
   }
 }

@@ -155,62 +155,66 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
                 </div>
               )}
 
-              {dailyItems.length > 0 && (
-                <div className="w-weather__panels_panel w-weather__panels_panel--forecast">
-                  <header>
-                    <span>📅</span>
-                    <span>5-DAY FORECAST</span>
-                  </header>
-                  <hr />
-                  {dailyItems.map((d, i) => {
-                    const rangeWidth = globalMax - globalMin || 1;
-                    const barStart = ((d.low - globalMin) / rangeWidth) * 100;
-                    const barWidth = ((d.high - d.low) / rangeWidth) * 100;
-                    return (
-                      <div key={i}>
-                        <span>{d.label}</span>
-                        <span>{d.icon}</span>
-                        <span>{d.low}°</span>
-                        <div>
-                          <div
-                            style={{
-                              left: `${barStart}%`,
-                              width: `${barWidth}%`,
-                            }}
-                          />
+              <div className="w-weather__panels_row">
+                {dailyItems.length > 0 && (
+                  <div className="w-weather__panels_panel w-weather__panels_panel--forecast">
+                    <header>
+                      <span>📅</span>
+                      <span>5-DAY FORECAST</span>
+                    </header>
+                    <hr />
+                    {dailyItems.map((d, i) => {
+                      const rangeWidth = globalMax - globalMin || 1;
+                      const barStart = ((d.low - globalMin) / rangeWidth) * 100;
+                      const barWidth = ((d.high - d.low) / rangeWidth) * 100;
+                      return (
+                        <div key={i}>
+                          <span>{d.label}</span>
+                          <span>{d.icon}</span>
+                          <span>{d.low}°</span>
+                          <div>
+                            <div
+                              style={{
+                                left: `${barStart}%`,
+                                width: `${barWidth}%`,
+                              }}
+                            />
+                          </div>
+                          <span>{d.high}°</span>
                         </div>
-                        <span>{d.high}°</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
+                      );
+                    })}
+                  </div>
+                )}
 
-              <div className="w-weather__panels_panel w-weather__panels_panel--conditions">
-                <header>
-                  <span>🌡️</span>
-                  <span>CONDITIONS</span>
-                </header>
-                <hr />
-                <div>
-                  {humidity !== null && (
+                <div className="w-weather__panels_side">
+                  <div className="w-weather__panels_panel w-weather__panels_panel--conditions">
+                    <header>
+                      <span>🌡️</span>
+                      <span>CONDITIONS</span>
+                    </header>
+                    <hr />
                     <div>
-                      <span>💧 Humidity</span>
-                      <span>{humidity}%</span>
+                      {humidity !== null && (
+                        <div>
+                          <span>💧 Humidity</span>
+                          <span>{humidity}%</span>
+                        </div>
+                      )}
+                      {windSpeed !== null && (
+                        <div>
+                          <span>💨 Wind</span>
+                          <span>{windSpeed} km/h</span>
+                        </div>
+                      )}
+                      {cloudiness !== null && (
+                        <div>
+                          <span>☁️ Cloud cover</span>
+                          <span>{cloudiness}%</span>
+                        </div>
+                      )}
                     </div>
-                  )}
-                  {windSpeed !== null && (
-                    <div>
-                      <span>💨 Wind</span>
-                      <span>{windSpeed} km/h</span>
-                    </div>
-                  )}
-                  {cloudiness !== null && (
-                    <div>
-                      <span>☁️ Cloud cover</span>
-                      <span>{cloudiness}%</span>
-                    </div>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
