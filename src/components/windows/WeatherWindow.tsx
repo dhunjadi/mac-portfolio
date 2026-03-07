@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState, useRef } from "react";
 import {
   getCurrentWeatherByCity,
   getForecastByCity,
@@ -9,6 +10,7 @@ import type {
   ForecastItem,
   ForecastResponse,
 } from "../../types";
+import { useDebounce } from "../../hooks/useDebounce";
 
 function iconToEmoji(icon: string): string {
   const map: Record<string, string> = {
@@ -34,9 +36,7 @@ function iconToEmoji(icon: string): string {
   return map[icon] ?? "🌡️";
 }
 
-const capitalize = (s: string) => {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-};
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 const formatHour = (dtTxt: string): string => {
   const date = new Date(dtTxt.replace(" ", "T"));
@@ -86,17 +86,23 @@ type WeatherWindowProps = {
 };
 
 const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
+  const [searchInput, setSearchInput] = useState("");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const debouncedCity = useDebounce(searchInput, 500, "zagreb");
+
   const { data: current, isLoading: loadingCurrent } = useQuery<CurrentWeather>(
     {
-      queryKey: ["weather", "current"],
-      queryFn: () => getCurrentWeatherByCity("zagreb"),
+      queryKey: ["weather", "current", debouncedCity],
+      queryFn: () => getCurrentWeatherByCity(debouncedCity),
     },
   );
 
   const { data: forecast, isLoading: loadingForecast } =
     useQuery<ForecastResponse>({
-      queryKey: ["weather", "forecast"],
-      queryFn: () => getForecastByCity("zagreb"),
+      queryKey: ["weather", "forecast", debouncedCity],
+      queryFn: () => getForecastByCity(debouncedCity),
     });
 
   const isLoading = loadingCurrent || loadingForecast;
@@ -107,7 +113,7 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
   const tempMax = current ? Math.round(current.main.temp_max) : null;
   const condition = current ? capitalize(current.weather[0].description) : "—";
   const humidity = current?.main.humidity ?? null;
-  const windSpeed = current ? Math.round(current.wind.speed * 3.6) : null; // m/s → km/h
+  const windSpeed = current ? Math.round(current.wind.speed * 3.6) : null;
   const cloudiness = current?.clouds.all ?? null;
 
   const hourlyItems = (forecast?.list ?? []).slice(0, 8).map((item, i) => ({
@@ -124,9 +130,49 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
     ? Math.max(...dailyItems.map((d) => d.high))
     : 1;
 
+  const handleSearchToggle = () => {
+    setIsSearchOpen((prev) => {
+      const next = !prev;
+      if (next) {
+        setTimeout(() => inputRef.current?.focus(), 0);
+      } else {
+        setSearchInput("");
+      }
+      return next;
+    });
+  };
+
+  const handleEscape = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") {
+      setIsSearchOpen(false);
+      setSearchInput("");
+    }
+  };
+
   return (
     <WindowWrapper onClose={onClose} disableResizing>
       <div className="w-weather">
+        <div
+          className={`w-weather__search${isSearchOpen ? " w-weather__search--open" : ""}`}
+        >
+          <button
+            className="w-weather__search_toggle"
+            onClick={handleSearchToggle}
+          >
+            {isSearchOpen ? "✕" : "🔍"}
+          </button>
+
+          <input
+            ref={inputRef}
+            className="w-weather__search_input"
+            type="text"
+            placeholder="Search city…"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={handleEscape}
+          />
+        </div>
+
         {isLoading ? (
           <div className="w-weather__loading">
             <span>Loading…</span>

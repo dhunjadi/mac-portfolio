@@ -2,15 +2,14 @@
 @use "../../abstracts/variables" as *;
 
 // Not using rem in md screen size to prevent scaling
-// I like tablet look of this window on dektop screen size
+// I like tablet look of this window on desktop screen size
 
 .w-weather {
   width: 32rem;
-  max-height: calc(100vh - 14rem);
+  max-height: 75vh;
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
-  border-radius: 0 0 1.2rem 1.2rem;
   scrollbar-width: none;
   background: linear-gradient(
     180deg,
@@ -30,7 +29,97 @@
 
   @include respond(md) {
     width: 600px;
-    max-height: calc(100vh - 112px);
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1rem 0;
+    height: 3.2rem;
+
+    @include respond(md) {
+      gap: 10px;
+      padding: 8px 10px 0;
+      height: 32px;
+    }
+
+    &_toggle {
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      width: 2.2rem;
+      height: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #fff;
+      transition:
+        background 0.3s ease,
+        transform 0.2s ease;
+
+      @include respond(md) {
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    &_input {
+      flex: 1;
+      max-width: 0;
+      overflow: hidden;
+      opacity: 0;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: $color-white;
+      font-size: 1.3rem;
+      outline: none;
+      transition:
+        max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.25s ease,
+        padding 0.3s ease;
+      pointer-events: none;
+
+      @include respond(md) {
+        font-size: 14px;
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    &--open {
+      .w-weather__search_input {
+        max-width: 100%;
+        opacity: 1;
+        padding: 0.3rem 0.7rem;
+        pointer-events: auto;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 1rem;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+
+        @include respond(md) {
+          padding: 4px 8px;
+          border-radius: 10px;
+        }
+      }
+
+      .w-weather__search_toggle {
+        background: rgba(255, 255, 255, 0.25);
+      }
+    }
   }
 
   &__hero {
@@ -45,7 +134,6 @@
     }
 
     &_city {
-      // city
       font-size: 2rem;
       font-weight: 400;
       letter-spacing: 0.03em;
@@ -93,7 +181,6 @@
     }
   }
 
-  // ─── Panels ─────────────────────────────────────────────
   &__panels {
     position: relative;
     z-index: 1;
@@ -205,7 +292,7 @@
           flex-direction: column;
           align-items: center;
           gap: 0.4rem;
-          min-width: 4.4rem; // 44px at base
+          min-width: 4.4rem;
           flex-shrink: 0;
 
           @include respond(md) {
