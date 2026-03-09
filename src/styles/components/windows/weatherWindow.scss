@@ -4,6 +4,12 @@
 // Not using rem in md screen size to prevent scaling
 // I like tablet look of this window on desktop screen size
 
+.c-windowWrapper.maximized .w-weather {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+}
+
 .w-weather {
   width: 32rem;
   max-height: 75vh;

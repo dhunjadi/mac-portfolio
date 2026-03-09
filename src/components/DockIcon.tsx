@@ -46,30 +46,27 @@ const DockIcon = ({ icon, id, mouseX, onClick }: DockIconProps) => {
   });
 
   const handleClick = async () => {
-    onClick();
-
     await controls.start({
       y: [0, -30, 0, -30, 0, -30, 0],
       transition: { duration: 3, ease: "easeInOut" },
     });
+    onClick();
   };
 
   return (
     <div className="c-dockIcon">
-      <motion.div whileHover={{ y: -6 }}>
-        <motion.img
-          ref={iconRef}
-          src={icon}
-          alt="dock icon"
-          draggable={false}
-          style={{
-            scale: iconScale,
-            userSelect: "none",
-          }}
-          animate={controls}
-          onClick={isActive ? undefined : handleClick}
-        />
-      </motion.div>
+      <motion.img
+        ref={iconRef}
+        src={icon}
+        alt="dock icon"
+        draggable={false}
+        style={{
+          scale: iconScale,
+          userSelect: "none",
+        }}
+        animate={controls}
+        onClick={isActive ? undefined : handleClick}
+      />
 
       {isActive && (
         <motion.div

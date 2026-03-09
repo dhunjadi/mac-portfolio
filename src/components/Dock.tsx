@@ -10,7 +10,11 @@ import {
 } from "../stores/dockStore";
 import type { AppleMenuDropdownItem } from "../types";
 
-const Dock = () => {
+type DockProps = {
+  ref?: React.Ref<HTMLUListElement>;
+};
+
+const Dock = ({ ref }: DockProps) => {
   const isLoggedIn = useLogin();
   const { openWindow } = useWindowActions();
 
@@ -37,6 +41,7 @@ const Dock = () => {
 
   return (
     <Reorder.Group
+      ref={ref}
       axis="x"
       values={icons}
       onReorder={moveIcon}

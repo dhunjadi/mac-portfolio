@@ -1,5 +1,10 @@
 @use "../../abstracts/variables" as *;
 
+.c-windowWrapper.maximized .w-pdfWindow {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+}
 .w-pdfWindow {
   width: min(90vw, 40rem);
   height: min(76vh, 48rem);

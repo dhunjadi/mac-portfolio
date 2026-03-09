@@ -21,6 +21,16 @@
     transform: translateY(10rem) scale(0.5);
   }
 
+  &.maximized {
+    width: 100%;
+    height: 100%;
+
+    .c-windowWrapper__content {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   &__titleBar {
     padding: 10px;
     position: relative;

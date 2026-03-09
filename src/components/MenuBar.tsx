@@ -9,9 +9,10 @@ import type { AppleMenuDropdownItem } from "../types";
 
 type MenuBarProps = {
   hideAppleLogo?: boolean;
+  ref?: React.Ref<HTMLDivElement>;
 };
 
-const MenuBar = ({ hideAppleLogo }: MenuBarProps) => {
+const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
   const isLoggedIn = useLogin();
   const { openWindow } = useWindowActions();
   const [isAppleMenuOpen, setIsAppleMenuOpen] = useState(false);
@@ -19,21 +20,14 @@ const MenuBar = ({ hideAppleLogo }: MenuBarProps) => {
   const date = dayjs().format("ddd D MMM HH:mm");
 
   useEffect(() => {
-    if (!isAppleMenuOpen) {
-      return;
-    }
+    if (!isAppleMenuOpen) return;
 
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsAppleMenuOpen(false);
-      }
+      if (event.key === "Escape") setIsAppleMenuOpen(false);
     };
 
     window.addEventListener("keydown", handleEscape);
-
-    return () => {
-      window.removeEventListener("keydown", handleEscape);
-    };
+    return () => window.removeEventListener("keydown", handleEscape);
   }, [isAppleMenuOpen]);
 
   const handleAppleMenuSelect = (item: AppleMenuDropdownItem) => {
@@ -42,7 +36,7 @@ const MenuBar = ({ hideAppleLogo }: MenuBarProps) => {
   };
 
   return (
-    <div className={`c-menuBar ${isLoggedIn ? "" : "hidden"}`}>
+    <div ref={ref} className={`c-menuBar ${isLoggedIn ? "" : "hidden"}`}>
       {!hideAppleLogo && (
         <div className="c-menuBar__apple" ref={appleMenuRef}>
           <button

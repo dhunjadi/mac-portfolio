@@ -2,12 +2,16 @@
 @use "../abstracts/variables" as *;
 
 .c-dockIcon {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 4px 0;
 
   &__activeIndicator {
+    position: absolute;
+    bottom: 0;
     background-color: $color-white;
     width: 4px;
     height: 4px;
