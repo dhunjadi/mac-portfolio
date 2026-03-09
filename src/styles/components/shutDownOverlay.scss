@@ -2,7 +2,7 @@
 @use "../abstracts/variables" as *;
 
 .c-shutDownOverlay {
-  min-height: 100vh;
+  min-height: 100svh;
   position: absolute;
   inset: 0;
   z-index: 999999999;

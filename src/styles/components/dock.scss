@@ -10,7 +10,7 @@
   --dock-outer-margin: 2rem;
 
   width: fit-content;
-  max-width: calc(100vw - var(--dock-outer-margin));
+  max-width: calc(100svw - var(--dock-outer-margin));
   position: fixed;
   bottom: 0.25rem;
   left: 50%;
@@ -38,7 +38,7 @@
       var(--icon-min-size),
       calc(
         (
-            100vw - var(--dock-outer-margin) - (var(--dock-padding-x) * 2) -
+            100svw - var(--dock-outer-margin) - (var(--dock-padding-x) * 2) -
               ((var(--dock-items) - 1) * var(--dock-gap))
           ) /
           var(--dock-items)

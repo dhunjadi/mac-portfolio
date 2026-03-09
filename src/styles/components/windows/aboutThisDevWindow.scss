@@ -1,7 +1,7 @@
 @use "../../abstracts/variables" as *;
 
 .w-aboutThisDev {
-  width: min(30rem, calc(70vw - 1.5rem));
+  width: min(30rem, calc(70svw - 1.5rem));
   color: $color-white;
 
   &__header {
@@ -67,7 +67,7 @@
 
   &__accordion {
     margin: 0.75rem 0.6rem 0.6rem 0.6rem;
-    max-height: min(24rem, calc(100vh - 12rem));
+    max-height: min(24rem, calc(100svh - 12rem));
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.12);
     background-color: rgba(0, 0, 0, 0.18);
