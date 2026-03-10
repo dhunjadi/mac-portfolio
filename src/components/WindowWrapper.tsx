@@ -125,6 +125,7 @@ const WindowWrapper = ({
       }}
     >
       <section
+        // eslint-disable-next-line max-len
         className={`c-windowWrapper ${className} ${isClosing ? "closed" : ""} ${isMaximized ? "maximized" : ""} ${isFocused ? "focused" : "unfocused"}`}
       >
         <div className="c-windowWrapper__titleBar">
