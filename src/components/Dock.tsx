@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { useMotionValue, Reorder } from "framer-motion";
 import DockIcon from "./DockIcon";
 import { useLogin } from "../stores/loginStore";
@@ -21,10 +21,14 @@ const Dock = ({ ref }: DockProps) => {
   const icons = useDockIcons();
   const { moveIcon } = useDockActions();
 
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+  // ref instead of state to avoid re-renders
+  // re-renders break icon reordering
+  const isDesktop = useRef(window.innerWidth >= 1024);
 
   useEffect(() => {
-    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    const handleResize = () => {
+      isDesktop.current = window.innerWidth >= 1024;
+    };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);

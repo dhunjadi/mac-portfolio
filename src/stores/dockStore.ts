@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
+
 import finderIcon from "/icons/finder.png";
 import calculatorIcon from "/icons/calculator.png";
 import infoIcon from "/icons/info.svg";
@@ -20,18 +22,28 @@ type DockStore = {
   actions: DockActions;
 };
 
-const useDockStore = create<DockStore>((set) => ({
-  icons: [
-    { id: "finder", icon: finderIcon },
-    { id: "about", icon: infoIcon, action: "about" },
-    { id: "calculator", icon: calculatorIcon, action: "calculator" },
-    { id: "settings", icon: settingsIcon, action: "settings" },
-    { id: "weather", icon: weatherIcon, action: "weather" },
-  ],
-  actions: {
-    moveIcon: (newItems) => set({ icons: newItems }),
-  },
-}));
+const useDockStore = create<DockStore>()(
+  persist(
+    (set) => ({
+      icons: [
+        { id: "finder", icon: finderIcon },
+        { id: "about", icon: infoIcon, action: "about" },
+        { id: "calculator", icon: calculatorIcon, action: "calculator" },
+        { id: "settings", icon: settingsIcon, action: "settings" },
+        { id: "weather", icon: weatherIcon, action: "weather" },
+      ],
+      actions: {
+        moveIcon: (newItems) => set({ icons: newItems }),
+      },
+    }),
+    {
+      name: "dock-storage",
+      partialize: (state) => ({
+        icons: state.icons,
+      }),
+    },
+  ),
+);
 
 export const useDockIcons = () => useDockStore((state) => state.icons);
 export const useDockActions = () => useDockStore((state) => state.actions);

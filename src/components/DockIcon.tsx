@@ -21,7 +21,8 @@ const DockIcon = ({ icon, id, mouseX, onClick }: DockIconProps) => {
   const controls = useAnimationControls();
   const openedWindows = useOpenedWindows();
 
-  const isActive = openedWindows.includes(id as AppleMenuDropdownItem);
+  const isActive =
+    openedWindows.includes(id as AppleMenuDropdownItem) || id === "finder";
 
   const distanceFromCursor = useTransform(mouseX, (cursorX) => {
     if (cursorX === Number.NEGATIVE_INFINITY) return Number.POSITIVE_INFINITY;
