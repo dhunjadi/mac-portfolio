@@ -25,15 +25,17 @@ const Dock = ({ ref }: DockProps) => {
   // re-renders break icon reordering
   const isDesktop = useRef(window.innerWidth >= 1024);
 
+  const mouseX = useMotionValue(Number.NEGATIVE_INFINITY);
   useEffect(() => {
     const handleResize = () => {
       isDesktop.current = window.innerWidth >= 1024;
+      if (!isDesktop.current) {
+        mouseX.set(Number.NEGATIVE_INFINITY);
+      }
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const mouseX = useMotionValue(Number.NEGATIVE_INFINITY);
+  }, [mouseX]);
 
   const handleIconClick = (iconId: string) => {
     openWindow(iconId as AppleMenuDropdownItem);
@@ -52,7 +54,7 @@ const Dock = ({ ref }: DockProps) => {
       className={`c-dock ${isLoggedIn ? "" : "hidden"}`}
       style={dockStyle}
       onMouseMove={(e) => {
-        if (isDesktop) mouseX.set(e.clientX);
+        if (isDesktop.current) mouseX.set(e.clientX);
       }}
       onMouseLeave={() => mouseX.set(Number.NEGATIVE_INFINITY)}
     >
