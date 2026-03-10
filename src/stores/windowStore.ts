@@ -98,3 +98,6 @@ export const useWindowZIndex = (id: AppleMenuDropdownItem) =>
     const index = state.windowOrder.indexOf(id);
     return WINDOW_Z_INDEX_BASE + (index < 0 ? 0 : index);
   });
+
+export const useActiveWindowId = () =>
+  useWindowStore((state) => state.activeWindowId);

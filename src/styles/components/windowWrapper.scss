@@ -5,11 +5,11 @@
   width: fit-content;
   position: fixed;
   opacity: 1;
-  z-index: 99;
   border-radius: 12px;
   @include glass-dark;
 
   overflow: hidden;
+  isolation: isolate;
 
   transform: translateY(0) scale(1);
   transition:
@@ -116,5 +116,14 @@
         }
       }
     }
+  }
+
+  &.unfocused::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    z-index: 2;
   }
 }

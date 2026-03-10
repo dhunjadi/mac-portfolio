@@ -1,7 +1,11 @@
 import { useState, useRef, type ReactNode } from "react";
 import { Rnd } from "react-rnd";
 import type { AppleMenuDropdownItem } from "../types";
-import { useWindowActions, useWindowZIndex } from "../stores/windowStore";
+import {
+  useActiveWindowId,
+  useWindowActions,
+  useWindowZIndex,
+} from "../stores/windowStore";
 
 type WindowWrapperProps = {
   windowId: AppleMenuDropdownItem;
@@ -41,6 +45,8 @@ const WindowWrapper = ({
   const [isAnimating, setIsAnimating] = useState(false);
   const { focusWindow } = useWindowActions();
   const zIndex = useWindowZIndex(windowId);
+  const activeWindowId = useActiveWindowId();
+  const isFocused = activeWindowId === windowId;
 
   const rndRef = useRef<Rnd | null>(null);
   const savedBounds = useRef<Bounds>(DEFAULT_BOUNDS);
@@ -119,7 +125,7 @@ const WindowWrapper = ({
       }}
     >
       <section
-        className={`c-windowWrapper ${className} ${isClosing ? "closed" : ""} ${isMaximized ? "maximized" : ""}`}
+        className={`c-windowWrapper ${className} ${isClosing ? "closed" : ""} ${isMaximized ? "maximized" : ""} ${isFocused ? "focused" : "unfocused"}`}
       >
         <div className="c-windowWrapper__titleBar">
           <div className="c-windowWrapper__titleBar_buttons">
