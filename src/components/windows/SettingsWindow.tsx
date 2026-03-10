@@ -22,7 +22,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
   };
 
   return (
-    <WindowWrapper onClose={onClose}>
+    <WindowWrapper windowId="settings" onClose={onClose}>
       <div className="w-settings">
         <div className="w-settings__sideBar">
           <div className="w-settings__sideBar_searchInput">

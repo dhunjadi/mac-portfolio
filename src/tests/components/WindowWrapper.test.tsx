@@ -5,7 +5,11 @@ import WindowWrapper from "../../components/WindowWrapper";
 describe("WindowWrapper", () => {
   it("renders correctly", () => {
     const onClose = vi.fn();
-    render(<WindowWrapper onClose={onClose}> </WindowWrapper>);
+    render(
+      <WindowWrapper windowId="about" onClose={onClose}>
+        {" "}
+      </WindowWrapper>,
+    );
 
     const buttons = screen.getAllByRole("button");
     expect(buttons).toHaveLength(3);

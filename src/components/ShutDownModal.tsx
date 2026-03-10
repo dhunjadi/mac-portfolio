@@ -6,7 +6,7 @@ import { useShutDownActions } from "../stores/shutDownStore";
 import { useLoginActions } from "../stores/loginStore";
 
 const ShutDownModal = () => {
-  const { closeWindow } = useWindowActions();
+  const { closeAllWindows, closeWindow } = useWindowActions();
   const { shutDown } = useShutDownActions();
   const { logout } = useLoginActions();
 
@@ -17,16 +17,16 @@ const ShutDownModal = () => {
       if (remainingTime > 0) {
         setRemainingTime((prev) => prev - 1);
       } else {
-        closeWindow("shut-down");
+        closeAllWindows();
         shutDown();
       }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [closeWindow, remainingTime, shutDown]);
+  }, [closeAllWindows, closeWindow, remainingTime, shutDown]);
 
   const handleShutDown = () => {
-    closeWindow("shut-down");
+    closeAllWindows();
     logout();
     setTimeout(() => {
       shutDown();

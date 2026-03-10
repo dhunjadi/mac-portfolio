@@ -29,7 +29,7 @@ const PdfWindow = ({ onClose }: PdfWindowProps) => {
   };
 
   return (
-    <WindowWrapper onClose={onClose} disableResizing>
+    <WindowWrapper windowId="pdf" onClose={onClose} disableResizing>
       <div className="w-pdfWindow">
         <div className="w-pdfWindow__viewer">
           {hasLoadError ? (

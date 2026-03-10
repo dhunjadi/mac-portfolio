@@ -11,6 +11,7 @@ type AboutThisDevWindowProps = {
 const AboutThisDevWindow = ({ onClose }: AboutThisDevWindowProps) => {
   return (
     <WindowWrapper
+      windowId="about"
       onClose={onClose}
       disableMinimize
       disableMaximize

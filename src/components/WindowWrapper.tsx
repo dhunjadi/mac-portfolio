@@ -1,7 +1,10 @@
 import { useState, useRef, type ReactNode } from "react";
 import { Rnd } from "react-rnd";
+import type { AppleMenuDropdownItem } from "../types";
+import { useWindowActions, useWindowZIndex } from "../stores/windowStore";
 
 type WindowWrapperProps = {
+  windowId: AppleMenuDropdownItem;
   children: ReactNode;
   onClose: () => void;
   className?: string;
@@ -25,6 +28,7 @@ const DEFAULT_BOUNDS: Bounds = {
 };
 
 const WindowWrapper = ({
+  windowId,
   children,
   onClose,
   className = "",
@@ -35,6 +39,8 @@ const WindowWrapper = ({
   const [isClosing, setIsClosing] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const { focusWindow } = useWindowActions();
+  const zIndex = useWindowZIndex(windowId);
 
   const rndRef = useRef<Rnd | null>(null);
   const savedBounds = useRef<Bounds>(DEFAULT_BOUNDS);
@@ -85,7 +91,7 @@ const WindowWrapper = ({
       ref={rndRef}
       default={DEFAULT_BOUNDS}
       style={{
-        zIndex: 99,
+        zIndex,
         transition: isAnimating
           ? "width 0.3s ease, height 0.3s ease, transform 0.3s ease, opacity 0.25s ease"
           : "opacity 0.25s ease",
@@ -94,6 +100,8 @@ const WindowWrapper = ({
       enableResizing={disableResizing || isMaximized ? false : true}
       disableDragging={isMaximized}
       cancel=".c-windowWrapper__titleBar_buttons"
+      onMouseDown={() => focusWindow(windowId)}
+      onTouchStart={() => focusWindow(windowId)}
       onDragStop={(_e, d) => {
         currentBounds.current = {
           ...currentBounds.current,

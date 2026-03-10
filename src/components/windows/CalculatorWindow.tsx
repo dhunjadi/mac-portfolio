@@ -153,6 +153,7 @@ const CalculatorWindow = ({ onClose }: CalculatorWindowProps) => {
 
   return (
     <WindowWrapper
+      windowId="calculator"
       onClose={onClose}
       disableMinimize
       disableMaximize

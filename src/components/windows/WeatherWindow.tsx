@@ -150,7 +150,7 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
   };
 
   return (
-    <WindowWrapper onClose={onClose} disableResizing>
+    <WindowWrapper windowId="weather" onClose={onClose} disableResizing>
       <div className="w-weather">
         <div
           className={`w-weather__search${isSearchOpen ? " w-weather__search--open" : ""}`}
