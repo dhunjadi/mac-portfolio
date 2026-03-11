@@ -17,9 +17,10 @@ const ShutDownOverlay = () => {
 
   useEffect(() => {
     if (isShutDown || isRestarting) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         navigate(appRoutes.turnOff);
       }, 2000);
+      return () => clearTimeout(timer);
     }
   }, [isRestarting, isShutDown, navigate]);
 

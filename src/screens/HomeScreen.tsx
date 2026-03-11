@@ -8,7 +8,7 @@ import {
   useGlassColor,
   useWallpaper,
 } from "../stores/settingsStore";
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, useCallback, useEffect, useRef, useState } from "react";
 import { useLogin } from "../stores/loginStore";
 import { useShutDown } from "../stores/powerStore";
 
@@ -62,6 +62,25 @@ const HomeScreen = () => {
   const dockRef = useRef<HTMLUListElement>(null);
 
   const [displayedWallpaper, setDisplayedWallpaper] = useState(wallpaper);
+
+  const handleOpenPdf = useCallback(() => openWindow("pdf"), [openWindow]);
+  const handleCloseAbout = useCallback(
+    () => closeWindow("about"),
+    [closeWindow],
+  );
+  const handleCloseCalculator = useCallback(
+    () => closeWindow("calculator"),
+    [closeWindow],
+  );
+  const handleCloseSettings = useCallback(
+    () => closeWindow("settings"),
+    [closeWindow],
+  );
+  const handleClosePdf = useCallback(() => closeWindow("pdf"), [closeWindow]);
+  const handleCloseWeather = useCallback(
+    () => closeWindow("weather"),
+    [closeWindow],
+  );
 
   useEffect(() => {
     const update = () => {
@@ -126,59 +145,31 @@ const HomeScreen = () => {
       className="s-home"
       style={{ backgroundImage: `url(${displayedWallpaper})` }}
     >
-      <Suspense fallback={null}>
-        <LoginOverlay />
-      </Suspense>
-      <Suspense fallback={null}>
-        <ShutDownOverlay />
-      </Suspense>
+      <LoginOverlay />
+
+      <ShutDownOverlay />
+
       <MenuBar ref={menuBarRef} />
       <main>
-        {isLoggedIn && !isShutDown && (
-          <DesktopPdfIcon onOpen={() => openWindow("pdf")} />
-        )}
+        {isLoggedIn && !isShutDown && <DesktopPdfIcon onOpen={handleOpenPdf} />}
 
-        {isAboutWindowOpen && (
-          <Suspense fallback={null}>
-            <AboutThisDevWindow onClose={() => closeWindow("about")} />
-          </Suspense>
-        )}
+        {isAboutWindowOpen && <AboutThisDevWindow onClose={handleCloseAbout} />}
 
         {isCalculatorWindowOpen && (
-          <Suspense fallback={null}>
-            <CalculatorWindow onClose={() => closeWindow("calculator")} />
-          </Suspense>
+          <CalculatorWindow onClose={handleCloseCalculator} />
         )}
 
-        {isShutDownModalOpen && (
-          <Suspense fallback={null}>
-            <ShutDownModal />
-          </Suspense>
-        )}
+        {isShutDownModalOpen && <ShutDownModal />}
 
-        {isRestartModalOpen && (
-          <Suspense fallback={null}>
-            <RestartModal />
-          </Suspense>
-        )}
+        {isRestartModalOpen && <RestartModal />}
 
         {isSettingsWindowOpen && (
-          <Suspense fallback={null}>
-            <SettingsWindow onClose={() => closeWindow("settings")} />
-          </Suspense>
+          <SettingsWindow onClose={handleCloseSettings} />
         )}
 
-        {isPdfWindowOpen && (
-          <Suspense fallback={null}>
-            <PdfWindow onClose={() => closeWindow("pdf")} />
-          </Suspense>
-        )}
+        {isPdfWindowOpen && <PdfWindow onClose={handleClosePdf} />}
 
-        {isWeatherWindowOpen && (
-          <Suspense fallback={null}>
-            <WeatherWindow onClose={() => closeWindow("weather")} />
-          </Suspense>
-        )}
+        {isWeatherWindowOpen && <WeatherWindow onClose={handleCloseWeather} />}
       </main>
       <Dock ref={dockRef} />
     </div>

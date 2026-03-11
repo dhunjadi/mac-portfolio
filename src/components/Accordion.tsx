@@ -49,9 +49,7 @@ const AccordionItem = ({
 
   return (
     <section
-      className={`c-accordion__item ${
-        isOpen && "c-accordion__item--open"
-      } ${className && className}`}
+      className={`c-accordion__item ${isOpen ? "c-accordion__item--open" : ""} ${className ?? ""}`}
     >
       <button
         type="button"

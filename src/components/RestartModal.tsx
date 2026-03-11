@@ -14,16 +14,19 @@ const RestartModal = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (remainingTime > 0) {
-        setRemainingTime((prev) => prev - 1);
-      } else {
-        closeAllWindows();
-        setIsRestarting(true);
-      }
+      setRemainingTime((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          closeAllWindows();
+          setIsRestarting(true);
+          return 0;
+        }
+        return prev - 1;
+      });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [closeAllWindows, closeWindow, remainingTime, setIsRestarting]);
+  }, [closeAllWindows, setIsRestarting]);
 
   const handleRestart = () => {
     closeAllWindows();

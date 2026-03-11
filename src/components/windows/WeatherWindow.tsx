@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState, useRef } from "react";
+import { useMemo, useState, useRef } from "react";
 import {
   getCurrentWeatherByCity,
   getForecastByCity,
@@ -92,17 +92,23 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
 
   const debouncedCity = useDebounce(searchInput, 500, "zagreb");
 
+  const trimmedCity = debouncedCity.trim();
+
   const { data: current, isLoading: loadingCurrent } = useQuery<CurrentWeather>(
     {
-      queryKey: ["weather", "current", debouncedCity],
-      queryFn: () => getCurrentWeatherByCity(debouncedCity),
+      queryKey: ["weather", "current", trimmedCity],
+      queryFn: () => getCurrentWeatherByCity(trimmedCity),
+      enabled: trimmedCity.length > 0,
+      staleTime: 1000 * 60 * 5,
     },
   );
 
   const { data: forecast, isLoading: loadingForecast } =
     useQuery<ForecastResponse>({
-      queryKey: ["weather", "forecast", debouncedCity],
-      queryFn: () => getForecastByCity(debouncedCity),
+      queryKey: ["weather", "forecast", trimmedCity],
+      queryFn: () => getForecastByCity(trimmedCity),
+      enabled: trimmedCity.length > 0,
+      staleTime: 1000 * 60 * 5,
     });
 
   const isLoading = loadingCurrent || loadingForecast;
@@ -116,19 +122,28 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
   const windSpeed = current ? Math.round(current.wind.speed * 3.6) : null;
   const cloudiness = current?.clouds.all ?? null;
 
-  const hourlyItems = (forecast?.list ?? []).slice(0, 8).map((item, i) => ({
-    time: i === 0 ? "Now" : formatHour(item.dt_txt),
-    icon: iconToEmoji(item.weather[0].icon),
-    temp: Math.round(item.main.temp),
-  }));
+  const hourlyItems = useMemo(
+    () =>
+      (forecast?.list ?? []).slice(0, 8).map((item, i) => ({
+        time: i === 0 ? "Now" : formatHour(item.dt_txt),
+        icon: iconToEmoji(item.weather[0].icon),
+        temp: Math.round(item.main.temp),
+      })),
+    [forecast],
+  );
 
-  const dailyItems = forecast ? buildDailyForecast(forecast.list) : [];
-  const globalMin = dailyItems.length
-    ? Math.min(...dailyItems.map((d) => d.low))
-    : 0;
-  const globalMax = dailyItems.length
-    ? Math.max(...dailyItems.map((d) => d.high))
-    : 1;
+  const dailyItems = useMemo(
+    () => (forecast ? buildDailyForecast(forecast.list) : []),
+    [forecast],
+  );
+  const globalMin = useMemo(
+    () => (dailyItems.length ? Math.min(...dailyItems.map((d) => d.low)) : 0),
+    [dailyItems],
+  );
+  const globalMax = useMemo(
+    () => (dailyItems.length ? Math.max(...dailyItems.map((d) => d.high)) : 1),
+    [dailyItems],
+  );
 
   const handleSearchToggle = () => {
     setIsSearchOpen((prev) => {

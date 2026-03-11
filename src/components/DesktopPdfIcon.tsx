@@ -6,6 +6,9 @@ type DesktopPdfIconProps = {
   onOpen: () => void;
 };
 
+const TAP_MOVE_THRESHOLD = 8;
+const DOUBLE_TAP_DELAY = 300;
+
 const DesktopPdfIcon = ({ onOpen }: DesktopPdfIconProps) => {
   const [isSelected, setIsSelected] = useState(false);
   const iconRef = useRef<HTMLDivElement | null>(null);
@@ -13,8 +16,6 @@ const DesktopPdfIcon = ({ onOpen }: DesktopPdfIconProps) => {
     null,
   );
   const lastTapTimeRef = useRef(0);
-  const TAP_MOVE_THRESHOLD = 8;
-  const DOUBLE_TAP_DELAY = 300;
 
   useEffect(() => {
     const handleOutsidePointerDown = (event: PointerEvent) => {

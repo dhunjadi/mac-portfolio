@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import userIcon from "/icons/user.svg";
 import powerOffIcon from "/icons/power-off.svg";
 import restartIcon from "/icons/restart.svg";
@@ -28,15 +28,18 @@ const LoginOverlay = () => {
     }
   };
 
-  const bottomButtons = [
-    { icon: powerOffIcon, label: "Shut Down", onClick: () => shutDown() },
-    {
-      icon: restartIcon,
-      label: "Restart",
-      onClick: () => setIsRestarting(true),
-    },
-    { icon: sleepIcon, label: "Sleep", onClick: () => setIsSleeping(true) },
-  ];
+  const bottomButtons = useMemo(
+    () => [
+      { icon: powerOffIcon, label: "Shut Down", onClick: () => shutDown() },
+      {
+        icon: restartIcon,
+        label: "Restart",
+        onClick: () => setIsRestarting(true),
+      },
+      { icon: sleepIcon, label: "Sleep", onClick: () => setIsSleeping(true) },
+    ],
+    [setIsRestarting, setIsSleeping, shutDown],
+  );
 
   return (
     <div

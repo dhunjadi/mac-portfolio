@@ -14,16 +14,19 @@ const ShutDownModal = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (remainingTime > 0) {
-        setRemainingTime((prev) => prev - 1);
-      } else {
-        closeAllWindows();
-        shutDown();
-      }
+      setRemainingTime((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          closeAllWindows();
+          shutDown();
+          return 0;
+        }
+        return prev - 1;
+      });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [closeAllWindows, closeWindow, remainingTime, shutDown]);
+  }, [closeAllWindows, shutDown]);
 
   const handleShutDown = () => {
     closeAllWindows();
