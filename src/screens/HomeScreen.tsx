@@ -1,9 +1,6 @@
 import MenuBar from "../components/MenuBar";
 import Dock from "../components/Dock";
-import LoginOverlay from "../components/LoginOverlay";
 import { useOpenedWindow, useWindowActions } from "../stores/windowStore";
-import ShutDownModal from "../components/ShutDownModal";
-import ShutDownOverlay from "../components/ShutDownOverlay";
 import DesktopPdfIcon from "../components/DesktopPdfIcon";
 import {
   useBlur,
@@ -14,6 +11,10 @@ import {
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useLogin } from "../stores/loginStore";
 import { useShutDown } from "../stores/powerStore";
+
+const LoginOverlay = lazy(() => import("../components/LoginOverlay"));
+
+const ShutDownOverlay = lazy(() => import("../components/ShutDownOverlay"));
 
 const AboutThisDevWindow = lazy(
   () => import("../components/windows/AboutThisDevWindow"),
@@ -26,6 +27,10 @@ const SettingsWindow = lazy(
 );
 const PdfWindow = lazy(() => import("../components/windows/PdfWindow"));
 const WeatherWindow = lazy(() => import("../components/windows/WeatherWindow"));
+
+const ShutDownModal = lazy(() => import("../components/ShutDownModal"));
+
+const RestartModal = lazy(() => import("../components/RestartModal"));
 
 const hexToRgb = (hexColor: string) => {
   const matched = /^#([0-9a-fA-F]{6})$/.exec(hexColor);
@@ -41,6 +46,7 @@ const HomeScreen = () => {
   const isAboutWindowOpen = useOpenedWindow("about");
   const isCalculatorWindowOpen = useOpenedWindow("calculator");
   const isShutDownModalOpen = useOpenedWindow("shut-down");
+  const isRestartModalOpen = useOpenedWindow("restart");
   const isSettingsWindowOpen = useOpenedWindow("settings");
   const isPdfWindowOpen = useOpenedWindow("pdf");
   const isWeatherWindowOpen = useOpenedWindow("weather");
@@ -120,8 +126,12 @@ const HomeScreen = () => {
       className="s-home"
       style={{ backgroundImage: `url(${displayedWallpaper})` }}
     >
-      <LoginOverlay />
-      <ShutDownOverlay />
+      <Suspense fallback={null}>
+        <LoginOverlay />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ShutDownOverlay />
+      </Suspense>
       <MenuBar ref={menuBarRef} />
       <main>
         {isLoggedIn && !isShutDown && (
@@ -140,7 +150,17 @@ const HomeScreen = () => {
           </Suspense>
         )}
 
-        {isShutDownModalOpen && <ShutDownModal />}
+        {isShutDownModalOpen && (
+          <Suspense fallback={null}>
+            <ShutDownModal />
+          </Suspense>
+        )}
+
+        {isRestartModalOpen && (
+          <Suspense fallback={null}>
+            <RestartModal />
+          </Suspense>
+        )}
 
         {isSettingsWindowOpen && (
           <Suspense fallback={null}>

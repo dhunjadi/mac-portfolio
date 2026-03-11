@@ -1,7 +1,8 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
-.c-shutDownModal {
+.c-shutDownModal,
+.c-restartModal {
   width: 22rem;
   display: flex;
   flex-direction: column;

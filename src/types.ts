@@ -4,6 +4,7 @@ export type AppleMenuDropdownItem =
   | "pdf"
   | "weather"
   | "settings"
+  | "restart"
   | "shut-down";
 
 export type CurrentWeather = {
