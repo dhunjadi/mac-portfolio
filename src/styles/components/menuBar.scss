@@ -9,10 +9,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(var(--glass-rgb, 0 0 0) / var(--glass-alpha, 0.25));
-  backdrop-filter: saturate(180%) blur(var(--blur-intensity));
-  -webkit-backdrop-filter: saturate(180%) blur(var(--blur-intensity));
+  position: fixed;
+  overflow: visible;
   padding: 0.25rem 0.5rem;
+  isolation: isolate;
 
   transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -26,6 +26,23 @@
 
   &.hidden {
     transform: translateY(calc(-100%));
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-color: rgb(var(--glass-rgb, 0 0 0) / var(--glass-alpha, 0.25));
+    backdrop-filter: saturate(180%) blur(var(--blur-intensity));
+    -webkit-backdrop-filter: saturate(180%) blur(var(--blur-intensity));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
   }
 
   &__apple {
