@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router";
-import { useTurnOn } from "../stores/turnOnStore";
+import { useTurnOn } from "../stores/powerStore";
 
 const ProtectedRoute = () => {
   const isTurnedOn = useTurnOn();

@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import shutDownIcon from "/icons/power-off.svg";
 import { Rnd } from "react-rnd";
 import { useWindowActions } from "../stores/windowStore";
-import { useShutDownActions } from "../stores/shutDownStore";
+import { usePowerActions } from "../stores/powerStore";
 import { useLoginActions } from "../stores/loginStore";
 
 const ShutDownModal = () => {
   const { closeAllWindows, closeWindow } = useWindowActions();
-  const { shutDown } = useShutDownActions();
+  const { shutDown } = usePowerActions();
   const { logout } = useLoginActions();
 
   const [remainingTime, setRemainingTime] = useState(60);

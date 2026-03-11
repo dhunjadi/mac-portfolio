@@ -1,29 +1,25 @@
 import { useNavigate } from "react-router";
-import { useShutDown, useShutDownActions } from "../stores/shutDownStore";
-import powerIcon from "/icons/power-off.svg";
+import { useRestart, useShutDown } from "../stores/powerStore";
 import { appRoutes } from "../data/appRoutes";
+import { useEffect } from "react";
 
 const ShutDownOverlay = () => {
   const isShutDown = useShutDown();
-  const { turnOn } = useShutDownActions();
+  const isRestarting = useRestart();
   const navigate = useNavigate();
 
-  const handleTurnOn = () => {
-    navigate(appRoutes.turnOn);
-    setTimeout(() => {
-      turnOn();
-    }, 500);
-  };
+  useEffect(() => {
+    if (isShutDown || isRestarting) {
+      setTimeout(() => {
+        navigate(appRoutes.turnOff);
+      }, 2000);
+    }
+  });
 
   return (
-    <div className={`c-shutDownOverlay ${isShutDown ? "" : "hidden"}`}>
-      <img
-        className="c-shutDownOverlay__icon"
-        src={powerIcon}
-        alt="power icon"
-        onClick={handleTurnOn}
-      />
-    </div>
+    <div
+      className={`c-shutDownOverlay ${isShutDown || isRestarting ? "" : "hidden"}`}
+    />
   );
 };
 

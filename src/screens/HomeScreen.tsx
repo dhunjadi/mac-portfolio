@@ -13,7 +13,7 @@ import {
 } from "../stores/settingsStore";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useLogin } from "../stores/loginStore";
-import { useShutDown } from "../stores/shutDownStore";
+import { useShutDown } from "../stores/powerStore";
 
 const AboutThisDevWindow = lazy(
   () => import("../components/windows/AboutThisDevWindow"),

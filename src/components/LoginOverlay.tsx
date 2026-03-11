@@ -5,12 +5,12 @@ import restartIcon from "/icons/restart.svg";
 import sleepIcon from "/icons/sleep.svg";
 import arrowRightCircle from "/icons/arrow-right-circle.svg";
 import { useLogin, useLoginActions } from "../stores/loginStore";
-import { useShutDownActions } from "../stores/shutDownStore";
+import { usePowerActions } from "../stores/powerStore";
 
 const LoginOverlay = () => {
   const isLoggedIn = useLogin();
   const { login } = useLoginActions();
-  const { shutDown } = useShutDownActions();
+  const { shutDown, setIsRestarting } = usePowerActions();
 
   const [password, setPassword] = useState("");
   const [isInvisible, setIsInvisible] = useState(false);
@@ -30,7 +30,11 @@ const LoginOverlay = () => {
 
   const bottomButtons = [
     { icon: powerOffIcon, label: "Shut Down", onClick: () => shutDown() },
-    { icon: restartIcon, label: "Restart", onClick: () => {} },
+    {
+      icon: restartIcon,
+      label: "Restart",
+      onClick: () => setIsRestarting(true),
+    },
     { icon: sleepIcon, label: "Sleep", onClick: () => {} },
   ];
 

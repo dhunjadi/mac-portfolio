@@ -1,0 +1,31 @@
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
+.s-turnOff {
+  min-width: 100svw;
+  min-height: 100svh;
+  background-color: $color-black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: $color-white;
+
+  &__powerButton {
+    width: fit-content;
+    border: none;
+    background: none;
+    cursor: pointer;
+    align-self: center;
+
+    &_img {
+      width: 5rem;
+    }
+  }
+
+  &__restartTimer {
+    font-size: 5rem;
+    align-self: center;
+  }
+}
