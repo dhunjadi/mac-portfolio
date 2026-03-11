@@ -6,6 +6,7 @@ import { useLogin } from "../stores/loginStore";
 import { useWindowActions } from "../stores/windowStore";
 import AppleMenuDropdown from "./AppleMenuDropdown";
 import type { AppleMenuDropdownItem } from "../types";
+import { usePowerActions } from "../stores/powerStore";
 
 type MenuBarProps = {
   hideAppleLogo?: boolean;
@@ -15,6 +16,8 @@ type MenuBarProps = {
 const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
   const isLoggedIn = useLogin();
   const { openWindow } = useWindowActions();
+  const { setIsSleeping } = usePowerActions();
+
   const [isAppleMenuOpen, setIsAppleMenuOpen] = useState(false);
   const appleMenuRef = useRef<HTMLDivElement | null>(null);
   const date = dayjs().format("ddd D MMM HH:mm");
@@ -31,6 +34,12 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
   }, [isAppleMenuOpen]);
 
   const handleAppleMenuSelect = (item: AppleMenuDropdownItem) => {
+    if (item === "sleep") {
+      setIsSleeping(true);
+      setIsAppleMenuOpen(false);
+      return;
+    }
+
     openWindow(item);
     setIsAppleMenuOpen(false);
   };

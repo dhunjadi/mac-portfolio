@@ -4,6 +4,7 @@ export type AppleMenuDropdownItem =
   | "pdf"
   | "weather"
   | "settings"
+  | "sleep"
   | "restart"
   | "shut-down";
 

@@ -10,7 +10,7 @@ import { usePowerActions } from "../stores/powerStore";
 const LoginOverlay = () => {
   const isLoggedIn = useLogin();
   const { login } = useLoginActions();
-  const { shutDown, setIsRestarting } = usePowerActions();
+  const { shutDown, setIsRestarting, setIsSleeping } = usePowerActions();
 
   const [password, setPassword] = useState("");
   const [isInvisible, setIsInvisible] = useState(false);
@@ -35,7 +35,7 @@ const LoginOverlay = () => {
       label: "Restart",
       onClick: () => setIsRestarting(true),
     },
-    { icon: sleepIcon, label: "Sleep", onClick: () => {} },
+    { icon: sleepIcon, label: "Sleep", onClick: () => setIsSleeping(true) },
   ];
 
   return (
