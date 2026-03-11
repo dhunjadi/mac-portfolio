@@ -1,1 +1,0 @@
-import{c as a,d as o,e as n,r,f as u,j as i}from"./index-CW-f1zZM.js";const f=()=>{const s=a(),t=o(),e=n();return r.useEffect(()=>{(s||t)&&setTimeout(()=>{e(u.turnOff)},2e3)}),i.jsx("div",{className:`c-shutDownOverlay ${s||t?"":"hidden"}`})};export{f as default};
