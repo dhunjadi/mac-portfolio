@@ -1,9 +1,9 @@
 import { useState } from "react";
 import WindowWrapper from "../WindowWrapper";
-import userIcon from "/icons/user-icon.svg";
 import { settingsCategories } from "../../data/settingsCategories";
 import AppearancePanel from "../AppearancePanel";
 import WallpaperPanel from "../WallpaperPanel";
+import avatarPicture from "/avatar.jpg";
 
 type SettingsWindowProps = {
   onClose: () => void;
@@ -35,10 +35,10 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
           </div>
 
           <div className="w-settings__sideBar_userInfo">
-            <img src={userIcon} alt="user" />
+            <img src={avatarPicture} alt="user" />
             <div className="w-settings__sideBar_userInfo--text">
-              <p>Sign in</p>
-              <small>with your Apple ID</small>
+              <p>Dario Hunjadi</p>
+              <small>@epl_aj_di</small>
             </div>
           </div>
 

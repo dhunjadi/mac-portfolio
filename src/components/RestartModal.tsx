@@ -18,7 +18,10 @@ const RestartModal = () => {
         if (prev <= 1) {
           clearInterval(interval);
           closeAllWindows();
-          setIsRestarting(true);
+          logout();
+          setTimeout(() => {
+            setIsRestarting(true);
+          }, 1000);
           return 0;
         }
         return prev - 1;
@@ -26,7 +29,7 @@ const RestartModal = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [closeAllWindows, setIsRestarting]);
+  }, [closeAllWindows, logout, setIsRestarting]);
 
   const handleRestart = () => {
     closeAllWindows();

@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import userIcon from "/icons/user.svg";
 import powerOffIcon from "/icons/power-off.svg";
 import restartIcon from "/icons/restart.svg";
 import sleepIcon from "/icons/sleep.svg";
 import arrowRightCircle from "/icons/arrow-right-circle.svg";
 import { useLogin, useLoginActions } from "../stores/loginStore";
 import { usePowerActions } from "../stores/powerStore";
+import avatarPicture from "/avatar.jpg";
 
 const LoginOverlay = () => {
   const isLoggedIn = useLogin();
@@ -50,7 +50,7 @@ const LoginOverlay = () => {
     >
       <div className="c-loginOverlay__userInfo">
         <div className="c-loginOverlay__userInfo_avatar">
-          <img src={userIcon} alt="user icon" />
+          <img src={avatarPicture} alt="avatar" />
         </div>
 
         <div className="c-loginOverlay__userInfo_name">Dario Hunjadi</div>
