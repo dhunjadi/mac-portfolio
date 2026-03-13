@@ -25,12 +25,26 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
   useEffect(() => {
     if (!isAppleMenuOpen) return;
 
+    const handlePointerDown = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node | null;
+      if (!target) return;
+      if (appleMenuRef.current && !appleMenuRef.current.contains(target)) {
+        setIsAppleMenuOpen(false);
+      }
+    };
+
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIsAppleMenuOpen(false);
     };
 
     window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown);
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+    };
   }, [isAppleMenuOpen]);
 
   const handleAppleMenuSelect = (item: AppleMenuDropdownItem) => {
