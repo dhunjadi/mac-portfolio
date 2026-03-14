@@ -27,3 +27,8 @@ $gradient-accent-blue: linear-gradient(
   $color-accent-blue-500,
   $color-accent-blue-600
 );
+
+$dropdown-border: 1px solid rgba(255, 255, 255, 0.2);
+$dropdown-box-shadow:
+  0 14px 30px rgba(0, 0, 0, 0.35),
+  0 2px 8px rgba(0, 0, 0, 0.35);

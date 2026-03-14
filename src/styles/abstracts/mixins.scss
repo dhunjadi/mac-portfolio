@@ -44,3 +44,52 @@
   -webkit-backdrop-filter: blur(var(--blur-intensity));
   border: 1px solid $color-glass-border;
 }
+
+@mixin dropdown-menu-body {
+  @include glass-dark;
+  border-radius: 0.6rem;
+  border: $dropdown-border;
+  box-shadow: $dropdown-box-shadow;
+  overflow: hidden;
+  padding: 0.35rem 0.25rem;
+  min-width: 12rem;
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin dropdown-menu-item {
+  width: 100%;
+  border: 0;
+  border-radius: 0.35rem;
+  background: transparent;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $color-white;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  white-space: nowrap;
+
+  @include respond(md) {
+    font-size: 0.8rem;
+  }
+
+  @include respond(lg) {
+    font-size: 14px;
+    padding: 4px 12px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: #fff;
+    background: $gradient-accent-blue;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+    outline: none;
+  }
+}
