@@ -65,7 +65,7 @@
   border-radius: 0.35rem;
   background: transparent;
   text-align: left;
-  font-size: 1rem;
+  font-size: var(--fs-body);
   font-weight: 500;
   color: $color-white;
   padding: 0.35rem 0.7rem;
@@ -77,11 +77,11 @@
   white-space: nowrap;
 
   @include respond(md) {
-    font-size: 0.8rem;
+    font-size: var(--fs-caption);
   }
 
   @include respond(lg) {
-    font-size: 14px;
+    font-size: var(--fs-body);
     padding: 4px 12px;
   }
 
@@ -122,8 +122,8 @@
 }
 
 @mixin panel-heading(
-  $title-size: 1.4rem,
-  $subtitle-size: 0.8rem,
+  $title-size: var(--fs-h3),
+  $subtitle-size: var(--fs-caption),
   $subtitle-color: $color-dark-600,
   $subtitle-line-height: 1.4
 ) {
@@ -156,7 +156,7 @@
   $hover-content: null,
   $hover-icon: null,
   $hover-icon-size: 70%,
-  $hover-font-size: 10px
+  $hover-font-size: var(--fs-micro)
 ) {
   background: $bg;
   position: relative;

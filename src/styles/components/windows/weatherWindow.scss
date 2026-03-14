@@ -60,7 +60,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: var(--fs-body);
       cursor: pointer;
       color: #fff;
       transition:
@@ -70,7 +70,7 @@
       @include respond(md) {
         width: 22px;
         height: 22px;
-        font-size: 10px;
+        font-size: var(--fs-micro);
       }
 
       &:hover {
@@ -87,7 +87,7 @@
       border: none;
       background: transparent;
       color: $color-white;
-      font-size: 1.3rem;
+      font-size: var(--fs-body-xl);
       outline: none;
       transition:
         max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
@@ -96,7 +96,7 @@
       pointer-events: none;
 
       @include respond(md) {
-        font-size: 14px;
+        font-size: var(--fs-body);
       }
 
       &::placeholder {
@@ -141,19 +141,19 @@
     }
 
     &_city {
-      font-size: 2rem;
+      font-size: var(--fs-h2);
       font-weight: 400;
       letter-spacing: 0.03em;
       margin: 0 0 0.2rem;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
 
       @include respond(md) {
-        font-size: 20px;
+        font-size: var(--fs-h3);
       }
     }
 
     &_temperature {
-      font-size: 7rem;
+      font-size: var(--fs-display-xl);
       font-weight: 100;
       line-height: 1;
       letter-spacing: -0.04em;
@@ -161,29 +161,29 @@
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
       @include respond(md) {
-        font-size: 64px;
+        font-size: var(--fs-display-md);
       }
     }
 
     &_condition {
-      font-size: 1.4rem;
+      font-size: var(--fs-h3);
       font-weight: 500;
       margin: 0.4rem 0 0.2rem;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
       @include respond(md) {
-        font-size: 14px;
+        font-size: var(--fs-body);
       }
     }
 
     &_highLowTemp {
-      font-size: 1.3rem;
+      font-size: var(--fs-body-xl);
       font-weight: 400;
       opacity: 0.9;
       margin: 0;
 
       @include respond(md) {
-        font-size: 13px;
+        font-size: var(--fs-caption-lg);
       }
     }
   }
@@ -248,23 +248,23 @@
         }
 
         span:nth-child(1) {
-          font-size: 1rem;
+          font-size: var(--fs-body);
           opacity: 0.8;
 
           @include respond(md) {
-            font-size: 10px;
+            font-size: var(--fs-micro);
           }
         }
 
         span:nth-child(2) {
-          font-size: 1rem;
+          font-size: var(--fs-body);
           font-weight: 600;
           letter-spacing: 0.06em;
           text-transform: uppercase;
           opacity: 0.75;
 
           @include respond(md) {
-            font-size: 10px;
+            font-size: var(--fs-micro);
           }
         }
       }
@@ -308,30 +308,30 @@
           }
 
           span:nth-child(1) {
-            font-size: 1.1rem;
+            font-size: var(--fs-body-lg);
             font-weight: 600;
             opacity: 0.9;
 
             @include respond(md) {
-              font-size: 11px;
+              font-size: var(--fs-micro);
             }
           }
 
           span:nth-child(2) {
-            font-size: 2rem;
+            font-size: var(--fs-h2);
             line-height: 1;
 
             @include respond(md) {
-              font-size: 20px;
+              font-size: var(--fs-h3);
             }
           }
 
           span:nth-child(3) {
-            font-size: 1.2rem;
+            font-size: var(--fs-body-lg);
             font-weight: 500;
 
             @include respond(md) {
-              font-size: 12px;
+              font-size: var(--fs-caption);
             }
           }
         }
@@ -356,30 +356,30 @@
           }
 
           span:nth-child(1) {
-            font-size: 1.3rem;
+            font-size: var(--fs-body-xl);
             font-weight: 500;
 
             @include respond(md) {
-              font-size: 13px;
+              font-size: var(--fs-caption-lg);
             }
           }
 
           span:nth-child(2) {
-            font-size: 1.8rem;
+            font-size: var(--fs-h2);
             text-align: center;
 
             @include respond(md) {
-              font-size: 18px;
+              font-size: var(--fs-body-xl);
             }
           }
 
           span:nth-child(3) {
-            font-size: 1.2rem;
+            font-size: var(--fs-body-lg);
             opacity: 0.6;
             text-align: right;
 
             @include respond(md) {
-              font-size: 12px;
+              font-size: var(--fs-caption);
             }
           }
 
@@ -403,12 +403,12 @@
           }
 
           span:nth-child(5) {
-            font-size: 1.2rem;
+            font-size: var(--fs-body-lg);
             font-weight: 500;
             text-align: right;
 
             @include respond(md) {
-              font-size: 12px;
+              font-size: var(--fs-caption);
             }
           }
         }
@@ -434,21 +434,21 @@
             }
 
             span:nth-child(1) {
-              font-size: 1rem;
+              font-size: var(--fs-body);
               opacity: 0.65;
               letter-spacing: 0.02em;
 
               @include respond(md) {
-                font-size: 10px;
+                font-size: var(--fs-micro);
               }
             }
 
             span:nth-child(2) {
-              font-size: 1.6rem;
+              font-size: var(--fs-h2);
               font-weight: 500;
 
               @include respond(md) {
-                font-size: 16px;
+                font-size: var(--fs-body-lg);
               }
             }
           }
@@ -462,12 +462,12 @@
     align-items: center;
     justify-content: center;
     height: 16rem;
-    font-size: 1.4rem;
+    font-size: var(--fs-h3);
     opacity: 0.7;
 
     @include respond(md) {
       height: 160px;
-      font-size: 14px;
+      font-size: var(--fs-body);
     }
   }
 }

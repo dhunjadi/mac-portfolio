@@ -20,7 +20,7 @@
       align-items: center;
       justify-content: center;
       background: $color-black;
-      font-size: 2.5rem;
+      font-size: var(--fs-hero);
       flex-shrink: 0;
     }
 
@@ -28,20 +28,21 @@
       text-align: left;
 
       h2 {
-        font-size: 1.4rem;
+        font-size: var(--fs-h3);
         line-height: 1.1;
         margin-bottom: 0.25rem;
       }
 
       p {
-        font-size: 1rem;
+        font-size: var(--fs-body);
         text-transform: uppercase;
         margin-bottom: 0.25rem;
       }
 
       small {
         display: block;
-        font-size: 0.8rem;
+        font-size: var(--fs-caption);
+        margin-top: 0.5rem;
       }
     }
   }
@@ -53,7 +54,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    font-size: 0.8rem;
+    font-size: var(--fs-caption);
 
     a {
       color: $color-accent-blue-500;
@@ -86,12 +87,12 @@
         }
 
         h3 {
-          font-size: 1rem;
+          font-size: var(--fs-body);
           margin-bottom: 0.125rem;
         }
 
         p {
-          font-size: 0.875rem;
+          font-size: var(--fs-body-sm);
           margin-bottom: 0.25rem;
         }
 
@@ -105,7 +106,7 @@
         li,
         > p,
         small {
-          font-size: 0.75rem;
+          font-size: var(--fs-caption);
         }
       }
     }

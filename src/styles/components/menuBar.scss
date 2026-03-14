@@ -79,7 +79,7 @@
         @include menu-bar-control;
         font-weight: 600;
         color: $color-white;
-        font-size: 1rem;
+        font-size: var(--fs-body);
         letter-spacing: 0.01em;
       }
 
@@ -99,14 +99,14 @@
 
   &__date {
     color: $color-white;
-    font-size: 1.25rem;
+    font-size: var(--fs-body-xl);
 
     @include respond(lg) {
-      font-size: 1rem;
+      font-size: var(--fs-body);
     }
 
     @include respond(xl) {
-      font-size: 0.75rem;
+      font-size: var(--fs-caption);
     }
   }
 }

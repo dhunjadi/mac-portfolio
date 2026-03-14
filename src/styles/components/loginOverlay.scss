@@ -49,12 +49,12 @@
 
     &_name {
       margin-top: 0.75rem;
-      font-size: 16px;
+      font-size: var(--fs-body-lg);
       font-weight: 500;
       text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 
       @include respond(lg) {
-        font-size: 20px;
+        font-size: var(--fs-h3);
       }
     }
 
@@ -76,11 +76,11 @@
         outline: none;
         color: $color-white;
         padding: 0.5rem 0;
-        font-size: 12px;
+        font-size: var(--fs-caption);
 
         &::placeholder {
           color: rgba(255, 255, 255, 0.5);
-          font-size: 12px;
+          font-size: var(--fs-caption);
         }
       }
     }
@@ -145,7 +145,7 @@
       }
 
       span {
-        font-size: 14px;
+        font-size: var(--fs-body);
         text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
         white-space: nowrap;
       }
