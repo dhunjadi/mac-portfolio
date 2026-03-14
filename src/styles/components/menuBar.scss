@@ -33,9 +33,7 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-color: rgb(var(--glass-rgb, 0 0 0) / var(--glass-alpha, 0.25));
-    backdrop-filter: saturate(180%) blur(var(--blur-intensity));
-    -webkit-backdrop-filter: saturate(180%) blur(var(--blur-intensity));
+    @include glass-surface;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     pointer-events: none;
   }
@@ -56,20 +54,7 @@
       align-items: center;
 
       & > button {
-        border: 0;
-        background: transparent;
-        cursor: pointer;
-        border-radius: 0.125rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.1rem 0.4rem;
-        transition: background-color 0.15s ease;
-
-        &:hover,
-        &.active {
-          background-color: $color-hover-bg;
-        }
+        @include menu-bar-control;
       }
 
       svg {
@@ -91,24 +76,11 @@
       align-items: center;
 
       & > button {
-        border: 0;
-        background: transparent;
-        cursor: pointer;
-        border-radius: 0.125rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.1rem 0.6rem;
+        @include menu-bar-control;
         font-weight: 600;
         color: $color-white;
         font-size: 1rem;
         letter-spacing: 0.01em;
-        transition: background-color 0.15s ease;
-
-        &:hover,
-        &.active {
-          background-color: $color-hover-bg;
-        }
       }
 
       & > div {

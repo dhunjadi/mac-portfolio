@@ -110,11 +110,12 @@
         opacity: 1;
         padding: 0.3rem 0.7rem;
         pointer-events: auto;
-        background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        @include frosted-surface(
+          $bg: rgba(255, 255, 255, 0.15),
+          $border: 1px solid rgba(255, 255, 255, 0.3),
+          $blur: 10px
+        );
         border-radius: 1rem;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
 
         @include respond(md) {
           padding: 4px 8px;

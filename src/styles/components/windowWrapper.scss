@@ -57,31 +57,11 @@
       }
 
       [class="--close"] {
-        background: $color-mac-close;
-        position: relative;
-
-        &:hover::after {
-          content: "\00D7";
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 10px;
-        }
+        @include window-control-button($color-mac-close, "\00D7");
       }
 
       [class="--minimize"] {
-        background: $color-mac-minimize;
-        position: relative;
-
-        &:hover::after {
-          content: "\2212";
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 10px;
-        }
+        @include window-control-button($color-mac-minimize, "\2212");
 
         &:disabled {
           cursor: initial;
@@ -93,18 +73,10 @@
       }
 
       [class="--maximize"] {
-        background: $color-mac-maximize;
-        position: relative;
-
-        &:hover::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background-image: url("/icons/maximize.svg");
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: 70%;
-        }
+        @include window-control-button(
+          $color-mac-maximize,
+          $hover-icon: "/icons/maximize.svg"
+        );
 
         &:disabled {
           cursor: initial;

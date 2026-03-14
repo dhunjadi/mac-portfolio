@@ -23,7 +23,11 @@
         width: 100%;
         color: white;
         border-radius: 4px;
-        @include glass-dark;
+        @include frosted-surface(
+          $bg: rgb(var(--glass-rgb, 0 0 0) / var(--glass-alpha, 0.25)),
+          $border: 1px solid $color-glass-border,
+          $blur: var(--blur-intensity)
+        );
         padding: 0.2rem 1.75rem;
 
         font-size: 1.2rem;

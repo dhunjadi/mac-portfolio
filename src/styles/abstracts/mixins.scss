@@ -93,3 +93,95 @@
     outline: none;
   }
 }
+
+@mixin glass-surface($saturate: 180%, $blur: var(--blur-intensity)) {
+  background-color: rgb(var(--glass-rgb, 0 0 0) / var(--glass-alpha, 0.25));
+  backdrop-filter: saturate($saturate) blur($blur);
+  -webkit-backdrop-filter: saturate($saturate) blur($blur);
+}
+
+@mixin menu-bar-control(
+  $padding-x: 0.4rem,
+  $padding-y: 0.1rem,
+  $radius: 0.125rem
+) {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: $radius;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $padding-y $padding-x;
+  transition: background-color 0.15s ease;
+
+  &:hover,
+  &.active {
+    background-color: $color-hover-bg;
+  }
+}
+
+@mixin panel-heading(
+  $title-size: 1.4rem,
+  $subtitle-size: 0.8rem,
+  $subtitle-color: $color-dark-600,
+  $subtitle-line-height: 1.4
+) {
+  &__title {
+    font-size: $title-size;
+  }
+
+  &__subTitle {
+    color: $subtitle-color;
+    font-size: $subtitle-size;
+    line-height: $subtitle-line-height;
+  }
+}
+
+@mixin frosted-surface($bg, $border, $blur: 10px, $saturate: null) {
+  background-color: $bg;
+  border: $border;
+
+  @if $saturate != null {
+    backdrop-filter: blur($blur) saturate($saturate);
+    -webkit-backdrop-filter: blur($blur) saturate($saturate);
+  } @else {
+    backdrop-filter: blur($blur);
+    -webkit-backdrop-filter: blur($blur);
+  }
+}
+
+@mixin window-control-button(
+  $bg,
+  $hover-content: null,
+  $hover-icon: null,
+  $hover-icon-size: 70%,
+  $hover-font-size: 10px
+) {
+  background: $bg;
+  position: relative;
+
+  &:hover::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: $hover-font-size;
+  }
+
+  @if $hover-icon != null {
+    &:hover::after {
+      content: "";
+      inset: 0;
+      background-image: url($hover-icon);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: $hover-icon-size;
+      transform: none;
+    }
+  } @else {
+    &:hover::after {
+      content: $hover-content;
+    }
+  }
+}
