@@ -45,13 +45,12 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
           <ul className="w-settings__sideBar_categories">
             {settingsCategories.map((item) => (
               <button
+                key={item.id}
                 type="button"
                 className={item.id === selectedCategoryId ? "active" : ""}
+                onClick={() => setSelectedCategoryId(item.id)}
               >
-                <li
-                  key={item.id}
-                  onClick={() => setSelectedCategoryId(item.id)}
-                >
+                <li>
                   <img src={item.icon} alt="item icon" />
                   {item.label}
                 </li>

@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import Dock from "../../components/Dock";
+import type { ReactNode } from "react";
 
 const mockUseLogin = vi.fn();
 const mockUseWindowActions = vi.fn();
@@ -19,11 +20,25 @@ vi.mock("framer-motion", () => ({
   useMotionValue: () => ({
     set: mockMotionSet,
   }),
+  Reorder: {
+    Group: ({ children, ...props }: { children: ReactNode }) => {
+      const { _, ...rest } = props as Record<string, unknown>;
+      return <ul {...rest}>{children}</ul>;
+    },
+    Item: ({ children, ...props }: { children: ReactNode }) => {
+      const { _, ...rest } = props as Record<string, unknown>;
+      return <li {...rest}>{children}</li>;
+    },
+  },
 }));
 
 vi.mock("../../components/DockIcon", () => ({
   default: ({ id, onClick }: { id: string; onClick: () => void }) => (
-    <button type="button" data-testid={`dock-icon-${id}`} onClick={onClick}>
+    <button
+      type="button"
+      data-testid={`dock-icon-${id}`}
+      onClick={id === "finder" ? undefined : onClick}
+    >
       {id}
     </button>
   ),

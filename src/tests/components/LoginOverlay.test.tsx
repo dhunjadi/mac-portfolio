@@ -7,10 +7,10 @@ describe("LoginOverlay", () => {
   it("renders correctly", () => {
     render(<LoginOverlay />);
 
-    const img = screen.getByRole("img", { name: "user icon" });
+    const img = screen.getByRole("img", { name: "avatar" });
     expect(img).toBeInTheDocument();
 
-    const passwordInput = screen.getByRole("textbox");
+    const passwordInput = screen.getByPlaceholderText("Enter anything...");
     expect(passwordInput).toBeInTheDocument();
   });
 
@@ -18,7 +18,7 @@ describe("LoginOverlay", () => {
     const user = userEvent.setup();
     render(<LoginOverlay />);
 
-    const passwordInput = screen.getByRole("textbox");
+    const passwordInput = screen.getByPlaceholderText("Enter anything...");
     await user.type(passwordInput, "123");
     expect(passwordInput).toHaveValue("123");
   });
