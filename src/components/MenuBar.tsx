@@ -62,6 +62,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
       pdf: "PDF",
       weather: "Weather",
       settings: "Settings",
+      "text-editor": "Text Editor",
     }),
     [],
   );

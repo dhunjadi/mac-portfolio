@@ -12,6 +12,7 @@ const menuItems: MenuItem[] = [
   { type: "item", id: "about", label: "About This Dev" },
   { type: "divider", id: "divider-1" },
   { type: "item", id: "calculator", label: "Calculator" },
+  { type: "item", id: "text-editor", label: "Text Editor" },
   { type: "item", id: "weather", label: "Weather" },
   { type: "item", id: "settings", label: "Settings" },
   { type: "divider", id: "divider-2" },

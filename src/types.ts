@@ -1,9 +1,11 @@
 export type AppleMenuDropdownItem =
+  | "finder"
   | "about"
   | "calculator"
   | "pdf"
   | "weather"
   | "settings"
+  | "text-editor"
   | "sleep"
   | "restart"
   | "shut-down";

@@ -27,6 +27,9 @@ const SettingsWindow = lazy(
 );
 const PdfWindow = lazy(() => import("../components/windows/PdfWindow"));
 const WeatherWindow = lazy(() => import("../components/windows/WeatherWindow"));
+const TextEditorWindow = lazy(
+  () => import("../components/windows/TextEditorWindow"),
+);
 
 const ShutDownModal = lazy(() => import("../components/ShutDownModal"));
 
@@ -50,6 +53,7 @@ const HomeScreen = () => {
   const isSettingsWindowOpen = useOpenedWindow("settings");
   const isPdfWindowOpen = useOpenedWindow("pdf");
   const isWeatherWindowOpen = useOpenedWindow("weather");
+  const isTextEditorWindowOpen = useOpenedWindow("text-editor");
   const wallpaper = useWallpaper();
   const glassAlpha = useGlassAlpha();
   const blurIntensity = useBlur();
@@ -79,6 +83,10 @@ const HomeScreen = () => {
   const handleClosePdf = useCallback(() => closeWindow("pdf"), [closeWindow]);
   const handleCloseWeather = useCallback(
     () => closeWindow("weather"),
+    [closeWindow],
+  );
+  const handleCloseTextEditor = useCallback(
+    () => closeWindow("text-editor"),
     [closeWindow],
   );
 
@@ -170,6 +178,10 @@ const HomeScreen = () => {
         {isPdfWindowOpen && <PdfWindow onClose={handleClosePdf} />}
 
         {isWeatherWindowOpen && <WeatherWindow onClose={handleCloseWeather} />}
+
+        {isTextEditorWindowOpen && (
+          <TextEditorWindow onClose={handleCloseTextEditor} />
+        )}
       </main>
       <Dock ref={dockRef} />
     </div>
