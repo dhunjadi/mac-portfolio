@@ -83,5 +83,9 @@
         outline: 2px solid $color-accent-blue-500;
       }
     }
+
+    &_fileInput {
+      display: none;
+    }
   }
 }
