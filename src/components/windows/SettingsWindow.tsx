@@ -3,6 +3,7 @@ import WindowWrapper from "../WindowWrapper";
 import { settingsCategories } from "../../data/settingsCategories";
 import AppearancePanel from "../AppearancePanel";
 import WallpaperPanel from "../WallpaperPanel";
+import DockPanel from "../DockPanel";
 import avatarPicture from "/avatar.jpg";
 
 type SettingsWindowProps = {
@@ -18,6 +19,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
   const renderPanelByCategoryId = (categoryId: string) => {
     if (categoryId === "appearance") return <AppearancePanel />;
     if (categoryId === "wallpaper") return <WallpaperPanel />;
+    if (categoryId === "dock") return <DockPanel />;
     return <></>;
   };
 

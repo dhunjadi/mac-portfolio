@@ -14,6 +14,8 @@ type DockIconProps = {
   icon: string;
   id: string;
   mouseX: MotionValue<number>;
+  mouseY: MotionValue<number>;
+  dockPosition: "left" | "bottom" | "right";
   tooltipLabel: string;
   onClick: () => void;
 };
@@ -22,6 +24,8 @@ const DockIcon = ({
   icon,
   id,
   mouseX,
+  mouseY,
+  dockPosition,
   onClick,
   tooltipLabel,
 }: DockIconProps) => {
@@ -32,15 +36,23 @@ const DockIcon = ({
   const isActive =
     openedWindows.includes(id as AppleMenuDropdownItem) || id === "finder";
 
-  const distanceFromCursor = useTransform(mouseX, (cursorX) => {
-    if (cursorX === Number.NEGATIVE_INFINITY) return Number.POSITIVE_INFINITY;
+  const distanceFromCursor = useTransform(
+    dockPosition === "bottom" ? mouseX : mouseY,
+    (cursorPosition) => {
+      if (cursorPosition === Number.NEGATIVE_INFINITY)
+        return Number.POSITIVE_INFINITY;
 
-    const iconRect = iconRef.current?.getBoundingClientRect();
+      const iconRect = iconRef.current?.getBoundingClientRect();
 
-    if (!iconRect) return Number.POSITIVE_INFINITY;
+      if (!iconRect) return Number.POSITIVE_INFINITY;
 
-    return cursorX - iconRect.left - iconRect.width / 2;
-  });
+      if (dockPosition === "bottom") {
+        return cursorPosition - iconRect.left - iconRect.width / 2;
+      }
+
+      return cursorPosition - iconRect.top - iconRect.height / 2;
+    },
+  );
 
   const scaleValue = useTransform(
     distanceFromCursor,
@@ -55,18 +67,28 @@ const DockIcon = ({
   });
 
   const handleClick = async () => {
+    const bounceDistance =
+      dockPosition === "left" ? 30 : dockPosition === "right" ? -30 : -30;
+
+    const bounceKeyframes =
+      dockPosition === "bottom"
+        ? { y: [0, bounceDistance, 0, bounceDistance, 0, bounceDistance, 0] }
+        : { x: [0, bounceDistance, 0, bounceDistance, 0, bounceDistance, 0] };
+
     await controls.start({
-      y: [0, -30, 0, -30, 0, -30, 0],
+      ...bounceKeyframes,
       transition: { duration: 3, ease: "easeInOut" },
     });
     onClick();
   };
 
   const tooltipId = `dock-tooltip-${id}`;
+  const tooltipPlace =
+    dockPosition === "bottom" ? "top" : dockPosition === "left" ? "right" : "left";
 
   return (
     <>
-      <div className="c-dockIcon">
+      <div className={`c-dockIcon c-dockIcon--${dockPosition}`}>
         <motion.img
           ref={iconRef}
           src={icon}
@@ -93,7 +115,7 @@ const DockIcon = ({
       <Tooltip
         id={tooltipId}
         className="c-dockIcon__tooltip"
-        place="top"
+        place={tooltipPlace}
         disableStyleInjection
       />
     </>

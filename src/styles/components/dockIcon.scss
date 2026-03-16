@@ -18,6 +18,21 @@
     border-radius: 50%;
   }
 
+  &--left &__activeIndicator,
+  &--right &__activeIndicator {
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &--left &__activeIndicator {
+    left: -4px;
+  }
+
+  &--right &__activeIndicator {
+    right: -4px;
+  }
+
   &__tooltip {
     background: rgb(var(--glass-rgb));
     padding: 4px 10px;

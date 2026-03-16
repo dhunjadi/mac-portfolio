@@ -2,11 +2,14 @@ import { create } from "zustand";
 import { wallpaperOptions, wallpaperPreviews } from "../data/wallpapers";
 import { persist } from "zustand/middleware";
 
+type DockPosition = "left" | "bottom" | "right";
+
 type SettingsActions = {
   setGlassAlpha: (glassAlpha: number) => void;
   setWallpaper: (wallpaper: string) => void;
   setBlur: (value: number) => void;
   setGlassColor: (value: string) => void;
+  setDockPosition: (value: DockPosition) => void;
 };
 
 type SettingsStore = {
@@ -14,6 +17,7 @@ type SettingsStore = {
   blur: number;
   glassColor: string;
   wallpaper: string;
+  dockPosition: DockPosition;
   wallpaperOptions: readonly string[];
   wallpaperPreviews: readonly string[];
   actions: SettingsActions;
@@ -29,6 +33,7 @@ const useSettingsStore = create<SettingsStore>()(
       blur: 16,
       glassColor: "#000000",
       wallpaper: wallpaperOptions[0],
+      dockPosition: "bottom",
       wallpaperOptions,
       wallpaperPreviews,
       actions: {
@@ -43,6 +48,8 @@ const useSettingsStore = create<SettingsStore>()(
           })),
 
         setWallpaper: (wallpaper) => set(() => ({ wallpaper })),
+
+        setDockPosition: (value) => set(() => ({ dockPosition: value })),
       },
     }),
     {
@@ -52,6 +59,7 @@ const useSettingsStore = create<SettingsStore>()(
         blur: state.blur,
         glassColor: state.glassColor,
         wallpaper: state.wallpaper,
+        dockPosition: state.dockPosition,
       }),
     },
   ),
@@ -66,6 +74,9 @@ export const useGlassColor = () =>
   useSettingsStore((state) => state.glassColor);
 
 export const useWallpaper = () => useSettingsStore((state) => state.wallpaper);
+
+export const useDockPosition = () =>
+  useSettingsStore((state) => state.dockPosition);
 
 export const useWallpaperOptions = () =>
   useSettingsStore((state) => state.wallpaperOptions);

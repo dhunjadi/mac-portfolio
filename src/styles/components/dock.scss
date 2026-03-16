@@ -35,6 +35,41 @@
     transform: translate(-50%, 200%);
   }
 
+  &--left,
+  &--right {
+    top: 50%;
+    bottom: auto;
+    max-width: none;
+    max-height: calc(100svh - (var(--dock-outer-margin) * 2));
+    flex-direction: column;
+    padding: var(--dock-padding-x) 0;
+    gap: var(--dock-gap);
+    transform: translateY(-50%);
+    padding: 16px 4px;
+
+    img {
+      transform-origin: center;
+    }
+  }
+
+  &--left {
+    left: 8px;
+    right: auto;
+
+    &.hidden {
+      transform: translate(calc(-100% - var(--dock-outer-margin)), -50%);
+    }
+  }
+
+  &--right {
+    right: 8px;
+    left: auto;
+
+    &.hidden {
+      transform: translate(calc(100% + var(--dock-outer-margin)), -50%);
+    }
+  }
+
   // Tablet
   @include respond(sm) {
     --dock-gap: 6px;

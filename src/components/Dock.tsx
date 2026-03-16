@@ -8,6 +8,7 @@ import {
   useDockIcons,
   type DockIcon as DockIconType,
 } from "../stores/dockStore";
+import { useDockPosition } from "../stores/settingsStore";
 import type { AppleMenuDropdownItem } from "../types";
 
 type DockProps = {
@@ -20,22 +21,25 @@ const Dock = ({ ref }: DockProps) => {
 
   const icons = useDockIcons();
   const { moveIcon } = useDockActions();
+  const dockPosition = useDockPosition();
 
   // ref instead of state to avoid re-renders
   // re-renders break icon reordering
   const isDesktop = useRef(window.innerWidth >= 1024);
 
   const mouseX = useMotionValue(Number.NEGATIVE_INFINITY);
+  const mouseY = useMotionValue(Number.NEGATIVE_INFINITY);
   useEffect(() => {
     const handleResize = () => {
       isDesktop.current = window.innerWidth >= 1024;
       if (!isDesktop.current) {
         mouseX.set(Number.NEGATIVE_INFINITY);
+        mouseY.set(Number.NEGATIVE_INFINITY);
       }
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [mouseX]);
+  }, [mouseX, mouseY]);
 
   const handleIconClick = (iconId: string) => {
     openWindow(iconId as AppleMenuDropdownItem);
@@ -48,15 +52,23 @@ const Dock = ({ ref }: DockProps) => {
   return (
     <Reorder.Group
       ref={ref}
-      axis="x"
+      axis={dockPosition === "bottom" ? "x" : "y"}
       values={icons}
       onReorder={moveIcon}
-      className={`c-dock ${isLoggedIn ? "" : "hidden"}`}
+      className={`c-dock c-dock--${dockPosition} ${isLoggedIn ? "" : "hidden"}`}
       style={dockStyle}
       onMouseMove={(e) => {
-        if (isDesktop.current) mouseX.set(e.clientX);
+        if (!isDesktop.current) return;
+        if (dockPosition === "bottom") {
+          mouseX.set(e.clientX);
+        } else {
+          mouseY.set(e.clientY);
+        }
       }}
-      onMouseLeave={() => mouseX.set(Number.NEGATIVE_INFINITY)}
+      onMouseLeave={() => {
+        mouseX.set(Number.NEGATIVE_INFINITY);
+        mouseY.set(Number.NEGATIVE_INFINITY);
+      }}
     >
       {icons.map((icon: DockIconType) => (
         <Reorder.Item
@@ -68,6 +80,8 @@ const Dock = ({ ref }: DockProps) => {
           <DockIcon
             id={icon.id}
             mouseX={mouseX}
+            mouseY={mouseY}
+            dockPosition={dockPosition}
             icon={icon.icon}
             tooltipLabel={icon.tooltipLabel}
             onClick={() => handleIconClick(icon.id)}
