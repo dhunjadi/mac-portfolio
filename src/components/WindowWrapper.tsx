@@ -6,6 +6,7 @@ import {
   useWindowActions,
   useWindowZIndex,
 } from "../stores/windowStore";
+import { useDockPosition } from "../stores/settingsStore";
 
 type WindowWrapperProps = {
   windowId: AppleMenuDropdownItem;
@@ -47,6 +48,7 @@ const WindowWrapper = ({
   const zIndex = useWindowZIndex(windowId);
   const activeWindowId = useActiveWindowId();
   const isFocused = activeWindowId === windowId;
+  const dockPosition = useDockPosition();
 
   const rndRef = useRef<Rnd | null>(null);
   const savedBounds = useRef<Bounds>(DEFAULT_BOUNDS);
@@ -78,14 +80,29 @@ const WindowWrapper = ({
         parseFloat(style.getPropertyValue("--menubar-height")) || 0;
       const dockHeight =
         parseFloat(style.getPropertyValue("--dock-height")) || 0;
+      const dockWidth = parseFloat(style.getPropertyValue("--dock-width")) || 0;
       const dockBottomOffset = 4;
 
-      rndRef.current.updatePosition({ x: 0, y: menuBarHeight });
-      rndRef.current.updateSize({
-        width: window.innerWidth,
-        height:
-          window.innerHeight - menuBarHeight - dockHeight - dockBottomOffset,
-      });
+      if (dockPosition === "left") {
+        rndRef.current.updatePosition({ x: dockWidth + 8, y: menuBarHeight });
+        rndRef.current.updateSize({
+          width: window.innerWidth - dockWidth,
+          height: window.innerHeight - menuBarHeight,
+        });
+      } else if (dockPosition === "right") {
+        rndRef.current.updatePosition({ x: 0, y: menuBarHeight });
+        rndRef.current.updateSize({
+          width: window.innerWidth - dockWidth,
+          height: window.innerHeight - menuBarHeight,
+        });
+      } else {
+        rndRef.current.updatePosition({ x: 0, y: menuBarHeight });
+        rndRef.current.updateSize({
+          width: window.innerWidth,
+          height:
+            window.innerHeight - menuBarHeight - dockHeight - dockBottomOffset,
+        });
+      }
       setIsMaximized(true);
     }
 

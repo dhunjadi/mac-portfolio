@@ -94,6 +94,7 @@ const HomeScreen = () => {
     const update = () => {
       const menuBarHeight = menuBarRef.current?.offsetHeight ?? 0;
       const dockHeight = dockRef.current?.offsetHeight ?? 0;
+      const dockWidth = dockRef.current?.offsetWidth ?? 0;
 
       document.documentElement.style.setProperty(
         "--menubar-height",
@@ -102,6 +103,10 @@ const HomeScreen = () => {
       document.documentElement.style.setProperty(
         "--dock-height",
         `${dockHeight}px`,
+      );
+      document.documentElement.style.setProperty(
+        "--dock-width",
+        `${dockWidth}px`,
       );
     };
 
