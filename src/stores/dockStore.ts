@@ -11,7 +11,7 @@ import textEditorIcon from "/icons/text-editor.png";
 export type DockIcon = {
   id: AppleMenuDropdownItem;
   icon: string;
-  action?: string;
+  tooltipLabel: string;
 };
 
 type DockActions = {
@@ -27,12 +27,16 @@ const useDockStore = create<DockStore>()(
   persist(
     (set) => ({
       icons: [
-        { id: "finder", icon: finderIcon },
-        { id: "about", icon: infoIcon, action: "about" },
-        { id: "calculator", icon: calculatorIcon, action: "calculator" },
-        { id: "settings", icon: settingsIcon, action: "settings" },
-        { id: "weather", icon: weatherIcon, action: "weather" },
-        { id: "text-editor", icon: textEditorIcon, action: "text-editor" },
+        { id: "finder", icon: finderIcon, tooltipLabel: "Finder" },
+        { id: "about", icon: infoIcon, tooltipLabel: "About" },
+        { id: "calculator", icon: calculatorIcon, tooltipLabel: "Calculator" },
+        { id: "settings", icon: settingsIcon, tooltipLabel: "Settings" },
+        { id: "weather", icon: weatherIcon, tooltipLabel: "Weather" },
+        {
+          id: "text-editor",
+          icon: textEditorIcon,
+          tooltipLabel: "Text Editor",
+        },
       ],
       actions: {
         moveIcon: (newItems) => set({ icons: newItems }),

@@ -6,6 +6,7 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { useRef } from "react";
+import { Tooltip } from "react-tooltip";
 import { useOpenedWindows } from "../stores/windowStore";
 import type { AppleMenuDropdownItem } from "../types";
 
@@ -13,10 +14,17 @@ type DockIconProps = {
   icon: string;
   id: string;
   mouseX: MotionValue<number>;
+  tooltipLabel: string;
   onClick: () => void;
 };
 
-const DockIcon = ({ icon, id, mouseX, onClick }: DockIconProps) => {
+const DockIcon = ({
+  icon,
+  id,
+  mouseX,
+  onClick,
+  tooltipLabel,
+}: DockIconProps) => {
   const iconRef = useRef<HTMLImageElement>(null);
   const controls = useAnimationControls();
   const openedWindows = useOpenedWindows();
@@ -54,28 +62,41 @@ const DockIcon = ({ icon, id, mouseX, onClick }: DockIconProps) => {
     onClick();
   };
 
-  return (
-    <div className="c-dockIcon">
-      <motion.img
-        ref={iconRef}
-        src={icon}
-        alt="dock icon"
-        draggable={false}
-        style={{
-          scale: iconScale,
-          userSelect: "none",
-        }}
-        animate={controls}
-        onClick={isActive ? undefined : handleClick}
-      />
+  const tooltipId = `dock-tooltip-${id}`;
 
-      {isActive && (
-        <motion.div
-          layoutId={`${id}-indicator`}
-          className="c-dockIcon__activeIndicator"
+  return (
+    <>
+      <div className="c-dockIcon">
+        <motion.img
+          ref={iconRef}
+          src={icon}
+          alt={tooltipLabel ?? "dock icon"}
+          draggable={false}
+          data-tooltip-id={tooltipId}
+          data-tooltip-content={tooltipLabel}
+          style={{
+            scale: iconScale,
+            userSelect: "none",
+          }}
+          animate={controls}
+          onClick={isActive ? undefined : handleClick}
         />
-      )}
-    </div>
+
+        {isActive && (
+          <motion.div
+            layoutId={`${id}-indicator`}
+            className="c-dockIcon__activeIndicator"
+          />
+        )}
+      </div>
+
+      <Tooltip
+        id={tooltipId}
+        className="c-dockIcon__tooltip"
+        place="top"
+        disableStyleInjection
+      />
+    </>
   );
 };
 

@@ -69,6 +69,7 @@ const Dock = ({ ref }: DockProps) => {
             id={icon.id}
             mouseX={mouseX}
             icon={icon.icon}
+            tooltipLabel={icon.tooltipLabel}
             onClick={() => handleIconClick(icon.id)}
           />
         </Reorder.Item>
