@@ -11,6 +11,9 @@ Live demo: https://dhunjadi.github.io/mac-portfolio/
 - Login overlay (type any password to enter)
 - Portfolio window (`About This Dev`) with experience and skills
 - Functional calculator window
+- PDF preview window with zoom controls
+- Weather window with current conditions and forecast
+- Text editor window with sample file import and download
 - Settings window with:
   - Wallpaper switching
   - Glass color selection

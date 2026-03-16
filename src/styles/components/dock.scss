@@ -1,16 +1,19 @@
 @use "../abstracts/mixins" as *;
 @use "../abstracts/variables" as *;
 
+// Using px instead of rem to avoid writing new styles for the same size in different breakpoints
+
 .c-dock {
   --dock-items: 1;
-  --dock-gap: 0.35rem;
-  --dock-padding-x: 1rem;
-  --icon-max-size: 6rem;
-  --icon-min-size: 2.2rem;
-  --dock-outer-margin: 2rem;
+  --dock-gap: 4px;
+  --dock-padding-x: 10px;
+  --icon-max-size: 48px;
+  --icon-min-size: 28px;
+  --dock-outer-margin: 12px;
+  --dock-available-width: calc(100svw - (var(--dock-outer-margin) * 2));
 
   width: fit-content;
-  max-width: calc(100svw - var(--dock-outer-margin));
+  max-width: var(--dock-available-width);
   position: fixed;
   bottom: 0.25rem;
   left: 50%;
@@ -32,12 +35,30 @@
     transform: translate(-50%, 200%);
   }
 
+  // Tablet
+  @include respond(sm) {
+    --dock-gap: 6px;
+    --dock-padding-x: 14px;
+    --icon-max-size: 60px;
+    --icon-min-size: 36px;
+    --dock-outer-margin: 20px;
+  }
+
+  // Desktop
+  @include respond(md) {
+    --dock-gap: 6px;
+    --dock-padding-x: 16px;
+    --icon-max-size: 56px;
+    --icon-min-size: 32px;
+    --dock-outer-margin: 32px;
+  }
+
   img {
     width: clamp(
       var(--icon-min-size),
       calc(
         (
-            100svw - var(--dock-outer-margin) - (var(--dock-padding-x) * 2) -
+            var(--dock-available-width) - (var(--dock-padding-x) * 2) -
               ((var(--dock-items) - 1) * var(--dock-gap))
           ) /
           var(--dock-items)
@@ -47,10 +68,5 @@
     height: auto;
     flex: 0 0 auto;
     transform-origin: center bottom;
-
-    @include respond(md) {
-      --icon-max-size: 3rem;
-      --icon-min-size: 1.8rem;
-    }
   }
 }
