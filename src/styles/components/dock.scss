@@ -7,7 +7,7 @@
   --dock-items: 1;
   --dock-gap: 4px;
   --dock-padding-x: 10px;
-  --icon-max-size: 48px;
+  --icon-max-size: var(--dock-icon-max-size, 48px);
   --icon-min-size: 28px;
   --dock-outer-margin: 12px;
   --dock-available-width: calc(100svw - (var(--dock-outer-margin) * 2));
@@ -74,7 +74,7 @@
   @include respond(sm) {
     --dock-gap: 6px;
     --dock-padding-x: 14px;
-    --icon-max-size: 60px;
+    --icon-max-size: var(--dock-icon-max-size, 60px);
     --icon-min-size: 36px;
     --dock-outer-margin: 20px;
   }
@@ -83,7 +83,7 @@
   @include respond(md) {
     --dock-gap: 6px;
     --dock-padding-x: 16px;
-    --icon-max-size: 56px;
+    --icon-max-size: var(--dock-icon-max-size, 56px);
     --icon-min-size: 32px;
     --dock-outer-margin: 32px;
   }

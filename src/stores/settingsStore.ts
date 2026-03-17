@@ -10,6 +10,7 @@ type SettingsActions = {
   setBlur: (value: number) => void;
   setGlassColor: (value: string) => void;
   setDockPosition: (value: DockPosition) => void;
+  setDockIconMaxSize: (value: number) => void;
 };
 
 type SettingsStore = {
@@ -18,6 +19,7 @@ type SettingsStore = {
   glassColor: string;
   wallpaper: string;
   dockPosition: DockPosition;
+  dockIconMaxSize: number | null;
   wallpaperOptions: readonly string[];
   wallpaperPreviews: readonly string[];
   actions: SettingsActions;
@@ -34,6 +36,7 @@ const useSettingsStore = create<SettingsStore>()(
       glassColor: "#000000",
       wallpaper: wallpaperOptions[0],
       dockPosition: "bottom",
+      dockIconMaxSize: null,
       wallpaperOptions,
       wallpaperPreviews,
       actions: {
@@ -50,6 +53,9 @@ const useSettingsStore = create<SettingsStore>()(
         setWallpaper: (wallpaper) => set(() => ({ wallpaper })),
 
         setDockPosition: (value) => set(() => ({ dockPosition: value })),
+
+        setDockIconMaxSize: (value) =>
+          set(() => ({ dockIconMaxSize: value })),
       },
     }),
     {
@@ -60,6 +66,7 @@ const useSettingsStore = create<SettingsStore>()(
         glassColor: state.glassColor,
         wallpaper: state.wallpaper,
         dockPosition: state.dockPosition,
+        dockIconMaxSize: state.dockIconMaxSize,
       }),
     },
   ),
@@ -77,6 +84,9 @@ export const useWallpaper = () => useSettingsStore((state) => state.wallpaper);
 
 export const useDockPosition = () =>
   useSettingsStore((state) => state.dockPosition);
+
+export const useDockIconMaxSize = () =>
+  useSettingsStore((state) => state.dockIconMaxSize);
 
 export const useWallpaperOptions = () =>
   useSettingsStore((state) => state.wallpaperOptions);

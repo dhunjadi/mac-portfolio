@@ -1,8 +1,44 @@
-import { useDockPosition, useSettingsActions } from "../stores/settingsStore";
+import { useEffect, useState } from "react";
+import {
+  useDockIconMaxSize,
+  useDockPosition,
+  useSettingsActions,
+} from "../stores/settingsStore";
+import {
+  clampDockIconSize,
+  getDockIconSizeLimits,
+} from "../utils/dockSizing";
 
 const DockPanel = () => {
   const dockPosition = useDockPosition();
-  const { setDockPosition } = useSettingsActions();
+  const dockIconMaxSize = useDockIconMaxSize();
+  const { setDockPosition, setDockIconMaxSize } = useSettingsActions();
+  const [sizeLimits, setSizeLimits] = useState(() =>
+    getDockIconSizeLimits(window.innerWidth),
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSizeLimits(getDockIconSizeLimits(window.innerWidth));
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (dockIconMaxSize === null) {
+      setDockIconMaxSize(sizeLimits.max);
+      return;
+    }
+
+    const clamped = clampDockIconSize(dockIconMaxSize, sizeLimits);
+    if (clamped !== dockIconMaxSize) {
+      setDockIconMaxSize(clamped);
+    }
+  }, [dockIconMaxSize, setDockIconMaxSize, sizeLimits]);
+
+  const sliderValue = dockIconMaxSize ?? sizeLimits.max;
 
   return (
     <section className="c-dockPanel">
@@ -22,6 +58,23 @@ const DockPanel = () => {
           <option value="bottom">Bottom</option>
           <option value="right">Right</option>
         </select>
+      </div>
+
+      <div className="c-dockPanel__input">
+        <label htmlFor="dock-icon-size">
+          Icon size: {Math.round(sliderValue)}px
+        </label>
+        <input
+          id="dock-icon-size"
+          type="range"
+          min={sizeLimits.min}
+          max={sizeLimits.max}
+          step="1"
+          value={sliderValue}
+          onChange={(event) =>
+            setDockIconMaxSize(Number(event.target.value))
+          }
+        />
       </div>
     </section>
   );

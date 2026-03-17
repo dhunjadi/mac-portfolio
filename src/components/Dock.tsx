@@ -1,4 +1,4 @@
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useMotionValue, Reorder } from "framer-motion";
 import DockIcon from "./DockIcon";
 import { useLogin } from "../stores/loginStore";
@@ -8,7 +8,11 @@ import {
   useDockIcons,
   type DockIcon as DockIconType,
 } from "../stores/dockStore";
-import { useDockPosition } from "../stores/settingsStore";
+import { useDockIconMaxSize, useDockPosition } from "../stores/settingsStore";
+import {
+  clampDockIconSize,
+  getDockIconSizeLimits,
+} from "../utils/dockSizing";
 import type { AppleMenuDropdownItem } from "../types";
 
 type DockProps = {
@@ -22,6 +26,10 @@ const Dock = ({ ref }: DockProps) => {
   const icons = useDockIcons();
   const { moveIcon } = useDockActions();
   const dockPosition = useDockPosition();
+  const dockIconMaxSize = useDockIconMaxSize();
+  const [sizeLimits, setSizeLimits] = useState(() =>
+    getDockIconSizeLimits(window.innerWidth),
+  );
 
   // ref instead of state to avoid re-renders
   // re-renders break icon reordering
@@ -32,6 +40,7 @@ const Dock = ({ ref }: DockProps) => {
   useEffect(() => {
     const handleResize = () => {
       isDesktop.current = window.innerWidth >= 1024;
+      setSizeLimits(getDockIconSizeLimits(window.innerWidth));
       if (!isDesktop.current) {
         mouseX.set(Number.NEGATIVE_INFINITY);
         mouseY.set(Number.NEGATIVE_INFINITY);
@@ -47,6 +56,14 @@ const Dock = ({ ref }: DockProps) => {
 
   const dockStyle = {
     "--dock-items": icons.length,
+    ...(dockIconMaxSize !== null
+      ? {
+          "--dock-icon-max-size": `${clampDockIconSize(
+            dockIconMaxSize,
+            sizeLimits,
+          )}px`,
+        }
+      : {}),
   } as CSSProperties;
 
   return (

@@ -82,17 +82,21 @@ const WindowWrapper = ({
         parseFloat(style.getPropertyValue("--dock-height")) || 0;
       const dockWidth = parseFloat(style.getPropertyValue("--dock-width")) || 0;
       const dockBottomOffset = 4;
+      const dockSideOffset = 12;
 
       if (dockPosition === "left") {
-        rndRef.current.updatePosition({ x: dockWidth + 8, y: menuBarHeight });
+        rndRef.current.updatePosition({
+          x: dockWidth + dockSideOffset,
+          y: menuBarHeight,
+        });
         rndRef.current.updateSize({
-          width: window.innerWidth - dockWidth,
+          width: window.innerWidth - dockWidth - dockSideOffset,
           height: window.innerHeight - menuBarHeight,
         });
       } else if (dockPosition === "right") {
         rndRef.current.updatePosition({ x: 0, y: menuBarHeight });
         rndRef.current.updateSize({
-          width: window.innerWidth - dockWidth,
+          width: window.innerWidth - dockWidth - dockSideOffset,
           height: window.innerHeight - menuBarHeight,
         });
       } else {
