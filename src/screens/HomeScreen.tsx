@@ -34,6 +34,9 @@ const TextEditorWindow = lazy(
 const ShutDownModal = lazy(() => import("../components/ShutDownModal"));
 
 const RestartModal = lazy(() => import("../components/RestartModal"));
+const BrightnessOverlay = lazy(
+  () => import("../components/BrightnessOverlay"),
+);
 
 const hexToRgb = (hexColor: string) => {
   const matched = /^#([0-9a-fA-F]{6})$/.exec(hexColor);
@@ -161,6 +164,7 @@ const HomeScreen = () => {
       <LoginOverlay />
 
       <ShutDownOverlay />
+      <BrightnessOverlay />
 
       <MenuBar ref={menuBarRef} />
       <main>

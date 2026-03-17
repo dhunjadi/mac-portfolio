@@ -19,6 +19,8 @@
 @use "./components/appearancePanel.scss";
 @use "./components/dockPanel.scss";
 @use "./components/accordion.scss";
+@use "./components/controlCenterDropdown.scss";
+@use "./components/brightnessOverlay.scss";
 
 // Windows
 @use "./components/windows/aboutThisDevWindow.scss";

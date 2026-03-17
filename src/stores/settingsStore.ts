@@ -11,6 +11,7 @@ type SettingsActions = {
   setGlassColor: (value: string) => void;
   setDockPosition: (value: DockPosition) => void;
   setDockIconMaxSize: (value: number) => void;
+  setBrightness: (value: number) => void;
 };
 
 type SettingsStore = {
@@ -20,12 +21,14 @@ type SettingsStore = {
   wallpaper: string;
   dockPosition: DockPosition;
   dockIconMaxSize: number | null;
+  brightness: number;
   wallpaperOptions: readonly string[];
   wallpaperPreviews: readonly string[];
   actions: SettingsActions;
 };
 
 const clampValue = (value: number) => Math.max(0.1, Math.min(1, value));
+const clampBrightness = (value: number) => Math.max(0, Math.min(100, value));
 const isHexColor = (value: string) => /^#[0-9a-fA-F]{6}$/.test(value);
 
 const useSettingsStore = create<SettingsStore>()(
@@ -37,6 +40,7 @@ const useSettingsStore = create<SettingsStore>()(
       wallpaper: wallpaperOptions[0],
       dockPosition: "bottom",
       dockIconMaxSize: null,
+      brightness: 100,
       wallpaperOptions,
       wallpaperPreviews,
       actions: {
@@ -54,8 +58,10 @@ const useSettingsStore = create<SettingsStore>()(
 
         setDockPosition: (value) => set(() => ({ dockPosition: value })),
 
-        setDockIconMaxSize: (value) =>
-          set(() => ({ dockIconMaxSize: value })),
+        setDockIconMaxSize: (value) => set(() => ({ dockIconMaxSize: value })),
+
+        setBrightness: (value) =>
+          set(() => ({ brightness: clampBrightness(value) })),
       },
     }),
     {
@@ -67,6 +73,7 @@ const useSettingsStore = create<SettingsStore>()(
         wallpaper: state.wallpaper,
         dockPosition: state.dockPosition,
         dockIconMaxSize: state.dockIconMaxSize,
+        brightness: state.brightness,
       }),
     },
   ),
@@ -87,6 +94,9 @@ export const useDockPosition = () =>
 
 export const useDockIconMaxSize = () =>
   useSettingsStore((state) => state.dockIconMaxSize);
+
+export const useBrightness = () =>
+  useSettingsStore((state) => state.brightness);
 
 export const useWallpaperOptions = () =>
   useSettingsStore((state) => state.wallpaperOptions);

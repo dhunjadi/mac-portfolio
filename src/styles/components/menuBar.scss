@@ -109,4 +109,24 @@
       font-size: var(--fs-caption);
     }
   }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    position: relative;
+
+    &_controlCenter {
+      display: flex;
+      align-items: center;
+
+      & > button {
+        @include menu-bar-control;
+      }
+
+      img {
+        width: var(--fs-body-xl);
+      }
+    }
+  }
 }

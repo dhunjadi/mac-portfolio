@@ -1,0 +1,10 @@
+@use "../abstracts/variables" as *;
+
+.c-brightnessOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  pointer-events: none;
+  background: rgb(0 0 0 / var(--brightness-dim, 0));
+  transition: background-color 0.1s ease;
+}

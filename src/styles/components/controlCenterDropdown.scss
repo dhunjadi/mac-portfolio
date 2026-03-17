@@ -1,0 +1,105 @@
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
+.c-controlCenterDropdown {
+  position: absolute;
+  top: calc(100% + 0.2rem);
+  right: 0;
+  z-index: 60;
+  @include dropdown-menu-body;
+  padding: 0.75rem 0.75rem 0.85rem;
+  width: min(22rem, calc(100vw - 1rem));
+  max-height: calc(100vh - 3.5rem);
+  overflow: hidden auto;
+
+  @include respond(lg) {
+    width: min(20rem, calc(100vw - 1.25rem));
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+
+    &_title {
+      font-size: var(--fs-caption);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: rgba(255, 255, 255, 0.75);
+      text-transform: uppercase;
+    }
+
+    &_sliderRow {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 0.9rem;
+      padding: 0.4rem 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      div {
+        position: absolute;
+        width: 1.6rem;
+        height: 1.6rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          max-width: 0.8rem;
+        }
+      }
+
+      input[type="range"] {
+        flex: 1;
+        height: 1.1rem;
+        border-radius: 999px;
+        appearance: none;
+        background:
+          linear-gradient(90deg, #fff, #fff) 0 / var(--brightness-fill, 50%)
+            100% no-repeat,
+          rgba(255, 255, 255, 0.22) 0 / 100% 100% no-repeat;
+        cursor: pointer;
+
+        &:focus-visible {
+          outline: 2px solid rgba(255, 255, 255, 0.5);
+          outline-offset: 3px;
+        }
+
+        &::-webkit-slider-runnable-track {
+          height: 1.1rem;
+          background: transparent;
+          border-radius: 999px;
+        }
+
+        &::-webkit-slider-thumb {
+          appearance: none;
+          width: 1.1rem;
+          height: 1.1rem;
+          border-radius: 50%;
+          background: #fff;
+          border: none;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+          margin-top: 0;
+        }
+
+        &::-moz-range-track {
+          height: 1.1rem;
+          background: transparent;
+          border-radius: 999px;
+        }
+
+        &::-moz-range-thumb {
+          width: 1.1rem;
+          height: 1.1rem;
+          border-radius: 50%;
+          background: #fff;
+          border: none;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+  }
+}

@@ -7,6 +7,8 @@ import { useActiveWindowId, useWindowActions } from "../stores/windowStore";
 import AppleMenuDropdown from "./AppleMenuDropdown";
 import type { AppleMenuDropdownItem } from "../types";
 import { usePowerActions } from "../stores/powerStore";
+import controlCenterIcon from "/icons/control-center.png";
+import ControlCenterDropdown from "./ControlCenterDropdown";
 
 type MenuBarProps = {
   hideAppleLogo?: boolean;
@@ -21,12 +23,14 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
 
   const [isAppleMenuOpen, setIsAppleMenuOpen] = useState(false);
   const [isWindowMenuOpen, setIsWindowMenuOpen] = useState(false);
+  const [iscontrolCenterOpen, setIsControlCenterOpen] = useState(false);
   const appleMenuRef = useRef<HTMLDivElement | null>(null);
   const windowMenuRef = useRef<HTMLDivElement | null>(null);
+  const controlCenterRef = useRef<HTMLDivElement | null>(null);
   const date = dayjs().format("ddd D MMM HH:mm");
 
   useEffect(() => {
-    if (!isAppleMenuOpen && !isWindowMenuOpen) return;
+    if (!isAppleMenuOpen && !isWindowMenuOpen && !iscontrolCenterOpen) return;
 
     const handlePointerDown = (event: MouseEvent | TouchEvent) => {
       const target = event.target as Node | null;
@@ -34,15 +38,20 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
       const isInsideAppleMenu = appleMenuRef.current?.contains(target) ?? false;
       const isInsideWindowMenu =
         windowMenuRef.current?.contains(target) ?? false;
-      if (isInsideAppleMenu || isInsideWindowMenu) return;
+      const isInsidecontrolCenter =
+        controlCenterRef.current?.contains(target) ?? false;
+      if (isInsideAppleMenu || isInsideWindowMenu || isInsidecontrolCenter)
+        return;
       setIsAppleMenuOpen(false);
       setIsWindowMenuOpen(false);
+      setIsControlCenterOpen(false);
     };
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
       setIsAppleMenuOpen(false);
       setIsWindowMenuOpen(false);
+      setIsControlCenterOpen(false);
     };
 
     window.addEventListener("keydown", handleEscape);
@@ -53,7 +62,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
       document.removeEventListener("mousedown", handlePointerDown);
       document.removeEventListener("touchstart", handlePointerDown);
     };
-  }, [isAppleMenuOpen, isWindowMenuOpen]);
+  }, [isAppleMenuOpen, iscontrolCenterOpen, isWindowMenuOpen]);
 
   const menuBarWindowLabels = useMemo(
     () => ({
@@ -94,7 +103,8 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
               aria-expanded={isAppleMenuOpen}
               onClick={() => {
                 setIsWindowMenuOpen(false);
-                setIsAppleMenuOpen((previousState) => !previousState);
+                setIsControlCenterOpen(false);
+                setIsAppleMenuOpen((prev) => !prev);
               }}
             >
               <FontAwesomeIcon icon={faApple} color="white" />
@@ -114,7 +124,8 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
                 aria-expanded={isWindowMenuOpen}
                 onClick={() => {
                   setIsAppleMenuOpen(false);
-                  setIsWindowMenuOpen((previousState) => !previousState);
+                  setIsWindowMenuOpen((prev) => !prev);
+                  setIsControlCenterOpen(false);
                 }}
               >
                 {activeWindowLabel}
@@ -139,7 +150,25 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
           )}
         </div>
       )}
-      <strong className="c-menuBar__date">{date}</strong>
+      <div className="c-menuBar__right">
+        <div className="c-menuBar__right_controlCenter" ref={controlCenterRef}>
+          <button
+            type="button"
+            className={`${iscontrolCenterOpen ? "active" : ""}`}
+            aria-label="Control center menu"
+            aria-expanded={iscontrolCenterOpen}
+            onClick={() => {
+              setIsAppleMenuOpen(false);
+              setIsWindowMenuOpen(false);
+              setIsControlCenterOpen((prev) => !prev);
+            }}
+          >
+            <img src={controlCenterIcon} alt="" />
+          </button>
+          {iscontrolCenterOpen && <ControlCenterDropdown />}
+        </div>
+        <strong className="c-menuBar__date">{date}</strong>
+      </div>
     </div>
   );
 };
