@@ -6,7 +6,8 @@ import {
   useSleep,
 } from "../stores/powerStore";
 import { appRoutes } from "../data/appRoutes";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import useDoubleActivate from "../hooks/useDoubleActivate";
 
 const ShutDownOverlay = () => {
   const isShutDown = useShutDown();
@@ -14,6 +15,16 @@ const ShutDownOverlay = () => {
   const isSleeping = useSleep();
   const navigate = useNavigate();
   const { setIsSleeping } = usePowerActions();
+
+  const handleWakeUp = useCallback(() => {
+    setIsSleeping(false);
+  }, [setIsSleeping]);
+
+  useDoubleActivate({
+    onActivate: handleWakeUp,
+    enabled: isSleeping,
+    target: "document",
+  });
 
   useEffect(() => {
     if (isShutDown || isRestarting) {
@@ -23,29 +34,6 @@ const ShutDownOverlay = () => {
       return () => clearTimeout(timer);
     }
   }, [isRestarting, isShutDown, navigate]);
-
-  useEffect(() => {
-    if (!isSleeping) return;
-    const handleWakeUp = () => {
-      setIsSleeping(false);
-    };
-    let lastTap = 0;
-    const handleTouchEnd = () => {
-      const now = Date.now();
-      const delta = now - lastTap;
-      if (delta > 0 && delta < 300) {
-        handleWakeUp();
-      }
-      lastTap = now;
-    };
-    document.addEventListener("dblclick", handleWakeUp);
-    document.addEventListener("touchend", handleTouchEnd);
-
-    return () => {
-      document.removeEventListener("dblclick", handleWakeUp);
-      document.removeEventListener("touchend", handleTouchEnd);
-    };
-  }, [isSleeping, setIsSleeping]);
 
   return (
     <div

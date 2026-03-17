@@ -7,6 +7,7 @@ import {
   useWindowZIndex,
 } from "../stores/windowStore";
 import { useDockPosition } from "../stores/settingsStore";
+import useDoubleActivate from "../hooks/useDoubleActivate";
 
 type WindowWrapperProps = {
   windowId: AppleMenuDropdownItem;
@@ -112,6 +113,9 @@ const WindowWrapper = ({
 
     setTimeout(() => setIsAnimating(false), 300);
   };
+  const { onDoubleClick, onTouchEnd } = useDoubleActivate({
+    onActivate: handleMaximize,
+  });
 
   return (
     <Rnd
@@ -149,7 +153,11 @@ const WindowWrapper = ({
         // eslint-disable-next-line max-len
         className={`c-windowWrapper ${className} ${isClosing ? "closed" : ""} ${isMaximized ? "maximized" : ""} ${isFocused ? "focused" : "unfocused"}`}
       >
-        <div className="c-windowWrapper__titleBar">
+        <div
+          className="c-windowWrapper__titleBar"
+          onDoubleClick={onDoubleClick}
+          onTouchEnd={onTouchEnd}
+        >
           <div className="c-windowWrapper__titleBar_buttons">
             <button className="--close" onClick={handleClose} />
             <button
