@@ -100,6 +100,9 @@
   &__date {
     color: $color-white;
     font-size: var(--fs-body-xl);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 
     @include respond(lg) {
       font-size: var(--fs-body);
@@ -107,6 +110,14 @@
 
     @include respond(xl) {
       font-size: var(--fs-caption);
+    }
+
+    &_dayMonth {
+      display: none;
+
+      @include respond(sm) {
+        display: inline;
+      }
     }
   }
 

@@ -27,7 +27,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
   const appleMenuRef = useRef<HTMLDivElement | null>(null);
   const windowMenuRef = useRef<HTMLDivElement | null>(null);
   const controlCenterRef = useRef<HTMLDivElement | null>(null);
-  const date = dayjs().format("ddd D MMM HH:mm");
+  const [now, setNow] = useState(() => dayjs());
 
   useEffect(() => {
     if (!isAppleMenuOpen && !isWindowMenuOpen && !iscontrolCenterOpen) return;
@@ -63,6 +63,25 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
       document.removeEventListener("touchstart", handlePointerDown);
     };
   }, [isAppleMenuOpen, iscontrolCenterOpen, isWindowMenuOpen]);
+
+  useEffect(() => {
+    const updateNow = () => setNow(dayjs());
+    updateNow();
+
+    const msToNextMinute =
+      60000 - (dayjs().second() * 1000 + dayjs().millisecond());
+
+    let intervalId: ReturnType<typeof setInterval> | null = null;
+    const timeoutId = window.setTimeout(() => {
+      updateNow();
+      intervalId = window.setInterval(updateNow, 60000);
+    }, msToNextMinute);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (intervalId) window.clearInterval(intervalId);
+    };
+  }, []);
 
   const menuBarWindowLabels = useMemo(
     () => ({
@@ -167,7 +186,12 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
           </button>
           {iscontrolCenterOpen && <ControlCenterDropdown />}
         </div>
-        <strong className="c-menuBar__date">{date}</strong>
+        <strong className="c-menuBar__date">
+          <span className="c-menuBar__date_dayMonth">
+            {now.format("ddd D MMM")}
+          </span>
+          <span className="c-menuBar__dateTime">{now.format("HH:mm")}</span>
+        </strong>
       </div>
     </div>
   );
