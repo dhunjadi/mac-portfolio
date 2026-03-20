@@ -6,6 +6,8 @@ import type { ReactNode } from "react";
 
 const mockUseLogin = vi.fn();
 const mockUseWindowActions = vi.fn();
+const mockUseDockPosition = vi.fn();
+const mockUseDockIconMaxSize = vi.fn();
 const mockMotionSet = vi.fn();
 
 vi.mock("../../stores/loginStore", () => ({
@@ -14,6 +16,11 @@ vi.mock("../../stores/loginStore", () => ({
 
 vi.mock("../../stores/windowStore", () => ({
   useWindowActions: () => mockUseWindowActions(),
+}));
+
+vi.mock("../../stores/settingsStore", () => ({
+  useDockPosition: () => mockUseDockPosition(),
+  useDockIconMaxSize: () => mockUseDockIconMaxSize(),
 }));
 
 vi.mock("framer-motion", () => ({
@@ -60,6 +67,8 @@ describe("Dock", () => {
     setViewportWidth(1280);
     mockUseLogin.mockReturnValue(true);
     mockUseWindowActions.mockReturnValue({ openWindow });
+    mockUseDockPosition.mockReturnValue("bottom");
+    mockUseDockIconMaxSize.mockReturnValue(null);
   });
 
   it("renders all dock icons", () => {
@@ -106,6 +115,17 @@ describe("Dock", () => {
 
     fireEvent.mouseLeave(dock);
     expect(mockMotionSet).toHaveBeenCalledWith(Number.NEGATIVE_INFINITY);
+  });
+
+  it("uses vertical motion on left dock", () => {
+    mockUseDockPosition.mockReturnValue("left");
+    const { container } = render(<Dock />);
+    const dock = container.querySelector(".c-dock");
+
+    if (!dock) throw new Error("Dock root not found");
+
+    fireEvent.mouseMove(dock, { clientY: 180 });
+    expect(mockMotionSet).toHaveBeenCalledWith(180);
   });
 
   it("does not update motion value on mouse move on mobile", () => {

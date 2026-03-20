@@ -8,7 +8,7 @@ describe("AppleMenuDropdown", () => {
     const onSelect = vi.fn();
     render(<AppleMenuDropdown onSelect={onSelect} />);
 
-    expect(screen.getAllByRole("menuitem")).toHaveLength(7);
+    expect(screen.getAllByRole("menuitem")).toHaveLength(8);
     expect(screen.getAllByRole("separator")).toHaveLength(2);
   });
 
