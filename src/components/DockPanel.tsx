@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   useDockIconMaxSize,
+  useDockIconScale,
   useDockPosition,
   useSettingsActions,
 } from "../stores/settingsStore";
@@ -12,7 +13,9 @@ import {
 const DockPanel = () => {
   const dockPosition = useDockPosition();
   const dockIconMaxSize = useDockIconMaxSize();
-  const { setDockPosition, setDockIconMaxSize } = useSettingsActions();
+  const dockIconScale = useDockIconScale();
+  const { setDockPosition, setDockIconMaxSize, setDockIconScale } =
+    useSettingsActions();
   const [sizeLimits, setSizeLimits] = useState(() =>
     getDockIconSizeLimits(window.innerWidth),
   );
@@ -74,6 +77,21 @@ const DockPanel = () => {
           onChange={(event) =>
             setDockIconMaxSize(Number(event.target.value))
           }
+        />
+      </div>
+
+      <div className="c-dockPanel__input">
+        <label htmlFor="dock-icon-scale">
+          Icon scale: {dockIconScale.toFixed(1)}x
+        </label>
+        <input
+          id="dock-icon-scale"
+          type="range"
+          min="1"
+          max="2"
+          step="0.1"
+          value={dockIconScale}
+          onChange={(event) => setDockIconScale(Number(event.target.value))}
         />
       </div>
     </section>

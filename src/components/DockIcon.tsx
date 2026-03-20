@@ -8,6 +8,7 @@ import {
 import { useRef } from "react";
 import { Tooltip } from "react-tooltip";
 import { useOpenedWindows } from "../stores/windowStore";
+import { useDockIconScale } from "../stores/settingsStore";
 import type { AppleMenuDropdownItem } from "../types";
 
 type DockIconProps = {
@@ -32,6 +33,7 @@ const DockIcon = ({
   const iconRef = useRef<HTMLImageElement>(null);
   const controls = useAnimationControls();
   const openedWindows = useOpenedWindows();
+  const dockIconScale = useDockIconScale();
 
   const isActive =
     openedWindows.includes(id as AppleMenuDropdownItem) || id === "finder";
@@ -57,7 +59,7 @@ const DockIcon = ({
   const scaleValue = useTransform(
     distanceFromCursor,
     [-200, 0, 200],
-    [1, 1.5, 1],
+    [1, dockIconScale, 1],
   );
 
   const iconScale = useSpring(scaleValue, {
@@ -84,7 +86,11 @@ const DockIcon = ({
 
   const tooltipId = `dock-tooltip-${id}`;
   const tooltipPlace =
-    dockPosition === "bottom" ? "top" : dockPosition === "left" ? "right" : "left";
+    dockPosition === "bottom"
+      ? "top"
+      : dockPosition === "left"
+        ? "right"
+        : "left";
 
   return (
     <>

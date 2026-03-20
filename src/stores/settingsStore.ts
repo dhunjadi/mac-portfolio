@@ -11,6 +11,7 @@ type SettingsActions = {
   setGlassColor: (value: string) => void;
   setDockPosition: (value: DockPosition) => void;
   setDockIconMaxSize: (value: number) => void;
+  setDockIconScale: (value: number) => void;
   setBrightness: (value: number) => void;
 };
 
@@ -21,6 +22,7 @@ type SettingsStore = {
   wallpaper: string;
   dockPosition: DockPosition;
   dockIconMaxSize: number | null;
+  dockIconScale: number;
   brightness: number;
   wallpaperOptions: readonly string[];
   wallpaperPreviews: readonly string[];
@@ -40,6 +42,7 @@ const useSettingsStore = create<SettingsStore>()(
       wallpaper: wallpaperOptions[0],
       dockPosition: "bottom",
       dockIconMaxSize: null,
+      dockIconScale: 1.5,
       brightness: 100,
       wallpaperOptions,
       wallpaperPreviews,
@@ -60,6 +63,9 @@ const useSettingsStore = create<SettingsStore>()(
 
         setDockIconMaxSize: (value) => set(() => ({ dockIconMaxSize: value })),
 
+        setDockIconScale: (value) =>
+          set(() => ({ dockIconScale: Math.max(1, Math.min(2, value)) })),
+
         setBrightness: (value) =>
           set(() => ({ brightness: clampBrightness(value) })),
       },
@@ -73,6 +79,7 @@ const useSettingsStore = create<SettingsStore>()(
         wallpaper: state.wallpaper,
         dockPosition: state.dockPosition,
         dockIconMaxSize: state.dockIconMaxSize,
+        dockIconScale: state.dockIconScale,
         brightness: state.brightness,
       }),
     },
@@ -94,6 +101,9 @@ export const useDockPosition = () =>
 
 export const useDockIconMaxSize = () =>
   useSettingsStore((state) => state.dockIconMaxSize);
+
+export const useDockIconScale = () =>
+  useSettingsStore((state) => state.dockIconScale);
 
 export const useBrightness = () =>
   useSettingsStore((state) => state.brightness);
