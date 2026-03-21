@@ -1,1 +1,0 @@
-import{T as t,j as e}from"./index-D_9A9Di4.js";const r=.65,a=()=>{const s=(1-t()/100)*r;return e.jsx("div",{className:"c-brightnessOverlay","aria-hidden":!0,style:{"--brightness-dim":s.toString()}})};export{a as default};
