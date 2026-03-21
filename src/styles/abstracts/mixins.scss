@@ -104,6 +104,66 @@
   -webkit-backdrop-filter: saturate($saturate) blur($blur);
 }
 
+@mixin thumb-slider {
+  --thumb-size: 1.1rem;
+  --thumb-center-offset: calc(var(--thumb-size) / 2);
+  flex: 1;
+  height: var(--thumb-size);
+  border-radius: 999px;
+  appearance: none;
+  background:
+    linear-gradient(90deg, #fff, #fff) 0 /
+      min(
+        100%,
+        calc(
+          (100% - var(--thumb-size)) *
+            (var(--range-fill, 50) * 0.01) +
+            var(--thumb-center-offset)
+        )
+      )
+      100%
+      no-repeat,
+    rgba(255, 255, 255, 0.22) 0 / 100% 100% no-repeat;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 3px;
+  }
+
+  &::-webkit-slider-runnable-track {
+    height: var(--thumb-size);
+    background: transparent;
+    border-radius: 999px;
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 0;
+  }
+
+  &::-moz-range-track {
+    height: var(--thumb-size);
+    background: transparent;
+    border-radius: 999px;
+  }
+
+  &::-moz-range-thumb {
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
 @mixin menu-bar-control(
   $padding-x: 0.4rem,
   $padding-y: 0.1rem,

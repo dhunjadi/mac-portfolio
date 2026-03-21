@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { colorOptions } from "../data/colorOptions";
 import {
   useBlur,
@@ -63,6 +64,11 @@ const AppearancePanel = () => {
           step="0.01"
           value={glassAlpha}
           onChange={(event) => setGlassAlpha(Number(event.target.value))}
+          style={
+            {
+              "--range-fill": ((glassAlpha - 0.1) / 0.9) * 100,
+            } as CSSProperties
+          }
         />
       </div>
 
@@ -76,6 +82,11 @@ const AppearancePanel = () => {
           step="1"
           value={blurIntensity}
           onChange={(event) => setBlur(Number(event.target.value))}
+          style={
+            {
+              "--range-fill": blurIntensity,
+            } as CSSProperties
+          }
         />
       </div>
 

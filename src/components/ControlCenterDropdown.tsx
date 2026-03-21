@@ -29,7 +29,7 @@ const ControlCenterDropdown = () => {
             }
             style={
               {
-                "--brightness-fill": `${brightness}%`,
+                "--range-fill": brightness,
               } as CSSProperties
             }
           />
