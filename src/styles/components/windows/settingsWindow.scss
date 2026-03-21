@@ -110,7 +110,7 @@
       border-radius: 8px;
 
       &.active {
-        background-color: $color-accent-blue-500;
+        background-color: var(--accent-500, #{$color-accent-blue-500});
       }
     }
 
@@ -182,7 +182,7 @@
 
     input[type="range"] {
       width: 100%;
-      accent-color: $color-accent-blue-500;
+      accent-color: var(--accent-500, #{$color-accent-blue-500});
     }
   }
 }

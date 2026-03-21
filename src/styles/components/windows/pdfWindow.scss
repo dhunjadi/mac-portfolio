@@ -23,14 +23,14 @@
       min-width: 2.25rem;
       font-size: var(--fs-h3);
 
-      background-color: $color-accent-blue-500;
+      background-color: var(--accent-500, #{$color-accent-blue-500});
       color: $color-white;
       border: none;
       border-radius: 99rem;
       cursor: pointer;
 
       &:hover {
-        background-color: $color-accent-blue-600;
+        background-color: var(--accent-600, #{$color-accent-blue-600});
       }
     }
   }

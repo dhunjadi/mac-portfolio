@@ -4,8 +4,10 @@ import { useOpenedWindow, useWindowActions } from "../stores/windowStore";
 import DesktopPdfIcon from "../components/DesktopPdfIcon";
 import {
   useBlur,
+  useAccentColor,
   useGlassAlpha,
   useGlassColor,
+  useHighlightColor,
   useWallpaper,
 } from "../stores/settingsStore";
 import { lazy, useCallback, useEffect, useRef, useState } from "react";
@@ -48,6 +50,25 @@ const hexToRgb = (hexColor: string) => {
   return `${red} ${green} ${blue}`;
 };
 
+const clampChannel = (value: number) => Math.max(0, Math.min(255, value));
+
+const mixHex = (baseHex: string, mixHexValue: string, amount: number) => {
+  const matchBase = /^#([0-9a-fA-F]{6})$/.exec(baseHex);
+  const matchMix = /^#([0-9a-fA-F]{6})$/.exec(mixHexValue);
+  if (!matchBase || !matchMix) return baseHex;
+
+  const base = matchBase[1];
+  const mix = matchMix[1];
+  const channels = [0, 2, 4].map((index) => {
+    const baseValue = parseInt(base.slice(index, index + 2), 16);
+    const mixValue = parseInt(mix.slice(index, index + 2), 16);
+    const blended = Math.round(baseValue + (mixValue - baseValue) * amount);
+    return clampChannel(blended).toString(16).padStart(2, "0");
+  });
+
+  return `#${channels.join("")}`.toUpperCase();
+};
+
 const HomeScreen = () => {
   const isAboutWindowOpen = useOpenedWindow("about");
   const isCalculatorWindowOpen = useOpenedWindow("calculator");
@@ -60,7 +81,9 @@ const HomeScreen = () => {
   const wallpaper = useWallpaper();
   const glassAlpha = useGlassAlpha();
   const blurIntensity = useBlur();
+  const accentColor = useAccentColor();
   const glassColor = useGlassColor();
+  const highlightColor = useHighlightColor();
   const isLoggedIn = useLogin();
   const isShutDown = useShutDown();
   const { closeWindow, openWindow } = useWindowActions();
@@ -135,7 +158,22 @@ const HomeScreen = () => {
       "--glass-rgb",
       hexToRgb(glassColor),
     );
-  }, [blurIntensity, glassAlpha, glassColor]);
+
+    const accent500 = accentColor.toUpperCase();
+    const accent500Hover = mixHex(accent500, "#FFFFFF", 0.08);
+    const accent600 = mixHex(accent500, "#000000", 0.14);
+
+    document.documentElement.style.setProperty("--accent-500", accent500);
+    document.documentElement.style.setProperty(
+      "--accent-500-hover",
+      accent500Hover,
+    );
+    document.documentElement.style.setProperty("--accent-600", accent600);
+    document.documentElement.style.setProperty(
+      "--highlight-rgb",
+      hexToRgb(highlightColor),
+    );
+  }, [blurIntensity, glassAlpha, glassColor, accentColor, highlightColor]);
 
   useEffect(() => {
     if (wallpaper === displayedWallpaper) return;

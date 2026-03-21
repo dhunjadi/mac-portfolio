@@ -1,8 +1,10 @@
 import { colorOptions } from "../data/colorOptions";
 import {
   useBlur,
+  useAccentColor,
   useGlassAlpha,
   useGlassColor,
+  useHighlightColor,
   useSettingsActions,
 } from "../stores/settingsStore";
 
@@ -10,7 +12,15 @@ const AppearancePanel = () => {
   const glassAlpha = useGlassAlpha();
   const blurIntensity = useBlur();
   const glassColor = useGlassColor();
-  const { setGlassAlpha, setBlur, setGlassColor } = useSettingsActions();
+  const accentColor = useAccentColor();
+  const highlightColor = useHighlightColor();
+  const {
+    setGlassAlpha,
+    setBlur,
+    setGlassColor,
+    setAccentColor,
+    setHighlightColor,
+  } = useSettingsActions();
 
   return (
     <section className="c-appearancePanel">
@@ -22,14 +32,14 @@ const AppearancePanel = () => {
       <div className="c-appearancePanel__input">
         <label>Glass color</label>
         <div
-          className="c-appearancePanel__colors"
+          className="c-appearancePanel__input_colors"
           role="radiogroup"
           aria-label="Glass color"
         >
           {colorOptions.map((color) => (
             <button
               key={color}
-              className={`c-appearancePanel__colors_button ${glassColor.toUpperCase() === color ? "active" : ""}`}
+              className={` ${glassColor.toUpperCase() === color ? "active" : ""}`}
               style={{ backgroundColor: color }}
               onClick={() => setGlassColor(color.toLowerCase())}
               type="button"
@@ -67,6 +77,50 @@ const AppearancePanel = () => {
           value={blurIntensity}
           onChange={(event) => setBlur(Number(event.target.value))}
         />
+      </div>
+
+      <div className="c-appearancePanel__input">
+        <label>Accent color</label>
+        <div
+          className="c-appearancePanel__input_colors"
+          role="radiogroup"
+          aria-label="Accent color"
+        >
+          {colorOptions.map((color) => (
+            <button
+              key={`accent-${color}`}
+              className={`${accentColor.toUpperCase() === color ? "active" : ""}`}
+              style={{ backgroundColor: color }}
+              onClick={() => setAccentColor(color.toLowerCase())}
+              type="button"
+              role="radio"
+              aria-checked={accentColor.toUpperCase() === color}
+              aria-label={`Set accent color to ${color}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="c-appearancePanel__input">
+        <label>Highlight color</label>
+        <div
+          className="c-appearancePanel__input_colors"
+          role="radiogroup"
+          aria-label="Highlight color"
+        >
+          {colorOptions.map((color) => (
+            <button
+              key={`highlight-${color}`}
+              className={`${highlightColor.toUpperCase() === color ? "active" : ""}`}
+              style={{ backgroundColor: color }}
+              onClick={() => setHighlightColor(color.toLowerCase())}
+              type="button"
+              role="radio"
+              aria-checked={highlightColor.toUpperCase() === color}
+              aria-label={`Set highlight color to ${color}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

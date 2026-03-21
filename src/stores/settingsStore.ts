@@ -9,6 +9,8 @@ type SettingsActions = {
   setWallpaper: (wallpaper: string) => void;
   setBlur: (value: number) => void;
   setGlassColor: (value: string) => void;
+  setAccentColor: (value: string) => void;
+  setHighlightColor: (value: string) => void;
   setDockPosition: (value: DockPosition) => void;
   setDockIconMaxSize: (value: number) => void;
   setDockIconScale: (value: number) => void;
@@ -19,6 +21,8 @@ type SettingsStore = {
   glassAlpha: number;
   blur: number;
   glassColor: string;
+  accentColor: string;
+  highlightColor: string;
   wallpaper: string;
   dockPosition: DockPosition;
   dockIconMaxSize: number | null;
@@ -39,6 +43,8 @@ const useSettingsStore = create<SettingsStore>()(
       glassAlpha: 0.25,
       blur: 16,
       glassColor: "#000000",
+      accentColor: "#0A84FF",
+      highlightColor: "#0A84FF",
       wallpaper: wallpaperOptions[0],
       dockPosition: "bottom",
       dockIconMaxSize: null,
@@ -55,6 +61,16 @@ const useSettingsStore = create<SettingsStore>()(
         setGlassColor: (value) =>
           set(() => ({
             glassColor: isHexColor(value) ? value : "#000000",
+          })),
+
+        setAccentColor: (value) =>
+          set(() => ({
+            accentColor: isHexColor(value) ? value : "#0A84FF",
+          })),
+
+        setHighlightColor: (value) =>
+          set(() => ({
+            highlightColor: isHexColor(value) ? value : "#0A84FF",
           })),
 
         setWallpaper: (wallpaper) => set(() => ({ wallpaper })),
@@ -76,6 +92,8 @@ const useSettingsStore = create<SettingsStore>()(
         glassAlpha: state.glassAlpha,
         blur: state.blur,
         glassColor: state.glassColor,
+        accentColor: state.accentColor,
+        highlightColor: state.highlightColor,
         wallpaper: state.wallpaper,
         dockPosition: state.dockPosition,
         dockIconMaxSize: state.dockIconMaxSize,
@@ -93,6 +111,12 @@ export const useBlur = () => useSettingsStore((state) => state.blur);
 
 export const useGlassColor = () =>
   useSettingsStore((state) => state.glassColor);
+
+export const useAccentColor = () =>
+  useSettingsStore((state) => state.accentColor);
+
+export const useHighlightColor = () =>
+  useSettingsStore((state) => state.highlightColor);
 
 export const useWallpaper = () => useSettingsStore((state) => state.wallpaper);
 

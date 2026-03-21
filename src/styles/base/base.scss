@@ -12,6 +12,10 @@
   --glass-rgb: 0 0 0;
   --glass-alpha: 0.25;
   --blur-intensity: 16px;
+  --accent-500: #0a7aff;
+  --accent-500-hover: #1a84ff;
+  --accent-600: #0a66da;
+  --highlight-rgb: 10 122 255;
 
   --fs-micro: clamp(10px, 0.7rem, 11px);
   --fs-caption: clamp(11px, 0.8rem, 12px);
@@ -32,6 +36,16 @@
 
 body {
   overflow: hidden;
+}
+
+::selection {
+  background-color: rgb(var(--highlight-rgb, 10 122 255) / 0.35);
+  color: #fff;
+}
+
+::-moz-selection {
+  background-color: rgb(var(--highlight-rgb, 10 122 255) / 0.35);
+  color: #fff;
 }
 
 html {

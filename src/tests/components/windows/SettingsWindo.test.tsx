@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import SettingsWindow from "../../../components/windows/SettingsWindow";
@@ -43,7 +43,10 @@ describe("SettingsWindow", () => {
     const panelTitle = screen.getByText(/appearance/i, { selector: "h2" });
     expect(panelTitle).toBeInTheDocument();
 
-    const colorButtons = screen.getAllByRole("radio");
+    const glassGroup = screen.getByRole("radiogroup", {
+      name: "Glass color",
+    });
+    const colorButtons = within(glassGroup).getAllByRole("radio");
     expect(colorButtons.length === colorOptions.length);
 
     await user.click(colorButtons[1]);

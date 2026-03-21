@@ -107,12 +107,15 @@
       }
 
       &.isPrimary {
-        background-color: $color-accent-blue-500;
+        background-color: var(--accent-500, #{$color-accent-blue-500});
         color: #fff;
         font-weight: 500;
 
         &:hover {
-          background-color: $color-accent-blue-500-hover;
+          background-color: var(
+            --accent-500-hover,
+            #{$color-accent-blue-500-hover}
+          );
         }
       }
     }
