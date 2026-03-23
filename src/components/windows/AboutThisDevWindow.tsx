@@ -1,14 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import WindowWrapper from "../WindowWrapper";
-import { experienceItems } from "../../data/experienceItems";
 import { Accordion, AccordionItem } from "../Accordion";
+import { useTranslation } from "react-i18next";
+import { getExperienceItems } from "../../data/experienceItems";
 
 type AboutThisDevWindowProps = {
   onClose: () => void;
 };
 
 const AboutThisDevWindow = ({ onClose }: AboutThisDevWindowProps) => {
+  const { t } = useTranslation();
+  const experienceItems = getExperienceItems();
+
   return (
     <WindowWrapper
       windowId="about"
@@ -24,16 +28,13 @@ const AboutThisDevWindow = ({ onClose }: AboutThisDevWindowProps) => {
           </div>
           <div className="w-aboutThisDev__header_aboutMe">
             <h2>Dario Hunjadi</h2>
-            <p>Software Engineer</p>
-            <small>
-              Self-taught software engineer with an MBA. Experienced in building
-              web and mobile applications using React and React Native.
-            </small>
+            <p>{t("windows.aboutThisDev.role")}</p>
+            <small>{t("windows.aboutThisDev.summary")}</small>
           </div>
         </div>
 
         <div className="w-aboutThisDev__meta">
-          <span>Zagreb, Croatia</span>
+          <span>{t("windows.aboutThisDev.location")}</span>
           <a
             href="https://github.com/dhunjadi"
             target="_blank"
@@ -45,7 +46,7 @@ const AboutThisDevWindow = ({ onClose }: AboutThisDevWindowProps) => {
 
         <Accordion className="w-aboutThisDev__accordion">
           <AccordionItem
-            title="Experience (Last Three)"
+            title={t("windows.aboutThisDev.experienceTitle")}
             contentClassName="w-aboutThisDev__accordion_content"
           >
             {experienceItems.map((item) => (
@@ -63,30 +64,31 @@ const AboutThisDevWindow = ({ onClose }: AboutThisDevWindowProps) => {
           </AccordionItem>
 
           <AccordionItem
-            title="Skills"
+            title={t("windows.aboutThisDev.skillsTitle")}
             contentClassName="w-aboutThisDev__accordion_content"
           >
-            <p>
-              HTML, CSS, JavaScript, React, React Native, Next.js, TypeScript,
-              Redux, Zustand, TanStack Query
-            </p>
+            <p>{t("windows.aboutThisDev.skillsList")}</p>
           </AccordionItem>
 
           <AccordionItem
-            title="Education & Languages"
+            title={t("windows.aboutThisDev.educationTitle")}
             contentClassName="w-aboutThisDev__accordion_content"
           >
             <p>
-              <strong>Electrical Engineering Technician</strong>
+              <strong>
+                {t("windows.aboutThisDev.education.highSchoolTtitle")}
+              </strong>
               <br />
-              Elektrotehnicka skola Zagreb (2008 - 2012)
+              {t("windows.aboutThisDev.education.highSchoolDescription")}
             </p>
             <p>
-              <strong>MBA</strong>
+              <strong>
+                {t("windows.aboutThisDev.education.universityTitle")}
+              </strong>
               <br />
-              Karlovac University of Applied Sciences (2014 - 2020)
+              {t("windows.aboutThisDev.education.universityDescription")}
             </p>
-            <p>Croatian, English</p>
+            <p>{t("windows.aboutThisDev.languages")}</p>
           </AccordionItem>
         </Accordion>
       </div>

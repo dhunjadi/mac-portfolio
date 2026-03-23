@@ -1,14 +1,14 @@
 {
   "windows": {
     "settings": {
-      "searchPlaceholder": "Pretraži",
+      "searchPlaceholder": "Pretra\u017ei",
       "categories": {
         "appearance": {
           "title": "Izgled",
-          "subtitle": "Prilagodi boje i jačinu efekta stakla.",
+          "subtitle": "Prilagodi boje i ja\u010dinu efekta stakla.",
           "glassColorLabel": "Boja stakla",
           "colorFillLabel": "Ispunjenost boje",
-          "blurLabel": "Zamućenje",
+          "blurLabel": "Zamu\u0107enje",
           "accentColorLabel": "Naglasna boja",
           "highlightColorLabel": "Boja isticanja"
         },
@@ -19,20 +19,68 @@
         "dock": {
           "title": "Dock",
           "subtitle": "Promijeni postavke docka",
-          "positionLabel": "Položaj",
+          "positionLabel": "Polo\u017eaj",
           "positionLeft": "Lijevo",
           "positionBottom": "Dolje",
           "positionRight": "Desno",
-          "iconSizeLabel": "Veličina ikone",
+          "iconSizeLabel": "Veli\u010dina ikone",
           "iconScaleLabel": "Skala ikona"
         },
         "language": {
           "title": "Jezik",
-          "subtitle": "Odaberite željeni jezik",
+          "subtitle": "Odaberi \u017eeljeni jezik",
           "englishLabel": "English",
           "croatianLabel": "Hrvatski"
         }
       }
+    },
+    "aboutThisDev": {
+      "role": "Softverski in\u017eenjer",
+      "summary": "Samouki softverski in\u017eenjer s MBA diplomom. Iskusan u razvoju web i mobilnih aplikacija koriste\u0107i React i React Native.",
+      "location": "Zagreb, Hrvatska",
+      "experienceTitle": "Iskustvo (zadnje tri)",
+      "skillsTitle": "Vje\u0161tine",
+      "educationTitle": "Obrazovanje i jezici",
+      "skillsList": "HTML, CSS, JavaScript, React, React Native, Next.js, TypeScript, Redux, Zustand, TanStack Query",
+      "education": {
+        "highSchoolTitle": "Tehni\u010dar elektrotehnike",
+        "highSchoolDescription": "Elektrotehni\u010dka \u0161kola Zagreb (2008 - 2012)",
+        "universityTitle": "MBA",
+        "universityDescription": "Veleu\u010dili\u0161te u Karlovcu (2014 - 2020)"
+      },
+      "languages": "Hrvatski, Engleski",
+      "experienceItems": [
+        {
+          "title": "Frontend Developer",
+          "company": "The Falcon Technology",
+          "period": "Lis 2023 - danas",
+          "highlights": [
+            "Odr\u017eavanje i a\u017euriranje web stranice tvrtke",
+            "Frontend razvoj na klijentskim projektima",
+            "Next.js, React, React Native, TypeScript, TanStack Query"
+          ]
+        },
+        {
+          "title": "Frontend Developer",
+          "company": "Serapion",
+          "period": "Sij 2023 - Srp 2023",
+          "highlights": [
+            "Implementacija dizajna i funkcionalnosti prvenstveno za Gepek mobilnu aplikaciju",
+            "Svakodnevni sastanci s timom i klijentima",
+            "React Native, TypeScript, Vue.js"
+          ]
+        },
+        {
+          "title": "Web Developer",
+          "company": "Nobula Technologies",
+          "period": "Pro 2021 - Sij 2023",
+          "highlights": [
+            "Frontend i backend razvoj za Nobula Case Creator i Nobula Case Player",
+            "Frontend razvoj Nobula Event platforme",
+            "HTML, SCSS, React, TypeScript, Redux, NestJS, MongoDB"
+          ]
+        }
+      ]
     }
   }
 }
