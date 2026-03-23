@@ -37,8 +37,8 @@ const DockIcon = ({
   const openedWindows = useOpenedWindows();
   const dockIconScale = useDockIconScale();
 
-  const isActive =
-    openedWindows.includes(id as AppleMenuDropdownItem) || id === "finder";
+  const isWindowOpen = openedWindows.includes(id as AppleMenuDropdownItem);
+  const showActiveIndicator = isWindowOpen || id === "finder";
 
   const distanceFromCursor = useTransform(
     dockPosition === "bottom" ? mouseX : mouseY,
@@ -109,10 +109,10 @@ const DockIcon = ({
             userSelect: "none",
           }}
           animate={controls}
-          onClick={isActive ? undefined : handleClick}
+          onClick={isWindowOpen ? undefined : handleClick}
         />
 
-        {isActive && (
+        {showActiveIndicator && (
           <motion.div
             layoutId={`${id}-indicator`}
             className="c-dockIcon__activeIndicator"

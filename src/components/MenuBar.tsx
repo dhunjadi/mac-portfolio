@@ -86,6 +86,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
   }, []);
 
   const menuBarWindowLabels = {
+    finder: t("menuBar.windowLabels.finder"),
     about: t("menuBar.windowLabels.about"),
     calculator: t("menuBar.windowLabels.calculator"),
     pdf: t("menuBar.windowLabels.pdf"),

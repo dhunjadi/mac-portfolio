@@ -88,6 +88,10 @@
       "zoomInLabel": "Zoom in",
       "zoomOutLabel": "Zoom out"
     },
+    "finder": {
+      "favorites": "Favorites",
+      "desktop": "Desktop"
+    },
     "textEditor": {
       "import": "Import",
       "download": "Download",
@@ -127,6 +131,7 @@
     "windowMenuLabel": "{{window}} menu",
     "closeWindow": "Close {{window}}",
     "windowLabels": {
+      "finder": "Finder",
       "about": "About This Dev",
       "calculator": "Calculator",
       "pdf": "PDF",

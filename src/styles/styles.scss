@@ -17,6 +17,7 @@
 @use "./components/shutDownOverlay.scss";
 @use "./components/wallpaperPanel.scss";
 @use "./components/appearancePanel.scss";
+@use "./components/desktopPanel.scss";
 @use "./components/dockPanel.scss";
 @use "./components/languagePanel.scss";
 @use "./components/accordion.scss";
@@ -30,3 +31,4 @@
 @use "./components/windows/pdfWindow.scss";
 @use "./components/windows/weatherWindow.scss";
 @use "./components/windows/textEditorWindow.scss";
+@use "./components/windows/finderWindow.scss";

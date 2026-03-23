@@ -27,6 +27,7 @@ const CalculatorWindow = lazy(
 const SettingsWindow = lazy(
   () => import("../components/windows/SettingsWindow"),
 );
+const FinderWindow = lazy(() => import("../components/windows/FinderWindow"));
 const PdfWindow = lazy(() => import("../components/windows/PdfWindow"));
 const WeatherWindow = lazy(() => import("../components/windows/WeatherWindow"));
 const TextEditorWindow = lazy(
@@ -75,6 +76,7 @@ const HomeScreen = () => {
   const isShutDownModalOpen = useOpenedWindow("shut-down");
   const isRestartModalOpen = useOpenedWindow("restart");
   const isSettingsWindowOpen = useOpenedWindow("settings");
+  const isFinderWindowOpen = useOpenedWindow("finder");
   const isPdfWindowOpen = useOpenedWindow("pdf");
   const isWeatherWindowOpen = useOpenedWindow("weather");
   const isTextEditorWindowOpen = useOpenedWindow("text-editor");
@@ -104,6 +106,10 @@ const HomeScreen = () => {
   );
   const handleCloseSettings = useCallback(
     () => closeWindow("settings"),
+    [closeWindow],
+  );
+  const handleCloseFinder = useCallback(
+    () => closeWindow("finder"),
     [closeWindow],
   );
   const handleClosePdf = useCallback(() => closeWindow("pdf"), [closeWindow]);
@@ -221,6 +227,8 @@ const HomeScreen = () => {
         {isSettingsWindowOpen && (
           <SettingsWindow onClose={handleCloseSettings} />
         )}
+
+        {isFinderWindowOpen && <FinderWindow onClose={handleCloseFinder} />}
 
         {isPdfWindowOpen && <PdfWindow onClose={handleClosePdf} />}
 
