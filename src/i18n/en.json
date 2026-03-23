@@ -100,7 +100,15 @@
       "loading": "Loading…",
       "now": "Now",
       "today": "Today",
-      "daysShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      "daysShort": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
       "forecastTitle": "5-DAY FORECAST",
       "conditionsTitle": "CONDITIONS",
       "humidity": "Humidity",
@@ -112,5 +120,107 @@
       "openSearchLabel": "Open search",
       "closeSearchLabel": "Close search"
     }
+  },
+  "menuBar": {
+    "appleMenuLabel": "Apple menu",
+    "controlCenterLabel": "Control center menu",
+    "windowMenuLabel": "{{window}} menu",
+    "closeWindow": "Close {{window}}",
+    "windowLabels": {
+      "about": "About This Dev",
+      "calculator": "Calculator",
+      "pdf": "PDF",
+      "weather": "Weather",
+      "settings": "Settings",
+      "textEditor": "Text Editor"
+    },
+    "daysShort": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "monthsShort": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ]
+  },
+  "appleMenu": {
+    "ariaLabel": "Apple menu",
+    "items": {
+      "about": "About This Dev",
+      "calculator": "Calculator",
+      "textEditor": "Text Editor",
+      "weather": "Weather",
+      "settings": "Settings",
+      "sleep": "Sleep",
+      "restart": "Restart...",
+      "shutDown": "Shut Down..."
+    }
+  },
+  "controlCenter": {
+    "menuLabel": "Control center menu",
+    "display": "Display",
+    "brightness": "Brightness",
+    "brightnessAlt": "brightness"
+  },
+  "dock": {
+    "finder": "Finder",
+    "about": "About",
+    "calculator": "Calculator",
+    "settings": "Settings",
+    "weather": "Weather",
+    "textEditor": "Text Editor",
+    "iconAlt": "dock icon"
+  },
+  "login": {
+    "passwordPlaceholder": "Enter anything...",
+    "loginAria": "Log in",
+    "power": {
+      "shutDown": "Shut Down",
+      "restart": "Restart",
+      "sleep": "Sleep"
+    },
+    "userAvatarAlt": "avatar",
+    "arrowAlt": "right arrow inside a circle"
+  },
+  "desktopPdf": {
+    "openAria": "Open PDF window",
+    "openTitle": "Double-click or double-tap to open",
+    "fileAlt": "PDF file icon",
+    "fileName": "Resume.pdf"
+  },
+  "shutdownOverlay": {
+    "wakeUp": "Double click/tap anywhere on screen to wake up"
+  },
+  "shutdownModal": {
+    "title": "Are you sure you want to shut down your computer now?",
+    "timer": "If you do nothing, the computer will shut down automatically in {{seconds}} seconds",
+    "cancel": "Cancel",
+    "confirm": "Shut Down",
+    "iconAlt": "power on/off icon"
+  },
+  "restartModal": {
+    "title": "Are you sure you want to restart your computer now?",
+    "timer": "If you do nothing, the computer will restart automatically in {{seconds}} seconds",
+    "cancel": "Cancel",
+    "confirm": "Restart",
+    "iconAlt": "power on/off icon"
+  },
+  "turnOff": {
+    "powerAlt": "power icon"
   }
 }

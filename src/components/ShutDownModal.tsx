@@ -4,8 +4,10 @@ import { Rnd } from "react-rnd";
 import { useWindowActions } from "../stores/windowStore";
 import { usePowerActions } from "../stores/powerStore";
 import { useLoginActions } from "../stores/loginStore";
+import { useTranslation } from "react-i18next";
 
 const ShutDownModal = () => {
+  const { t } = useTranslation();
   const { closeAllWindows, closeWindow } = useWindowActions();
   const { shutDown } = usePowerActions();
   const { logout } = useLoginActions();
@@ -50,19 +52,16 @@ const ShutDownModal = () => {
       <div className="c-shutDownModal">
         <div className="c-shutDownModal__body">
           <div className="c-shutDownModal__body_icon">
-            <img src={shutDownIcon} alt="power on/off icon" />
+            <img src={shutDownIcon} alt={t("shutdownModal.iconAlt")} />
           </div>
 
           <div className="c-shutDownModal__body_text">
             <p>
-              <strong>
-                Are you sure you want to shut down your computer now?
-              </strong>
+              <strong>{t("shutdownModal.title")}</strong>
             </p>
             <p>
               <small>
-                If you do nothing, the computer will shut down automatically in{" "}
-                {remainingTime} seconds
+                {t("shutdownModal.timer", { seconds: remainingTime })}
               </small>
             </p>
           </div>
@@ -72,10 +71,10 @@ const ShutDownModal = () => {
             className="isSecondary"
             onClick={() => closeWindow("shut-down")}
           >
-            Cancel
+            {t("shutdownModal.cancel")}
           </button>
           <button className="isPrimary" onClick={handleShutDown}>
-            Shut Down
+            {t("shutdownModal.confirm")}
           </button>
         </div>
       </div>

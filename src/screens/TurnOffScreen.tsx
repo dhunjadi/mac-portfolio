@@ -3,8 +3,10 @@ import { appRoutes } from "../data/appRoutes";
 import { useRestart, useShutDown, usePowerActions } from "../stores/powerStore";
 import powerIcon from "/icons/power-off.svg";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const TurnOffScreen = () => {
+  const { t } = useTranslation();
   const isShutDown = useShutDown();
   const isRestarting = useRestart();
   const { turnOn, setIsRestarting } = usePowerActions();
@@ -39,7 +41,7 @@ const TurnOffScreen = () => {
           <img
             className="s-turnOff__powerButton_img"
             src={powerIcon}
-            alt="power icon"
+            alt={t("turnOff.powerAlt")}
             onClick={handleTurnOn}
           />
         </button>

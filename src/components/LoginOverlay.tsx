@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import powerOffIcon from "/icons/power-off.svg";
 import restartIcon from "/icons/restart.svg";
 import sleepIcon from "/icons/sleep.svg";
@@ -6,8 +6,10 @@ import arrowRightCircle from "/icons/arrow-right-circle.svg";
 import { useLogin, useLoginActions } from "../stores/loginStore";
 import { usePowerActions } from "../stores/powerStore";
 import avatarPicture from "/avatar.jpg";
+import { useTranslation } from "react-i18next";
 
 const LoginOverlay = () => {
+  const { t } = useTranslation();
   const isLoggedIn = useLogin();
   const { login } = useLoginActions();
   const { shutDown, setIsRestarting, setIsSleeping } = usePowerActions();
@@ -28,18 +30,23 @@ const LoginOverlay = () => {
     }
   };
 
-  const bottomButtons = useMemo(
-    () => [
-      { icon: powerOffIcon, label: "Shut Down", onClick: () => shutDown() },
-      {
-        icon: restartIcon,
-        label: "Restart",
-        onClick: () => setIsRestarting(true),
-      },
-      { icon: sleepIcon, label: "Sleep", onClick: () => setIsSleeping(true) },
-    ],
-    [setIsRestarting, setIsSleeping, shutDown],
-  );
+  const bottomButtons = [
+    {
+      icon: powerOffIcon,
+      label: t("login.power.shutDown"),
+      onClick: () => shutDown(),
+    },
+    {
+      icon: restartIcon,
+      label: t("login.power.restart"),
+      onClick: () => setIsRestarting(true),
+    },
+    {
+      icon: sleepIcon,
+      label: t("login.power.sleep"),
+      onClick: () => setIsSleeping(true),
+    },
+  ];
 
   return (
     <div
@@ -50,7 +57,7 @@ const LoginOverlay = () => {
     >
       <div className="c-loginOverlay__userInfo">
         <div className="c-loginOverlay__userInfo_avatar">
-          <img src={avatarPicture} alt="avatar" />
+          <img src={avatarPicture} alt={t("login.userAvatarAlt")} />
         </div>
 
         <div className="c-loginOverlay__userInfo_name">Dario Hunjadi</div>
@@ -60,7 +67,7 @@ const LoginOverlay = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter anything..."
+            placeholder={t("login.passwordPlaceholder")}
             onKeyDown={(e) => {
               if (e.key === "Enter") handleLogin();
             }}
@@ -72,9 +79,9 @@ const LoginOverlay = () => {
               
              ${password.length === 0 ? "is-hidden" : ""}`}
             onClick={handleLogin}
-            aria-label="Log in"
+            aria-label={t("login.loginAria")}
           >
-            <img src={arrowRightCircle} alt="right arrow inside a circle" />
+            <img src={arrowRightCircle} alt={t("login.arrowAlt")} />
           </button>
         </div>
       </div>

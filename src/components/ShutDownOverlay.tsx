@@ -8,8 +8,10 @@ import {
 import { appRoutes } from "../data/appRoutes";
 import { useCallback, useEffect } from "react";
 import useDoubleActivate from "../hooks/useDoubleActivate";
+import { useTranslation } from "react-i18next";
 
 const ShutDownOverlay = () => {
+  const { t } = useTranslation();
   const isShutDown = useShutDown();
   const isRestarting = useRestart();
   const isSleeping = useSleep();
@@ -40,7 +42,7 @@ const ShutDownOverlay = () => {
       className={`c-shutDownOverlay ${isShutDown || isRestarting || isSleeping ? "" : "hidden"}`}
     >
       {isSleeping ? (
-        <p>Double click/tap anywhere on screen to wake up</p>
+        <p>{t("shutdownOverlay.wakeUp")}</p>
       ) : (
         <></>
       )}

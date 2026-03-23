@@ -1,8 +1,10 @@
 import type { CSSProperties } from "react";
 import brightnessIcon from "/icons/brightness.svg";
 import { useBrightness, useSettingsActions } from "../stores/settingsStore";
+import { useTranslation } from "react-i18next";
 
 const ControlCenterDropdown = () => {
+  const { t } = useTranslation();
   const brightness = useBrightness();
   const { setBrightness } = useSettingsActions();
 
@@ -10,20 +12,22 @@ const ControlCenterDropdown = () => {
     <div
       className="c-controlCenterDropdown"
       role="menu"
-      aria-label="Control center menu"
+      aria-label={t("controlCenter.menuLabel")}
     >
       <div className="c-controlCenterDropdown__section">
-        <span className="c-controlCenterDropdown__section_title">Display</span>
+        <span className="c-controlCenterDropdown__section_title">
+          {t("controlCenter.display")}
+        </span>
         <div className="c-controlCenterDropdown__section_sliderRow">
           <div aria-hidden>
-            <img src={brightnessIcon} alt="brightness" />
+            <img src={brightnessIcon} alt={t("controlCenter.brightnessAlt")} />
           </div>
           <input
             type="range"
             min={0}
             max={100}
             value={brightness}
-            aria-label="Brightness"
+            aria-label={t("controlCenter.brightness")}
             onChange={(event) =>
               setBrightness(Number(event.currentTarget.value))
             }

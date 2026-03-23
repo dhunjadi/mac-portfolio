@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import dayjs from "dayjs";
@@ -9,6 +9,7 @@ import type { AppleMenuDropdownItem } from "../types";
 import { usePowerActions } from "../stores/powerStore";
 import controlCenterIcon from "/icons/control-center.png";
 import ControlCenterDropdown from "./ControlCenterDropdown";
+import { useTranslation } from "react-i18next";
 
 type MenuBarProps = {
   hideAppleLogo?: boolean;
@@ -16,6 +17,7 @@ type MenuBarProps = {
 };
 
 const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
+  const { t } = useTranslation();
   const isLoggedIn = useLogin();
   const { openWindow, closeWindow } = useWindowActions();
   const { setIsSleeping } = usePowerActions();
@@ -83,21 +85,26 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
     };
   }, []);
 
-  const menuBarWindowLabels = useMemo(
-    () => ({
-      about: "About This Dev",
-      calculator: "Calculator",
-      pdf: "PDF",
-      weather: "Weather",
-      settings: "Settings",
-      "text-editor": "Text Editor",
-    }),
-    [],
-  );
+  const menuBarWindowLabels = {
+    about: t("menuBar.windowLabels.about"),
+    calculator: t("menuBar.windowLabels.calculator"),
+    pdf: t("menuBar.windowLabels.pdf"),
+    weather: t("menuBar.windowLabels.weather"),
+    settings: t("menuBar.windowLabels.settings"),
+    "text-editor": t("menuBar.windowLabels.textEditor"),
+  };
 
   const activeWindowLabel = activeWindowId
     ? menuBarWindowLabels[activeWindowId as keyof typeof menuBarWindowLabels]
     : undefined;
+
+  const dayLabels = t("menuBar.daysShort", { returnObjects: true }) as string[];
+  const monthLabels = t("menuBar.monthsShort", {
+    returnObjects: true,
+  }) as string[];
+  const dayLabel = dayLabels[now.day()] ?? "";
+  const monthLabel = monthLabels[now.month()] ?? "";
+  const dateLabel = `${dayLabel} ${now.format("D")} ${monthLabel}`;
 
   const handleAppleMenuSelect = (item: AppleMenuDropdownItem) => {
     if (item === "sleep") {
@@ -118,7 +125,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
             <button
               type="button"
               className={` ${isAppleMenuOpen ? "active" : ""}`}
-              aria-label="Apple menu"
+              aria-label={t("menuBar.appleMenuLabel")}
               aria-expanded={isAppleMenuOpen}
               onClick={() => {
                 setIsWindowMenuOpen(false);
@@ -139,7 +146,9 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
               <button
                 type="button"
                 className={` ${isWindowMenuOpen ? "active" : ""}`}
-                aria-label={`${activeWindowLabel} menu`}
+                aria-label={t("menuBar.windowMenuLabel", {
+                  window: activeWindowLabel,
+                })}
                 aria-expanded={isWindowMenuOpen}
                 onClick={() => {
                   setIsAppleMenuOpen(false);
@@ -151,7 +160,12 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
               </button>
 
               {isWindowMenuOpen && (
-                <div role="menu" aria-label={`${activeWindowLabel} menu`}>
+                <div
+                  role="menu"
+                  aria-label={t("menuBar.windowMenuLabel", {
+                    window: activeWindowLabel,
+                  })}
+                >
                   <button
                     type="button"
                     role="menuitem"
@@ -161,7 +175,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
                       setIsWindowMenuOpen(false);
                     }}
                   >
-                    Close {activeWindowLabel}
+                    {t("menuBar.closeWindow", { window: activeWindowLabel })}
                   </button>
                 </div>
               )}
@@ -174,7 +188,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
           <button
             type="button"
             className={`${iscontrolCenterOpen ? "active" : ""}`}
-            aria-label="Control center menu"
+            aria-label={t("menuBar.controlCenterLabel")}
             aria-expanded={iscontrolCenterOpen}
             onClick={() => {
               setIsAppleMenuOpen(false);
@@ -188,7 +202,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
         </div>
         <strong className="c-menuBar__date">
           <span className="c-menuBar__date_dayMonth">
-            {now.format("ddd D MMM")}
+            {dateLabel}
           </span>
           <span className="c-menuBar__dateTime">{now.format("HH:mm")}</span>
         </strong>

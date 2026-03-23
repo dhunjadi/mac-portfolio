@@ -4,8 +4,10 @@ import { Rnd } from "react-rnd";
 import { useWindowActions } from "../stores/windowStore";
 import { usePowerActions } from "../stores/powerStore";
 import { useLoginActions } from "../stores/loginStore";
+import { useTranslation } from "react-i18next";
 
 const RestartModal = () => {
+  const { t } = useTranslation();
   const { closeAllWindows, closeWindow } = useWindowActions();
   const { setIsRestarting } = usePowerActions();
   const { logout } = useLoginActions();
@@ -53,19 +55,16 @@ const RestartModal = () => {
       <div className="c-restartModal">
         <div className="c-restartModal__body">
           <div className="c-restartModal__body_icon">
-            <img src={restartIcon} alt="power on/off icon" />
+            <img src={restartIcon} alt={t("restartModal.iconAlt")} />
           </div>
 
           <div className="c-restartModal__body_text">
             <p>
-              <strong>
-                Are you sure you want to restart your computer now?
-              </strong>
+              <strong>{t("restartModal.title")}</strong>
             </p>
             <p>
               <small>
-                If you do nothing, the computer will restart automatically in{" "}
-                {remainingTime} seconds
+                {t("restartModal.timer", { seconds: remainingTime })}
               </small>
             </p>
           </div>
@@ -75,10 +74,10 @@ const RestartModal = () => {
             className="isSecondary"
             onClick={() => closeWindow("restart")}
           >
-            Cancel
+            {t("restartModal.cancel")}
           </button>
           <button className="isPrimary" onClick={handleRestart}>
-            Restart
+            {t("restartModal.confirm")}
           </button>
         </div>
       </div>

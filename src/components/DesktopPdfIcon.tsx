@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Rnd } from "react-rnd";
 import resumePreview from "/resume-preview.jpg";
+import { useTranslation } from "react-i18next";
 
 type DesktopPdfIconProps = {
   onOpen: () => void;
@@ -10,6 +11,7 @@ const TAP_MOVE_THRESHOLD = 8;
 const DOUBLE_TAP_DELAY = 300;
 
 const DesktopPdfIcon = ({ onOpen }: DesktopPdfIconProps) => {
+  const { t } = useTranslation();
   const [isSelected, setIsSelected] = useState(false);
   const iconRef = useRef<HTMLDivElement | null>(null);
   const pointerStartRef = useRef<{ x: number; y: number; time: number } | null>(
@@ -76,11 +78,11 @@ const DesktopPdfIcon = ({ onOpen }: DesktopPdfIconProps) => {
               onOpen();
             }
           }}
-          aria-label="Open PDF window"
-          title="Double-click or double-tap to open"
+          aria-label={t("desktopPdf.openAria")}
+          title={t("desktopPdf.openTitle")}
         >
-          <img src={resumePreview} alt="PDF file icon" />
-          <span>Resume.pdf</span>
+          <img src={resumePreview} alt={t("desktopPdf.fileAlt")} />
+          <span>{t("desktopPdf.fileName")}</span>
         </button>
       </div>
     </Rnd>

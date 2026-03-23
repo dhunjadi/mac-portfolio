@@ -112,5 +112,99 @@
       "openSearchLabel": "Otvori pretragu",
       "closeSearchLabel": "Zatvori pretragu"
     }
+  },
+  "menuBar": {
+    "appleMenuLabel": "Apple izbornik",
+    "controlCenterLabel": "Centar kontrole",
+    "windowMenuLabel": "{{window}} izbornik",
+    "closeWindow": "Zatvori {{window}}",
+    "windowLabels": {
+      "about": "O developeru",
+      "calculator": "Kalkulator",
+      "pdf": "PDF",
+      "weather": "Vrijeme",
+      "settings": "Postavke",
+      "textEditor": "Uređivač teksta"
+    },
+    "daysShort": ["Ned", "Pon", "Uto", "Sri", "Čet", "Pet", "Sub"],
+    "monthsShort": [
+      "Sij",
+      "Vel",
+      "Ožu",
+      "Tra",
+      "Svi",
+      "Lip",
+      "Srp",
+      "Kol",
+      "Ruj",
+      "Lis",
+      "Stu",
+      "Pro"
+    ]
+  },
+  "appleMenu": {
+    "ariaLabel": "Apple izbornik",
+    "items": {
+      "about": "O developeru",
+      "calculator": "Kalkulator",
+      "textEditor": "Uređivač teksta",
+      "weather": "Vrijeme",
+      "settings": "Postavke",
+      "sleep": "Spavanje",
+      "restart": "Ponovno pokreni...",
+      "shutDown": "Isključi..."
+    }
+  },
+  "controlCenter": {
+    "menuLabel": "Centar kontrole",
+    "display": "Zaslon",
+    "brightness": "Svjetlina",
+    "brightnessAlt": "svjetlina"
+  },
+  "dock": {
+    "finder": "Finder",
+    "about": "O developeru",
+    "calculator": "Kalkulator",
+    "settings": "Postavke",
+    "weather": "Vrijeme",
+    "textEditor": "Uređivač teksta",
+    "iconAlt": "ikona docka"
+  },
+  "login": {
+    "passwordPlaceholder": "Unesi bilo što...",
+    "loginAria": "Prijava",
+    "power": {
+      "shutDown": "Isključi",
+      "restart": "Ponovno pokreni",
+      "sleep": "Spavanje"
+    },
+    "userAvatarAlt": "avatar",
+    "arrowAlt": "strelica u krugu"
+  },
+  "desktopPdf": {
+    "openAria": "Otvori PDF prozor",
+    "openTitle": "Dvoklik ili dvostruki dodir za otvaranje",
+    "fileAlt": "Ikona PDF datoteke",
+    "fileName": "Resume.pdf"
+  },
+  "shutdownOverlay": {
+    "wakeUp": "Dvoklik/dvostruki dodir bilo gdje na zaslonu za buđenje"
+  },
+  "shutdownModal": {
+    "title": "Jeste li sigurni da želite isključiti računalo sada?",
+    "timer": "Ako ništa ne učinite, računalo će se automatski isključiti za {{seconds}} sekundi",
+    "cancel": "Odustani",
+    "confirm": "Isključi",
+    "iconAlt": "ikona napajanja"
+  },
+  "restartModal": {
+    "title": "Jeste li sigurni da želite ponovno pokrenuti računalo sada?",
+    "timer": "Ako ništa ne učinite, računalo će se automatski ponovno pokrenuti za {{seconds}} sekundi",
+    "cancel": "Odustani",
+    "confirm": "Ponovno pokreni",
+    "iconAlt": "ikona napajanja"
+  },
+  "turnOff": {
+    "powerAlt": "ikona napajanja"
   }
 }

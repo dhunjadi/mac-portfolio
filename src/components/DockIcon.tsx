@@ -10,6 +10,7 @@ import { Tooltip } from "react-tooltip";
 import { useOpenedWindows } from "../stores/windowStore";
 import { useDockIconScale } from "../stores/settingsStore";
 import type { AppleMenuDropdownItem } from "../types";
+import { useTranslation } from "react-i18next";
 
 type DockIconProps = {
   icon: string;
@@ -30,6 +31,7 @@ const DockIcon = ({
   onClick,
   tooltipLabel,
 }: DockIconProps) => {
+  const { t } = useTranslation();
   const iconRef = useRef<HTMLImageElement>(null);
   const controls = useAnimationControls();
   const openedWindows = useOpenedWindows();
@@ -98,7 +100,7 @@ const DockIcon = ({
         <motion.img
           ref={iconRef}
           src={icon}
-          alt={tooltipLabel ?? "dock icon"}
+          alt={tooltipLabel || t("dock.iconAlt")}
           draggable={false}
           data-tooltip-id={tooltipId}
           data-tooltip-content={tooltipLabel}

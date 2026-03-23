@@ -14,12 +14,14 @@ import {
   getDockIconSizeLimits,
 } from "../utils/dockSizing";
 import type { AppleMenuDropdownItem } from "../types";
+import { useTranslation } from "react-i18next";
 
 type DockProps = {
   ref?: React.Ref<HTMLUListElement>;
 };
 
 const Dock = ({ ref }: DockProps) => {
+  const { t } = useTranslation();
   const isLoggedIn = useLogin();
   const { openWindow } = useWindowActions();
 
@@ -52,6 +54,25 @@ const Dock = ({ ref }: DockProps) => {
 
   const handleIconClick = (iconId: string) => {
     openWindow(iconId as AppleMenuDropdownItem);
+  };
+
+  const getTooltipLabel = (id: DockIconType["id"]) => {
+    switch (id) {
+      case "finder":
+        return t("dock.finder");
+      case "about":
+        return t("dock.about");
+      case "calculator":
+        return t("dock.calculator");
+      case "settings":
+        return t("dock.settings");
+      case "weather":
+        return t("dock.weather");
+      case "text-editor":
+        return t("dock.textEditor");
+      default:
+        return t("dock.iconAlt");
+    }
   };
 
   const dockStyle = {
@@ -100,7 +121,7 @@ const Dock = ({ ref }: DockProps) => {
             mouseY={mouseY}
             dockPosition={dockPosition}
             icon={icon.icon}
-            tooltipLabel={icon.tooltipLabel}
+            tooltipLabel={getTooltipLabel(icon.id)}
             onClick={() => handleIconClick(icon.id)}
           />
         </Reorder.Item>
