@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import WindowWrapper from "../WindowWrapper";
+import { useTranslation } from "react-i18next";
 
 type TextEditorWindowProps = {
   onClose: () => void;
@@ -9,6 +10,7 @@ const SAMPLE_FILE_NAME = "sample.txt";
 const SAMPLE_FILE_PATH = `${import.meta.env.BASE_URL}${SAMPLE_FILE_NAME}`;
 
 const TextEditorWindow = ({ onClose }: TextEditorWindowProps) => {
+  const { t } = useTranslation();
   const [content, setContent] = useState("");
   const [fileName, setFileName] = useState(SAMPLE_FILE_NAME);
   const [isLoading, setIsLoading] = useState(true);
@@ -85,7 +87,7 @@ const TextEditorWindow = ({ onClose }: TextEditorWindowProps) => {
             onClick={handleImportClick}
             disabled={isLoading}
           >
-            Import
+            {t("windows.textEditor.import")}
           </button>
           <button
             className="w-textEditor__toolbar_button w-textEditor__toolbar_button--primary"
@@ -93,19 +95,18 @@ const TextEditorWindow = ({ onClose }: TextEditorWindowProps) => {
             onClick={handleDownload}
             disabled={isLoading}
           >
-            Download
+            {t("windows.textEditor.download")}
           </button>
         </div>
 
         <div className="w-textEditor__content">
           {isLoading ? (
             <p className="w-textEditor__content_placeholder">
-              Loading sample text...
+              {t("windows.textEditor.loading")}
             </p>
           ) : hasLoadError ? (
             <p className="w-textEditor__content_placeholder">
-              Unable to load the sample file. You can still type below and
-              download your edits.
+              {t("windows.textEditor.error")}
             </p>
           ) : null}
 
@@ -113,7 +114,7 @@ const TextEditorWindow = ({ onClose }: TextEditorWindowProps) => {
             className="w-textEditor__content_textarea"
             value={content}
             onChange={(event) => setContent(event.target.value)}
-            aria-label="Text editor"
+            aria-label={t("windows.textEditor.editorLabel")}
           />
           <input
             ref={fileInputRef}

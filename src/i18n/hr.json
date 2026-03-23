@@ -1,14 +1,14 @@
 {
   "windows": {
     "settings": {
-      "searchPlaceholder": "Pretra\u017ei",
+      "searchPlaceholder": "Pretraži",
       "categories": {
         "appearance": {
           "title": "Izgled",
-          "subtitle": "Prilagodi boje i ja\u010dinu efekta stakla.",
+          "subtitle": "Prilagodi boje i jačinu efekta stakla.",
           "glassColorLabel": "Boja stakla",
           "colorFillLabel": "Ispunjenost boje",
-          "blurLabel": "Zamu\u0107enje",
+          "blurLabel": "Zamućenje",
           "accentColorLabel": "Naglasna boja",
           "highlightColorLabel": "Boja isticanja"
         },
@@ -19,27 +19,27 @@
         "dock": {
           "title": "Dock",
           "subtitle": "Promijeni postavke docka",
-          "positionLabel": "Polo\u017eaj",
+          "positionLabel": "Položaj",
           "positionLeft": "Lijevo",
           "positionBottom": "Dolje",
           "positionRight": "Desno",
-          "iconSizeLabel": "Veli\u010dina ikone",
+          "iconSizeLabel": "Veličina ikone",
           "iconScaleLabel": "Skala ikona"
         },
         "language": {
           "title": "Jezik",
-          "subtitle": "Odaberi \u017eeljeni jezik",
+          "subtitle": "Odaberi željeni jezik",
           "englishLabel": "English",
           "croatianLabel": "Hrvatski"
         }
       }
     },
     "aboutThisDev": {
-      "role": "Softverski in\u017eenjer",
-      "summary": "Samouki softverski in\u017eenjer s MBA diplomom. Iskusan u razvoju web i mobilnih aplikacija koriste\u0107i React i React Native.",
+      "role": "Softverski inženjer",
+      "summary": "Samouki softverski inženjer s MBA diplomom. Iskusan u razvoju web i mobilnih aplikacija koristeći React i React Native.",
       "location": "Zagreb, Hrvatska",
       "experienceTitle": "Iskustvo (zadnje tri)",
-      "skillsTitle": "Vje\u0161tine",
+      "skillsTitle": "Vještine",
       "educationTitle": "Obrazovanje i jezici",
       "skillsList": "HTML, CSS, JavaScript, React, React Native, Next.js, TypeScript, Redux, Zustand, TanStack Query",
       "education": {
@@ -55,7 +55,7 @@
           "company": "The Falcon Technology",
           "period": "Lis 2023 - danas",
           "highlights": [
-            "Odr\u017eavanje i a\u017euriranje web stranice tvrtke",
+            "Održavanje i ažuriranje web stranice tvrtke",
             "Frontend razvoj na klijentskim projektima",
             "Next.js, React, React Native, TypeScript, TanStack Query"
           ]
@@ -81,6 +81,36 @@
           ]
         }
       ]
+    },
+    "pdf": {
+      "loading": "Učitavanje pregleda PDF-a...",
+      "error": "Greška pri učitavanju PDF-a",
+      "zoomInLabel": "Uvećaj",
+      "zoomOutLabel": "Smanji"
+    },
+    "textEditor": {
+      "import": "Uvezi",
+      "download": "Preuzmi",
+      "loading": "Učitavanje uzorka teksta...",
+      "error": "Nije moguće učitati datoteku. I dalje možete pisati ispod i preuzeti izmijenjenu datoteku.",
+      "editorLabel": "Uređivač teksta"
+    },
+    "weather": {
+      "searchPlaceholder": "Pretraži grad…",
+      "loading": "Učitavanje…",
+      "now": "Sada",
+      "today": "Danas",
+      "daysShort": ["Ned", "Pon", "Uto", "Sri", "Čet", "Pet", "Sub"],
+      "forecastTitle": "PROGNOZA ZA 5 DANA",
+      "conditionsTitle": "UVJETI",
+      "humidity": "Vlažnost",
+      "wind": "Vjetar",
+      "cloudCover": "Naoblaka",
+      "highLabel": "V",
+      "lowLabel": "N",
+      "windUnit": "km/h",
+      "openSearchLabel": "Otvori pretragu",
+      "closeSearchLabel": "Zatvori pretragu"
     }
   }
 }

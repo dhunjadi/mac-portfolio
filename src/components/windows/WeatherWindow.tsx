@@ -11,6 +11,7 @@ import type {
   ForecastResponse,
 } from "../../types";
 import { useDebounce } from "../../hooks/useDebounce";
+import { useTranslation } from "react-i18next";
 
 function iconToEmoji(icon: string): string {
   const map: Record<string, string> = {
@@ -43,49 +44,12 @@ const formatHour = (dtTxt: string): string => {
   return `${date.getHours()}:00`;
 };
 
-const getDayLabel = (dtTxt: string, index: number): string => {
-  if (index === 0) return "Today";
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  return days[new Date(dtTxt.replace(" ", "T")).getDay()];
-};
-
-const buildDailyForecast = (list: ForecastItem[]) => {
-  const days: Record<
-    string,
-    { min: number; max: number; dayIcons: string[]; label: string }
-  > = {};
-  let dayIndex = 0;
-
-  list.forEach((item) => {
-    const dateKey = item.dt_txt.split(" ")[0];
-    if (!days[dateKey]) {
-      days[dateKey] = {
-        min: item.main.temp_min,
-        max: item.main.temp_max,
-        dayIcons: [],
-        label: getDayLabel(item.dt_txt, dayIndex++),
-      };
-    }
-    days[dateKey].min = Math.min(days[dateKey].min, item.main.temp_min);
-    days[dateKey].max = Math.max(days[dateKey].max, item.main.temp_max);
-    if (item.sys.pod === "d") {
-      days[dateKey].dayIcons.push(item.weather[0].icon);
-    }
-  });
-
-  return Object.values(days).map((d) => ({
-    label: d.label,
-    low: Math.round(d.min),
-    high: Math.round(d.max),
-    icon: iconToEmoji(d.dayIcons[Math.floor(d.dayIcons.length / 2)] ?? "01d"),
-  }));
-};
-
 type WeatherWindowProps = {
   onClose: () => void;
 };
 
 const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
+  const { t } = useTranslation();
   const [searchInput, setSearchInput] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -122,19 +86,63 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
   const windSpeed = current ? Math.round(current.wind.speed * 3.6) : null;
   const cloudiness = current?.clouds.all ?? null;
 
+  const dayLabels = t("windows.weather.daysShort", {
+    returnObjects: true,
+  }) as string[];
+  const todayLabel = t("windows.weather.today");
+  const nowLabel = t("windows.weather.now");
+
+  const getDayLabel = (dtTxt: string, index: number): string => {
+    if (index === 0) return todayLabel;
+    const dayIndex = new Date(dtTxt.replace(" ", "T")).getDay();
+    return dayLabels[dayIndex] ?? dayLabels[0] ?? "";
+  };
+
+  const buildDailyForecast = (list: ForecastItem[]) => {
+    const days: Record<
+      string,
+      { min: number; max: number; dayIcons: string[]; label: string }
+    > = {};
+    let dayIndex = 0;
+
+    list.forEach((item) => {
+      const dateKey = item.dt_txt.split(" ")[0];
+      if (!days[dateKey]) {
+        days[dateKey] = {
+          min: item.main.temp_min,
+          max: item.main.temp_max,
+          dayIcons: [],
+          label: getDayLabel(item.dt_txt, dayIndex++),
+        };
+      }
+      days[dateKey].min = Math.min(days[dateKey].min, item.main.temp_min);
+      days[dateKey].max = Math.max(days[dateKey].max, item.main.temp_max);
+      if (item.sys.pod === "d") {
+        days[dateKey].dayIcons.push(item.weather[0].icon);
+      }
+    });
+
+    return Object.values(days).map((d) => ({
+      label: d.label,
+      low: Math.round(d.min),
+      high: Math.round(d.max),
+      icon: iconToEmoji(d.dayIcons[Math.floor(d.dayIcons.length / 2)] ?? "01d"),
+    }));
+  };
+
   const hourlyItems = useMemo(
     () =>
       (forecast?.list ?? []).slice(0, 8).map((item, i) => ({
-        time: i === 0 ? "Now" : formatHour(item.dt_txt),
+        time: i === 0 ? nowLabel : formatHour(item.dt_txt),
         icon: iconToEmoji(item.weather[0].icon),
         temp: Math.round(item.main.temp),
       })),
-    [forecast],
+    [forecast, nowLabel],
   );
 
   const dailyItems = useMemo(
     () => (forecast ? buildDailyForecast(forecast.list) : []),
-    [forecast],
+    [forecast, dayLabels, todayLabel],
   );
   const globalMin = useMemo(
     () => (dailyItems.length ? Math.min(...dailyItems.map((d) => d.low)) : 0),
@@ -173,6 +181,11 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
           <button
             className="w-weather__search_toggle"
             onClick={handleSearchToggle}
+            aria-label={
+              isSearchOpen
+                ? t("windows.weather.closeSearchLabel")
+                : t("windows.weather.openSearchLabel")
+            }
           >
             {isSearchOpen ? "✕" : "🔍"}
           </button>
@@ -181,7 +194,7 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
             ref={inputRef}
             className="w-weather__search_input"
             type="text"
-            placeholder="Search city…"
+            placeholder={t("windows.weather.searchPlaceholder")}
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleEscape}
@@ -190,7 +203,7 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
 
         {isLoading ? (
           <div className="w-weather__loading">
-            <span>Loading…</span>
+            <span>{t("windows.weather.loading")}</span>
           </div>
         ) : (
           <>
@@ -199,7 +212,8 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
               <p className="w-weather__hero_temperature">{temp}°</p>
               <p className="w-weather__hero_condition">{condition}</p>
               <p className="w-weather__hero_highLowTemp">
-                H:{tempMax}°&nbsp;&nbsp;L:{tempMin}°
+                {t("windows.weather.highLabel")}:{tempMax}°&nbsp;&nbsp;
+                {t("windows.weather.lowLabel")}:{tempMin}°
               </p>
             </div>
 
@@ -221,7 +235,7 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
                   <div className="w-weather__panels_panel w-weather__panels_panel--forecast">
                     <header>
                       <span>📅</span>
-                      <span>5-DAY FORECAST</span>
+                      <span>{t("windows.weather.forecastTitle")}</span>
                     </header>
                     <hr />
                     {dailyItems.map((d, i) => {
@@ -252,25 +266,27 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
                   <div className="w-weather__panels_panel w-weather__panels_panel--conditions">
                     <header>
                       <span>🌡️</span>
-                      <span>CONDITIONS</span>
+                      <span>{t("windows.weather.conditionsTitle")}</span>
                     </header>
                     <hr />
                     <div>
                       {humidity !== null && (
                         <div>
-                          <span>💧 Humidity</span>
+                          <span>💧 {t("windows.weather.humidity")}</span>
                           <span>{humidity}%</span>
                         </div>
                       )}
                       {windSpeed !== null && (
                         <div>
-                          <span>💨 Wind</span>
-                          <span>{windSpeed} km/h</span>
+                          <span>💨 {t("windows.weather.wind")}</span>
+                          <span>
+                            {windSpeed} {t("windows.weather.windUnit")}
+                          </span>
                         </div>
                       )}
                       {cloudiness !== null && (
                         <div>
-                          <span>☁️ Cloud cover</span>
+                          <span>☁️ {t("windows.weather.cloudCover")}</span>
                           <span>{cloudiness}%</span>
                         </div>
                       )}

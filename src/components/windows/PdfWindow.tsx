@@ -3,6 +3,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import WindowWrapper from "../WindowWrapper";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
+import { useTranslation } from "react-i18next";
 
 type PdfWindowProps = {
   onClose: () => void;
@@ -16,6 +17,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 const PdfWindow = ({ onClose }: PdfWindowProps) => {
+  const { t } = useTranslation();
   const [numPages, setNumPages] = useState<number | null>(null);
   const [hasLoadError, setHasLoadError] = useState(false);
   const [scale, setScale] = useState(1);
@@ -33,7 +35,9 @@ const PdfWindow = ({ onClose }: PdfWindowProps) => {
       <div className="w-pdfWindow">
         <div className="w-pdfWindow__viewer">
           {hasLoadError ? (
-            <p className="w-pdfWindow__placeholder">Error loading PDF</p>
+            <p className="w-pdfWindow__placeholder">
+              {t("windows.pdf.error")}
+            </p>
           ) : (
             <Document
               file={PDF_FILE_PATH}
@@ -43,7 +47,7 @@ const PdfWindow = ({ onClose }: PdfWindowProps) => {
               onLoadError={() => setHasLoadError(true)}
               loading={
                 <p className="w-pdfWindow__placeholder">
-                  Loading PDF preview...
+                  {t("windows.pdf.loading")}
                 </p>
               }
             >
@@ -62,12 +66,14 @@ const PdfWindow = ({ onClose }: PdfWindowProps) => {
           <button
             className="w-pdfWindow__buttons_button"
             onClick={handleZoomIn}
+            aria-label={t("windows.pdf.zoomInLabel")}
           >
             +
           </button>
           <button
             className="w-pdfWindow__buttons_button"
             onClick={handleZoomOut}
+            aria-label={t("windows.pdf.zoomOutLabel")}
           >
             &#8722;
           </button>

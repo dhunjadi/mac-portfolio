@@ -81,6 +81,36 @@
           ]
         }
       ]
+    },
+    "pdf": {
+      "loading": "Loading PDF preview...",
+      "error": "Error loading PDF",
+      "zoomInLabel": "Zoom in",
+      "zoomOutLabel": "Zoom out"
+    },
+    "textEditor": {
+      "import": "Import",
+      "download": "Download",
+      "loading": "Loading sample text...",
+      "error": "Unable to load the sample file. You can still type below and download your edits.",
+      "editorLabel": "Text editor"
+    },
+    "weather": {
+      "searchPlaceholder": "Search city…",
+      "loading": "Loading…",
+      "now": "Now",
+      "today": "Today",
+      "daysShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      "forecastTitle": "5-DAY FORECAST",
+      "conditionsTitle": "CONDITIONS",
+      "humidity": "Humidity",
+      "wind": "Wind",
+      "cloudCover": "Cloud cover",
+      "highLabel": "H",
+      "lowLabel": "L",
+      "windUnit": "km/h",
+      "openSearchLabel": "Open search",
+      "closeSearchLabel": "Close search"
     }
   }
 }
