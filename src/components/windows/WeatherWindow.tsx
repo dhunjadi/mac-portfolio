@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useMemo, useState, useRef } from "react";
+import { useMemo, useState, useRef, useCallback } from "react";
 import {
   getCurrentWeatherByCity,
   getForecastByCity,
@@ -92,43 +92,52 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
   const todayLabel = t("windows.weather.today");
   const nowLabel = t("windows.weather.now");
 
-  const getDayLabel = (dtTxt: string, index: number): string => {
-    if (index === 0) return todayLabel;
-    const dayIndex = new Date(dtTxt.replace(" ", "T")).getDay();
-    return dayLabels[dayIndex] ?? dayLabels[0] ?? "";
-  };
+  const getDayLabel = useCallback(
+    (dtTxt: string, index: number): string => {
+      if (index === 0) return todayLabel;
+      const dayIndex = new Date(dtTxt.replace(" ", "T")).getDay();
+      return dayLabels[dayIndex] ?? dayLabels[0] ?? "";
+    },
+    [dayLabels, todayLabel],
+  );
 
-  const buildDailyForecast = (list: ForecastItem[]) => {
-    const days: Record<
-      string,
-      { min: number; max: number; dayIcons: string[]; label: string }
-    > = {};
-    let dayIndex = 0;
+  const buildDailyForecast = useCallback(
+    (list: ForecastItem[]) => {
+      const days: Record<
+        string,
+        { min: number; max: number; dayIcons: string[]; label: string }
+      > = {};
+      let dayIndex = 0;
 
-    list.forEach((item) => {
-      const dateKey = item.dt_txt.split(" ")[0];
-      if (!days[dateKey]) {
-        days[dateKey] = {
-          min: item.main.temp_min,
-          max: item.main.temp_max,
-          dayIcons: [],
-          label: getDayLabel(item.dt_txt, dayIndex++),
-        };
-      }
-      days[dateKey].min = Math.min(days[dateKey].min, item.main.temp_min);
-      days[dateKey].max = Math.max(days[dateKey].max, item.main.temp_max);
-      if (item.sys.pod === "d") {
-        days[dateKey].dayIcons.push(item.weather[0].icon);
-      }
-    });
+      list.forEach((item) => {
+        const dateKey = item.dt_txt.split(" ")[0];
+        if (!days[dateKey]) {
+          days[dateKey] = {
+            min: item.main.temp_min,
+            max: item.main.temp_max,
+            dayIcons: [],
+            label: getDayLabel(item.dt_txt, dayIndex++),
+          };
+        }
+        days[dateKey].min = Math.min(days[dateKey].min, item.main.temp_min);
+        days[dateKey].max = Math.max(days[dateKey].max, item.main.temp_max);
 
-    return Object.values(days).map((d) => ({
-      label: d.label,
-      low: Math.round(d.min),
-      high: Math.round(d.max),
-      icon: iconToEmoji(d.dayIcons[Math.floor(d.dayIcons.length / 2)] ?? "01d"),
-    }));
-  };
+        if (item.sys.pod === "d") {
+          days[dateKey].dayIcons.push(item.weather[0].icon);
+        }
+      });
+
+      return Object.values(days).map((d) => ({
+        label: d.label,
+        low: Math.round(d.min),
+        high: Math.round(d.max),
+        icon: iconToEmoji(
+          d.dayIcons[Math.floor(d.dayIcons.length / 2)] ?? "01d",
+        ),
+      }));
+    },
+    [getDayLabel],
+  );
 
   const hourlyItems = useMemo(
     () =>
@@ -142,7 +151,7 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
 
   const dailyItems = useMemo(
     () => (forecast ? buildDailyForecast(forecast.list) : []),
-    [forecast, dayLabels, todayLabel],
+    [forecast, buildDailyForecast],
   );
   const globalMin = useMemo(
     () => (dailyItems.length ? Math.min(...dailyItems.map((d) => d.low)) : 0),
