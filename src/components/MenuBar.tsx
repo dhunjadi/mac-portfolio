@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faApple } from "@fortawesome/free-brands-svg-icons";
+import { faApple } from "@fortawesome/free-brands-svg-icons/faApple";
 import dayjs from "dayjs";
 import { useLogin } from "../stores/loginStore";
 import { useActiveWindowId, useWindowActions } from "../stores/windowStore";

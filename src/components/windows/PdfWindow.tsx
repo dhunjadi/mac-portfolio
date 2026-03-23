@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import WindowWrapper from "../WindowWrapper";
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -11,16 +11,18 @@ type PdfWindowProps = {
 
 const PDF_FILE_PATH = `${import.meta.env.BASE_URL}resume.pdf`;
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url,
-).toString();
-
 const PdfWindow = ({ onClose }: PdfWindowProps) => {
   const { t } = useTranslation();
   const [numPages, setNumPages] = useState<number | null>(null);
   const [hasLoadError, setHasLoadError] = useState(false);
   const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+      "pdfjs-dist/build/pdf.worker.min.mjs",
+      import.meta.url,
+    ).toString();
+  }, []);
 
   const handleZoomIn = () => {
     setScale((prev) => Math.min(prev + 0.1, 2));

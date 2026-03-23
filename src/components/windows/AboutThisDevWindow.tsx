@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faApple } from "@fortawesome/free-brands-svg-icons";
+import { faApple } from "@fortawesome/free-brands-svg-icons/faApple";
 import WindowWrapper from "../WindowWrapper";
 import { Accordion, AccordionItem } from "../Accordion";
 import { useTranslation } from "react-i18next";

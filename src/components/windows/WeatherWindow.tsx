@@ -1,5 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import { useMemo, useState, useRef, useCallback } from "react";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+import { useMemo, useState, useRef } from "react";
 import {
   getCurrentWeatherByCity,
   getForecastByCity,
@@ -7,7 +11,6 @@ import {
 import WindowWrapper from "../WindowWrapper";
 import type {
   CurrentWeather,
-  ForecastItem,
   ForecastResponse,
 } from "../../types";
 import { useDebounce } from "../../hooks/useDebounce";
@@ -48,7 +51,9 @@ type WeatherWindowProps = {
   onClose: () => void;
 };
 
-const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
+const weatherQueryClient = new QueryClient();
+
+const WeatherWindowContent = ({ onClose }: WeatherWindowProps) => {
   const { t } = useTranslation();
   const [searchInput, setSearchInput] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -92,75 +97,64 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
   const todayLabel = t("windows.weather.today");
   const nowLabel = t("windows.weather.now");
 
-  const getDayLabel = useCallback(
-    (dtTxt: string, index: number): string => {
-      if (index === 0) return todayLabel;
-      const dayIndex = new Date(dtTxt.replace(" ", "T")).getDay();
-      return dayLabels[dayIndex] ?? dayLabels[0] ?? "";
-    },
-    [dayLabels, todayLabel],
-  );
+  const { hourlyItems, dailyItems, globalMin, globalMax } = useMemo(() => {
+    const list = forecast?.list ?? [];
 
-  const buildDailyForecast = useCallback(
-    (list: ForecastItem[]) => {
-      const days: Record<
-        string,
-        { min: number; max: number; dayIcons: string[]; label: string }
-      > = {};
-      let dayIndex = 0;
+    const nextHourlyItems = list.slice(0, 8).map((item, i) => ({
+      time: i === 0 ? nowLabel : formatHour(item.dt_txt),
+      icon: iconToEmoji(item.weather[0].icon),
+      temp: Math.round(item.main.temp),
+    }));
 
-      list.forEach((item) => {
-        const dateKey = item.dt_txt.split(" ")[0];
-        if (!days[dateKey]) {
-          days[dateKey] = {
-            min: item.main.temp_min,
-            max: item.main.temp_max,
-            dayIcons: [],
-            label: getDayLabel(item.dt_txt, dayIndex++),
-          };
-        }
-        days[dateKey].min = Math.min(days[dateKey].min, item.main.temp_min);
-        days[dateKey].max = Math.max(days[dateKey].max, item.main.temp_max);
+    const days: Record<
+      string,
+      { min: number; max: number; dayIcons: string[]; label: string }
+    > = {};
+    let dayIndex = 0;
 
-        if (item.sys.pod === "d") {
-          days[dateKey].dayIcons.push(item.weather[0].icon);
-        }
-      });
+    list.forEach((item) => {
+      const dateKey = item.dt_txt.split(" ")[0];
+      if (!days[dateKey]) {
+        const label =
+          dayIndex === 0
+            ? todayLabel
+            : (dayLabels[new Date(item.dt_txt.replace(" ", "T")).getDay()] ??
+              dayLabels[0] ??
+              "");
+        days[dateKey] = {
+          min: item.main.temp_min,
+          max: item.main.temp_max,
+          dayIcons: [],
+          label,
+        };
+        dayIndex += 1;
+      }
 
-      return Object.values(days).map((d) => ({
-        label: d.label,
-        low: Math.round(d.min),
-        high: Math.round(d.max),
-        icon: iconToEmoji(
-          d.dayIcons[Math.floor(d.dayIcons.length / 2)] ?? "01d",
-        ),
-      }));
-    },
-    [getDayLabel],
-  );
+      days[dateKey].min = Math.min(days[dateKey].min, item.main.temp_min);
+      days[dateKey].max = Math.max(days[dateKey].max, item.main.temp_max);
 
-  const hourlyItems = useMemo(
-    () =>
-      (forecast?.list ?? []).slice(0, 8).map((item, i) => ({
-        time: i === 0 ? nowLabel : formatHour(item.dt_txt),
-        icon: iconToEmoji(item.weather[0].icon),
-        temp: Math.round(item.main.temp),
-      })),
-    [forecast, nowLabel],
-  );
+      if (item.sys.pod === "d") {
+        days[dateKey].dayIcons.push(item.weather[0].icon);
+      }
+    });
 
-  const dailyItems = useMemo(
-    () => (forecast ? buildDailyForecast(forecast.list) : []),
-    [forecast, buildDailyForecast],
-  );
-  const globalMin = useMemo(
-    () => (dailyItems.length ? Math.min(...dailyItems.map((d) => d.low)) : 0),
-    [dailyItems],
-  );
-  const globalMax = useMemo(
-    () => (dailyItems.length ? Math.max(...dailyItems.map((d) => d.high)) : 1),
-    [dailyItems],
-  );
+    const nextDailyItems = Object.values(days).map((d) => ({
+      label: d.label,
+      low: Math.round(d.min),
+      high: Math.round(d.max),
+      icon: iconToEmoji(d.dayIcons[Math.floor(d.dayIcons.length / 2)] ?? "01d"),
+    }));
+
+    const lows = nextDailyItems.map((d) => d.low);
+    const highs = nextDailyItems.map((d) => d.high);
+
+    return {
+      hourlyItems: nextHourlyItems,
+      dailyItems: nextDailyItems,
+      globalMin: lows.length ? Math.min(...lows) : 0,
+      globalMax: highs.length ? Math.max(...highs) : 1,
+    };
+  }, [forecast, nowLabel, todayLabel, dayLabels]);
 
   const handleSearchToggle = () => {
     setIsSearchOpen((prev) => {
@@ -310,5 +304,11 @@ const WeatherWindow = ({ onClose }: WeatherWindowProps) => {
     </WindowWrapper>
   );
 };
+
+const WeatherWindow = ({ onClose }: WeatherWindowProps) => (
+  <QueryClientProvider client={weatherQueryClient}>
+    <WeatherWindowContent onClose={onClose} />
+  </QueryClientProvider>
+);
 
 export default WeatherWindow;

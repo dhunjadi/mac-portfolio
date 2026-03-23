@@ -176,7 +176,7 @@
     "iconAlt": "ikona docka"
   },
   "login": {
-    "passwordPlaceholder": "Unesi bilo što...",
+    "passwordPlaceholder": "Unesite bilo što...",
     "loginAria": "Prijava",
     "power": {
       "shutDown": "Isključi",
