@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { colorOptions } from "../data/colorOptions";
+import { useTranslation } from "react-i18next";
 import {
   useBlur,
   useAccentColor,
@@ -10,6 +11,20 @@ import {
 } from "../stores/settingsStore";
 
 const AppearancePanel = () => {
+  const { t } = useTranslation();
+  const glassColorLabel = t(
+    "windows.settings.categories.appearance.glassColorLabel",
+  );
+  const colorFillLabel = t(
+    "windows.settings.categories.appearance.colorFillLabel",
+  );
+  const blurLabel = t("windows.settings.categories.appearance.blurLabel");
+  const accentColorLabel = t(
+    "windows.settings.categories.appearance.accentColorLabel",
+  );
+  const highlightColorLabel = t(
+    "windows.settings.categories.appearance.highlightColorLabel",
+  );
   const glassAlpha = useGlassAlpha();
   const blurIntensity = useBlur();
   const glassColor = useGlassColor();
@@ -25,17 +40,19 @@ const AppearancePanel = () => {
 
   return (
     <section className="c-appearancePanel">
-      <h2 className="c-appearancePanel__title">Appearance</h2>
+      <h2 className="c-appearancePanel__title">
+        {t("windows.settings.categories.appearance.title")}
+      </h2>
       <p className="c-appearancePanel__subTitle">
-        Adjust the color and how strong the glass effect looks.
+        {t("windows.settings.categories.appearance.subtitle")}
       </p>
 
       <div className="c-appearancePanel__input">
-        <label>Glass color</label>
+        <label>{glassColorLabel}</label>
         <div
           className="c-appearancePanel__input_colors"
           role="radiogroup"
-          aria-label="Glass color"
+          aria-label={glassColorLabel}
         >
           {colorOptions.map((color) => (
             <button
@@ -46,7 +63,7 @@ const AppearancePanel = () => {
               type="button"
               role="radio"
               aria-checked={glassColor.toUpperCase() === color}
-              aria-label={`Set glass color to ${color}`}
+              aria-label={`${glassColorLabel}: ${color}`}
             />
           ))}
         </div>
@@ -54,7 +71,7 @@ const AppearancePanel = () => {
 
       <div className="c-appearancePanel__input">
         <label htmlFor="glass-transparency">
-          Color fill: {Math.round(glassAlpha * 100)}%
+          {`${colorFillLabel}: ${Math.round(glassAlpha * 100)}%`}
         </label>
         <input
           id="glass-transparency"
@@ -73,7 +90,7 @@ const AppearancePanel = () => {
       </div>
 
       <div className="c-appearancePanel__input">
-        <label htmlFor="blur">Blur: {Math.round(blurIntensity)}</label>
+        <label htmlFor="blur">{`${blurLabel}: ${Math.round(blurIntensity)}`}</label>
         <input
           id="blur"
           type="range"
@@ -91,11 +108,11 @@ const AppearancePanel = () => {
       </div>
 
       <div className="c-appearancePanel__input">
-        <label>Accent color</label>
+        <label>{accentColorLabel}</label>
         <div
           className="c-appearancePanel__input_colors"
           role="radiogroup"
-          aria-label="Accent color"
+          aria-label={accentColorLabel}
         >
           {colorOptions.map((color) => (
             <button
@@ -106,18 +123,18 @@ const AppearancePanel = () => {
               type="button"
               role="radio"
               aria-checked={accentColor.toUpperCase() === color}
-              aria-label={`Set accent color to ${color}`}
+              aria-label={`${accentColorLabel}: ${color}`}
             />
           ))}
         </div>
       </div>
 
       <div className="c-appearancePanel__input">
-        <label>Highlight color</label>
+        <label>{highlightColorLabel}</label>
         <div
           className="c-appearancePanel__input_colors"
           role="radiogroup"
-          aria-label="Highlight color"
+          aria-label={highlightColorLabel}
         >
           {colorOptions.map((color) => (
             <button
@@ -128,7 +145,7 @@ const AppearancePanel = () => {
               type="button"
               role="radio"
               aria-checked={highlightColor.toUpperCase() === color}
-              aria-label={`Set highlight color to ${color}`}
+              aria-label={`${highlightColorLabel}: ${color}`}
             />
           ))}
         </div>

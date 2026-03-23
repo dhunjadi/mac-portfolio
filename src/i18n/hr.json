@@ -1,0 +1,38 @@
+{
+  "windows": {
+    "settings": {
+      "searchPlaceholder": "Pretraži",
+      "categories": {
+        "appearance": {
+          "title": "Izgled",
+          "subtitle": "Prilagodi boje i jačinu efekta stakla.",
+          "glassColorLabel": "Boja stakla",
+          "colorFillLabel": "Ispunjenost boje",
+          "blurLabel": "Zamućenje",
+          "accentColorLabel": "Naglasna boja",
+          "highlightColorLabel": "Boja isticanja"
+        },
+        "wallpaper": {
+          "title": "Pozadina",
+          "subtitle": "Odaberi pozadinsku sliku"
+        },
+        "dock": {
+          "title": "Dock",
+          "subtitle": "Promijeni postavke docka",
+          "positionLabel": "Položaj",
+          "positionLeft": "Lijevo",
+          "positionBottom": "Dolje",
+          "positionRight": "Desno",
+          "iconSizeLabel": "Veličina ikone",
+          "iconScaleLabel": "Skala ikona"
+        },
+        "language": {
+          "title": "Jezik",
+          "subtitle": "Odaberite željeni jezik",
+          "englishLabel": "English",
+          "croatianLabel": "Hrvatski"
+        }
+      }
+    }
+  }
+}

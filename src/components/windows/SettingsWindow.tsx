@@ -4,13 +4,16 @@ import { settingsCategories } from "../../data/settingsCategories";
 import AppearancePanel from "../AppearancePanel";
 import WallpaperPanel from "../WallpaperPanel";
 import DockPanel from "../DockPanel";
+import LanguagePanel from "../LanguagePanel";
 import avatarPicture from "/avatar.jpg";
+import { useTranslation } from "react-i18next";
 
 type SettingsWindowProps = {
   onClose: () => void;
 };
 
 const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
+  const { t } = useTranslation();
   const [searchText, setSearchText] = useState("");
   const [selectedCategoryId, setSelectedCategoryId] = useState(
     settingsCategories[0]?.id ?? "",
@@ -20,6 +23,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
     if (categoryId === "appearance") return <AppearancePanel />;
     if (categoryId === "wallpaper") return <WallpaperPanel />;
     if (categoryId === "dock") return <DockPanel />;
+    if (categoryId === "language") return <LanguagePanel />;
     return <></>;
   };
 
@@ -32,7 +36,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
               type="text"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              placeholder="Search"
+              placeholder={t("windows.settings.searchPlaceholder")}
             />
           </div>
 
@@ -54,7 +58,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
               >
                 <li>
                   <img src={item.icon} alt="item icon" />
-                  {item.label}
+                  {t(item.labelKey)}
                 </li>
               </button>
             ))}

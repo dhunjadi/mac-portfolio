@@ -1,0 +1,38 @@
+{
+  "windows": {
+    "settings": {
+      "searchPlaceholder": "Search",
+      "categories": {
+        "appearance": {
+          "title": "Appearance",
+          "subtitle": "Adjust the colors and how strong the glass effect looks.",
+          "glassColorLabel": "Glass color",
+          "colorFillLabel": "Color fill",
+          "blurLabel": "Blur",
+          "accentColorLabel": "Accent color",
+          "highlightColorLabel": "Highlight color"
+        },
+        "wallpaper": {
+          "title": "Wallpaper",
+          "subtitle": "Choose a background image"
+        },
+        "dock": {
+          "title": "Dock",
+          "subtitle": "Change dock settings",
+          "positionLabel": "Position",
+          "positionLeft": "Left",
+          "positionBottom": "Bottom",
+          "positionRight": "Right",
+          "iconSizeLabel": "Icon size",
+          "iconScaleLabel": "Icon scale"
+        },
+        "language": {
+          "title": "Language",
+          "subtitle": "Choose your preferred language",
+          "englishLabel": "English",
+          "croatianLabel": "Hrvatski"
+        }
+      }
+    }
+  }
+}

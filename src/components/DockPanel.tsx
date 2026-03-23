@@ -9,8 +9,10 @@ import {
   clampDockIconSize,
   getDockIconSizeLimits,
 } from "../utils/dockSizing";
+import { useTranslation } from "react-i18next";
 
 const DockPanel = () => {
+  const { t } = useTranslation();
   const dockPosition = useDockPosition();
   const dockIconMaxSize = useDockIconMaxSize();
   const dockIconScale = useDockIconScale();
@@ -45,11 +47,17 @@ const DockPanel = () => {
 
   return (
     <section className="c-dockPanel">
-      <h2 className="c-dockPanel__title">Dock</h2>
-      <p className="c-dockPanel__subTitle">Change dock settings</p>
+      <h2 className="c-dockPanel__title">
+        {t("windows.settings.categories.dock.title")}
+      </h2>
+      <p className="c-dockPanel__subTitle">
+        {t("windows.settings.categories.dock.subtitle")}
+      </p>
 
       <div className="c-dockPanel__input">
-        <label htmlFor="dock-position">Position</label>
+        <label htmlFor="dock-position">
+          {t("windows.settings.categories.dock.positionLabel")}
+        </label>
         <select
           id="dock-position"
           value={dockPosition}
@@ -57,15 +65,23 @@ const DockPanel = () => {
             setDockPosition(event.target.value as "left" | "bottom" | "right")
           }
         >
-          <option value="left">Left</option>
-          <option value="bottom">Bottom</option>
-          <option value="right">Right</option>
+          <option value="left">
+            {t("windows.settings.categories.dock.positionLeft")}
+          </option>
+          <option value="bottom">
+            {t("windows.settings.categories.dock.positionBottom")}
+          </option>
+          <option value="right">
+            {t("windows.settings.categories.dock.positionRight")}
+          </option>
         </select>
       </div>
 
       <div className="c-dockPanel__input">
         <label htmlFor="dock-icon-size">
-          Icon size: {Math.round(sliderValue)}px
+          {`${t("windows.settings.categories.dock.iconSizeLabel")}: ${Math.round(
+            sliderValue,
+          )}px`}
         </label>
         <input
           id="dock-icon-size"
@@ -82,7 +98,7 @@ const DockPanel = () => {
 
       <div className="c-dockPanel__input">
         <label htmlFor="dock-icon-scale">
-          Icon scale: {dockIconScale.toFixed(1)}x
+          {`${t("windows.settings.categories.dock.iconScaleLabel")}: ${dockIconScale.toFixed(1)}x`}
         </label>
         <input
           id="dock-icon-scale"

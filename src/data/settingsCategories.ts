@@ -1,9 +1,27 @@
 import appearanceIcon from "/icons/appearance-icon.svg";
 import wallpaperIcon from "/icons/wallpaper-icon.svg";
 import dockIcon from "/icons/dock.svg";
+import globeIcon from "/icons/globe.svg";
 
 export const settingsCategories = [
-  { id: "appearance", label: "Appearance", icon: appearanceIcon },
-  { id: "wallpaper", label: "Wallpaper", icon: wallpaperIcon },
-  { id: "dock", label: "Dock", icon: dockIcon },
+  {
+    id: "appearance",
+    labelKey: "windows.settings.categories.appearance.title",
+    icon: appearanceIcon,
+  },
+  {
+    id: "wallpaper",
+    labelKey: "windows.settings.categories.wallpaper.title",
+    icon: wallpaperIcon,
+  },
+  {
+    id: "dock",
+    labelKey: "windows.settings.categories.dock.title",
+    icon: dockIcon,
+  },
+  {
+    id: "language",
+    labelKey: "windows.settings.categories.language.title",
+    icon: globeIcon,
+  },
 ];
