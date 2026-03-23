@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import SettingsWindow from "../../../components/windows/SettingsWindow";
 import { settingsCategories } from "../../../data/settingsCategories";
 import { colorOptions } from "../../../data/colorOptions";
+import i18n from "../../../i18n";
 
 describe("SettingsWindow", () => {
   const mockOnClose = vi.fn();
@@ -44,7 +45,7 @@ describe("SettingsWindow", () => {
     expect(panelTitle).toBeInTheDocument();
 
     const glassGroup = screen.getByRole("radiogroup", {
-      name: "Glass color",
+      name: i18n.t("windows.settings.categories.appearance.glassColorLabel"),
     });
     const colorButtons = within(glassGroup).getAllByRole("radio");
     expect(colorButtons.length === colorOptions.length);

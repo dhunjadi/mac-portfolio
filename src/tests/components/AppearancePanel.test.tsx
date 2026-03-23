@@ -2,6 +2,7 @@ import { render, screen, fireEvent, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import AppearancePanel from "../../components/AppearancePanel";
 import { colorOptions } from "../../data/colorOptions";
+import i18n from "../../i18n";
 
 const mockSetGlassAlpha = vi.fn();
 const mockSetBlur = vi.fn();
@@ -29,11 +30,14 @@ describe("AppearancePanel", () => {
     render(<AppearancePanel />);
 
     const firstColor = colorOptions[0];
+    const glassLabel = i18n.t(
+      "windows.settings.categories.appearance.glassColorLabel",
+    );
     const glassGroup = screen.getByRole("radiogroup", {
-      name: "Glass color",
+      name: glassLabel,
     });
     const button = within(glassGroup).getByRole("radio", {
-      name: `Set glass color to ${firstColor}`,
+      name: `${glassLabel}: ${firstColor}`,
     });
 
     fireEvent.click(button);
@@ -44,11 +48,14 @@ describe("AppearancePanel", () => {
     render(<AppearancePanel />);
 
     const firstColor = colorOptions[2];
+    const accentLabel = i18n.t(
+      "windows.settings.categories.appearance.accentColorLabel",
+    );
     const accentGroup = screen.getByRole("radiogroup", {
-      name: "Accent color",
+      name: accentLabel,
     });
     const button = within(accentGroup).getByRole("radio", {
-      name: `Set accent color to ${firstColor}`,
+      name: `${accentLabel}: ${firstColor}`,
     });
 
     fireEvent.click(button);
@@ -59,11 +66,14 @@ describe("AppearancePanel", () => {
     render(<AppearancePanel />);
 
     const firstColor = colorOptions[1];
+    const highlightLabel = i18n.t(
+      "windows.settings.categories.appearance.highlightColorLabel",
+    );
     const highlightGroup = screen.getByRole("radiogroup", {
-      name: "Highlight color",
+      name: highlightLabel,
     });
     const button = within(highlightGroup).getByRole("radio", {
-      name: `Set highlight color to ${firstColor}`,
+      name: `${highlightLabel}: ${firstColor}`,
     });
 
     fireEvent.click(button);

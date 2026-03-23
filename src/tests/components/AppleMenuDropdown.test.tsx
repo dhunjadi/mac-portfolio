@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import AppleMenuDropdown from "../../components/AppleMenuDropdown";
+import i18n from "../../i18n";
 
 describe("AppleMenuDropdown", () => {
   it("renders menu items and separators", () => {
@@ -17,7 +18,9 @@ describe("AppleMenuDropdown", () => {
     const onSelect = vi.fn();
     render(<AppleMenuDropdown onSelect={onSelect} />);
 
-    await user.click(screen.getByRole("menuitem", { name: "Restart..." }));
+    await user.click(
+      screen.getByRole("menuitem", { name: i18n.t("appleMenu.items.restart") }),
+    );
     expect(onSelect).toHaveBeenCalledWith("restart");
   });
 });

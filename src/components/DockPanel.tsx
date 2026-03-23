@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import {
   useDockIconMaxSize,
   useDockIconScale,
   useDockPosition,
   useSettingsActions,
 } from "../stores/settingsStore";
-import {
-  clampDockIconSize,
-  getDockIconSizeLimits,
-} from "../utils/dockSizing";
+import { clampDockIconSize, getDockIconSizeLimits } from "../utils/dockSizing";
 import { useTranslation } from "react-i18next";
 
 const DockPanel = () => {
@@ -90,8 +87,14 @@ const DockPanel = () => {
           max={sizeLimits.max}
           step="1"
           value={sliderValue}
-          onChange={(event) =>
-            setDockIconMaxSize(Number(event.target.value))
+          onChange={(event) => setDockIconMaxSize(Number(event.target.value))}
+          style={
+            {
+              "--range-fill":
+                ((sliderValue - sizeLimits.min) /
+                  (sizeLimits.max - sizeLimits.min)) *
+                100,
+            } as CSSProperties
           }
         />
       </div>
@@ -108,6 +111,11 @@ const DockPanel = () => {
           step="0.1"
           value={dockIconScale}
           onChange={(event) => setDockIconScale(Number(event.target.value))}
+          style={
+            {
+              "--range-fill": ((dockIconScale - 1) / (2 - 1)) * 100,
+            } as CSSProperties
+          }
         />
       </div>
     </section>

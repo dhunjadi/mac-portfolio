@@ -25,8 +25,8 @@
       width: fit-content;
 
       button {
-        width: 0.8rem;
-        height: 0.8rem;
+        width: clamp(12px, 0.8rem, 18px);
+        height: clamp(12px, 0.8rem, 18px);
         border-radius: 50%;
         border: 2px solid rgb(255 255 255 / 45%);
         cursor: pointer;

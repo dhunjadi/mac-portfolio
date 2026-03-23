@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 import type { ReactNode } from "react";
 import DesktopPdfIcon from "../../components/DesktopPdfIcon";
+import i18n from "../../i18n";
 
 const mockOnOpen = vi.fn();
 
@@ -29,7 +30,9 @@ describe("DesktopPdfIcon", () => {
   it("selects the icon on tap", () => {
     render(<DesktopPdfIcon onOpen={mockOnOpen} />);
 
-    const button = screen.getByRole("button", { name: "Open PDF window" });
+    const button = screen.getByRole("button", {
+      name: i18n.t("desktopPdf.openAria"),
+    });
 
     fireEvent.pointerDown(button, { clientX: 10, clientY: 10 });
     fireEvent.pointerUp(button, { clientX: 10, clientY: 10 });
@@ -41,7 +44,9 @@ describe("DesktopPdfIcon", () => {
   it("opens the PDF on double tap", () => {
     render(<DesktopPdfIcon onOpen={mockOnOpen} />);
 
-    const button = screen.getByRole("button", { name: "Open PDF window" });
+    const button = screen.getByRole("button", {
+      name: i18n.t("desktopPdf.openAria"),
+    });
 
     fireEvent.pointerDown(button, { clientX: 10, clientY: 10 });
     fireEvent.pointerUp(button, { clientX: 10, clientY: 10 });
