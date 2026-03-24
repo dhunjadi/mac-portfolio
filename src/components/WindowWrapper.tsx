@@ -213,6 +213,7 @@ const WindowWrapper = ({
       }}
     >
       <section
+        // eslint-disable-next-line max-len
         className={`c-windowWrapper ${className} ${isClosing ? "closed" : ""} ${isMaximized ? "maximized" : ""} ${isFocused ? "focused" : "unfocused"} ${isMinimizing || isMinimized ? "minimizing" : ""} ${isRestoring ? "restoring" : ""}`}
         style={minimizeStyle}
       >
