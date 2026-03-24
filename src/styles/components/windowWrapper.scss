@@ -1,5 +1,6 @@
 @use "../abstracts/mixins" as *;
 @use "../abstracts/variables" as *;
+@use "../base/animations" as *;
 
 .c-windowWrapper {
   width: fit-content;
@@ -19,6 +20,21 @@
   &.closed {
     opacity: 0;
     transform: translateY(10rem) scale(0.5);
+  }
+
+  &.minimizing {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(
+        var(--minimize-translate-x, 0),
+        var(--minimize-translate-y, 42vh)
+      )
+      scale(0.2);
+    transform-origin: center center;
+  }
+
+  &.restoring {
+    animation: window-restore 0.3s ease-out;
   }
 
   &.maximized {

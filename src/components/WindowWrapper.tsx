@@ -1,8 +1,15 @@
-import { useState, useRef, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import { Rnd } from "react-rnd";
 import type { AppleMenuDropdownItem } from "../types";
 import {
   useActiveWindowId,
+  useIsWindowMinimized,
   useWindowActions,
   useWindowZIndex,
 } from "../stores/windowStore";
@@ -45,19 +52,56 @@ const WindowWrapper = ({
   const [isClosing, setIsClosing] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const { focusWindow } = useWindowActions();
+  const [isMinimizing, setIsMinimizing] = useState(false);
+  const [isRestoring, setIsRestoring] = useState(false);
+  const { focusWindow, minimizeWindow } = useWindowActions();
   const zIndex = useWindowZIndex(windowId);
   const activeWindowId = useActiveWindowId();
+  const isMinimized = useIsWindowMinimized(windowId);
   const isFocused = activeWindowId === windowId;
   const dockPosition = useDockPosition();
 
   const rndRef = useRef<Rnd | null>(null);
   const savedBounds = useRef<Bounds>(DEFAULT_BOUNDS);
   const currentBounds = useRef<Bounds>(DEFAULT_BOUNDS);
+  const minimizeTimerRef = useRef<number | null>(null);
+  const restoreTimerRef = useRef<number | null>(null);
+  const wasMinimizedRef = useRef(isMinimized);
+
+  useEffect(() => {
+    return () => {
+      if (minimizeTimerRef.current)
+        window.clearTimeout(minimizeTimerRef.current);
+      if (restoreTimerRef.current) window.clearTimeout(restoreTimerRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (wasMinimizedRef.current && !isMinimized) {
+      // Intentional UI transition state when restoring from Dock.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsRestoring(true);
+      restoreTimerRef.current = window.setTimeout(() => {
+        setIsRestoring(false);
+        restoreTimerRef.current = null;
+      }, 260);
+    }
+    wasMinimizedRef.current = isMinimized;
+  }, [isMinimized]);
 
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => onClose(), 500);
+  };
+
+  const handleMinimize = () => {
+    if (disableMinimize || isMinimizing) return;
+    setIsMinimizing(true);
+    minimizeTimerRef.current = window.setTimeout(() => {
+      minimizeWindow(windowId);
+      setIsMinimizing(false);
+      minimizeTimerRef.current = null;
+    }, 240);
   };
 
   const handleMaximize = () => {
@@ -117,6 +161,25 @@ const WindowWrapper = ({
     onActivate: handleMaximize,
   });
 
+  const minimizeStyle: CSSProperties & {
+    "--minimize-translate-x": string;
+    "--minimize-translate-y": string;
+  } =
+    dockPosition === "left"
+      ? {
+          "--minimize-translate-x": "-45vw",
+          "--minimize-translate-y": "20vh",
+        }
+      : dockPosition === "right"
+        ? {
+            "--minimize-translate-x": "45vw",
+            "--minimize-translate-y": "20vh",
+          }
+        : {
+            "--minimize-translate-x": "0",
+            "--minimize-translate-y": "42vh",
+          };
+
   return (
     <Rnd
       ref={rndRef}
@@ -150,8 +213,8 @@ const WindowWrapper = ({
       }}
     >
       <section
-        // eslint-disable-next-line max-len
-        className={`c-windowWrapper ${className} ${isClosing ? "closed" : ""} ${isMaximized ? "maximized" : ""} ${isFocused ? "focused" : "unfocused"}`}
+        className={`c-windowWrapper ${className} ${isClosing ? "closed" : ""} ${isMaximized ? "maximized" : ""} ${isFocused ? "focused" : "unfocused"} ${isMinimizing || isMinimized ? "minimizing" : ""} ${isRestoring ? "restoring" : ""}`}
+        style={minimizeStyle}
       >
         <div
           className="c-windowWrapper__titleBar"
@@ -163,7 +226,7 @@ const WindowWrapper = ({
             <button
               className="--minimize"
               disabled={disableMinimize}
-              onClick={handleClose}
+              onClick={handleMinimize}
             />
             <button
               className="--maximize"

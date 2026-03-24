@@ -71,6 +71,11 @@ const DockIcon = ({
   });
 
   const handleClick = async () => {
+    if (isWindowOpen) {
+      onClick();
+      return;
+    }
+
     const bounceDistance =
       dockPosition === "left" ? 30 : dockPosition === "right" ? -30 : -30;
 
@@ -109,7 +114,7 @@ const DockIcon = ({
             userSelect: "none",
           }}
           animate={controls}
-          onClick={isWindowOpen ? undefined : handleClick}
+          onClick={handleClick}
         />
 
         {showActiveIndicator && (

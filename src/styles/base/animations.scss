@@ -17,3 +17,18 @@
     width: 100%;
   }
 }
+
+@keyframes window-restore {
+  from {
+    opacity: 0;
+    transform: translate(
+        var(--minimize-translate-x, 0),
+        var(--minimize-translate-y, 42vh)
+      )
+      scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

@@ -4,6 +4,7 @@ import type { AppleMenuDropdownItem } from "../types";
 type WindowActions = {
   openWindow: (id: AppleMenuDropdownItem) => void;
   closeWindow: (id: AppleMenuDropdownItem) => void;
+  minimizeWindow: (id: AppleMenuDropdownItem) => void;
   closeAllWindows: () => void;
   focusWindow: (id: AppleMenuDropdownItem) => void;
   isWindowOpen: (id: AppleMenuDropdownItem) => boolean;
@@ -11,6 +12,7 @@ type WindowActions = {
 
 type WindowStore = {
   openedWindowsIds: AppleMenuDropdownItem[];
+  minimizedWindowsIds: AppleMenuDropdownItem[];
   windowOrder: AppleMenuDropdownItem[];
   activeWindowId: AppleMenuDropdownItem | null;
   actions: WindowActions;
@@ -26,6 +28,7 @@ const moveToFront = (
 
 const useWindowStore = create<WindowStore>((set, get) => ({
   openedWindowsIds: [],
+  minimizedWindowsIds: [],
   windowOrder: [],
   activeWindowId: null,
 
@@ -35,6 +38,9 @@ const useWindowStore = create<WindowStore>((set, get) => ({
         openedWindowsIds: state.openedWindowsIds.includes(id)
           ? state.openedWindowsIds
           : [...state.openedWindowsIds, id],
+        minimizedWindowsIds: state.minimizedWindowsIds.filter(
+          (windowId) => windowId !== id,
+        ),
         windowOrder: state.windowOrder.includes(id)
           ? moveToFront(state.windowOrder, id)
           : [...state.windowOrder, id],
@@ -55,14 +61,30 @@ const useWindowStore = create<WindowStore>((set, get) => ({
           openedWindowsIds: state.openedWindowsIds.filter(
             (windowId) => windowId !== id,
           ),
+          minimizedWindowsIds: state.minimizedWindowsIds.filter(
+            (windowId) => windowId !== id,
+          ),
           windowOrder: nextOrder,
           activeWindowId: nextActive,
+        };
+      }),
+
+    minimizeWindow: (id) =>
+      set((state) => {
+        if (!state.openedWindowsIds.includes(id)) return state;
+        if (state.minimizedWindowsIds.includes(id)) return state;
+        const nextOrder = state.windowOrder.filter((windowId) => windowId !== id);
+        return {
+          minimizedWindowsIds: [...state.minimizedWindowsIds, id],
+          windowOrder: nextOrder,
+          activeWindowId: nextOrder[nextOrder.length - 1] ?? null,
         };
       }),
 
     closeAllWindows: () =>
       set(() => ({
         openedWindowsIds: [],
+        minimizedWindowsIds: [],
         windowOrder: [],
         activeWindowId: null,
       })),
@@ -88,6 +110,9 @@ export const useOpenedWindows = () =>
 
 export const useOpenedWindow = (id: AppleMenuDropdownItem) =>
   useWindowStore((state) => state.openedWindowsIds.includes(id));
+
+export const useIsWindowMinimized = (id: AppleMenuDropdownItem) =>
+  useWindowStore((state) => state.minimizedWindowsIds.includes(id));
 
 export const useWindowActions = () => useWindowStore((state) => state.actions);
 
