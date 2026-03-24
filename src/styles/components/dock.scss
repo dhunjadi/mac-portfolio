@@ -24,13 +24,22 @@
   justify-content: center;
   align-items: center;
   gap: var(--dock-gap);
+  isolation: isolate;
 
   padding: 0 var(--dock-padding-x);
-  border: 1px solid $color-glass-border;
-  border-radius: 10px;
-  @include glass-surface;
 
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &__surface {
+    position: absolute;
+    inset: 0;
+    border: 1px solid $color-glass-border;
+    border-radius: 10px;
+    @include glass-surface;
+    background-color: rgba($color-black, 0.25);
+    z-index: -1;
+    pointer-events: none;
+  }
 
   &.hidden {
     transform: translate(-50%, 200%);
@@ -74,7 +83,7 @@
   // Tablet
   @include respond(sm) {
     --dock-gap: 6px;
-    --dock-padding-x: 14px;
+    --dock-padding-x: 8px;
     --icon-max-size: var(--dock-icon-max-size, 60px);
     --icon-min-size: 36px;
     --dock-outer-margin: 20px;
@@ -83,7 +92,7 @@
   // Desktop
   @include respond(md) {
     --dock-gap: 6px;
-    --dock-padding-x: 16px;
+    --dock-padding-x: 8px;
     --icon-max-size: var(--dock-icon-max-size, 56px);
     --icon-min-size: 32px;
     --dock-outer-margin: 32px;
@@ -103,6 +112,5 @@
     );
     height: auto;
     flex: 0 0 auto;
-    transform-origin: center bottom;
   }
 }

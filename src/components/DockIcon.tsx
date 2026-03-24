@@ -31,6 +31,9 @@ const DockIcon = ({
   onClick,
   tooltipLabel,
 }: DockIconProps) => {
+  const MAGNIFY_DISTANCE = 110;
+  const NUDGE_DISTANCE = 20;
+
   const { t } = useTranslation();
   const iconRef = useRef<HTMLImageElement>(null);
   const controls = useAnimationControls();
@@ -60,7 +63,7 @@ const DockIcon = ({
 
   const scaleValue = useTransform(
     distanceFromCursor,
-    [-200, 0, 200],
+    [-MAGNIFY_DISTANCE, 0, MAGNIFY_DISTANCE],
     [1, dockIconScale, 1],
   );
 
@@ -69,6 +72,31 @@ const DockIcon = ({
     mass: 0.1,
     stiffness: 200,
   });
+
+  const directionalOffset = useTransform(() => {
+    const d = distanceFromCursor.get();
+
+    if (!Number.isFinite(d)) return 0;
+
+    if (d < -MAGNIFY_DISTANCE || d > MAGNIFY_DISTANCE) {
+      return Math.sign(d) * -1 * NUDGE_DISTANCE;
+    }
+
+    return (-d / MAGNIFY_DISTANCE) * NUDGE_DISTANCE * iconScale.get();
+  });
+
+  const directionalOffsetSpring = useSpring(directionalOffset, {
+    damping: 10,
+    mass: 0.1,
+    stiffness: 200,
+  });
+
+  const getTransformOrigin = () => {
+    if (dockPosition === "bottom") return "center bottom";
+    if (dockPosition === "right") return "right center";
+    if (dockPosition === "left") return "left center";
+    return "center";
+  };
 
   const handleClick = async () => {
     if (isWindowOpen) {
@@ -101,7 +129,14 @@ const DockIcon = ({
 
   return (
     <>
-      <div className={`c-dockIcon c-dockIcon--${dockPosition}`}>
+      <motion.div
+        className={`c-dockIcon c-dockIcon--${dockPosition}`}
+        style={
+          dockPosition === "bottom"
+            ? { x: directionalOffsetSpring }
+            : { y: directionalOffsetSpring }
+        }
+      >
         <motion.img
           ref={iconRef}
           src={icon}
@@ -111,6 +146,7 @@ const DockIcon = ({
           data-tooltip-content={tooltipLabel}
           style={{
             scale: iconScale,
+            transformOrigin: getTransformOrigin(), // Add this
             userSelect: "none",
           }}
           animate={controls}
@@ -123,7 +159,7 @@ const DockIcon = ({
             className="c-dockIcon__activeIndicator"
           />
         )}
-      </div>
+      </motion.div>
 
       <Tooltip
         id={tooltipId}
