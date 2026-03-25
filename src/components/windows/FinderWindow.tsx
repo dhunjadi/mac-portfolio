@@ -1,4 +1,4 @@
-import WindowWrapper from "../WindowWrapper";
+import WindowWrapperWithSidebar from "../WindowWrapperWithSidebar";
 import DesktopPanel from "../DesktopPanel";
 import { useTranslation } from "react-i18next";
 
@@ -9,31 +9,32 @@ type FinderWindowProps = {
 const FinderWindow = ({ onClose }: FinderWindowProps) => {
   const { t } = useTranslation();
   return (
-    <WindowWrapper windowId="finder" onClose={onClose}>
-      <div className="w-finder">
-        <div className="w-finder__body">
-          <aside className="w-finder__body_sidebar">
-            <p>{t('windows.finder.favorites')}</p>
-            <ul>
-              <li className="active">
-                <span>🖥️</span>
-                <span>{t('windows.finder.desktop')}</span>
-              </li>
-            </ul>
-          </aside>
-
-          <section className="w-finder__content">
-            <div className="w-finder__content_sectionHeader">
-              <h2>Desktop</h2>
-            </div>
-
-            <div className="w-finder__content_area">
-              <DesktopPanel />
-            </div>
-          </section>
+    <WindowWrapperWithSidebar
+      windowId="finder"
+      onClose={onClose}
+      className="w-finder"
+      sidebar={
+        <aside className="w-finder__sidebar">
+          <p>{t("windows.finder.favorites")}</p>
+          <ul>
+            <li className="active">
+              <span>🖥️</span>
+              <span>{t("windows.finder.desktop")}</span>
+            </li>
+          </ul>
+        </aside>
+      }
+    >
+      <section className="w-finder__content">
+        <div className="w-finder__content_sectionHeader">
+          <h2>Desktop</h2>
         </div>
-      </div>
-    </WindowWrapper>
+
+        <div className="w-finder__content_area">
+          <DesktopPanel />
+        </div>
+      </section>
+    </WindowWrapperWithSidebar>
   );
 };
 
