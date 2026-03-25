@@ -201,7 +201,7 @@ const WindowWrapper = ({
       disableDragging={isMaximized}
       cancel={
         layout === "sidebar"
-          ? ".c-windowWrapperWithSidebar__titleBar_buttons"
+          ? ".--close, .--minimize, .--maximize"
           : ".c-windowWrapper__titleBar_buttons"
       }
       onMouseDown={() => focusWindow(windowId)}
