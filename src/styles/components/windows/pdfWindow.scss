@@ -21,7 +21,7 @@
 
     &_button {
       min-width: 2.25rem;
-      font-size: var(--fs-h3);
+      font-size: $fs-h3;
 
       background-color: var(--accent-500, #{$color-accent-blue-500});
       color: $color-white;
@@ -55,7 +55,7 @@
 
   &__placeholder {
     color: $color-white;
-    font-size: var(--fs-body-sm);
+    font-size: $fs-body-sm;
     line-height: 1.4;
   }
 }

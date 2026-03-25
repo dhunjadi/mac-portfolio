@@ -65,7 +65,7 @@
   border-radius: 0.35rem;
   background: transparent;
   text-align: left;
-  font-size: var(--fs-body);
+  font-size: $fs-body;
   font-weight: 500;
   color: $color-white;
   padding: 0.35rem 0.7rem;
@@ -77,11 +77,11 @@
   white-space: nowrap;
 
   @include respond(md) {
-    font-size: var(--fs-caption);
+    font-size: $fs-caption;
   }
 
   @include respond(lg) {
-    font-size: var(--fs-body);
+    font-size: $fs-body;
     padding: 4px 12px;
   }
 
@@ -116,13 +116,11 @@
       min(
         100%,
         calc(
-          (100% - var(--thumb-size)) *
-            (var(--range-fill, 50) * 0.01) +
+          (100% - var(--thumb-size)) * (var(--range-fill, 50) * 0.01) +
             var(--thumb-center-offset)
         )
       )
-      100%
-      no-repeat,
+      100% no-repeat,
     rgba(255, 255, 255, 0.22) 0 / 100% 100% no-repeat;
   cursor: pointer;
 
@@ -186,8 +184,8 @@
 }
 
 @mixin panel-heading(
-  $title-size: var(--fs-h3),
-  $subtitle-size: var(--fs-caption),
+  $title-size: $fs-h3,
+  $subtitle-size: $fs-caption,
   $subtitle-color: $color-dark-600,
   $subtitle-line-height: 1.4
 ) {
@@ -220,7 +218,7 @@
   $hover-content: null,
   $hover-icon: null,
   $hover-icon-size: 70%,
-  $hover-font-size: var(--fs-micro)
+  $hover-font-size: $fs-micro
 ) {
   background: $bg;
   position: relative;

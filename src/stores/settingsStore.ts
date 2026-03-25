@@ -87,7 +87,7 @@ const useSettingsStore = create<SettingsStore>()(
       },
     }),
     {
-      name: "settings-storage",
+      name: "settings-store",
       partialize: (state) => ({
         glassAlpha: state.glassAlpha,
         blur: state.blur,

@@ -19,7 +19,7 @@
       border: 1px solid $color-glass-border;
       background-color: $color-dark-800;
       color: $color-white;
-      font-size: var(--fs-body);
+      font-size: $fs-body;
       cursor: pointer;
       transition:
         border-color 0.2s ease,

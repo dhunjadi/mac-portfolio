@@ -28,7 +28,7 @@
     text-align: left;
     list-style: none;
     cursor: pointer;
-    font-size: var(--fs-caption);
+    font-size: $fs-caption;
     text-transform: uppercase;
     padding: 0.625rem 0.75rem 0.625rem 1rem;
     position: relative;
@@ -40,7 +40,7 @@
       left: 0;
       top: 50%;
       transform: translate(50%, -50%);
-      font-size: var(--fs-caption);
+      font-size: $fs-caption;
     }
   }
 

@@ -146,7 +146,7 @@ const DockIcon = ({
           data-tooltip-content={tooltipLabel}
           style={{
             scale: iconScale,
-            transformOrigin: getTransformOrigin(), // Add this
+            transformOrigin: getTransformOrigin(),
             userSelect: "none",
           }}
           animate={controls}

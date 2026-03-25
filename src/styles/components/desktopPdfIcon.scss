@@ -38,7 +38,7 @@
     }
 
     span {
-      font-size: var(--fs-body);
+      font-size: $fs-body;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
       text-align: center;
       border-radius: 8px;

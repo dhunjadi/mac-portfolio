@@ -25,15 +25,15 @@
       border-right: 1px solid rgba(255, 255, 255, 0.12);
       padding: 0.8rem 0.55rem;
       background-color: rgba(0, 0, 0, 0.16);
-  
+
       p {
-        font-size: var(--fs-caption);
+        font-size: $fs-caption;
         text-transform: uppercase;
         letter-spacing: 0.04em;
         margin: 0 0 0.45rem 0.35rem;
         color: rgba(255, 255, 255, 0.56);
       }
-  
+
       ul {
         display: flex;
         flex-direction: column;
@@ -42,27 +42,27 @@
         padding: 0;
         list-style: none;
       }
-  
+
       button {
         border: none;
         background: transparent;
         border-radius: 7px;
         padding: 0;
-  
+
         &.active {
           background: var(--accent-500, #{$color-accent-blue-500});
         }
       }
-  
+
       li {
         display: flex;
         align-items: center;
         gap: 0.45rem;
-        font-size: var(--fs-body);
+        font-size: $fs-body;
         border-radius: 7px;
         padding: 0.36rem 0.45rem;
         color: rgba(255, 255, 255, 0.88);
-  
+
         &.active {
           background: var(--accent-500, #{$color-accent-blue-500});
           color: $color-white;
@@ -84,8 +84,4 @@
       flex: 1;
     }
   }
-
-  
-
-
 }

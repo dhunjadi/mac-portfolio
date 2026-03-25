@@ -76,7 +76,7 @@ const AboutThisDevWindow = ({ onClose }: AboutThisDevWindowProps) => {
           >
             <p>
               <strong>
-                {t("windows.aboutThisDev.education.highSchoolTtitle")}
+                {t("windows.aboutThisDev.education.highSchoolTiitle")}
               </strong>
               <br />
               {t("windows.aboutThisDev.education.highSchoolDescription")}

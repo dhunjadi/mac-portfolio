@@ -19,7 +19,7 @@ $animation-duration: 3s;
   gap: 3rem;
 
   &__appleLogo {
-    font-size: var(--fs-display-lg);
+    font-size: $fs-display-lg;
   }
 
   &__loader {

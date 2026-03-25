@@ -38,7 +38,7 @@ const useDockStore = create<DockStore>()(
       },
     }),
     {
-      name: "dock-storage",
+      name: "dock-store",
       partialize: (state) => ({
         icons: state.icons,
       }),

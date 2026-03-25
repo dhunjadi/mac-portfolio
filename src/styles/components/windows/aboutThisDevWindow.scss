@@ -20,7 +20,7 @@
       align-items: center;
       justify-content: center;
       background: $color-black;
-      font-size: var(--fs-hero);
+      font-size: $fs-hero;
       flex-shrink: 0;
     }
 
@@ -28,20 +28,20 @@
       text-align: left;
 
       h2 {
-        font-size: var(--fs-h3);
+        font-size: $fs-h3;
         line-height: 1.1;
         margin-bottom: 0.25rem;
       }
 
       p {
-        font-size: var(--fs-body);
+        font-size: $fs-body;
         text-transform: uppercase;
         margin-bottom: 0.25rem;
       }
 
       small {
         display: block;
-        font-size: var(--fs-caption);
+        font-size: $fs-caption;
         margin-top: 0.5rem;
       }
     }
@@ -54,7 +54,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    font-size: var(--fs-caption);
+    font-size: $fs-caption;
 
     a {
       color: var(--accent-500, #{$color-accent-blue-500});
@@ -87,12 +87,12 @@
         }
 
         h3 {
-          font-size: var(--fs-body);
+          font-size: $fs-body;
           margin-bottom: 0.125rem;
         }
 
         p {
-          font-size: var(--fs-body-sm);
+          font-size: $fs-body-sm;
           margin-bottom: 0.25rem;
         }
 
@@ -106,7 +106,7 @@
         li,
         > p,
         small {
-          font-size: var(--fs-caption);
+          font-size: $fs-caption;
         }
       }
     }
