@@ -17,11 +17,6 @@
     opacity 0.3s ease-in-out,
     transform 0.3s ease-in-out;
 
-  &.closed {
-    opacity: 0;
-    transform: translateY(10rem) scale(0.5);
-  }
-
   &.minimizing {
     opacity: 0;
     pointer-events: none;
@@ -104,6 +99,126 @@
         }
       }
     }
+  }
+
+  &.unfocused::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+.c-windowWrapperWithSidebar {
+  width: fit-content;
+  position: fixed;
+  opacity: 1;
+  border-radius: 12px;
+  border: 1px solid $color-glass-border;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  background: transparent;
+
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+
+  &.minimizing {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(
+        var(--minimize-translate-x, 0),
+        var(--minimize-translate-y, 42vh)
+      )
+      scale(0.2);
+    transform-origin: center center;
+  }
+
+  &.restoring {
+    animation: window-restore 0.3s ease-out;
+  }
+
+  &.maximized {
+    width: 100%;
+    height: 100%;
+
+    .c-windowWrapperWithSidebar__sideBar,
+    .c-windowWrapperWithSidebar__content {
+      height: 100%;
+    }
+  }
+
+  &__sideBar {
+    display: flex;
+    flex-direction: column;
+    @include glass-dark;
+
+    &_header {
+      padding: 10px;
+
+      & > div {
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        flex: 1;
+
+        button {
+          width: 12px;
+          height: 12px;
+
+          border-radius: 50%;
+          border: 1px solid $color-button-border;
+          cursor: pointer;
+
+          &:disabled {
+            background-color: $color-dark-800;
+          }
+        }
+
+        [class="--close"] {
+          @include window-control-button($color-mac-close, "\00D7");
+        }
+
+        [class="--minimize"] {
+          @include window-control-button($color-mac-minimize, "\2212");
+
+          &:disabled {
+            cursor: initial;
+
+            &:hover::after {
+              content: "";
+            }
+          }
+        }
+
+        [class="--maximize"] {
+          @include window-control-button(
+            $color-mac-maximize,
+            $hover-icon: "/icons/maximize.svg"
+          );
+
+          &:disabled {
+            cursor: initial;
+
+            &:hover::after {
+              content: "";
+              background-image: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
   }
 
   &.unfocused::after {

@@ -1,4 +1,4 @@
-import WindowWrapperWithSidebar from "../WindowWrapperWithSidebar";
+import WindowWrapper from "../WindowWrapper";
 import DesktopPanel from "../DesktopPanel";
 import { useTranslation } from "react-i18next";
 
@@ -9,9 +9,10 @@ type FinderWindowProps = {
 const FinderWindow = ({ onClose }: FinderWindowProps) => {
   const { t } = useTranslation();
   return (
-    <WindowWrapperWithSidebar
+    <WindowWrapper
       windowId="finder"
       onClose={onClose}
+      layout="sidebar"
       className="w-finder"
       sidebar={
         <aside className="w-finder__sidebar">
@@ -34,7 +35,7 @@ const FinderWindow = ({ onClose }: FinderWindowProps) => {
           <DesktopPanel />
         </div>
       </section>
-    </WindowWrapperWithSidebar>
+    </WindowWrapper>
   );
 };
 

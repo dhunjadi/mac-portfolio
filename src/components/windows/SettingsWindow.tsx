@@ -1,5 +1,5 @@
 import { useState } from "react";
-import WindowWrapperWithSidebar from "../WindowWrapperWithSidebar";
+import WindowWrapper from "../WindowWrapper";
 import { settingsCategories } from "../../data/settingsCategories";
 import AppearancePanel from "../AppearancePanel";
 import WallpaperPanel from "../WallpaperPanel";
@@ -28,9 +28,10 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
   };
 
   return (
-    <WindowWrapperWithSidebar
+    <WindowWrapper
       windowId="settings"
       onClose={onClose}
+      layout="sidebar"
       className="w-settings"
       sidebar={
         <div className="w-settings__sideBar">
@@ -72,7 +73,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
       <div className="w-settings__content">
         {renderPanelByCategoryId(selectedCategoryId)}
       </div>
-    </WindowWrapperWithSidebar>
+    </WindowWrapper>
   );
 };
 

@@ -20,6 +20,8 @@ type WindowWrapperProps = {
   windowId: AppleMenuDropdownItem;
   children: ReactNode;
   onClose: () => void;
+  sidebar?: ReactNode;
+  layout?: "standard" | "sidebar";
   className?: string;
   disableMinimize?: boolean;
   disableMaximize?: boolean;
@@ -44,12 +46,13 @@ const WindowWrapper = ({
   windowId,
   children,
   onClose,
+  sidebar,
+  layout = "standard",
   className = "",
   disableMinimize,
   disableMaximize,
   disableResizing,
 }: WindowWrapperProps) => {
-  const [isClosing, setIsClosing] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMinimizing, setIsMinimizing] = useState(false);
@@ -90,8 +93,7 @@ const WindowWrapper = ({
   }, [isMinimized]);
 
   const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(() => onClose(), 500);
+    onClose();
   };
 
   const handleMinimize = () => {
@@ -167,8 +169,8 @@ const WindowWrapper = ({
   } =
     dockPosition === "left"
       ? {
-          "--minimize-translate-x": "-45vw",
-          "--minimize-translate-y": "20vh",
+          "--minimize-translate-x": "-50vw",
+          "--minimize-translate-y": "0vh",
         }
       : dockPosition === "right"
         ? {
@@ -190,10 +192,18 @@ const WindowWrapper = ({
           ? "width 0.3s ease, height 0.3s ease, transform 0.3s ease, opacity 0.25s ease"
           : "opacity 0.25s ease",
       }}
-      dragHandleClassName="c-windowWrapper__titleBar"
+      dragHandleClassName={
+        layout === "sidebar"
+          ? "c-windowWrapperWithSidebar__sideBar_header"
+          : "c-windowWrapper__titleBar"
+      }
       enableResizing={disableResizing || isMaximized ? false : true}
       disableDragging={isMaximized}
-      cancel=".c-windowWrapper__titleBar_buttons"
+      cancel={
+        layout === "sidebar"
+          ? ".c-windowWrapperWithSidebar__titleBar_buttons"
+          : ".c-windowWrapper__titleBar_buttons"
+      }
       onMouseDown={() => focusWindow(windowId)}
       onTouchStart={() => focusWindow(windowId)}
       onDragStop={(_e, d) => {
@@ -212,33 +222,67 @@ const WindowWrapper = ({
         };
       }}
     >
-      <section
-        // eslint-disable-next-line max-len
-        className={`c-windowWrapper ${className} ${isClosing ? "closed" : ""} ${isMaximized ? "maximized" : ""} ${isFocused ? "focused" : "unfocused"} ${isMinimizing || isMinimized ? "minimizing" : ""} ${isRestoring ? "restoring" : ""}`}
-        style={minimizeStyle}
-      >
-        <div
-          className="c-windowWrapper__titleBar"
-          onDoubleClick={onDoubleClick}
-          onTouchEnd={onTouchEnd}
+      {layout === "sidebar" ? (
+        <section
+          // eslint-disable-next-line max-len
+          className={`c-windowWrapperWithSidebar ${className} ${isMaximized ? "maximized" : ""} ${isFocused ? "focused" : "unfocused"} ${isMinimizing || isMinimized ? "minimizing" : ""} ${isRestoring ? "restoring" : ""}`}
+          style={minimizeStyle}
         >
-          <div className="c-windowWrapper__titleBar_buttons">
-            <button className="--close" onClick={handleClose} />
-            <button
-              className="--minimize"
-              disabled={disableMinimize}
-              onClick={handleMinimize}
-            />
-            <button
-              className="--maximize"
-              disabled={disableMaximize}
-              onClick={handleMaximize}
-            />
-          </div>
-        </div>
+          <aside className="c-windowWrapperWithSidebar__sideBar">
+            <div
+              className="c-windowWrapperWithSidebar__sideBar_header"
+              onDoubleClick={onDoubleClick}
+              onTouchEnd={onTouchEnd}
+            >
+              <div>
+                <button className="--close" onClick={handleClose} />
+                <button
+                  className="--minimize"
+                  disabled={disableMinimize}
+                  onClick={handleMinimize}
+                />
+                <button
+                  className="--maximize"
+                  disabled={disableMaximize}
+                  onClick={handleMaximize}
+                />
+              </div>
+            </div>
 
-        <div className="c-windowWrapper__content">{children}</div>
-      </section>
+            {sidebar}
+          </aside>
+
+          <div className="c-windowWrapperWithSidebar__content">{children}</div>
+        </section>
+      ) : (
+        <section
+          // eslint-disable-next-line max-len
+          className={`c-windowWrapper ${className} ${isMaximized ? "maximized" : ""} ${isFocused ? "focused" : "unfocused"} ${isMinimizing || isMinimized ? "minimizing" : ""} ${isRestoring ? "restoring" : ""}`}
+          style={minimizeStyle}
+        >
+          <div
+            className="c-windowWrapper__titleBar"
+            onDoubleClick={onDoubleClick}
+            onTouchEnd={onTouchEnd}
+          >
+            <div className="c-windowWrapper__titleBar_buttons">
+              <button className="--close" onClick={handleClose} />
+              <button
+                className="--minimize"
+                disabled={disableMinimize}
+                onClick={handleMinimize}
+              />
+              <button
+                className="--maximize"
+                disabled={disableMaximize}
+                onClick={handleMaximize}
+              />
+            </div>
+          </div>
+
+          <div className="c-windowWrapper__content">{children}</div>
+        </section>
+      )}
     </Rnd>
   );
 };
