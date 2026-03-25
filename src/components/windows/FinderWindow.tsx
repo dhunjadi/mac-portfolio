@@ -1,7 +1,9 @@
+/// <reference types="vite-plugin-svgr/client" />
+
 import WindowWrapper from "../WindowWrapper";
 import DesktopPanel from "../DesktopPanel";
 import { useTranslation } from "react-i18next";
-import DesktopIcon from "/icons/desktop.svg";
+import DesktopIcon from "../../assets/icons/desktop.svg?react";
 
 type FinderWindowProps = {
   onClose: () => void;
@@ -20,7 +22,7 @@ const FinderWindow = ({ onClose }: FinderWindowProps) => {
           <p>{t("windows.finder.favorites")}</p>
           <ul>
             <li className="active">
-              <img src={DesktopIcon} alt="desktop" />
+              <DesktopIcon />
               <span>{t("windows.finder.desktop")}</span>
             </li>
           </ul>

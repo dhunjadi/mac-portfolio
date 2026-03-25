@@ -116,7 +116,8 @@
   position: fixed;
   opacity: 1;
   border-radius: 12px;
-  border: 1px solid $color-glass-border;
+  border: 1px solid rgba($color: #686868, $alpha: 0.7);
+
   overflow: hidden;
   isolation: isolate;
   display: flex;
@@ -155,7 +156,7 @@
   &__sideBar {
     display: flex;
     flex-direction: column;
-    @include glass-dark;
+    @include glass-dark-sidebar;
 
     &_header {
       padding: 10px;
@@ -177,6 +178,10 @@
           cursor: pointer;
 
           &:disabled {
+            background-color: $color-dark-800;
+          }
+
+          .c-windowWrapperWithSidebar:not(.focused) & {
             background-color: $color-dark-800;
           }
         }

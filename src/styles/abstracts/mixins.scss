@@ -45,6 +45,12 @@
   border: 1px solid $color-glass-border;
 }
 
+@mixin glass-dark-sidebar {
+  background-color: rgba($color: $color-dark-800, $alpha: 0.75);
+  backdrop-filter: blur(var(--blur-intensity));
+  -webkit-backdrop-filter: blur(var(--blur-intensity));
+}
+
 @mixin dropdown-menu-body {
   @include glass-dark;
   border-radius: 0.6rem;
