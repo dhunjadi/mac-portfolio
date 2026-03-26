@@ -1,5 +1,4 @@
 export const colorOptions = [
-  "#000000",
   "#0A84FF",
   "#AF52DE",
   "#FF2D55",

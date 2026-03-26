@@ -3,7 +3,6 @@ import { describe, it, expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import SettingsWindow from "../../../components/windows/SettingsWindow";
 import { settingsCategories } from "../../../data/settingsCategories";
-import { colorOptions } from "../../../data/colorOptions";
 import i18n from "../../../i18n";
 
 describe("SettingsWindow", () => {
@@ -34,7 +33,7 @@ describe("SettingsWindow", () => {
     expect(searchBar).toHaveValue("abc");
   });
 
-  it("renders appearance panel and changes color, fill and blur", async () => {
+  it("renders appearance panel and changes theme, fill and blur", async () => {
     render(<SettingsWindow onClose={mockOnClose} />);
 
     const appearanceTab = screen.getAllByRole("button")[0];
@@ -44,15 +43,15 @@ describe("SettingsWindow", () => {
     const panelTitle = screen.getByText(/appearance/i, { selector: "h2" });
     expect(panelTitle).toBeInTheDocument();
 
-    const glassGroup = screen.getByRole("radiogroup", {
-      name: i18n.t("windows.settings.categories.appearance.glassColorLabel"),
+    const themeGroup = screen.getByRole("radiogroup", {
+      name: i18n.t("windows.settings.categories.appearance.themeLabel"),
     });
-    const colorButtons = within(glassGroup).getAllByRole("radio");
-    expect(colorButtons.length === colorOptions.length);
+    const themeButtons = within(themeGroup).getAllByRole("radio");
+    expect(themeButtons.length).toBe(3);
 
-    await user.click(colorButtons[1]);
+    await user.click(themeButtons[1]);
 
-    expect(colorButtons[1]).toHaveAttribute("aria-checked", "true");
+    expect(themeButtons[1]).toHaveAttribute("aria-checked", "true");
 
     const colorFillSlider = screen.getByLabelText(
       /color fill:/i,

@@ -6,42 +6,41 @@ import i18n from "../../i18n";
 
 const mockSetGlassAlpha = vi.fn();
 const mockSetBlur = vi.fn();
-const mockSetGlassColor = vi.fn();
+const mockSetThemePreference = vi.fn();
 const mockSetAccentColor = vi.fn();
 const mockSetHighlightColor = vi.fn();
 
 vi.mock("../../stores/settingsStore", () => ({
   useGlassAlpha: () => 0.4,
   useBlur: () => 12,
-  useGlassColor: () => "#0A84FF",
   useAccentColor: () => "#AF52DE",
   useHighlightColor: () => "#FF9F0A",
+  useThemePreference: () => "auto",
   useSettingsActions: () => ({
     setGlassAlpha: mockSetGlassAlpha,
     setBlur: mockSetBlur,
-    setGlassColor: mockSetGlassColor,
+    setThemePreference: mockSetThemePreference,
     setAccentColor: mockSetAccentColor,
     setHighlightColor: mockSetHighlightColor,
   }),
 }));
 
 describe("AppearancePanel", () => {
-  it("renders color options and updates color on selection", () => {
+  it("updates theme preference on selection", () => {
     render(<AppearancePanel />);
 
-    const firstColor = colorOptions[0];
-    const glassLabel = i18n.t(
-      "windows.settings.categories.appearance.glassColorLabel",
+    const themeLabel = i18n.t(
+      "windows.settings.categories.appearance.themeLabel",
     );
-    const glassGroup = screen.getByRole("radiogroup", {
-      name: glassLabel,
+    const themeGroup = screen.getByRole("radiogroup", {
+      name: themeLabel,
     });
-    const button = within(glassGroup).getByRole("radio", {
-      name: `${glassLabel}: ${firstColor}`,
+    const button = within(themeGroup).getByRole("radio", {
+      name: i18n.t("windows.settings.categories.appearance.themeDarkLabel"),
     });
 
     fireEvent.click(button);
-    expect(mockSetGlassColor).toHaveBeenCalledWith(firstColor.toLowerCase());
+    expect(mockSetThemePreference).toHaveBeenCalledWith("dark");
   });
 
   it("updates accent color on selection", () => {

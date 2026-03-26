@@ -1,17 +1,19 @@
-$color-white: #fff;
-$color-black: #000;
+$color-white: var(--color-white);
+$color-black: var(--color-black);
 
-$color-dark-900: #1c1d1f;
-$color-dark-800: #252526;
-$color-dark-700: #3d3e3f;
-$color-dark-600: #343435;
+$color-dark-900: var(--color-dark-900);
+$color-dark-800: var(--color-dark-800);
+$color-dark-700: var(--color-dark-700);
+$color-dark-600: var(--color-dark-600);
 
-$color-glass-bg: rgba(0, 0, 0, 0.25);
-$color-glass-border: rgba(255, 255, 255, 0.25);
-$color-overlay-bg: rgba(0, 0, 0, 0.2);
-$color-overlay-border: rgba(255, 255, 255, 0.3);
-$color-hover-bg: rgba(255, 255, 255, 0.2);
-$color-button-border: rgba(0, 0, 0, 0.2);
+$color-text-primary: var(--color-text-primary);
+
+$color-glass-bg: var(--color-glass-bg);
+$color-glass-border: var(--color-glass-border);
+$color-overlay-bg: var(--color-overlay-bg);
+$color-overlay-border: var(--color-overlay-border);
+$color-hover-bg: var(--color-hover-bg);
+$color-button-border: var(--color-button-border);
 
 $color-mac-close: #ff5f57;
 $color-mac-minimize: #febc2e;
@@ -28,10 +30,8 @@ $gradient-accent-blue: linear-gradient(
   $color-accent-blue-600
 );
 
-$dropdown-border: 1px solid rgba(255, 255, 255, 0.2);
-$dropdown-box-shadow:
-  0 14px 30px rgba(0, 0, 0, 0.35),
-  0 2px 8px rgba(0, 0, 0, 0.35);
+$dropdown-border: var(--dropdown-border);
+$dropdown-box-shadow: var(--dropdown-box-shadow);
 
 $fs-micro: clamp(10px, 0.7rem, 11px);
 $fs-caption: clamp(11px, 0.8rem, 12px);

@@ -9,7 +9,7 @@
 .w-finder {
   width: min(40rem, calc(100svw - 2rem));
   height: min(30rem, calc(100svh - 15rem));
-  color: $color-white;
+  color: $color-text-primary;
   background: transparent;
 
   .c-windowWrapperWithSidebar__sideBar {
@@ -28,7 +28,7 @@
       text-transform: uppercase;
       letter-spacing: 0.04em;
       margin: 0 0 0.45rem 0.35rem;
-      color: rgba(255, 255, 255, 0.56);
+      color: rgb(var(--color-text-primary-rgb) / 0.56);
     }
 
     ul {
@@ -47,7 +47,7 @@
       font-size: $fs-body;
       border-radius: 7px;
       padding: 0.36rem 0.45rem;
-      color: rgba(255, 255, 255, 0.88);
+      color: rgb(var(--color-text-primary-rgb) / 0.88);
 
       svg {
         width: 1.4rem;
@@ -62,7 +62,7 @@
 
       &.active {
         background: $color-dark-700;
-        color: $color-white;
+        color: $color-text-primary;
       }
     }
   }

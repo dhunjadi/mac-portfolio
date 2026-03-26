@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
 
-  color: $color-white;
+  color: $color-text-primary;
 
   &__userInfo {
     display: flex;
@@ -33,7 +33,7 @@
       height: clamp(80px, 12svw, 120px);
       border-radius: 50%;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgb(var(--color-text-primary-rgb) / 0.15);
 
       display: flex;
       align-items: center;
@@ -74,12 +74,12 @@
         background: transparent;
         border: none;
         outline: none;
-        color: $color-white;
+        color: $color-text-primary;
         padding: 0.5rem 0;
         font-size: $fs-caption;
 
         &::placeholder {
-          color: rgba(255, 255, 255, 0.5);
+          color: rgb(var(--color-text-primary-rgb) / 0.5);
           font-size: $fs-caption;
         }
       }

@@ -46,7 +46,7 @@
 }
 
 @mixin glass-dark-sidebar {
-  background-color: rgba($color: $color-dark-800, $alpha: 0.75);
+  background-color: rgb(var(--color-dark-800-rgb) / 0.75);
   backdrop-filter: blur(var(--blur-intensity));
   -webkit-backdrop-filter: blur(var(--blur-intensity));
 }
@@ -73,7 +73,7 @@
   text-align: left;
   font-size: $fs-body;
   font-weight: 500;
-  color: $color-white;
+  color: $color-text-primary;
   padding: 0.35rem 0.7rem;
   cursor: pointer;
   transition:
@@ -115,6 +115,7 @@
   --thumb-center-offset: calc(var(--thumb-size) / 2);
   flex: 1;
   height: var(--thumb-size);
+  border: 1px solid var(--slider-border-color);
   border-radius: 999px;
   appearance: none;
   background:

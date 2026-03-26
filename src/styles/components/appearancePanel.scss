@@ -28,12 +28,40 @@
         width: clamp(12px, 0.8rem, 18px);
         height: clamp(12px, 0.8rem, 18px);
         border-radius: 50%;
-        border: 2px solid rgb(255 255 255 / 45%);
+        border: 1px solid rgb(var(--color-text-primary-rgb) / 0.45);
         cursor: pointer;
 
         &.active {
-          border-color: $color-white;
+          border-color: $color-text-primary;
         }
+      }
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: 1px solid $color-glass-border;
+      background-color: $color-dark-800;
+      color: $color-text-primary;
+      font-size: $fs-body;
+      cursor: pointer;
+      transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+
+      &.active {
+        border-color: var(--accent-500, #{$color-accent-blue-500});
+        background-color: rgb(var(--color-text-primary-rgb) / 0.08);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--accent-500, #{$color-accent-blue-500});
       }
     }
   }

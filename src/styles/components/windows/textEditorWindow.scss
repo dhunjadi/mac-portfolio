@@ -23,9 +23,9 @@
     &_button {
       border-radius: 999px;
       border: 1px solid $color-dark-700;
-      color: $color-white;
+      color: $color-text-primary;
       padding: 0.35rem 0.9rem;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgb(var(--color-text-primary-rgb) / 0.08);
       cursor: pointer;
       font-size: $fs-body-sm;
       transition:
@@ -33,8 +33,8 @@
         border-color 0.2s ease;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.25);
+        background: rgb(var(--color-text-primary-rgb) / 0.15);
+        border-color: rgb(var(--color-text-primary-rgb) / 0.25);
       }
 
       &:disabled {
@@ -60,7 +60,7 @@
     gap: 0.5rem;
 
     &_placeholder {
-      color: $color-white;
+      color: $color-text-primary;
       font-size: $fs-body-sm;
     }
 
@@ -69,8 +69,8 @@
       width: 100%;
       resize: none;
       border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: $color-white;
+      border: 1px solid rgb(var(--color-text-primary-rgb) / 0.1);
+      color: $color-text-primary;
       padding: 1rem;
       font-size: $fs-body;
       @include frosted-surface(

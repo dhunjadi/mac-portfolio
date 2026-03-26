@@ -5,16 +5,14 @@ import {
   useBlur,
   useAccentColor,
   useGlassAlpha,
-  useGlassColor,
   useHighlightColor,
   useSettingsActions,
+  useThemePreference,
 } from "../stores/settingsStore";
 
 const AppearancePanel = () => {
   const { t } = useTranslation();
-  const glassColorLabel = t(
-    "windows.settings.categories.appearance.glassColorLabel",
-  );
+  const themeLabel = t("windows.settings.categories.appearance.themeLabel");
   const colorFillLabel = t(
     "windows.settings.categories.appearance.colorFillLabel",
   );
@@ -27,15 +25,15 @@ const AppearancePanel = () => {
   );
   const glassAlpha = useGlassAlpha();
   const blurIntensity = useBlur();
-  const glassColor = useGlassColor();
   const accentColor = useAccentColor();
   const highlightColor = useHighlightColor();
+  const themePreference = useThemePreference();
   const {
     setGlassAlpha,
     setBlur,
-    setGlassColor,
     setAccentColor,
     setHighlightColor,
+    setThemePreference,
   } = useSettingsActions();
 
   return (
@@ -48,24 +46,39 @@ const AppearancePanel = () => {
       </p>
 
       <div className="c-appearancePanel__input">
-        <label>{glassColorLabel}</label>
+        <label>{themeLabel}</label>
         <div
-          className="c-appearancePanel__input_colors"
+          className="c-appearancePanel__buttons"
           role="radiogroup"
-          aria-label={glassColorLabel}
+          aria-label={themeLabel}
         >
-          {colorOptions.map((color) => (
-            <button
-              key={color}
-              className={` ${glassColor.toUpperCase() === color ? "active" : ""}`}
-              style={{ backgroundColor: color }}
-              onClick={() => setGlassColor(color.toLowerCase())}
-              type="button"
-              role="radio"
-              aria-checked={glassColor.toUpperCase() === color}
-              aria-label={`${glassColorLabel}: ${color}`}
-            />
-          ))}
+          <button
+            type="button"
+            role="radio"
+            aria-checked={themePreference === "light"}
+            className={themePreference === "light" ? "active" : ""}
+            onClick={() => setThemePreference("light")}
+          >
+            {t("windows.settings.categories.appearance.themeLightLabel")}
+          </button>
+          <button
+            type="button"
+            role="radio"
+            aria-checked={themePreference === "dark"}
+            className={themePreference === "dark" ? "active" : ""}
+            onClick={() => setThemePreference("dark")}
+          >
+            {t("windows.settings.categories.appearance.themeDarkLabel")}
+          </button>
+          <button
+            type="button"
+            role="radio"
+            aria-checked={themePreference === "auto"}
+            className={themePreference === "auto" ? "active" : ""}
+            onClick={() => setThemePreference("auto")}
+          >
+            {t("windows.settings.categories.appearance.themeAutoLabel")}
+          </button>
         </div>
       </div>
 

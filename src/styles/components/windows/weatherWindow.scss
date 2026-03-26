@@ -86,7 +86,7 @@
       padding: 0;
       border: none;
       background: transparent;
-      color: $color-white;
+      color: $color-text-primary;
       font-size: $fs-body-xl;
       outline: none;
       transition:
@@ -100,7 +100,7 @@
       }
 
       &::placeholder {
-        color: rgba(255, 255, 255, 0.5);
+        color: rgb(var(--color-text-primary-rgb) / 0.5);
       }
     }
 

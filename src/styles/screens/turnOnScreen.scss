@@ -3,14 +3,14 @@
 @use "../base/animations.scss" as *;
 
 $bar-bg: $color-dark-800;
-$progress-color: $color-white;
+$progress-color: $color-text-primary;
 $bar-height: 0.25rem;
 $animation-duration: 3s;
 
 .s-turnOn {
   min-height: 100svh;
-  background-color: $color-black;
-  color: $color-white;
+  background-color: $color-dark-900;
+  color: $color-text-primary;
 
   display: flex;
   flex-direction: column;

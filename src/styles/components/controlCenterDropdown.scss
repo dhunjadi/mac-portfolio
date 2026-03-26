@@ -25,7 +25,7 @@
       font-size: $fs-caption;
       font-weight: 600;
       letter-spacing: 0.02em;
-      color: rgba(255, 255, 255, 0.75);
+      color: rgb(var(--color-text-primary-rgb) / 0.75);
       text-transform: uppercase;
     }
 
@@ -34,10 +34,10 @@
       display: flex;
       align-items: center;
       gap: 0.65rem;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgb(var(--color-text-primary-rgb) / 0.05);
       border-radius: 0.9rem;
       padding: 0.4rem 0.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgb(var(--color-text-primary-rgb) / 0.08);
 
       div {
         position: absolute;

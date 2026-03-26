@@ -1,10 +1,14 @@
 @use "../abstracts/variables" as *;
 
 .c-desktopPanel {
-height: 100%;
+  height: 100%;
   position: relative;
   min-height: 16rem;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgb(var(--color-text-primary-rgb) / 0.1);
   background-color: $color-dark-900;
+
+  .c-desktopResumeIcon span {
+    color: var(--color-text-primary) !important;
+  }
 }

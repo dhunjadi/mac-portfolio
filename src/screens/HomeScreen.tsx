@@ -6,8 +6,8 @@ import {
   useBlur,
   useAccentColor,
   useGlassAlpha,
-  useGlassColor,
   useHighlightColor,
+  useThemePreference,
   useWallpaper,
 } from "../stores/settingsStore";
 import { lazy, useCallback, useEffect, useRef, useState } from "react";
@@ -84,8 +84,8 @@ const HomeScreen = () => {
   const glassAlpha = useGlassAlpha();
   const blurIntensity = useBlur();
   const accentColor = useAccentColor();
-  const glassColor = useGlassColor();
   const highlightColor = useHighlightColor();
+  const themePreference = useThemePreference();
   const isLoggedIn = useLogin();
   const isShutDown = useShutDown();
   const { closeWindow, openWindow } = useWindowActions();
@@ -160,11 +160,6 @@ const HomeScreen = () => {
       "--blur-intensity",
       `${blurIntensity}px`,
     );
-    document.documentElement.style.setProperty(
-      "--glass-rgb",
-      hexToRgb(glassColor),
-    );
-
     const accent500 = accentColor.toUpperCase();
     const accent500Hover = mixHex(accent500, "#FFFFFF", 0.08);
     const accent600 = mixHex(accent500, "#000000", 0.14);
@@ -179,7 +174,11 @@ const HomeScreen = () => {
       "--highlight-rgb",
       hexToRgb(highlightColor),
     );
-  }, [blurIntensity, glassAlpha, glassColor, accentColor, highlightColor]);
+  }, [blurIntensity, glassAlpha, accentColor, highlightColor]);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = themePreference;
+  }, [themePreference]);
 
   useEffect(() => {
     if (wallpaper === displayedWallpaper) return;

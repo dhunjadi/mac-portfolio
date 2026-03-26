@@ -3,12 +3,13 @@ import { wallpaperOptions, wallpaperPreviews } from "../data/wallpapers";
 import { persist } from "zustand/middleware";
 
 type DockPosition = "left" | "bottom" | "right";
+type ThemePreference = "light" | "dark" | "auto";
 
 type SettingsActions = {
   setGlassAlpha: (glassAlpha: number) => void;
   setWallpaper: (wallpaper: string) => void;
   setBlur: (value: number) => void;
-  setGlassColor: (value: string) => void;
+  setThemePreference: (value: ThemePreference) => void;
   setAccentColor: (value: string) => void;
   setHighlightColor: (value: string) => void;
   setDockPosition: (value: DockPosition) => void;
@@ -20,7 +21,7 @@ type SettingsActions = {
 type SettingsStore = {
   glassAlpha: number;
   blur: number;
-  glassColor: string;
+  themePreference: ThemePreference;
   accentColor: string;
   highlightColor: string;
   wallpaper: string;
@@ -41,8 +42,8 @@ const useSettingsStore = create<SettingsStore>()(
   persist(
     (set) => ({
       glassAlpha: 0.25,
-      blur: 16,
-      glassColor: "#000000",
+      blur: 4,
+      themePreference: "auto",
       accentColor: "#0A84FF",
       highlightColor: "#0A84FF",
       wallpaper: wallpaperOptions[0],
@@ -58,9 +59,9 @@ const useSettingsStore = create<SettingsStore>()(
 
         setBlur: (value) => set(() => ({ blur: value })),
 
-        setGlassColor: (value) =>
+        setThemePreference: (value) =>
           set(() => ({
-            glassColor: isHexColor(value) ? value : "#000000",
+            themePreference: value,
           })),
 
         setAccentColor: (value) =>
@@ -91,7 +92,7 @@ const useSettingsStore = create<SettingsStore>()(
       partialize: (state) => ({
         glassAlpha: state.glassAlpha,
         blur: state.blur,
-        glassColor: state.glassColor,
+        themePreference: state.themePreference,
         accentColor: state.accentColor,
         highlightColor: state.highlightColor,
         wallpaper: state.wallpaper,
@@ -109,8 +110,8 @@ export const useGlassAlpha = () =>
 
 export const useBlur = () => useSettingsStore((state) => state.blur);
 
-export const useGlassColor = () =>
-  useSettingsStore((state) => state.glassColor);
+export const useThemePreference = () =>
+  useSettingsStore((state) => state.themePreference);
 
 export const useAccentColor = () =>
   useSettingsStore((state) => state.accentColor);

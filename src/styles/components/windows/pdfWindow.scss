@@ -38,7 +38,7 @@
   &__viewer {
     flex: 1;
     overflow: auto;
-    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    scrollbar-color: rgb($color-white) transparent;
     scrollbar-width: thin;
   }
 
@@ -54,7 +54,7 @@
   }
 
   &__placeholder {
-    color: $color-white;
+    color: $color-text-primary;
     font-size: $fs-body-sm;
     line-height: 1.4;
   }

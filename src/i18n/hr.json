@@ -6,7 +6,10 @@
         "appearance": {
           "title": "Izgled",
           "subtitle": "Prilagodi boje i jačinu efekta stakla.",
-          "glassColorLabel": "Boja stakla",
+          "themeLabel": "Tema",
+          "themeLightLabel": "Svijetla",
+          "themeDarkLabel": "Tamna",
+          "themeAutoLabel": "Automatski",
           "colorFillLabel": "Ispunjenost boje",
           "blurLabel": "Zamućenje",
           "accentColorLabel": "Naglasna boja",

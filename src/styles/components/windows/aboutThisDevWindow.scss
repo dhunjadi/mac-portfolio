@@ -2,7 +2,7 @@
 
 .w-aboutThisDev {
   width: min(30rem, calc(70svw - 1.5rem));
-  color: $color-white;
+  color: $color-text-primary;
 
   &__header {
     display: flex;
@@ -70,11 +70,11 @@
     margin: 0.75rem 0.6rem 0.6rem 0.6rem;
     max-height: min(24rem, calc(100svh - 12rem));
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background-color: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgb(var(--color-text-primary-rgb) / 0.12);
+    background-color: rgb(var(--glass-rgb, 0 0 0) / 0.18);
 
     .c-accordion__item + .c-accordion__item {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgb(var(--color-text-primary-rgb) / 0.08);
     }
 
     .c-accordion__panel {

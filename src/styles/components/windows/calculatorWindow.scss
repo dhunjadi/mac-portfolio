@@ -10,7 +10,7 @@ $calculator-key-size: 60px;
 
   &__display {
     background-color: $color-dark-900;
-    color: $color-white;
+    color: $color-text-primary;
     height: 80px;
     padding: 0 12px;
     display: flex;
@@ -39,7 +39,7 @@ $calculator-key-size: 60px;
       align-items: center;
       justify-content: center;
       background-color: $color-dark-700;
-      color: $color-white;
+      color: $color-text-primary;
       font-size: 20px;
       border: none;
       outline: none;

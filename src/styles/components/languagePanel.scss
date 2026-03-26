@@ -18,7 +18,7 @@
       border-radius: 8px;
       border: 1px solid $color-glass-border;
       background-color: $color-dark-800;
-      color: $color-white;
+      color: $color-text-primary;
       font-size: $fs-body;
       cursor: pointer;
       transition:
@@ -27,7 +27,7 @@
 
       &.active {
         border-color: var(--accent-500, #{$color-accent-blue-500});
-        background-color: rgb(255 255 255 / 10%);
+        background-color: rgb(var(--color-text-primary-rgb) / 0.1);
       }
 
       &:focus-visible {

@@ -34,8 +34,8 @@
     inset: 0;
     z-index: 0;
     @include glass-surface;
-    background-color: rgba($color-black, 0.25);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgb(var(--glass-rgb, 0 0 0) / 0.25);
+    border-bottom: 1px solid rgb(var(--color-text-primary-rgb) / 0.1);
     pointer-events: none;
   }
 

@@ -25,7 +25,7 @@
       position: relative;
       input {
         width: 100%;
-        color: white;
+        color: $color-text-primary;
         border-radius: 4px;
         @include frosted-surface(
           $bg: rgb(var(--glass-rgb, 0 0 0) / var(--glass-alpha, 0.25)),
@@ -67,7 +67,7 @@
     &_userInfo {
       display: flex;
       align-items: center;
-      color: white;
+      color: $color-text-primary;
       margin: 10px 0;
 
       font-size: $fs-body-lg;
@@ -123,7 +123,7 @@
       align-items: center;
       justify-content: flex-start;
       gap: 0.5rem;
-      color: white;
+      color: $color-text-primary;
       cursor: pointer;
       padding: 0.5rem 0.8rem;
       font-size: $fs-body-lg;
@@ -146,7 +146,7 @@
 
   &__content {
     height: 100%;
-    color: white;
+    color: $color-text-primary;
     background-color: $color-dark-900;
     flex: 1;
     padding: 24px;
