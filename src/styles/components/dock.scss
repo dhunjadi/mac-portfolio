@@ -1,5 +1,4 @@
 @use "../abstracts/mixins" as *;
-@use "../abstracts/variables" as *;
 
 // Using px instead of rem to avoid writing new styles for the same size in different breakpoints
 
@@ -33,7 +32,7 @@
   &__surface {
     position: absolute;
     inset: 0;
-    border: 1px solid $color-glass-border;
+    border: 1px solid var(--glass-border);
     border-radius: 10px;
     @include glass-surface;
     background-color: rgb(var(--glass-rgb, 0 0 0) / 0.25);

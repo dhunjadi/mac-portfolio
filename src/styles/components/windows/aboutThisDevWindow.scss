@@ -1,8 +1,7 @@
-@use "../../abstracts/variables" as *;
 
 .w-aboutThisDev {
   width: min(30rem, calc(70svw - 1.5rem));
-  color: $color-text-primary;
+  color: var(--text-primary);
 
   &__header {
     display: flex;
@@ -19,8 +18,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: $color-black;
-      font-size: $fs-hero;
+      background: var(--color-black);
+      font-size: var(--fs-hero);
       flex-shrink: 0;
     }
 
@@ -28,20 +27,20 @@
       text-align: left;
 
       h2 {
-        font-size: $fs-h3;
+        font-size: var(--fs-h3);
         line-height: 1.1;
         margin-bottom: 0.25rem;
       }
 
       p {
-        font-size: $fs-body;
+        font-size: var(--fs-body);
         text-transform: uppercase;
         margin-bottom: 0.25rem;
       }
 
       small {
         display: block;
-        font-size: $fs-caption;
+        font-size: var(--fs-caption);
         margin-top: 0.5rem;
       }
     }
@@ -54,14 +53,14 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    font-size: $fs-caption;
+    font-size: var(--fs-caption);
 
     a {
-      color: var(--accent-500, #{$color-accent-blue-500});
+      color: var(--accent-500);
       text-decoration: none;
 
       &:hover {
-        color: var(--accent-600, #{$color-accent-blue-600});
+        color: var(--accent-600);
       }
     }
   }
@@ -70,11 +69,11 @@
     margin: 0.75rem 0.6rem 0.6rem 0.6rem;
     max-height: min(24rem, calc(100svh - 12rem));
     border-radius: 8px;
-    border: 1px solid rgb(var(--color-text-primary-rgb) / 0.12);
+    border: 1px solid rgb(var(--text-primary-rgb) / 0.12);
     background-color: rgb(var(--glass-rgb, 0 0 0) / 0.18);
 
     .c-accordion__item + .c-accordion__item {
-      border-top: 1px solid rgb(var(--color-text-primary-rgb) / 0.08);
+      border-top: 1px solid rgb(var(--text-primary-rgb) / 0.08);
     }
 
     .c-accordion__panel {
@@ -87,12 +86,12 @@
         }
 
         h3 {
-          font-size: $fs-body;
+          font-size: var(--fs-body);
           margin-bottom: 0.125rem;
         }
 
         p {
-          font-size: $fs-body-sm;
+          font-size: var(--fs-body-sm);
           margin-bottom: 0.25rem;
         }
 
@@ -106,7 +105,7 @@
         li,
         > p,
         small {
-          font-size: $fs-caption;
+          font-size: var(--fs-caption);
         }
       }
     }

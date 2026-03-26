@@ -1,5 +1,4 @@
 @use "../abstracts/mixins" as *;
-@use "../abstracts/variables" as *;
 
 .c-controlCenterDropdown {
   position: absolute;
@@ -22,10 +21,10 @@
     gap: 0.55rem;
 
     &_title {
-      font-size: $fs-caption;
+      font-size: var(--fs-caption);
       font-weight: 600;
       letter-spacing: 0.02em;
-      color: rgb(var(--color-text-primary-rgb) / 0.75);
+      color: rgb(var(--text-primary-rgb) / 0.75);
       text-transform: uppercase;
     }
 
@@ -34,10 +33,10 @@
       display: flex;
       align-items: center;
       gap: 0.65rem;
-      background: rgb(var(--color-text-primary-rgb) / 0.05);
+      background: rgb(var(--text-primary-rgb) / 0.05);
       border-radius: 0.9rem;
       padding: 0.4rem 0.5rem;
-      border: 1px solid rgb(var(--color-text-primary-rgb) / 0.08);
+      border: 1px solid rgb(var(--text-primary-rgb) / 0.08);
 
       div {
         position: absolute;

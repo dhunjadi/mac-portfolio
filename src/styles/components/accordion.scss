@@ -1,8 +1,7 @@
-@use "../abstracts/variables" as *;
 
 .c-accordion {
   overflow: auto;
-  scrollbar-color: $color-dark-700 $color-dark-900;
+  scrollbar-color: var(--surface-3) var(--surface-1);
   scrollbar-width: thin;
 
   &__panel {
@@ -28,7 +27,7 @@
     text-align: left;
     list-style: none;
     cursor: pointer;
-    font-size: $fs-caption;
+    font-size: var(--fs-caption);
     text-transform: uppercase;
     padding: 0.625rem 0.75rem 0.625rem 1rem;
     position: relative;
@@ -40,7 +39,7 @@
       left: 0;
       top: 50%;
       transform: translate(50%, -50%);
-      font-size: $fs-caption;
+      font-size: var(--fs-caption);
     }
   }
 

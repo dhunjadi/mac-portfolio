@@ -1,5 +1,4 @@
 @use "../../abstracts/mixins.scss" as *;
-@use "../../abstracts/variables" as *;
 
 // Not using rem in md screen size to prevent scaling
 // I like tablet look of this window on desktop screen size
@@ -60,7 +59,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: $fs-body;
+      font-size: var(--fs-body);
       cursor: pointer;
       color: #fff;
       transition:
@@ -70,7 +69,7 @@
       @include respond(md) {
         width: 22px;
         height: 22px;
-        font-size: $fs-micro;
+        font-size: var(--fs-micro);
       }
 
       &:hover {
@@ -86,8 +85,8 @@
       padding: 0;
       border: none;
       background: transparent;
-      color: $color-text-primary;
-      font-size: $fs-body-xl;
+      color: var(--text-primary);
+      font-size: var(--fs-body-xl);
       outline: none;
       transition:
         max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
@@ -96,11 +95,11 @@
       pointer-events: none;
 
       @include respond(md) {
-        font-size: $fs-body;
+        font-size: var(--fs-body);
       }
 
       &::placeholder {
-        color: rgb(var(--color-text-primary-rgb) / 0.5);
+        color: rgb(var(--text-primary-rgb) / 0.5);
       }
     }
 
@@ -141,19 +140,19 @@
     }
 
     &_city {
-      font-size: $fs-h2;
+      font-size: var(--fs-h2);
       font-weight: 400;
       letter-spacing: 0.03em;
       margin: 0 0 0.2rem;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
 
       @include respond(md) {
-        font-size: $fs-h3;
+        font-size: var(--fs-h3);
       }
     }
 
     &_temperature {
-      font-size: $fs-display-xl;
+      font-size: var(--fs-display-xl);
       font-weight: 100;
       line-height: 1;
       letter-spacing: -0.04em;
@@ -161,29 +160,29 @@
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
       @include respond(md) {
-        font-size: $fs-display-md;
+        font-size: var(--fs-display-md);
       }
     }
 
     &_condition {
-      font-size: $fs-h3;
+      font-size: var(--fs-h3);
       font-weight: 500;
       margin: 0.4rem 0 0.2rem;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
       @include respond(md) {
-        font-size: $fs-body;
+        font-size: var(--fs-body);
       }
     }
 
     &_highLowTemp {
-      font-size: $fs-body-xl;
+      font-size: var(--fs-body-xl);
       font-weight: 400;
       opacity: 0.9;
       margin: 0;
 
       @include respond(md) {
-        font-size: $fs-caption-lg;
+        font-size: var(--fs-caption-lg);
       }
     }
   }
@@ -248,23 +247,23 @@
         }
 
         span:nth-child(1) {
-          font-size: $fs-body;
+          font-size: var(--fs-body);
           opacity: 0.8;
 
           @include respond(md) {
-            font-size: $fs-micro;
+            font-size: var(--fs-micro);
           }
         }
 
         span:nth-child(2) {
-          font-size: $fs-body;
+          font-size: var(--fs-body);
           font-weight: 600;
           letter-spacing: 0.06em;
           text-transform: uppercase;
           opacity: 0.75;
 
           @include respond(md) {
-            font-size: $fs-micro;
+            font-size: var(--fs-micro);
           }
         }
       }
@@ -308,30 +307,30 @@
           }
 
           span:nth-child(1) {
-            font-size: $fs-body-lg;
+            font-size: var(--fs-body-lg);
             font-weight: 600;
             opacity: 0.9;
 
             @include respond(md) {
-              font-size: $fs-micro;
+              font-size: var(--fs-micro);
             }
           }
 
           span:nth-child(2) {
-            font-size: $fs-h2;
+            font-size: var(--fs-h2);
             line-height: 1;
 
             @include respond(md) {
-              font-size: $fs-h3;
+              font-size: var(--fs-h3);
             }
           }
 
           span:nth-child(3) {
-            font-size: $fs-body-lg;
+            font-size: var(--fs-body-lg);
             font-weight: 500;
 
             @include respond(md) {
-              font-size: $fs-caption;
+              font-size: var(--fs-caption);
             }
           }
         }
@@ -356,30 +355,30 @@
           }
 
           span:nth-child(1) {
-            font-size: $fs-body-xl;
+            font-size: var(--fs-body-xl);
             font-weight: 500;
 
             @include respond(md) {
-              font-size: $fs-caption-lg;
+              font-size: var(--fs-caption-lg);
             }
           }
 
           span:nth-child(2) {
-            font-size: $fs-h2;
+            font-size: var(--fs-h2);
             text-align: center;
 
             @include respond(md) {
-              font-size: $fs-body-xl;
+              font-size: var(--fs-body-xl);
             }
           }
 
           span:nth-child(3) {
-            font-size: $fs-body-lg;
+            font-size: var(--fs-body-lg);
             opacity: 0.6;
             text-align: right;
 
             @include respond(md) {
-              font-size: $fs-caption;
+              font-size: var(--fs-caption);
             }
           }
 
@@ -403,12 +402,12 @@
           }
 
           span:nth-child(5) {
-            font-size: $fs-body-lg;
+            font-size: var(--fs-body-lg);
             font-weight: 500;
             text-align: right;
 
             @include respond(md) {
-              font-size: $fs-caption;
+              font-size: var(--fs-caption);
             }
           }
         }
@@ -434,21 +433,21 @@
             }
 
             span:nth-child(1) {
-              font-size: $fs-body;
+              font-size: var(--fs-body);
               opacity: 0.65;
               letter-spacing: 0.02em;
 
               @include respond(md) {
-                font-size: $fs-micro;
+                font-size: var(--fs-micro);
               }
             }
 
             span:nth-child(2) {
-              font-size: $fs-h2;
+              font-size: var(--fs-h2);
               font-weight: 500;
 
               @include respond(md) {
-                font-size: $fs-body-lg;
+                font-size: var(--fs-body-lg);
               }
             }
           }
@@ -462,12 +461,12 @@
     align-items: center;
     justify-content: center;
     height: 16rem;
-    font-size: $fs-h3;
+    font-size: var(--fs-h3);
     opacity: 0.7;
 
     @include respond(md) {
       height: 160px;
-      font-size: $fs-body;
+      font-size: var(--fs-body);
     }
   }
 }

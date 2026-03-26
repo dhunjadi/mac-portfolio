@@ -1,16 +1,15 @@
 @use "../abstracts/mixins" as *;
-@use "../abstracts/variables" as *;
 
 .s-turnOff {
   min-width: 100svw;
   min-height: 100svh;
-  background-color: $color-black;
+  background-color: var(--color-black);
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  color: $color-text-primary;
+  color: var(--text-primary);
 
   &__powerButton {
     width: fit-content;
@@ -25,7 +24,7 @@
   }
 
   &__restartTimer {
-    font-size: $fs-display-lg;
+    font-size: var(--fs-display-lg);
     align-self: center;
   }
 }

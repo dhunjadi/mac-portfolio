@@ -1,5 +1,4 @@
 @use "../abstracts/mixins" as *;
-@use "../abstracts/variables" as *;
 
 .c-loginOverlay {
   position: absolute;
@@ -21,7 +20,7 @@
   align-items: center;
   justify-content: center;
 
-  color: $color-text-primary;
+  color: var(--text-primary);
 
   &__userInfo {
     display: flex;
@@ -33,7 +32,7 @@
       height: clamp(80px, 12svw, 120px);
       border-radius: 50%;
       overflow: hidden;
-      background: rgb(var(--color-text-primary-rgb) / 0.15);
+      background: rgb(var(--text-primary-rgb) / 0.15);
 
       display: flex;
       align-items: center;
@@ -49,12 +48,12 @@
 
     &_name {
       margin-top: 0.75rem;
-      font-size: $fs-body-lg;
+      font-size: var(--fs-body-lg);
       font-weight: 500;
       text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 
       @include respond(lg) {
-        font-size: $fs-h3;
+        font-size: var(--fs-h3);
       }
     }
 
@@ -74,13 +73,13 @@
         background: transparent;
         border: none;
         outline: none;
-        color: $color-text-primary;
+        color: var(--text-primary);
         padding: 0.5rem 0;
-        font-size: $fs-caption;
+        font-size: var(--fs-caption);
 
         &::placeholder {
-          color: rgb(var(--color-text-primary-rgb) / 0.5);
-          font-size: $fs-caption;
+          color: rgb(var(--text-primary-rgb) / 0.5);
+          font-size: var(--fs-caption);
         }
       }
     }
@@ -145,7 +144,7 @@
       }
 
       span {
-        font-size: $fs-body;
+        font-size: var(--fs-body);
         text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
         white-space: nowrap;
       }

@@ -1,5 +1,4 @@
 @use "../abstracts/mixins" as *;
-@use "../abstracts/variables" as *;
 
 .c-menuBar {
   width: 100%;
@@ -35,7 +34,7 @@
     z-index: 0;
     @include glass-surface;
     background-color: rgb(var(--glass-rgb, 0 0 0) / 0.25);
-    border-bottom: 1px solid rgb(var(--color-text-primary-rgb) / 0.1);
+    border-bottom: 1px solid rgb(var(--text-primary-rgb) / 0.1);
     pointer-events: none;
   }
 
@@ -79,8 +78,8 @@
       & > button {
         @include menu-bar-control;
         font-weight: 600;
-        color: $color-white;
-        font-size: $fs-body;
+        color: var(--color-white);
+        font-size: var(--fs-body);
         letter-spacing: 0.01em;
       }
 
@@ -99,18 +98,18 @@
   }
 
   &__date {
-    color: $color-white;
-    font-size: $fs-body-xl;
+    color: var(--color-white);
+    font-size: var(--fs-body-xl);
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
 
     @include respond(lg) {
-      font-size: $fs-body;
+      font-size: var(--fs-body);
     }
 
     @include respond(xl) {
-      font-size: $fs-caption;
+      font-size: var(--fs-caption);
     }
 
     &_dayMonth {
@@ -137,7 +136,7 @@
       }
 
       img {
-        width: $fs-body-xl;
+        width: var(--fs-body-xl);
       }
     }
   }

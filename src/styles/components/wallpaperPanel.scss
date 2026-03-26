@@ -1,4 +1,3 @@
-@use "../abstracts/variables" as *;
 @use "../abstracts/mixins.scss" as *;
 
 .c-wallpaperPanel {
@@ -35,7 +34,7 @@
       }
 
       &.active {
-        outline: 2px solid var(--accent-500, #{$color-accent-blue-500});
+        outline: 2px solid var(--accent-500);
       }
     }
   }

@@ -1,13 +1,12 @@
 @use "../abstracts/mixins" as *;
-@use "../abstracts/variables" as *;
 
 .c-shutDownOverlay {
   min-height: 100svh;
   position: absolute;
   inset: 0;
   z-index: 999999999;
-  background: $color-black;
-  color: $color-text-primary;
+  background: var(--color-black);
+  color: var(--text-primary);
 
   display: flex;
   justify-content: center;

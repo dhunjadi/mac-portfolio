@@ -1,16 +1,15 @@
 @use "../abstracts/mixins" as *;
-@use "../abstracts/variables" as *;
 @use "../base/animations.scss" as *;
 
-$bar-bg: $color-dark-800;
-$progress-color: $color-text-primary;
-$bar-height: 0.25rem;
-$animation-duration: 3s;
-
 .s-turnOn {
+  --bar-bg: var(--surface-2);
+  --progress-color: var(--text-primary);
+  --bar-height: 0.25rem;
+  --animation-duration: 3s;
+
   min-height: 100svh;
-  background-color: $color-dark-900;
-  color: $color-text-primary;
+  background-color: var(--surface-1);
+  color: var(--text-primary);
 
   display: flex;
   flex-direction: column;
@@ -19,21 +18,21 @@ $animation-duration: 3s;
   gap: 3rem;
 
   &__appleLogo {
-    font-size: $fs-display-lg;
+    font-size: var(--fs-display-lg);
   }
 
   &__loader {
     width: 15rem;
-    height: $bar-height;
-    background-color: $bar-bg;
+    height: var(--bar-height);
+    background-color: var(--bar-bg);
     border-radius: 1rem;
     overflow: hidden;
 
     &_progress {
       width: 0;
       height: 100%;
-      background-color: $progress-color;
-      animation: boot-up-loading $animation-duration linear forwards;
+      background-color: var(--progress-color);
+      animation: boot-up-loading var(--animation-duration) linear forwards;
     }
   }
 }

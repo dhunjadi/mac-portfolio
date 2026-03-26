@@ -1,5 +1,4 @@
 @use "../../abstracts/mixins" as *;
-@use "../../abstracts/variables" as *;
 
 .c-windowWrapper.maximized .w-textEditor {
   width: 100%;
@@ -22,19 +21,19 @@
 
     &_button {
       border-radius: 999px;
-      border: 1px solid $color-dark-700;
-      color: $color-text-primary;
+      border: 1px solid var(--surface-3);
+      color: var(--text-primary);
       padding: 0.35rem 0.9rem;
-      background: rgb(var(--color-text-primary-rgb) / 0.08);
+      background: rgb(var(--text-primary-rgb) / 0.08);
       cursor: pointer;
-      font-size: $fs-body-sm;
+      font-size: var(--fs-body-sm);
       transition:
         background-color 0.2s ease,
         border-color 0.2s ease;
 
       &:hover {
-        background: rgb(var(--color-text-primary-rgb) / 0.15);
-        border-color: rgb(var(--color-text-primary-rgb) / 0.25);
+        background: rgb(var(--text-primary-rgb) / 0.15);
+        border-color: rgb(var(--text-primary-rgb) / 0.25);
       }
 
       &:disabled {
@@ -43,11 +42,11 @@
       }
 
       &--primary {
-        background-color: var(--accent-500, #{$color-accent-blue-500});
+        background-color: var(--accent-500);
         border-color: transparent;
 
         &:hover {
-          background-color: var(--accent-600, #{$color-accent-blue-600});
+          background-color: var(--accent-600);
         }
       }
     }
@@ -60,8 +59,8 @@
     gap: 0.5rem;
 
     &_placeholder {
-      color: $color-text-primary;
-      font-size: $fs-body-sm;
+      color: var(--text-primary);
+      font-size: var(--fs-body-sm);
     }
 
     &_textarea {
@@ -69,18 +68,18 @@
       width: 100%;
       resize: none;
       border-radius: 10px;
-      border: 1px solid rgb(var(--color-text-primary-rgb) / 0.1);
-      color: $color-text-primary;
+      border: 1px solid rgb(var(--text-primary-rgb) / 0.1);
+      color: var(--text-primary);
       padding: 1rem;
-      font-size: $fs-body;
+      font-size: var(--fs-body);
       @include frosted-surface(
         $bg: rgb(var(--glass-rgb, 0 0 0) / 0.25),
-        $border: 1px solid $color-glass-border,
+        $border: 1px solid var(--glass-border),
         $blur: var(--blur-intensity)
       );
 
       &:focus {
-        outline: 2px solid var(--accent-500, #{$color-accent-blue-500});
+        outline: 2px solid var(--accent-500);
       }
     }
 

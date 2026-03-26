@@ -1,5 +1,4 @@
 @use "../abstracts/mixins" as *;
-@use "../abstracts/variables" as *;
 @use "../base/animations" as *;
 
 .c-windowWrapper {
@@ -59,20 +58,20 @@
         height: 12px;
 
         border-radius: 50%;
-        border: 1px solid $color-button-border;
+        border: 1px solid var(--button-border);
         cursor: pointer;
 
         &:disabled {
-          background-color: $color-dark-800;
+          background-color: var(--surface-2);
         }
       }
 
       [class="--close"] {
-        @include window-control-button($color-mac-close, "\00D7");
+        @include window-control-button(var(--mac-close), "\00D7");
       }
 
       [class="--minimize"] {
-        @include window-control-button($color-mac-minimize, "\2212");
+        @include window-control-button(var(--mac-minimize), "\2212");
 
         &:disabled {
           cursor: initial;
@@ -85,7 +84,7 @@
 
       [class="--maximize"] {
         @include window-control-button(
-          $color-mac-maximize,
+          var(--mac-maximize),
           $hover-icon: "/icons/maximize.svg"
         );
 
@@ -174,24 +173,24 @@
           height: 12px;
 
           border-radius: 50%;
-          border: 1px solid $color-button-border;
+          border: 1px solid var(--button-border);
           cursor: pointer;
 
           &:disabled {
-            background-color: $color-dark-800;
+            background-color: var(--surface-2);
           }
 
           .c-windowWrapperWithSidebar:not(.focused) & {
-            background-color: $color-dark-800;
+            background-color: var(--surface-2);
           }
         }
 
         [class="--close"] {
-          @include window-control-button($color-mac-close, "\00D7");
+          @include window-control-button(var(--mac-close), "\00D7");
         }
 
         [class="--minimize"] {
-          @include window-control-button($color-mac-minimize, "\2212");
+          @include window-control-button(var(--mac-minimize), "\2212");
 
           &:disabled {
             cursor: initial;
@@ -204,7 +203,7 @@
 
         [class="--maximize"] {
           @include window-control-button(
-            $color-mac-maximize,
+            var(--mac-maximize),
             $hover-icon: "/icons/maximize.svg"
           );
 
