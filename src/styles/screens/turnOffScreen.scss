@@ -3,13 +3,13 @@
 .s-turnOff {
   min-width: 100svw;
   min-height: 100svh;
-  background-color: var(--color-black);
+  background-color: black;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  color: var(--text-primary);
+  color: white;
 
   &__powerButton {
     width: fit-content;

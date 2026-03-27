@@ -2,14 +2,12 @@
 @use "../base/animations.scss" as *;
 
 .s-turnOn {
-  --bar-bg: var(--surface-2);
-  --progress-color: var(--text-primary);
   --bar-height: 0.25rem;
   --animation-duration: 3s;
 
   min-height: 100svh;
-  background-color: var(--surface-1);
-  color: var(--text-primary);
+  background-color: black;
+  color: white;
 
   display: flex;
   flex-direction: column;
@@ -24,14 +22,14 @@
   &__loader {
     width: 15rem;
     height: var(--bar-height);
-    background-color: var(--bar-bg);
+    background-color: black;
     border-radius: 1rem;
     overflow: hidden;
 
     &_progress {
       width: 0;
       height: 100%;
-      background-color: var(--progress-color);
+      background-color: white;
       animation: boot-up-loading var(--animation-duration) linear forwards;
     }
   }
