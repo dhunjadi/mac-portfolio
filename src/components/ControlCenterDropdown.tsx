@@ -14,12 +14,15 @@ const ControlCenterDropdown = () => {
       role="menu"
       aria-label={t("controlCenter.menuLabel")}
     >
-      <div className="c-controlCenterDropdown__section">
-        <span className="c-controlCenterDropdown__section_title">
+      <div className="c-controlCenterDropdown__display">
+        <p className="c-controlCenterDropdown__display_title">
           {t("controlCenter.display")}
-        </span>
-        <div className="c-controlCenterDropdown__section_sliderRow">
-          <div aria-hidden>
+        </p>
+        <div
+          className="c-controlCenterDropdown__display_sliderContainer"
+          aria-hidden
+        >
+          <div>
             <img src={brightnessIcon} alt={t("controlCenter.brightnessAlt")} />
           </div>
           <input
@@ -31,11 +34,7 @@ const ControlCenterDropdown = () => {
             onChange={(event) =>
               setBrightness(Number(event.currentTarget.value))
             }
-            style={
-              {
-                "--range-fill": brightness,
-              } as CSSProperties
-            }
+            style={{ "--range-fill": brightness } as CSSProperties}
           />
         </div>
       </div>
