@@ -2,13 +2,13 @@
   --calculator-key-size: 60px;
 
   width: 240px;
-  background-color: var(--surface-3);
+  background-color: #3d3e3f;
   display: flex;
   flex-direction: column;
 
   &__display {
-    background-color: var(--surface-1);
-    color: var(--text-primary);
+    background-color: #1c1d1f;
+    color: var(--color-white);
     height: 80px;
     padding: 0 12px;
     display: flex;
@@ -30,14 +30,14 @@
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: var(--calculator-key-size);
     gap: 1px;
-    background-color: var(--surface-2);
+    background-color: #252526;
 
     &_key {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--surface-3);
-      color: var(--text-primary);
+      background-color: #3d3e3f;
+      color: var(--color-white);
       font-size: 20px;
       border: none;
       outline: none;
@@ -48,7 +48,7 @@
       }
 
       &--fn {
-        background-color: var(--surface-2);
+        background-color: #252526;
       }
 
       &--operator {

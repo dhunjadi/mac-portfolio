@@ -1,26 +1,26 @@
 import { create } from "zustand";
-import type { AppleMenuDropdownItem } from "../types";
+import type { WindowId } from "../types";
 
 type WindowActions = {
-  openWindow: (id: AppleMenuDropdownItem) => void;
-  closeWindow: (id: AppleMenuDropdownItem) => void;
-  minimizeWindow: (id: AppleMenuDropdownItem) => void;
+  openWindow: (id: WindowId) => void;
+  closeWindow: (id: WindowId) => void;
+  minimizeWindow: (id: WindowId) => void;
   closeAllWindows: () => void;
-  focusWindow: (id: AppleMenuDropdownItem) => void;
-  isWindowOpen: (id: AppleMenuDropdownItem) => boolean;
+  focusWindow: (id: WindowId) => void;
+  isWindowOpen: (id: WindowId) => boolean;
 };
 
 type WindowStore = {
-  openedWindowsIds: AppleMenuDropdownItem[];
-  minimizedWindowsIds: AppleMenuDropdownItem[];
-  windowOrder: AppleMenuDropdownItem[];
-  activeWindowId: AppleMenuDropdownItem | null;
+  openedWindowsIds: WindowId[];
+  minimizedWindowsIds: WindowId[];
+  windowOrder: WindowId[];
+  activeWindowId: WindowId | null;
   actions: WindowActions;
 };
 
 const moveToFront = (
-  order: AppleMenuDropdownItem[],
-  id: AppleMenuDropdownItem,
+  order: WindowId[],
+  id: WindowId,
 ) => {
   const filtered = order.filter((windowId) => windowId !== id);
   return [...filtered, id];
@@ -108,17 +108,17 @@ const useWindowStore = create<WindowStore>((set, get) => ({
 export const useOpenedWindows = () =>
   useWindowStore((state) => state.openedWindowsIds);
 
-export const useOpenedWindow = (id: AppleMenuDropdownItem) =>
+export const useOpenedWindow = (id: WindowId) =>
   useWindowStore((state) => state.openedWindowsIds.includes(id));
 
-export const useIsWindowMinimized = (id: AppleMenuDropdownItem) =>
+export const useIsWindowMinimized = (id: WindowId) =>
   useWindowStore((state) => state.minimizedWindowsIds.includes(id));
 
 export const useWindowActions = () => useWindowStore((state) => state.actions);
 
 const WINDOW_Z_INDEX_BASE = 20;
 
-export const useWindowZIndex = (id: AppleMenuDropdownItem) =>
+export const useWindowZIndex = (id: WindowId) =>
   useWindowStore((state) => {
     const index = state.windowOrder.indexOf(id);
     return WINDOW_Z_INDEX_BASE + (index < 0 ? 0 : index);

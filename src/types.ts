@@ -1,4 +1,4 @@
-export type AppleMenuDropdownItem =
+export type WindowId =
   | "finder"
   | "about"
   | "calculator"
@@ -6,9 +6,12 @@ export type AppleMenuDropdownItem =
   | "weather"
   | "settings"
   | "text-editor"
-  | "sleep"
   | "restart"
   | "shut-down";
+
+export type AppleMenuActionId = "sleep";
+
+export type AppleMenuDropdownItem = WindowId | AppleMenuActionId;
 
 export type CurrentWeather = {
   name: string;

@@ -5,11 +5,12 @@ import dayjs from "dayjs";
 import { useLogin } from "../stores/loginStore";
 import { useActiveWindowId, useWindowActions } from "../stores/windowStore";
 import AppleMenuDropdown from "./AppleMenuDropdown";
-import type { AppleMenuDropdownItem } from "../types";
+import type { AppleMenuDropdownItem, WindowId } from "../types";
 import { usePowerActions } from "../stores/powerStore";
 import controlCenterIcon from "/icons/control-center.png";
 import ControlCenterDropdown from "./ControlCenterDropdown";
 import { useTranslation } from "react-i18next";
+import { getMenuBarWindowLabels, isWindowId } from "../data/windowData";
 
 type MenuBarProps = {
   hideAppleLogo?: boolean;
@@ -85,18 +86,10 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
     };
   }, []);
 
-  const menuBarWindowLabels = {
-    finder: t("menuBar.windowLabels.finder"),
-    about: t("menuBar.windowLabels.about"),
-    calculator: t("menuBar.windowLabels.calculator"),
-    pdf: t("menuBar.windowLabels.pdf"),
-    weather: t("menuBar.windowLabels.weather"),
-    settings: t("menuBar.windowLabels.settings"),
-    "text-editor": t("menuBar.windowLabels.textEditor"),
-  };
+  const menuBarWindowLabels = getMenuBarWindowLabels(t);
 
   const activeWindowLabel = activeWindowId
-    ? menuBarWindowLabels[activeWindowId as keyof typeof menuBarWindowLabels]
+    ? menuBarWindowLabels[activeWindowId as WindowId]
     : undefined;
 
   const dayLabels = t("menuBar.daysShort", { returnObjects: true }) as string[];
@@ -114,7 +107,9 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
       return;
     }
 
-    openWindow(item);
+    if (isWindowId(item)) {
+      openWindow(item);
+    }
     setIsAppleMenuOpen(false);
   };
 
@@ -202,9 +197,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
           {iscontrolCenterOpen && <ControlCenterDropdown />}
         </div>
         <strong className="c-menuBar__date">
-          <span className="c-menuBar__date_dayMonth">
-            {dateLabel}
-          </span>
+          <span className="c-menuBar__date_dayMonth">{dateLabel}</span>
           <span className="c-menuBar__dateTime">{now.format("HH:mm")}</span>
         </strong>
       </div>

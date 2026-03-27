@@ -16,7 +16,8 @@ import {
 } from "../stores/dockStore";
 import { useDockIconMaxSize, useDockPosition } from "../stores/settingsStore";
 import { clampDockIconSize, getDockIconSizeLimits } from "../utils/dockSizing";
-import type { AppleMenuDropdownItem } from "../types";
+import type { WindowId } from "../types";
+import { getDockTooltipLabel } from "../data/windowData";
 import { useTranslation } from "react-i18next";
 
 type DockProps = {
@@ -84,28 +85,12 @@ const Dock = ({ ref }: DockProps) => {
     return () => window.removeEventListener("resize", handleResize);
   }, [mouseBottom, mouseLeft, mouseRight, mouseTop, mouseX, mouseY]);
 
-  const handleIconClick = (iconId: string) => {
-    openWindow(iconId as AppleMenuDropdownItem);
+  const handleIconClick = (iconId: WindowId) => {
+    openWindow(iconId);
   };
 
-  const getTooltipLabel = (id: DockIconType["id"]) => {
-    switch (id) {
-      case "finder":
-        return t("dock.finder");
-      case "about":
-        return t("dock.about");
-      case "calculator":
-        return t("dock.calculator");
-      case "settings":
-        return t("dock.settings");
-      case "weather":
-        return t("dock.weather");
-      case "text-editor":
-        return t("dock.textEditor");
-      default:
-        return t("dock.iconAlt");
-    }
-  };
+  const getTooltipLabel = (id: DockIconType["id"]) =>
+    getDockTooltipLabel(id, t);
 
   const dockStyle = {
     "--dock-items": icons.length,

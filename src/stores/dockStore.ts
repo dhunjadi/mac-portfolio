@@ -1,15 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { AppleMenuDropdownItem } from "../types";
-import finderIcon from "/icons/finder.png";
-import calculatorIcon from "/icons/calculator.png";
-import infoIcon from "/icons/info.svg";
-import settingsIcon from "/icons/settings.svg";
-import weatherIcon from "/icons/weather.png";
-import textEditorIcon from "/icons/text-editor.png";
+import type { WindowId } from "../types";
+import { DEFAULT_DOCK_ICONS } from "../data/windowData";
 
 export type DockIcon = {
-  id: AppleMenuDropdownItem;
+  id: WindowId;
   icon: string;
 };
 
@@ -25,14 +20,7 @@ type DockStore = {
 const useDockStore = create<DockStore>()(
   persist(
     (set) => ({
-      icons: [
-        { id: "finder", icon: finderIcon },
-        { id: "about", icon: infoIcon },
-        { id: "calculator", icon: calculatorIcon },
-        { id: "settings", icon: settingsIcon },
-        { id: "weather", icon: weatherIcon },
-        { id: "text-editor", icon: textEditorIcon },
-      ],
+      icons: [...DEFAULT_DOCK_ICONS],
       actions: {
         moveIcon: (newItems) => set({ icons: newItems }),
       },

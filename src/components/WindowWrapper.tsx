@@ -6,7 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import { Rnd } from "react-rnd";
-import type { AppleMenuDropdownItem } from "../types";
+import type { WindowId } from "../types";
 import {
   useActiveWindowId,
   useIsWindowMinimized,
@@ -17,7 +17,7 @@ import { useDockPosition } from "../stores/settingsStore";
 import useDoubleActivate from "../hooks/useDoubleActivate";
 
 type WindowWrapperProps = {
-  windowId: AppleMenuDropdownItem;
+  windowId: WindowId;
   children: ReactNode;
   onClose: () => void;
   sidebar?: ReactNode;

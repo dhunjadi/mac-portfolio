@@ -5,16 +5,16 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import { Tooltip } from "react-tooltip";
 import { useOpenedWindows } from "../stores/windowStore";
 import { useDockIconScale } from "../stores/settingsStore";
-import type { AppleMenuDropdownItem } from "../types";
+import type { WindowId } from "../types";
 import { useTranslation } from "react-i18next";
 
 type DockIconProps = {
   icon: string;
-  id: string;
+  id: WindowId;
   mouseX: MotionValue<number>;
   mouseY: MotionValue<number>;
   dockPosition: "left" | "bottom" | "right";
@@ -40,7 +40,7 @@ const DockIcon = ({
   const openedWindows = useOpenedWindows();
   const dockIconScale = useDockIconScale();
 
-  const isWindowOpen = openedWindows.includes(id as AppleMenuDropdownItem);
+  const isWindowOpen = openedWindows.includes(id);
   const showActiveIndicator = isWindowOpen || id === "finder";
 
   const distanceFromCursor = useTransform(
@@ -171,4 +171,4 @@ const DockIcon = ({
   );
 };
 
-export default DockIcon;
+export default memo(DockIcon);

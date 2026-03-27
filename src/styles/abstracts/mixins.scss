@@ -245,6 +245,7 @@
   } @else {
     &:hover::after {
       content: $hover-content;
+      color: var(--color-black);
     }
   }
 }
