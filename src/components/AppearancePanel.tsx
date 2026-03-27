@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { colorOptions } from "../data/colorOptions";
 import { useTranslation } from "react-i18next";
+import ColorPicker from "./ColorPicker";
 import {
   useBlur,
   useAccentColor,
@@ -48,7 +49,7 @@ const AppearancePanel = () => {
       <div className="c-appearancePanel__input">
         <label>{themeLabel}</label>
         <div
-          className="c-appearancePanel__buttons"
+          className="c-appearancePanel__input_theme"
           role="radiogroup"
           aria-label={themeLabel}
         >
@@ -122,46 +123,20 @@ const AppearancePanel = () => {
 
       <div className="c-appearancePanel__input">
         <label>{accentColorLabel}</label>
-        <div
-          className="c-appearancePanel__input_colors"
-          role="radiogroup"
-          aria-label={accentColorLabel}
-        >
-          {colorOptions.map((color) => (
-            <button
-              key={`accent-${color}`}
-              className={`${accentColor.toUpperCase() === color ? "active" : ""}`}
-              style={{ backgroundColor: color }}
-              onClick={() => setAccentColor(color.toLowerCase())}
-              type="button"
-              role="radio"
-              aria-checked={accentColor.toUpperCase() === color}
-              aria-label={`${accentColorLabel}: ${color}`}
-            />
-          ))}
-        </div>
+        <ColorPicker
+          colors={colorOptions}
+          value={accentColor}
+          onChange={(color) => setAccentColor(color.toLowerCase())}
+        />
       </div>
 
       <div className="c-appearancePanel__input">
         <label>{highlightColorLabel}</label>
-        <div
-          className="c-appearancePanel__input_colors"
-          role="radiogroup"
-          aria-label={highlightColorLabel}
-        >
-          {colorOptions.map((color) => (
-            <button
-              key={`highlight-${color}`}
-              className={`${highlightColor.toUpperCase() === color ? "active" : ""}`}
-              style={{ backgroundColor: color }}
-              onClick={() => setHighlightColor(color.toLowerCase())}
-              type="button"
-              role="radio"
-              aria-checked={highlightColor.toUpperCase() === color}
-              aria-label={`${highlightColorLabel}: ${color}`}
-            />
-          ))}
-        </div>
+        <ColorPicker
+          colors={colorOptions}
+          value={highlightColor}
+          onChange={(color) => setHighlightColor(color.toLowerCase())}
+        />
       </div>
     </section>
   );
