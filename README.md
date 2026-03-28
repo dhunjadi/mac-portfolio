@@ -1,37 +1,49 @@
 # mac-portfolio
 
-A macOS-inspired interactive portfolio built with React, TypeScript, and Vite.
+A macOS-inspired interactive portfolio built with React, TypeScript, and Vite. It simulates a desktop OS experience with draggable windows, a customizable dock, and a handful of portfolio-focused apps.
 
 Live demo: https://dhunjadi.github.io/mac-portfolio/
 
 ## Features
 
-- Boot screen flow with route protection (`/turn-on` -> `/`)
-- Desktop-style UI with menu bar, dock, draggable windows, and overlays
-- Login overlay (type any password to enter)
-- Portfolio window (`About This Dev`) with experience and skills
-- Functional calculator window
-- PDF preview window with zoom controls
-- Weather window with current conditions and forecast
-- Text editor window with sample file import and download
-- Settings window with:
-  - Wallpaper switching
-  - Glass color selection
-  - Blur and transparency controls
-- Shutdown modal with countdown and shutdown overlay
-- Responsive dock behavior for desktop/mobile sizing
+- Boot, login, sleep, restart, and shutdown flow (`/turn-on` -> `/` -> `/turn-off`)
+- Desktop UI with menu bar, control center, dock, draggable windows, and overlays
+- Window management with focus, z-index stacking, minimize/restore, maximize, and resizing
+- Dock with magnification, drag-to-reorder, active indicators, and left/bottom/right positioning
+- Settings window with theme preference (light/dark/auto)
+- Accent + highlight color pickers
+- Wallpaper switching
+- Dock sizing and icon scale controls
+- Language toggle (English/Croatian)
+- Finder window showing a desktop panel
+- About This Dev window with experience, skills, and education accordion
+- Calculator app
+- Weather app (search, current conditions, hourly + daily forecast)
+- Text editor with sample file load, TXT import, and download
+- Resume PDF viewer with zoom
+- Brightness overlay via Control Center slider
+- Persistent UI state via localStorage (settings, dock order, power/login state)
 
 ## Tech Stack
 
 - React 19 + TypeScript
 - Vite 7
-- Zustand (state management)
 - React Router 7
-- Framer Motion (dock interactions)
-- React RND (draggable windows/modals)
+- Zustand (state management + persistence)
+- Framer Motion (dock magnification + animations)
+- React RND (draggable/resizable windows and dialogs)
+- React Query + Axios (weather data)
+- React PDF (resume viewer)
+- i18next + react-i18next (EN/HR localization)
+- Day.js (menu bar clock)
 - Sass (SCSS)
 - Vitest + Testing Library
 - ESLint + Husky
+
+## Configuration Notes
+
+- Weather data comes from OpenWeatherMap. The API key is currently hardcoded in `src/services/services.ts`. Replace it with your own key if needed.
+- The resume PDF is served from `public/resume.pdf`, and the desktop icon preview uses `public/resume-preview.jpg`.
 
 ## Getting Started
 
