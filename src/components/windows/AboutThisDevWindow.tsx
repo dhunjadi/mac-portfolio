@@ -40,7 +40,7 @@ const AboutThisDevWindow = ({ onClose }: AboutThisDevWindowProps) => {
             target="_blank"
             rel="noreferrer"
           >
-            github.com/dhunjadi
+            <strong>github.com/dhunjadi</strong>
           </a>
         </div>
 

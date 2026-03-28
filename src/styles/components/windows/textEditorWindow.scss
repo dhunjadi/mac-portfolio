@@ -75,7 +75,7 @@
       @include frosted-surface(
         $bg: rgb(var(--glass-rgb, 0 0 0) / 0.25),
         $border: 1px solid var(--glass-border),
-        $blur: var(--blur-intensity)
+        $blur: 8px
       );
 
       &:focus {

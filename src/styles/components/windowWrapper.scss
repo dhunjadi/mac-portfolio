@@ -6,7 +6,7 @@
   position: fixed;
   opacity: 1;
   border-radius: 12px;
-  @include glass-dark;
+  @include glass;
 
   overflow: hidden;
   isolation: isolate;
@@ -155,7 +155,7 @@
   &__sideBar {
     display: flex;
     flex-direction: column;
-    @include glass-dark-sidebar;
+    @include glass-sidebar;
 
     &_header {
       padding: 10px;

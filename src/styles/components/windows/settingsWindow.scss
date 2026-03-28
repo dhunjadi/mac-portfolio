@@ -27,9 +27,9 @@
         color: var(--text-primary);
         border-radius: 4px;
         @include frosted-surface(
-          $bg: rgb(var(--glass-rgb, 0 0 0) / var(--glass-alpha, 0.25)),
+          $bg: rgba(0, 0, 0, 0.25),
           $border: 1px solid var(--glass-border),
-          $blur: var(--blur-intensity)
+          $blur: 8px
         );
         padding: 0.2rem 1.75rem;
 
@@ -92,7 +92,7 @@
         flex-direction: column;
 
         small {
-          color: var(--text-secondary);
+          color: var(--text-primary);
         }
       }
     }

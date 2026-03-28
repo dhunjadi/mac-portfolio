@@ -36,21 +36,21 @@
   }
 }
 
-@mixin glass-dark {
-  background-color: rgb(var(--glass-rgb, 0 0 0) / var(--glass-alpha, 0.25));
-  backdrop-filter: blur(var(--blur-intensity));
-  -webkit-backdrop-filter: blur(var(--blur-intensity));
+@mixin glass {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--glass-border);
 }
 
-@mixin glass-dark-sidebar {
+@mixin glass-sidebar {
   background-color: rgb(var(--surface-2-rgb) / 0.75);
-  backdrop-filter: blur(var(--blur-intensity));
-  -webkit-backdrop-filter: blur(var(--blur-intensity));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 @mixin dropdown-menu-body {
-  @include glass-dark;
+  @include glass;
   border-radius: 0.6rem;
   border: var(--dropdown-border);
   box-shadow: var(--dropdown-box-shadow);
@@ -97,8 +97,8 @@
   }
 }
 
-@mixin glass-surface($saturate: 180%, $blur: var(--blur-intensity)) {
-  background-color: rgb(var(--glass-rgb, 0 0 0) / var(--glass-alpha, 0.25));
+@mixin glass-surface($saturate: 180%, $blur: 8px) {
+  background-color: rgba($color: #000000, $alpha: 0.25);
   backdrop-filter: saturate($saturate) blur($blur);
   -webkit-backdrop-filter: saturate($saturate) blur($blur);
 }
@@ -186,7 +186,7 @@
 @mixin panel-heading(
   $title-size: var(--fs-h3),
   $subtitle-size: var(--fs-caption),
-  $subtitle-color: var(--text-secondary),
+  $subtitle-color: currentColor,
   $subtitle-line-height: 1.4
 ) {
   &__title {
@@ -200,7 +200,7 @@
   }
 }
 
-@mixin frosted-surface($bg, $border, $blur: 10px, $saturate: null) {
+@mixin frosted-surface($bg, $border, $blur: 8px, $saturate: null) {
   background-color: $bg;
   border: $border;
 

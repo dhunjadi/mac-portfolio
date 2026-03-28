@@ -3,9 +3,7 @@ import Dock from "../components/Dock";
 import { useOpenedWindow, useWindowActions } from "../stores/windowStore";
 import DesktopPdfIcon from "../components/DesktopPdfIcon";
 import {
-  useBlur,
   useAccentColor,
-  useGlassAlpha,
   useHighlightColor,
   useThemePreference,
   useWallpaper,
@@ -37,9 +35,7 @@ const TextEditorWindow = lazy(
 const ShutDownModal = lazy(() => import("../components/ShutDownModal"));
 
 const RestartModal = lazy(() => import("../components/RestartModal"));
-const BrightnessOverlay = lazy(
-  () => import("../components/BrightnessOverlay"),
-);
+const BrightnessOverlay = lazy(() => import("../components/BrightnessOverlay"));
 
 const hexToRgb = (hexColor: string) => {
   const matched = /^#([0-9a-fA-F]{6})$/.exec(hexColor);
@@ -81,8 +77,6 @@ const HomeScreen = () => {
   const isWeatherWindowOpen = useOpenedWindow("weather");
   const isTextEditorWindowOpen = useOpenedWindow("text-editor");
   const wallpaper = useWallpaper();
-  const glassAlpha = useGlassAlpha();
-  const blurIntensity = useBlur();
   const accentColor = useAccentColor();
   const highlightColor = useHighlightColor();
   const themePreference = useThemePreference();
@@ -152,14 +146,6 @@ const HomeScreen = () => {
   }, []);
 
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--glass-alpha",
-      glassAlpha.toString(),
-    );
-    document.documentElement.style.setProperty(
-      "--blur-intensity",
-      `${blurIntensity}px`,
-    );
     const accent500 = accentColor.toUpperCase();
     const accent500Hover = mixHex(accent500, "#FFFFFF", 0.08);
     const accent600 = mixHex(accent500, "#000000", 0.14);
@@ -174,7 +160,7 @@ const HomeScreen = () => {
       "--highlight-rgb",
       hexToRgb(highlightColor),
     );
-  }, [blurIntensity, glassAlpha, accentColor, highlightColor]);
+  }, [accentColor, highlightColor]);
 
   useEffect(() => {
     document.documentElement.dataset.theme = themePreference;

@@ -11,8 +11,6 @@
 :root {
   color-scheme: dark;
   --glass-rgb: 0 0 0;
-  --glass-alpha: 0.25;
-  --blur-intensity: 16px;
   --accent-500: #0a7aff;
   --accent-500-hover: #1a84ff;
   --accent-600: #0a66da;
@@ -97,7 +95,7 @@
   --text-primary: #1c1d1f;
   --text-primary-rgb: 28 29 31;
 
-  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.5);
   --glass-border: rgba(0, 0, 0, 0.12);
   --overlay-bg: rgba(0, 0, 0, 0.06);
   --overlay-border: rgba(0, 0, 0, 0.12);

@@ -11,7 +11,6 @@
           "themeDarkLabel": "Tamna",
           "themeAutoLabel": "Automatski",
           "colorFillLabel": "Ispunjenost boje",
-          "blurLabel": "Zamućenje",
           "accentColorLabel": "Naglasna boja",
           "highlightColorLabel": "Boja isticanja"
         },
@@ -44,7 +43,7 @@
       "experienceTitle": "Iskustvo (zadnje tri)",
       "skillsTitle": "Vještine",
       "educationTitle": "Obrazovanje i jezici",
-      "skillsList": "HTML, CSS, JavaScript, React, React Native, Next.js, TypeScript, Redux, Zustand, TanStack Query",
+      "skillsList": "HTML, CSS, JavaScript, React, React Native, Next.js, TypeScript, NestJS, MongoDB, Redux, Zustand, TanStack Query",
       "education": {
         "highSchoolTitle": "Tehni\u010dar elektrotehnike",
         "highSchoolDescription": "Elektrotehni\u010dka \u0161kola Zagreb (2008 - 2012)",
@@ -58,8 +57,11 @@
           "company": "The Falcon Technology",
           "period": "Lis 2023 - danas",
           "highlights": [
-            "Održavanje i ažuriranje web stranice tvrtke",
-            "Frontend razvoj na klijentskim projektima",
+            "Održavao i unaprijeđivao web stranicu tvrtke implementiranjem novih funkcionalnosti, ispravljanjem grešaka te osiguravanjem stabilnih performansi i pouzdanosti",
+            "Razvijao responzivne i skalabilne frontend funkcionalnosti za više klijentskih projekata koristeći React i TypeScript",
+            "Integrirao API-je i upravljao stanjem na poslužitelju koristeći TanStack Query radi poboljšanja obrade podataka i korisničkog iskustva",
+            "Surađivao s dizajnerima, backend inženjerima i dionicima projekta kako bi isporučio web i mobilne aplikacije spremne za produkciju",
+            "Doprinosio poboljšanju kvalitete i održivosti koda kroz reusable komponente i moderne frontend razvojne prakse",
             "Next.js, React, React Native, TypeScript, TanStack Query"
           ]
         },
@@ -68,8 +70,10 @@
           "company": "Serapion",
           "period": "Sij 2023 - Srp 2023",
           "highlights": [
-            "Implementacija dizajna i funkcionalnosti prvenstveno za Gepek mobilnu aplikaciju",
-            "Svakodnevni sastanci s timom i klijentima",
+            "Sudjelovao u razvoju i implementaciji funkcionalnosti mobilne aplikacije Gepek koristeći React Native i TypeScript",
+            "Pretvarao zahtjeve dizajna u responzivne i funkcionalne mobilne UI komponente",
+            "Usko surađivao s članovima tima i klijentima kroz redovite sastanke radi usklađivanja zahtjeva i osiguravanja uspješne isporuke",
+            "Pomagao u implementaciji i održavanju funkcionalnosti mobilne aplikacije, poboljšavajući upotrebljivost i cjelokupno korisničko iskustvo",
             "React Native, TypeScript, Vue.js"
           ]
         },
@@ -78,8 +82,11 @@
           "company": "Nobula Technologies",
           "period": "Pro 2021 - Sij 2023",
           "highlights": [
-            "Frontend i backend razvoj za Nobula Case Creator i Nobula Case Player",
-            "Frontend razvoj Nobula Event platforme",
+            "Sudjelovao u razvoju platformi Nobula Case Creator i Case Player, radeći na frontend i backend funkcionalnostima",
+            "Izrađivao responzivne UI komponente koristeći React, TypeScript, HTML i CSS za podršku dinamičkim korisničkim procesima",
+            "Implementirao state management koristeći Redux te integrirao backend servise uz pomoć NestJS-a i MongoDB-a",
+            "Sudjelovao u razvoju Nobula Event Platforme, poboljšavajući funkcionalnost korisničkog sučelja i upotrebljivost platforme",
+            "Surađivao s razvojnim timom na isporuci skalabilnih i održivih funkcionalnosti aplikacije",
             "HTML, SCSS, React, TypeScript, Redux, NestJS, MongoDB"
           ]
         }

@@ -11,7 +11,6 @@
           "themeDarkLabel": "Dark",
           "themeAutoLabel": "Auto",
           "colorFillLabel": "Color fill",
-          "blurLabel": "Blur",
           "accentColorLabel": "Accent color",
           "highlightColorLabel": "Highlight color"
         },
@@ -44,7 +43,7 @@
       "experienceTitle": "Experience (Last Three)",
       "skillsTitle": "Skills",
       "educationTitle": "Education & Languages",
-      "skillsList": "HTML, CSS, JavaScript, React, React Native, Next.js, TypeScript, Redux, Zustand, TanStack Query",
+      "skillsList": "HTML, CSS, JavaScript, React, React Native, Next.js, TypeScript, NestJS, MongoDB, Redux, Zustand, TanStack Query",
       "education": {
         "highSchoolTitle": "Electrical Engineering Technician",
         "highSchoolDescription": "Elektrotehnicka skola Zagreb (2008 - 2012)",
@@ -58,8 +57,11 @@
           "company": "The Falcon Technology",
           "period": "Oct 2023 - Present",
           "highlights": [
-            "Company website maintenance and updates",
-            "Frontend development on client projects",
+            "Maintained and improved the company website by implementing new features, fixing issues, and ensuring consistent performance and reliability",
+            "Developed responsive and scalable frontend features for multiple client projects using React and TypeScript",
+            "Integrated APIs and managed server state using TanStack Query to improve data handling and user experience",
+            "Collaborated with designers, backend engineers, and project stakeholders to deliver production-ready web and mobile applications",
+            "Contributed to improving code quality and maintainability through reusable components and modern frontend development practices",
             "Next.js, React, React Native, TypeScript, TanStack Query"
           ]
         },
@@ -68,8 +70,10 @@
           "company": "Serapion",
           "period": "Jan 2023 - Jul 2023",
           "highlights": [
-            "Design and functionality implementation primarily for the Gepek mobile app",
-            "Daily meetings with the rest of the team and clients",
+            "Contributed to the development and feature implementation of the Gepek mobile application using React Native and TypeScript",
+            "Translated design requirements into responsive and functional mobile UI components",
+            "Worked closely with team members and clients in regular meetings to refine requirements and ensure successful delivery",
+            "Assisted in implementing and maintaining mobile application features, improving usability and overall user experience",
             "React Native, TypeScript, Vue.js"
           ]
         },
@@ -78,8 +82,11 @@
           "company": "Nobula Technologies",
           "period": "Dec 2021 - Jan 2023",
           "highlights": [
-            "Frontend and backend development of Nobula Case Creator and Nobula Case Player",
-            "Frontend development of Nobula Event Platform",
+            "Contributed to the development of the Nobula Case Creator and Case Player platforms, working on both frontend and backend functionality",
+            "Built responsive UI components using React, TypeScript, HTML, and CSS to support dynamic user workflows",
+            "Implemented state management using Redux and integrated backend services with NestJS and MongoDB",
+            "Participated in the development of the Nobula Event Platform, improving user interface functionality and platform usability",
+            "Collaborated with the development team to deliver scalable and maintainable application features",
             "HTML, SCSS, React, TypeScript, Redux, NestJS, MongoDB"
           ]
         }
@@ -107,15 +114,7 @@
       "loading": "Loading…",
       "now": "Now",
       "today": "Today",
-      "daysShort": [
-        "Sun",
-        "Mon",
-        "Tue",
-        "Wed",
-        "Thu",
-        "Fri",
-        "Sat"
-      ],
+      "daysShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
       "forecastTitle": "5-DAY FORECAST",
       "conditionsTitle": "CONDITIONS",
       "humidity": "Humidity",
@@ -142,15 +141,7 @@
       "settings": "Settings",
       "textEditor": "Text Editor"
     },
-    "daysShort": [
-      "Sun",
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thu",
-      "Fri",
-      "Sat"
-    ],
+    "daysShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
     "monthsShort": [
       "Jan",
       "Feb",
