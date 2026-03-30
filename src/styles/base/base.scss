@@ -10,6 +10,7 @@
 
 :root {
   color-scheme: dark;
+  --color-blue: #0a7aff;
   --glass-rgb: 0 0 0;
   --accent-500: #0a7aff;
   --accent-500-hover: #1a84ff;
@@ -81,6 +82,7 @@
 
 :root[data-theme="light"] {
   color-scheme: light;
+  --color-blue: #0a7aff;
   --glass-rgb: 255 255 255;
   --apple-dropdown-body-color: rgba(255, 255, 255, 0.7);
   --control-center-dropdown-body-color: rgba(255, 255, 255, 0.4);

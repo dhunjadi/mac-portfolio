@@ -124,7 +124,8 @@
     },
     "finder": {
       "favorites": "Favoriti",
-      "desktop": "Desktop"
+      "desktop": "Desktop",
+      "applications": "Aplikacije"
     }
   },
   "menuBar": {

@@ -1,3 +1,5 @@
+import type { ReactElement } from "react";
+
 export type WindowId =
   | "finder"
   | "about"
@@ -36,4 +38,12 @@ export type ForecastItem = {
 
 export type ForecastResponse = {
   list: ForecastItem[];
+};
+
+export type FinderCategoryId = "desktop" | "applications";
+
+export type FinderCategory = {
+  id: FinderCategoryId;
+  labelKey: string;
+  icon: ReactElement;
 };

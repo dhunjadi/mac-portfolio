@@ -39,29 +39,40 @@
       list-style: none;
     }
 
-    li {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: var(--fs-body);
-      border-radius: 7px;
-      padding: 0.36rem 0.45rem;
-      color: rgb(var(--text-primary-rgb) / 0.88);
-
-      svg {
-        width: 1.4rem;
-        height: 1.4rem;
-        color: var(--accent-500);
-
-        @include respond(sm) {
-          width: 14px;
-          height: 14px;
-        }
-      }
+    button {
+      border: none;
+      background: none;
+      border-radius: 8px;
 
       &.active {
         background: var(--surface-3);
         color: var(--text-primary);
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: var(--fs-body);
+        border-radius: 7px;
+        padding: 0.36rem 0.45rem;
+        color: rgb(var(--text-primary-rgb) / 0.88);
+
+        svg {
+          width: 1.4rem;
+          height: 1.4rem;
+          fill: var(--accent-500);
+
+          @include respond(sm) {
+            width: 14px;
+            height: 14px;
+          }
+        }
+
+        &.active {
+          background: var(--surface-3);
+          color: var(--text-primary);
+        }
       }
     }
   }

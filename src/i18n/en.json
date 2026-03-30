@@ -100,7 +100,8 @@
     },
     "finder": {
       "favorites": "Favorites",
-      "desktop": "Desktop"
+      "desktop": "Desktop",
+      "applications": "Applications"
     },
     "textEditor": {
       "import": "Import",
