@@ -183,23 +183,6 @@
   }
 }
 
-@mixin panel-heading(
-  $title-size: var(--fs-h3),
-  $subtitle-size: var(--fs-caption),
-  $subtitle-color: currentColor,
-  $subtitle-line-height: 1.4
-) {
-  &__title {
-    font-size: $title-size;
-  }
-
-  &__subTitle {
-    color: $subtitle-color;
-    font-size: $subtitle-size;
-    line-height: $subtitle-line-height;
-  }
-}
-
 @mixin frosted-surface($bg, $border, $blur: 8px, $saturate: null) {
   background-color: $bg;
   border: $border;

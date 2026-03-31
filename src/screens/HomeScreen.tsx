@@ -1,7 +1,7 @@
 import MenuBar from "../components/MenuBar";
 import Dock from "../components/Dock";
 import { useOpenedWindow, useWindowActions } from "../stores/windowStore";
-import DesktopPdfIcon from "../components/DesktopPdfIcon";
+import resumePreviewIcon from "/resume-preview.jpg";
 import {
   useAccentColor,
   useHighlightColor,
@@ -11,6 +11,7 @@ import {
 import { lazy, useCallback, useEffect, useRef, useState } from "react";
 import { useLogin } from "../stores/loginStore";
 import { useShutDown } from "../stores/powerStore";
+import Icon from "../components/DesktopIcon";
 
 const LoginOverlay = lazy(() => import("../components/LoginOverlay"));
 
@@ -89,7 +90,6 @@ const HomeScreen = () => {
 
   const [displayedWallpaper, setDisplayedWallpaper] = useState(wallpaper);
 
-  const handleOpenPdf = useCallback(() => openWindow("pdf"), [openWindow]);
   const handleCloseAbout = useCallback(
     () => closeWindow("about"),
     [closeWindow],
@@ -197,7 +197,15 @@ const HomeScreen = () => {
 
       <MenuBar ref={menuBarRef} />
       <main>
-        {isLoggedIn && !isShutDown && <DesktopPdfIcon onOpen={handleOpenPdf} />}
+        {isLoggedIn && !isShutDown && (
+          <Icon
+            label="Resume.pdf"
+            imgSrc={resumePreviewIcon}
+            onOpen={() => openWindow("pdf")}
+            xPosition={24}
+            yPosition={72}
+          />
+        )}
 
         {isAboutWindowOpen && <AboutThisDevWindow onClose={handleCloseAbout} />}
 

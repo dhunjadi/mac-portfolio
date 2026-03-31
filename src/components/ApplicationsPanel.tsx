@@ -1,4 +1,4 @@
-import Icon from "./Icon";
+import Icon from "./DesktopIcon";
 import LinkedInLogo from "/icons/linked-in-logo.png";
 
 const ApplicationsPanel = () => {

@@ -27,6 +27,10 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
     return <></>;
   };
 
+  const selectedCategory = settingsCategories.find(
+    (category) => category.id === selectedCategoryId,
+  );
+
   return (
     <WindowWrapper
       windowId="settings"
@@ -53,16 +57,16 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
           </div>
 
           <ul className="w-settings__sideBar_categories">
-            {settingsCategories.map((item) => (
+            {settingsCategories.map((category) => (
               <button
-                key={item.id}
+                key={category.id}
                 type="button"
-                className={item.id === selectedCategoryId ? "active" : ""}
-                onClick={() => setSelectedCategoryId(item.id)}
+                className={category.id === selectedCategoryId ? "active" : ""}
+                onClick={() => setSelectedCategoryId(category.id)}
               >
                 <li>
-                  <img src={item.icon} alt="item icon" />
-                  {t(item.labelKey)}
+                  <img src={category.icon as string} alt="item icon" />
+                  {t(category.labelKey)}
                 </li>
               </button>
             ))}
@@ -71,6 +75,9 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
       }
     >
       <div className="w-settings__content">
+        <div className="w-settings__content_header drag-handler">
+          <h3>{t(selectedCategory?.labelKey || "")}</h3>
+        </div>
         {renderPanelByCategoryId(selectedCategoryId)}
       </div>
     </WindowWrapper>

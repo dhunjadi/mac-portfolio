@@ -7,13 +7,6 @@ const LanguagePanel = () => {
 
   return (
     <section className="c-languagePanel">
-      <h2 className="c-languagePanel__title">
-        {t("windows.settings.categories.language.title")}
-      </h2>
-      <p className="c-languagePanel__subTitle">
-        {t("windows.settings.categories.language.subtitle")}
-      </p>
-
       <div
         className="c-languagePanel__buttons"
         role="radiogroup"

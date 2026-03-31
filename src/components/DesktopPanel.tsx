@@ -1,5 +1,5 @@
 import { useWindowActions } from "../stores/windowStore";
-import Icon from "./Icon";
+import Icon from "./DesktopIcon";
 import resumePreviewIcon from "/resume-preview.jpg";
 
 const DesktopPanel = () => {

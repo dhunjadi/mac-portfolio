@@ -1,16 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import { Rnd } from "react-rnd";
-import resumePreview from "/resume-preview.jpg";
 import { useTranslation } from "react-i18next";
 
-type DesktopPdfIconProps = {
+type DesktopIconProps = {
+  label: string;
+  imgSrc: string;
+  xPosition?: number;
+  yPosition?: number;
   onOpen: () => void;
 };
 
 const TAP_MOVE_THRESHOLD = 8;
 const DOUBLE_TAP_DELAY = 300;
 
-const DesktopPdfIcon = ({ onOpen }: DesktopPdfIconProps) => {
+const DesktopIcon = ({
+  label,
+  imgSrc,
+  onOpen,
+  xPosition = 24,
+  yPosition = 72,
+}: DesktopIconProps) => {
   const { t } = useTranslation();
   const [isSelected, setIsSelected] = useState(false);
   const iconRef = useRef<HTMLDivElement | null>(null);
@@ -36,19 +45,19 @@ const DesktopPdfIcon = ({ onOpen }: DesktopPdfIconProps) => {
   return (
     <Rnd
       default={{
-        x: 24,
-        y: 72,
+        x: xPosition,
+        y: yPosition,
         width: "fit-content",
         height: "fit-content",
       }}
       enableResizing={false}
       bounds="parent"
-      className="c-desktopResumeIcon__rnd"
+      className="c-desktopIcon__rnd"
     >
-      <div className="c-desktopResumeIcon" ref={iconRef}>
+      <div className="c-desktopIcon" ref={iconRef}>
         <button
           type="button"
-          className={`c-desktopResumeIcon__button ${isSelected ? "isSelected" : ""}`}
+          className={`c-desktopIcon__button ${isSelected ? "isSelected" : ""}`}
           onPointerDown={(event) => {
             pointerStartRef.current = {
               x: event.clientX,
@@ -81,12 +90,12 @@ const DesktopPdfIcon = ({ onOpen }: DesktopPdfIconProps) => {
           aria-label={t("desktopPdf.openAria")}
           title={t("desktopPdf.openTitle")}
         >
-          <img src={resumePreview} alt={t("desktopPdf.fileAlt")} />
-          <span>{t("desktopPdf.fileName")}</span>
+          <img src={imgSrc} alt="icon" />
+          <span>{label}</span>
         </button>
       </div>
     </Rnd>
   );
 };
 
-export default DesktopPdfIcon;
+export default DesktopIcon;

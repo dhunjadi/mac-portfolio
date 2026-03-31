@@ -27,10 +27,6 @@ const AppearancePanel = () => {
 
   return (
     <section className="c-appearancePanel">
-      <h2 className="c-appearancePanel__title">
-        {t("windows.settings.categories.appearance.title")}
-      </h2>
-
       <div className="c-appearancePanel__group">
         <div className="c-appearancePanel__group_input">
           <label>{appearanceLabel}</label>

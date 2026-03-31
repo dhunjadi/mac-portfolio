@@ -148,7 +148,6 @@
     color: var(--text-primary);
     background-color: var(--surface-1);
     flex: 1;
-    padding: 24px;
     overflow: auto;
     scrollbar-color: var(--surface-3) var(--surface-1);
     scrollbar-width: thin;
@@ -157,6 +156,26 @@
       margin: 0;
       font-size: var(--fs-h1);
       font-weight: 600;
+    }
+
+    &_header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 0.75rem 0rem 2.75rem;
+
+      @include respond(md) {
+        padding-left: 40px;
+      }
+
+      svg {
+        width: 1rem;
+        fill: var(--text-primary);
+      }
+
+      h3 {
+        font-size: 14px;
+      }
     }
   }
 

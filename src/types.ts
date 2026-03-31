@@ -50,7 +50,7 @@ export type SettingsCategoryId =
 
 type Category = {
   labelKey: string;
-  icon: ReactElement;
+  icon: ReactElement | string;
 };
 
 export type FinderCategory = Category & {

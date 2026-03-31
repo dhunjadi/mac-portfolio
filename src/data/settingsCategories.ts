@@ -2,8 +2,9 @@ import appearanceIcon from "/icons/appearance-icon.svg";
 import wallpaperIcon from "/icons/wallpaper-icon.svg";
 import dockIcon from "/icons/dock.svg";
 import globeIcon from "/icons/globe.svg";
+import type { SettingsCategory } from "../types";
 
-export const settingsCategories = [
+export const settingsCategories: SettingsCategory[] = [
   {
     id: "appearance",
     labelKey: "windows.settings.categories.appearance.title",

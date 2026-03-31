@@ -44,13 +44,6 @@ const DockPanel = () => {
 
   return (
     <section className="c-dockPanel">
-      <h2 className="c-dockPanel__title">
-        {t("windows.settings.categories.dock.title")}
-      </h2>
-      <p className="c-dockPanel__subTitle">
-        {t("windows.settings.categories.dock.subtitle")}
-      </p>
-
       <div className="c-dockPanel__group">
         <div className="c-dockPanel__group_input">
           <label htmlFor="dock-position">
