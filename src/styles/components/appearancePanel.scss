@@ -32,6 +32,22 @@
         justify-content: space-between;
       }
 
+      select {
+        width: fit-content;
+        color: var(--text-primary);
+        padding: 0.4rem 0.7rem;
+        border-radius: 8px;
+        border: 1px solid var(--glass-border);
+        background-color: var(--surface-2);
+        font-size: var(--fs-body);
+        cursor: pointer;
+
+        &:focus-visible {
+          outline: 2px solid var(--accent-500);
+          outline-offset: 2px;
+        }
+      }
+
       label {
         align-self: flex-start;
         margin-bottom: 1rem;
