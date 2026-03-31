@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { wallpaperOptions, wallpaperPreviews } from "../data/wallpapers";
 import { persist } from "zustand/middleware";
 import type { SidebarIconSize } from "../types";
+import { colorOptions } from "../data/colorOptions";
 
 type DockPosition = "left" | "bottom" | "right";
 type ThemePreference = "light" | "dark" | "auto";
@@ -40,8 +41,8 @@ const useSettingsStore = create<SettingsStore>()(
   persist(
     (set) => ({
       themePreference: "auto",
-      accentColor: "#0A84FF",
-      highlightColor: "#0A84FF",
+      accentColor: colorOptions[0].value,
+      highlightColor: colorOptions[0].value,
       wallpaper: wallpaperOptions[0],
       dockPosition: "bottom",
       dockIconMaxSize: null,
@@ -58,12 +59,12 @@ const useSettingsStore = create<SettingsStore>()(
 
         setAccentColor: (value) =>
           set(() => ({
-            accentColor: isHexColor(value) ? value : "#0A84FF",
+            accentColor: isHexColor(value) ? value : colorOptions[0].value,
           })),
 
         setHighlightColor: (value) =>
           set(() => ({
-            highlightColor: isHexColor(value) ? value : "#0A84FF",
+            highlightColor: isHexColor(value) ? value : colorOptions[0].value,
           })),
 
         setWallpaper: (wallpaper) => set(() => ({ wallpaper })),

@@ -76,7 +76,7 @@ const AppearancePanel = () => {
           <label>{accentColorLabel}</label>
           <ColorPicker
             colors={colorOptions}
-            value={accentColor}
+            selectedColor={accentColor}
             onChange={(color) => setAccentColor(color.toLowerCase())}
           />
         </div>
@@ -85,7 +85,7 @@ const AppearancePanel = () => {
           <label>{highlightColorLabel}</label>
           <ColorPicker
             colors={colorOptions}
-            value={highlightColor}
+            selectedColor={highlightColor}
             onChange={(color) => setHighlightColor(color.toLowerCase())}
           />
         </div>
