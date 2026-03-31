@@ -46,7 +46,7 @@ describe("AppearancePanel", () => {
   it("updates accent color on selection", () => {
     render(<AppearancePanel />);
 
-    const firstColor = colorOptions[2];
+    const firstColor = colorOptions[2].value;
     const accentLabel = i18n.t(
       "windows.settings.categories.appearance.accentColorLabel",
     );
@@ -64,7 +64,7 @@ describe("AppearancePanel", () => {
   it("updates highlight color on selection", () => {
     render(<AppearancePanel />);
 
-    const firstColor = colorOptions[1];
+    const firstColor = colorOptions[1].value;
     const highlightLabel = i18n.t(
       "windows.settings.categories.appearance.highlightColorLabel",
     );
@@ -76,7 +76,9 @@ describe("AppearancePanel", () => {
     });
 
     fireEvent.click(button);
-    expect(mockSetHighlightColor).toHaveBeenCalledWith(firstColor.toLowerCase());
+    expect(mockSetHighlightColor).toHaveBeenCalledWith(
+      firstColor.toLowerCase(),
+    );
   });
 
   it("updates alpha and blur from sliders", () => {
