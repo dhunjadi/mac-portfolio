@@ -1,16 +1,16 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import WindowWrapper from "../WindowWrapper";
-import DesktopPanel from "../DesktopPanel";
+import WindowWrapper from "../../WindowWrapper";
+import DesktopPanel from "./panels/DesktopPanel";
 import { useTranslation } from "react-i18next";
-import ApplicationsPanel from "../ApplicationsPanel";
+import ApplicationsPanel from "./panels/ApplicationsPanel";
 import { useState } from "react";
-import { finderCategories } from "../../data/finderCategories";
-import type { FinderCategoryId } from "../../types";
-import ChevronLeftIcon from "../../assets/icons/chevron-left.svg?react";
-import ChevronRightIcon from "../../assets/icons/chevron-right.svg?react";
-import { useSidebarIconSize } from "../../stores/settingsStore";
-import { getSidebarIconSizeClass } from "../../utils";
+import { finderCategories } from "../../../data/finderCategories";
+import type { FinderCategoryId } from "../../../types";
+import ChevronLeftIcon from "../../../assets/icons/chevron-left.svg?react";
+import ChevronRightIcon from "../../../assets/icons/chevron-right.svg?react";
+import { useSidebarIconSize } from "../../../stores/settingsStore";
+import { getSidebarIconSizeClass } from "../../../utils";
 
 type FinderWindowProps = {
   onClose: () => void;

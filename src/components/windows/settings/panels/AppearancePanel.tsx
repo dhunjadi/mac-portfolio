@@ -1,14 +1,14 @@
-import { colorOptions } from "../data/colorOptions";
+import { colorOptions } from "../../../../data/colorOptions";
 import { useTranslation } from "react-i18next";
-import ColorPicker from "./ColorPicker";
+import ColorPicker from "../../../ColorPicker";
 import {
   useAccentColor,
   useHighlightColor,
-  useSettingsActions,
-  useSidebarIconSize,
   useThemePreference,
-} from "../stores/settingsStore";
-import type { SidebarIconSize } from "../types";
+  useSidebarIconSize,
+  useSettingsActions,
+} from "../../../../stores/settingsStore";
+import type { SidebarIconSize } from "../../../../types";
 
 const AppearancePanel = () => {
   const { t } = useTranslation();

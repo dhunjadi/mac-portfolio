@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import DockPanel from "../../components/DockPanel";
+import DockPanel from "../../../../../components/windows/settings/panels/DockPanel";
 
 const mockSetDockPosition = vi.fn();
 const mockSetDockIconMaxSize = vi.fn();

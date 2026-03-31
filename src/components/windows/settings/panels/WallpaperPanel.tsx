@@ -1,8 +1,8 @@
 import {
-  useSettingsActions,
   useWallpaper,
   useWallpaperPreviews,
-} from "../stores/settingsStore";
+  useSettingsActions,
+} from "../../../../stores/settingsStore";
 
 const WallpaperPanel = () => {
   const wallpaper = useWallpaper();

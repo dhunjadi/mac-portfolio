@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import WallpaperPanel from "../../components/WallpaperPanel";
+import WallpaperPanel from "../../../../../components/windows/settings/panels/WallpaperPanel";
 
 const mockSetWallpaper = vi.fn();
 

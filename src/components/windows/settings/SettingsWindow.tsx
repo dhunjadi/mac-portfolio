@@ -1,14 +1,14 @@
 import { useState } from "react";
-import WindowWrapper from "../WindowWrapper";
-import { settingsCategories } from "../../data/settingsCategories";
-import AppearancePanel from "../AppearancePanel";
-import WallpaperPanel from "../WallpaperPanel";
-import DockPanel from "../DockPanel";
-import LanguagePanel from "../LanguagePanel";
+import WindowWrapper from "../../WindowWrapper";
+import { settingsCategories } from "../../../data/settingsCategories";
+import AppearancePanel from "./panels/AppearancePanel";
+import WallpaperPanel from "./panels/WallpaperPanel";
+import DockPanel from "./panels/DockPanel";
+import LanguagePanel from "./panels/LanguagePanel";
 import avatarPicture from "/avatar.jpg";
 import { useTranslation } from "react-i18next";
-import { useSidebarIconSize } from "../../stores/settingsStore";
-import { getSidebarIconSizeClass } from "../../utils";
+import { useSidebarIconSize } from "../../../stores/settingsStore";
+import { getSidebarIconSizeClass } from "../../../utils";
 
 type SettingsWindowProps = {
   onClose: () => void;

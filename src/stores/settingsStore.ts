@@ -6,6 +6,7 @@ import { colorOptions } from "../data/colorOptions";
 
 type DockPosition = "left" | "bottom" | "right";
 type ThemePreference = "light" | "dark" | "auto";
+type ActivePanel = "general" | "appearance" | "wallpaper" | "dock" | "language";
 
 type SettingsActions = {
   setWallpaper: (wallpaper: string) => void;
@@ -20,6 +21,7 @@ type SettingsActions = {
 };
 
 type SettingsStore = {
+  activePanel: ActivePanel;
   themePreference: ThemePreference;
   accentColor: string;
   highlightColor: string;
@@ -40,6 +42,7 @@ const isHexColor = (value: string) => /^#[0-9a-fA-F]{6}$/.test(value);
 const useSettingsStore = create<SettingsStore>()(
   persist(
     (set) => ({
+      activePanel: "appearance",
       themePreference: "auto",
       accentColor: colorOptions[0].value,
       highlightColor: colorOptions[0].value,

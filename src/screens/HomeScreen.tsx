@@ -24,9 +24,11 @@ const CalculatorWindow = lazy(
   () => import("../components/windows/CalculatorWindow"),
 );
 const SettingsWindow = lazy(
-  () => import("../components/windows/SettingsWindow"),
+  () => import("../components/windows/settings/SettingsWindow"),
 );
-const FinderWindow = lazy(() => import("../components/windows/FinderWindow"));
+const FinderWindow = lazy(
+  () => import("../components/windows/finder/FinderWindow"),
+);
 const PdfWindow = lazy(() => import("../components/windows/PdfWindow"));
 const WeatherWindow = lazy(() => import("../components/windows/WeatherWindow"));
 const TextEditorWindow = lazy(

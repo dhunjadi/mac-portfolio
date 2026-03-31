@@ -1,12 +1,16 @@
 import { useEffect, useState, type CSSProperties } from "react";
+
+import { useTranslation } from "react-i18next";
 import {
+  useDockPosition,
   useDockIconMaxSize,
   useDockIconScale,
-  useDockPosition,
   useSettingsActions,
-} from "../stores/settingsStore";
-import { clampDockIconSize, getDockIconSizeLimits } from "../utils/dockSizing";
-import { useTranslation } from "react-i18next";
+} from "../../../../stores/settingsStore";
+import {
+  getDockIconSizeLimits,
+  clampDockIconSize,
+} from "../../../../utils/dockSizing";
 
 const DockPanel = () => {
   const { t } = useTranslation();

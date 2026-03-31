@@ -1,10 +1,10 @@
-import Icon from "./DesktopIcon";
+import DesktopIcon from "../../../DesktopIcon";
 import LinkedInLogo from "/icons/linked-in-logo.png";
 
 const ApplicationsPanel = () => {
   return (
     <section className="c-applicationsPanel">
-      <Icon
+      <DesktopIcon
         label="LinkedIn"
         imgSrc={LinkedInLogo}
         onOpen={() => {

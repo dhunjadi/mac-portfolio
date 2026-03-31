@@ -1,5 +1,5 @@
-import { useWindowActions } from "../stores/windowStore";
-import Icon from "./DesktopIcon";
+import { useWindowActions } from "../../../../stores/windowStore";
+import DesktopIcon from "../../../DesktopIcon";
 import resumePreviewIcon from "/resume-preview.jpg";
 
 const DesktopPanel = () => {
@@ -7,7 +7,7 @@ const DesktopPanel = () => {
 
   return (
     <section className="c-desktopPanel">
-      <Icon
+      <DesktopIcon
         label="Resume.pdf"
         imgSrc={resumePreviewIcon}
         onOpen={() => openWindow("pdf")}

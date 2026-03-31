@@ -1,9 +1,9 @@
 import { render, screen, fireEvent, within } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import SettingsWindow from "../../../components/windows/SettingsWindow";
-import { settingsCategories } from "../../../data/settingsCategories";
-import i18n from "../../../i18n";
+import SettingsWindow from "../../../../components/windows/settings/SettingsWindow";
+import { settingsCategories } from "../../../../data/settingsCategories";
+import i18n from "../../../../i18n";
 
 describe("SettingsWindow", () => {
   const mockOnClose = vi.fn();

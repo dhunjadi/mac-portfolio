@@ -1,8 +1,8 @@
 import { render, screen, fireEvent, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import AppearancePanel from "../../components/AppearancePanel";
-import { colorOptions } from "../../data/colorOptions";
-import i18n from "../../i18n";
+import AppearancePanel from "../../../../../components/windows/settings/panels/AppearancePanel";
+import { colorOptions } from "../../../../../data/colorOptions";
+import i18n from "../../../../../i18n";
 
 const mockSetGlassAlpha = vi.fn();
 const mockSetBlur = vi.fn();
