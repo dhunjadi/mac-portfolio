@@ -6,7 +6,7 @@
         "appearance": {
           "title": "Appearance",
           "subtitle": "Adjust the colors and how strong the glass effect looks.",
-          "themeLabel": "Theme",
+          "appearance": "Appearance",
           "themeLightLabel": "Light",
           "themeDarkLabel": "Dark",
           "themeAutoLabel": "Auto",

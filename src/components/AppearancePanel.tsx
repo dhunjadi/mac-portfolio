@@ -10,7 +10,9 @@ import {
 
 const AppearancePanel = () => {
   const { t } = useTranslation();
-  const themeLabel = t("windows.settings.categories.appearance.themeLabel");
+  const appearanceLabel = t(
+    "windows.settings.categories.appearance.appearance",
+  );
   const accentColorLabel = t(
     "windows.settings.categories.appearance.accentColorLabel",
   );
@@ -28,63 +30,62 @@ const AppearancePanel = () => {
       <h2 className="c-appearancePanel__title">
         {t("windows.settings.categories.appearance.title")}
       </h2>
-      <p className="c-appearancePanel__subTitle">
-        {t("windows.settings.categories.appearance.subtitle")}
-      </p>
 
-      <div className="c-appearancePanel__input">
-        <label>{themeLabel}</label>
-        <div
-          className="c-appearancePanel__input_theme"
-          role="radiogroup"
-          aria-label={themeLabel}
-        >
-          <button
-            type="button"
-            role="radio"
-            aria-checked={themePreference === "light"}
-            className={themePreference === "light" ? "active" : ""}
-            onClick={() => setThemePreference("light")}
+      <div className="c-appearancePanel__group">
+        <div className="c-appearancePanel__group_input">
+          <label>{appearanceLabel}</label>
+          <div
+            className="c-appearancePanel__group_input_appearance"
+            role="radiogroup"
+            aria-label={appearanceLabel}
           >
-            {t("windows.settings.categories.appearance.themeLightLabel")}
-          </button>
-          <button
-            type="button"
-            role="radio"
-            aria-checked={themePreference === "dark"}
-            className={themePreference === "dark" ? "active" : ""}
-            onClick={() => setThemePreference("dark")}
-          >
-            {t("windows.settings.categories.appearance.themeDarkLabel")}
-          </button>
-          <button
-            type="button"
-            role="radio"
-            aria-checked={themePreference === "auto"}
-            className={themePreference === "auto" ? "active" : ""}
-            onClick={() => setThemePreference("auto")}
-          >
-            {t("windows.settings.categories.appearance.themeAutoLabel")}
-          </button>
+            <button
+              type="button"
+              role="radio"
+              aria-checked={themePreference === "light"}
+              className={themePreference === "light" ? "active" : ""}
+              onClick={() => setThemePreference("light")}
+            >
+              {t("windows.settings.categories.appearance.themeLightLabel")}
+            </button>
+            <button
+              type="button"
+              role="radio"
+              aria-checked={themePreference === "dark"}
+              className={themePreference === "dark" ? "active" : ""}
+              onClick={() => setThemePreference("dark")}
+            >
+              {t("windows.settings.categories.appearance.themeDarkLabel")}
+            </button>
+            <button
+              type="button"
+              role="radio"
+              aria-checked={themePreference === "auto"}
+              className={themePreference === "auto" ? "active" : ""}
+              onClick={() => setThemePreference("auto")}
+            >
+              {t("windows.settings.categories.appearance.themeAutoLabel")}
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className="c-appearancePanel__input">
-        <label>{accentColorLabel}</label>
-        <ColorPicker
-          colors={colorOptions}
-          value={accentColor}
-          onChange={(color) => setAccentColor(color.toLowerCase())}
-        />
-      </div>
+        <div className="c-appearancePanel__group_input">
+          <label>{accentColorLabel}</label>
+          <ColorPicker
+            colors={colorOptions}
+            value={accentColor}
+            onChange={(color) => setAccentColor(color.toLowerCase())}
+          />
+        </div>
 
-      <div className="c-appearancePanel__input">
-        <label>{highlightColorLabel}</label>
-        <ColorPicker
-          colors={colorOptions}
-          value={highlightColor}
-          onChange={(color) => setHighlightColor(color.toLowerCase())}
-        />
+        <div className="c-appearancePanel__group_input">
+          <label>{highlightColorLabel}</label>
+          <ColorPicker
+            colors={colorOptions}
+            value={highlightColor}
+            onChange={(color) => setHighlightColor(color.toLowerCase())}
+          />
+        </div>
       </div>
     </section>
   );

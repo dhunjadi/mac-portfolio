@@ -6,7 +6,7 @@
         "appearance": {
           "title": "Izgled",
           "subtitle": "Prilagodi boje i jačinu efekta stakla.",
-          "themeLabel": "Tema",
+          "appearance": "Izgled",
           "themeLightLabel": "Svijetla",
           "themeDarkLabel": "Tamna",
           "themeAutoLabel": "Automatski",
@@ -16,7 +16,7 @@
         },
         "wallpaper": {
           "title": "Pozadina",
-          "subtitle": "Odaberi pozadinsku sliku"
+          "subtitle": "Odaberite pozadinsku sliku"
         },
         "dock": {
           "title": "Dock",
@@ -30,7 +30,7 @@
         },
         "language": {
           "title": "Jezik",
-          "subtitle": "Odaberi željeni jezik",
+          "subtitle": "Odaberite željeni jezik",
           "englishLabel": "English",
           "croatianLabel": "Hrvatski"
         }
