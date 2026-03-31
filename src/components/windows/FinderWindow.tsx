@@ -7,6 +7,8 @@ import ApplicationsPanel from "../ApplicationsPanel";
 import { useState } from "react";
 import { finderCategories } from "../../data/finderCategories";
 import type { FinderCategoryId } from "../../types";
+import ChevronLeftIcon from "../../assets/icons/chevron-left.svg?react";
+import ChevronRightIcon from "../../assets/icons/chevron-right.svg?react";
 
 type FinderWindowProps = {
   onClose: () => void;
@@ -16,6 +18,10 @@ const FinderWindow = ({ onClose }: FinderWindowProps) => {
   const { t } = useTranslation();
   const [selectedCategoryId, setSelectedCategoryId] = useState(
     finderCategories[0]?.id ?? "",
+  );
+
+  const selectedCategory = finderCategories.find(
+    (category) => category.id === selectedCategoryId,
   );
 
   const renderPanelByCategoryId = (categoryId: FinderCategoryId) => {
@@ -53,6 +59,11 @@ const FinderWindow = ({ onClose }: FinderWindowProps) => {
       }
     >
       <section className="w-finder__content">
+        <div className="w-finder__content_header drag-handler">
+          <ChevronLeftIcon className="no-drag" />
+          <ChevronRightIcon className="no-drag" />
+          <h3>{t(selectedCategory?.labelKey || "")}</h3>
+        </div>
         {renderPanelByCategoryId(selectedCategoryId)}
       </section>
     </WindowWrapper>

@@ -193,15 +193,13 @@ const WindowWrapper = ({
           : "opacity 0.25s ease",
       }}
       dragHandleClassName={
-        layout === "sidebar"
-          ? "c-windowWrapperWithSidebar__sideBar_header"
-          : "c-windowWrapper__titleBar"
+        layout === "sidebar" ? "drag-handler" : "c-windowWrapper__titleBar"
       }
       enableResizing={disableResizing || isMaximized ? false : true}
       disableDragging={isMaximized}
       cancel={
         layout === "sidebar"
-          ? ".--close, .--minimize, .--maximize"
+          ? ".--close, .--minimize, .--maximize, .no-drag"
           : ".c-windowWrapper__titleBar_buttons"
       }
       onMouseDown={() => focusWindow(windowId)}
@@ -230,7 +228,7 @@ const WindowWrapper = ({
         >
           <aside className="c-windowWrapperWithSidebar__sideBar">
             <div
-              className="c-windowWrapperWithSidebar__sideBar_header"
+              className="c-windowWrapperWithSidebar__sideBar_header drag-handler"
               onDoubleClick={onDoubleClick}
               onTouchEnd={onTouchEnd}
             >

@@ -14,8 +14,8 @@ const ApplicationsPanel = () => {
             "noopener,noreferrer",
           );
         }}
-        xPosition={0}
-        yPosition={0}
+        xPosition={24}
+        yPosition={24}
       />
     </section>
   );

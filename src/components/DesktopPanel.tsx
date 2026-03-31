@@ -11,8 +11,8 @@ const DesktopPanel = () => {
         label="Resume.pdf"
         imgSrc={resumePreviewIcon}
         onOpen={() => openWindow("pdf")}
-        xPosition={0}
-        yPosition={0}
+        xPosition={24}
+        yPosition={24}
       />
     </section>
   );
