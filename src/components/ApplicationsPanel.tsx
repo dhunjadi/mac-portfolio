@@ -3,7 +3,7 @@ import LinkedInLogo from "/icons/linked-in-logo.png";
 
 const ApplicationsPanel = () => {
   return (
-    <section className="c-ApplicationsPanel">
+    <section className="c-applicationsPanel">
       <Icon
         label="LinkedIn"
         imgSrc={LinkedInLogo}

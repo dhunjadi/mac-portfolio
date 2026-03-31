@@ -42,8 +42,21 @@ export type ForecastResponse = {
 
 export type FinderCategoryId = "desktop" | "applications";
 
-export type FinderCategory = {
-  id: FinderCategoryId;
+export type SettingsCategoryId =
+  | "appearance"
+  | "wallpaper"
+  | "dock"
+  | "language";
+
+type Category = {
   labelKey: string;
   icon: ReactElement;
+};
+
+export type FinderCategory = Category & {
+  id: FinderCategoryId;
+};
+
+export type SettingsCategory = Category & {
+  id: SettingsCategoryId;
 };
