@@ -7,6 +7,8 @@ import DockPanel from "../DockPanel";
 import LanguagePanel from "../LanguagePanel";
 import avatarPicture from "/avatar.jpg";
 import { useTranslation } from "react-i18next";
+import { useSidebarIconSize } from "../../stores/settingsStore";
+import { getSidebarIconSizeClass } from "../../utils";
 
 type SettingsWindowProps = {
   onClose: () => void;
@@ -14,6 +16,8 @@ type SettingsWindowProps = {
 
 const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
   const { t } = useTranslation();
+  const sidebarIconSize = useSidebarIconSize();
+
   const [searchText, setSearchText] = useState("");
   const [selectedCategoryId, setSelectedCategoryId] = useState(
     settingsCategories[0]?.id ?? "",
@@ -64,8 +68,12 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
                 className={category.id === selectedCategoryId ? "active" : ""}
                 onClick={() => setSelectedCategoryId(category.id)}
               >
-                <li>
-                  <img src={category.icon as string} alt="item icon" />
+                <li className={getSidebarIconSizeClass(sidebarIconSize)}>
+                  <img
+                    src={category.icon as string}
+                    alt="item icon"
+                    className={getSidebarIconSizeClass(sidebarIconSize)}
+                  />
                   {t(category.labelKey)}
                 </li>
               </button>

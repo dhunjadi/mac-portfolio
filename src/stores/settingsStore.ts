@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { wallpaperOptions, wallpaperPreviews } from "../data/wallpapers";
 import { persist } from "zustand/middleware";
+import type { SidebarIconSize } from "../types";
 
 type DockPosition = "left" | "bottom" | "right";
 type ThemePreference = "light" | "dark" | "auto";
@@ -14,6 +15,7 @@ type SettingsActions = {
   setDockIconMaxSize: (value: number) => void;
   setDockIconScale: (value: number) => void;
   setBrightness: (value: number) => void;
+  setSidebarIconSize: (value: SidebarIconSize) => void;
 };
 
 type SettingsStore = {
@@ -27,6 +29,7 @@ type SettingsStore = {
   brightness: number;
   wallpaperOptions: readonly string[];
   wallpaperPreviews: readonly string[];
+  sidebarIconSize: SidebarIconSize;
   actions: SettingsActions;
 };
 
@@ -46,6 +49,7 @@ const useSettingsStore = create<SettingsStore>()(
       brightness: 100,
       wallpaperOptions,
       wallpaperPreviews,
+      sidebarIconSize: "medium",
       actions: {
         setThemePreference: (value) =>
           set(() => ({
@@ -73,6 +77,9 @@ const useSettingsStore = create<SettingsStore>()(
 
         setBrightness: (value) =>
           set(() => ({ brightness: clampBrightness(value) })),
+
+        setSidebarIconSize: (iconSize) =>
+          set(() => ({ sidebarIconSize: iconSize })),
       },
     }),
     {
@@ -86,6 +93,7 @@ const useSettingsStore = create<SettingsStore>()(
         dockIconMaxSize: state.dockIconMaxSize,
         dockIconScale: state.dockIconScale,
         brightness: state.brightness,
+        sidebarIconSize: state.sidebarIconSize,
       }),
     },
   ),
@@ -114,8 +122,12 @@ export const useDockIconScale = () =>
 export const useBrightness = () =>
   useSettingsStore((state) => state.brightness);
 
+export const useSidebarIconSize = () =>
+  useSettingsStore((state) => state.sidebarIconSize);
+
 export const useWallpaperOptions = () =>
   useSettingsStore((state) => state.wallpaperOptions);
+
 export const useWallpaperPreviews = () =>
   useSettingsStore((state) => state.wallpaperPreviews);
 

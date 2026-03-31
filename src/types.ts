@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import type { ComponentType, SVGProps } from "react";
 
 export type WindowId =
   | "finder"
@@ -50,7 +50,7 @@ export type SettingsCategoryId =
 
 type Category = {
   labelKey: string;
-  icon: ReactElement | string;
+  icon: ComponentType<SVGProps<SVGSVGElement>> | string;
 };
 
 export type FinderCategory = Category & {
@@ -60,3 +60,5 @@ export type FinderCategory = Category & {
 export type SettingsCategory = Category & {
   id: SettingsCategoryId;
 };
+
+export type SidebarIconSize = "small" | "medium" | "large";

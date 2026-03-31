@@ -9,6 +9,8 @@ import { finderCategories } from "../../data/finderCategories";
 import type { FinderCategoryId } from "../../types";
 import ChevronLeftIcon from "../../assets/icons/chevron-left.svg?react";
 import ChevronRightIcon from "../../assets/icons/chevron-right.svg?react";
+import { useSidebarIconSize } from "../../stores/settingsStore";
+import { getSidebarIconSizeClass } from "../../utils";
 
 type FinderWindowProps = {
   onClose: () => void;
@@ -16,6 +18,8 @@ type FinderWindowProps = {
 
 const FinderWindow = ({ onClose }: FinderWindowProps) => {
   const { t } = useTranslation();
+  const sidebarIconSize = useSidebarIconSize();
+
   const [selectedCategoryId, setSelectedCategoryId] = useState(
     finderCategories[0]?.id ?? "",
   );
@@ -41,19 +45,24 @@ const FinderWindow = ({ onClose }: FinderWindowProps) => {
         <aside className="w-finder__sidebar">
           <p>{t("windows.finder.favorites")}</p>
           <ul>
-            {finderCategories.map((category) => (
-              <button
-                key={category.id}
-                type="button"
-                className={category.id === selectedCategoryId ? "active" : ""}
-                onClick={() => setSelectedCategoryId(category.id)}
-              >
-                <li>
-                  {category.icon}
-                  {t(category.labelKey)}
-                </li>
-              </button>
-            ))}
+            {finderCategories.map((category) => {
+              const Icon = category.icon;
+              return (
+                <button
+                  key={category.id}
+                  type="button"
+                  className={category.id === selectedCategoryId ? "active" : ""}
+                  onClick={() => setSelectedCategoryId(category.id)}
+                >
+                  <li className={getSidebarIconSizeClass(sidebarIconSize)}>
+                    <Icon
+                      className={getSidebarIconSizeClass(sidebarIconSize)}
+                    />
+                    {t(category.labelKey)}
+                  </li>
+                </button>
+              );
+            })}
           </ul>
         </aside>
       }

@@ -12,7 +12,13 @@
           "themeAutoLabel": "Auto",
           "colorFillLabel": "Color fill",
           "accentColorLabel": "Accent color",
-          "highlightColorLabel": "Highlight color"
+          "highlightColorLabel": "Highlight color",
+          "sidebarIconSize": {
+            "label": "Sidebar icon size",
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
         },
         "wallpaper": {
           "title": "Wallpaper",

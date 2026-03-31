@@ -11,7 +11,7 @@
   display: flex;
 
   .c-windowWrapperWithSidebar__sideBar {
-    min-width: 130px;
+    min-width: 140px;
     flex: 0 0 30%;
   }
 
@@ -115,6 +115,18 @@
       &.active {
         background-color: var(--accent-500);
       }
+
+      li.is-small {
+        font-size: 12px;
+      }
+
+      li.is-medium {
+        font-size: 14px;
+      }
+
+      li.is-large {
+        font-size: 16px !important;
+      }
     }
 
     li {
@@ -125,19 +137,35 @@
       color: var(--text-primary);
       cursor: pointer;
       padding: 0.5rem 0.8rem;
-      font-size: var(--fs-body-lg);
+      /* font-size: var(--fs-body-lg); */
 
       @include respond(sm) {
-        font-size: var(--fs-caption);
+        /* font-size: var(--fs-caption); */
         gap: 4px;
         padding: 5px 8px;
       }
 
-      img {
+      img.is-small {
+        width: 1rem;
+
+        @include respond(sm) {
+          width: 10px;
+        }
+      }
+
+      img.is-medium {
         width: 1.4rem;
 
         @include respond(sm) {
           width: 14px;
+        }
+      }
+
+      img.is-large {
+        width: 1.6rem;
+
+        @include respond(sm) {
+          width: 18px;
         }
       }
     }

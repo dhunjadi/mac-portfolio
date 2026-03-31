@@ -5,8 +5,10 @@ import {
   useAccentColor,
   useHighlightColor,
   useSettingsActions,
+  useSidebarIconSize,
   useThemePreference,
 } from "../stores/settingsStore";
+import type { SidebarIconSize } from "../types";
 
 const AppearancePanel = () => {
   const { t } = useTranslation();
@@ -22,8 +24,13 @@ const AppearancePanel = () => {
   const accentColor = useAccentColor();
   const highlightColor = useHighlightColor();
   const themePreference = useThemePreference();
-  const { setAccentColor, setHighlightColor, setThemePreference } =
-    useSettingsActions();
+  const sidebarIconSize = useSidebarIconSize();
+  const {
+    setAccentColor,
+    setHighlightColor,
+    setThemePreference,
+    setSidebarIconSize,
+  } = useSettingsActions();
 
   return (
     <section className="c-appearancePanel">
@@ -81,6 +88,35 @@ const AppearancePanel = () => {
             value={highlightColor}
             onChange={(color) => setHighlightColor(color.toLowerCase())}
           />
+        </div>
+
+        <div className="c-appearancePanel__group_input c-appearancePanel__group_input--row">
+          <label htmlFor="sidebar-icon-size">
+            {t("windows.settings.categories.appearance.sidebarIconSize.label")}
+          </label>
+          <select
+            id="sidebar-icon-size"
+            value={sidebarIconSize}
+            onChange={(event) =>
+              setSidebarIconSize(event.target.value as SidebarIconSize)
+            }
+          >
+            <option value="small">
+              {t(
+                "windows.settings.categories.appearance.sidebarIconSize.small",
+              )}
+            </option>
+            <option value="medium">
+              {t(
+                "windows.settings.categories.appearance.sidebarIconSize.medium",
+              )}
+            </option>
+            <option value="large">
+              {t(
+                "windows.settings.categories.appearance.sidebarIconSize.large",
+              )}
+            </option>
+          </select>
         </div>
       </div>
     </section>

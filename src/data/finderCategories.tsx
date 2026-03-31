@@ -6,11 +6,11 @@ export const finderCategories: FinderCategory[] = [
   {
     id: "desktop",
     labelKey: "windows.finder.desktop",
-    icon: <DesktopIcon />,
+    icon: DesktopIcon,
   },
   {
     id: "applications",
     labelKey: "windows.finder.applications",
-    icon: <ApplicationsIcon />,
+    icon: ApplicationsIcon,
   },
 ];

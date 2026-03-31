@@ -12,7 +12,13 @@
           "themeAutoLabel": "Automatski",
           "colorFillLabel": "Ispunjenost boje",
           "accentColorLabel": "Naglasna boja",
-          "highlightColorLabel": "Boja isticanja"
+          "highlightColorLabel": "Boja isticanja",
+          "sidebarIconSize": {
+            "label": "Veličina ikona bočne trake",
+            "small": "Mala",
+            "medium": "Srednja",
+            "large": "Velika"
+          }
         },
         "wallpaper": {
           "title": "Pozadina",
