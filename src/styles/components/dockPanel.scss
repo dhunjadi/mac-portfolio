@@ -55,6 +55,17 @@
           outline-offset: 2px;
         }
       }
+
+      &--row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        label {
+          margin-bottom: 0;
+          align-self: center;
+        }
+      }
     }
   }
 }
