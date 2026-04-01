@@ -39,6 +39,9 @@
           "subtitle": "Choose your preferred language",
           "englishLabel": "English",
           "croatianLabel": "Hrvatski"
+        },
+        "general": {
+          "title": "General"
         }
       }
     },

@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import { wallpaperOptions, wallpaperPreviews } from "../data/wallpapers";
 import { persist } from "zustand/middleware";
-import type { SidebarIconSize } from "../types";
+import type { SettingsCategoryPanel, SidebarIconSize } from "../types";
 import { colorOptions } from "../data/colorOptions";
 
 type DockPosition = "left" | "bottom" | "right";
 type ThemePreference = "light" | "dark" | "auto";
-type ActivePanel = "general" | "appearance" | "wallpaper" | "dock" | "language";
 
 type SettingsActions = {
+  setActivePanel: (activePanel: SettingsCategoryPanel) => void;
   setWallpaper: (wallpaper: string) => void;
   setThemePreference: (value: ThemePreference) => void;
   setAccentColor: (value: string) => void;
@@ -21,7 +21,7 @@ type SettingsActions = {
 };
 
 type SettingsStore = {
-  activePanel: ActivePanel;
+  activePanel: SettingsCategoryPanel;
   themePreference: ThemePreference;
   accentColor: string;
   highlightColor: string;
@@ -55,6 +55,8 @@ const useSettingsStore = create<SettingsStore>()(
       wallpaperPreviews,
       sidebarIconSize: "medium",
       actions: {
+        setActivePanel: (activePanel) => set(() => ({ activePanel })),
+
         setThemePreference: (value) =>
           set(() => ({
             themePreference: value,
@@ -102,6 +104,9 @@ const useSettingsStore = create<SettingsStore>()(
     },
   ),
 );
+
+export const useActiveSettingsPanel = () =>
+  useSettingsStore((state) => state.activePanel);
 
 export const useThemePreference = () =>
   useSettingsStore((state) => state.themePreference);

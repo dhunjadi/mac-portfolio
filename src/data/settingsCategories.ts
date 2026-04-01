@@ -20,9 +20,10 @@ export const settingsCategories: SettingsCategory[] = [
     labelKey: "windows.settings.categories.dock.title",
     icon: dockIcon,
   },
+
   {
-    id: "language",
-    labelKey: "windows.settings.categories.language.title",
+    id: "general",
+    labelKey: "windows.settings.categories.general.title",
     icon: globeIcon,
   },
 ];

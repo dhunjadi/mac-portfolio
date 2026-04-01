@@ -7,6 +7,7 @@ const LanguagePanel = () => {
 
   return (
     <section className="c-languagePanel">
+      <h2>prifrd lengliđ</h2>
       <div
         className="c-languagePanel__buttons"
         role="radiogroup"

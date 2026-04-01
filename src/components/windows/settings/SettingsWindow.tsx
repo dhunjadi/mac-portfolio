@@ -7,8 +7,13 @@ import DockPanel from "./panels/DockPanel";
 import LanguagePanel from "./panels/LanguagePanel";
 import avatarPicture from "/avatar.jpg";
 import { useTranslation } from "react-i18next";
-import { useSidebarIconSize } from "../../../stores/settingsStore";
+import {
+  useActiveSettingsPanel,
+  useSettingsActions,
+  useSidebarIconSize,
+} from "../../../stores/settingsStore";
 import { getSidebarIconSizeClass } from "../../../utils";
+import GeneralPanel from "./panels/GeneralPanel";
 
 type SettingsWindowProps = {
   onClose: () => void;
@@ -17,22 +22,22 @@ type SettingsWindowProps = {
 const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
   const { t } = useTranslation();
   const sidebarIconSize = useSidebarIconSize();
+  const activePanel = useActiveSettingsPanel();
+  const { setActivePanel } = useSettingsActions();
 
   const [searchText, setSearchText] = useState("");
-  const [selectedCategoryId, setSelectedCategoryId] = useState(
-    settingsCategories[0]?.id ?? "",
-  );
 
-  const renderPanelByCategoryId = (categoryId: string) => {
-    if (categoryId === "appearance") return <AppearancePanel />;
-    if (categoryId === "wallpaper") return <WallpaperPanel />;
-    if (categoryId === "dock") return <DockPanel />;
-    if (categoryId === "language") return <LanguagePanel />;
+  const renderPanelByCategoryId = () => {
+    if (activePanel === "general") return <GeneralPanel />;
+    if (activePanel === "appearance") return <AppearancePanel />;
+    if (activePanel === "wallpaper") return <WallpaperPanel />;
+    if (activePanel === "dock") return <DockPanel />;
+    if (activePanel === "language") return <LanguagePanel />;
     return <></>;
   };
 
   const selectedCategory = settingsCategories.find(
-    (category) => category.id === selectedCategoryId,
+    (category) => category.id === activePanel,
   );
 
   return (
@@ -65,8 +70,8 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
               <button
                 key={category.id}
                 type="button"
-                className={category.id === selectedCategoryId ? "active" : ""}
-                onClick={() => setSelectedCategoryId(category.id)}
+                className={category.id === activePanel ? "active" : ""}
+                onClick={() => setActivePanel(category.id)}
               >
                 <li className={getSidebarIconSizeClass(sidebarIconSize)}>
                   <img
@@ -86,7 +91,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
         <div className="w-settings__content_header drag-handler">
           <h3>{t(selectedCategory?.labelKey || "")}</h3>
         </div>
-        {renderPanelByCategoryId(selectedCategoryId)}
+        {renderPanelByCategoryId()}
       </div>
     </WindowWrapper>
   );

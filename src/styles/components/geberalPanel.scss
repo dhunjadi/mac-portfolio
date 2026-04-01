@@ -1,0 +1,57 @@
+@use "../abstracts/mixins.scss" as *;
+
+.c-generalPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1rem;
+
+  &__group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--surface-2);
+    border: 1px solid var(--glass-border);
+    border-radius: 6px;
+    overflow: hidden;
+
+    &_button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      font-size: var(--fs-body-sm);
+      color: var(--text-primary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      transition: background-color 0.15s ease;
+
+      &:hover {
+        background-color: rgb(var(--text-primary-rgb) / 0.05);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--accent-500);
+        outline-offset: -2px;
+      }
+
+      & + & {
+        border-top: 1px solid var(--glass-border);
+      }
+
+      svg {
+        fill: #494a4a;
+        width: 1.4rem;
+        height: 1.4rem;
+
+        @include respond(md) {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
+}

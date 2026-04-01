@@ -39,6 +39,9 @@
           "subtitle": "Odaberite željeni jezik",
           "englishLabel": "English",
           "croatianLabel": "Hrvatski"
+        },
+        "general": {
+          "title": "Općenito"
         }
       }
     },

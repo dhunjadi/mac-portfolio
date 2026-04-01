@@ -42,11 +42,12 @@ export type ForecastResponse = {
 
 export type FinderCategoryId = "desktop" | "applications";
 
-export type SettingsCategoryId =
+export type SettingsCategoryPanel =
   | "appearance"
   | "wallpaper"
   | "dock"
-  | "language";
+  | "language"
+  | "general";
 
 type Category = {
   labelKey: string;
@@ -58,7 +59,7 @@ export type FinderCategory = Category & {
 };
 
 export type SettingsCategory = Category & {
-  id: SettingsCategoryId;
+  id: SettingsCategoryPanel;
 };
 
 export type SidebarIconSize = "small" | "medium" | "large";
