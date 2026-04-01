@@ -32,10 +32,10 @@
   &__surface {
     position: absolute;
     inset: 0;
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--dock-border-color);
     border-radius: 10px;
     @include glass-surface;
-    background-color: rgb(var(--glass-rgb, 0 0 0) / 0.25);
+    background-color: rgb(var(--glass-rgb, 0 0 0) / 0.5);
     z-index: -1;
     pointer-events: none;
   }
