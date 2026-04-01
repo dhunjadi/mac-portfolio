@@ -9,11 +9,13 @@ import avatarPicture from "/avatar.jpg";
 import { useTranslation } from "react-i18next";
 import {
   useActiveSettingsPanel,
+  useActiveSettingsSidebarPanel,
   useSettingsActions,
   useSidebarIconSize,
 } from "../../../stores/settingsStore";
 import { getSidebarIconSizeClass } from "../../../utils";
 import GeneralPanel from "./panels/GeneralPanel";
+import ChevronLeft from "../../../assets/icons/chevron-left.svg?react";
 
 type SettingsWindowProps = {
   onClose: () => void;
@@ -23,22 +25,25 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
   const { t } = useTranslation();
   const sidebarIconSize = useSidebarIconSize();
   const activePanel = useActiveSettingsPanel();
-  const { setActivePanel } = useSettingsActions();
+  const activeSidebarPanel = useActiveSettingsSidebarPanel();
+  const { setActivePanel, setActiveSidebarPanel } = useSettingsActions();
 
   const [searchText, setSearchText] = useState("");
 
   const renderPanelByCategoryId = () => {
-    if (activePanel === "general") return <GeneralPanel />;
-    if (activePanel === "appearance") return <AppearancePanel />;
-    if (activePanel === "wallpaper") return <WallpaperPanel />;
-    if (activePanel === "dock") return <DockPanel />;
-    if (activePanel === "language") return <LanguagePanel />;
+    if (activePanel.value === "general") return <GeneralPanel />;
+    if (activePanel.value === "appearance") return <AppearancePanel />;
+    if (activePanel.value === "wallpaper") return <WallpaperPanel />;
+    if (activePanel.value === "dock") return <DockPanel />;
+    if (activePanel.value === "language") return <LanguagePanel />;
     return <></>;
   };
 
-  const selectedCategory = settingsCategories.find(
-    (category) => category.id === activePanel,
+  const activeSidebarCategory = settingsCategories.find(
+    (category) => category.id === activeSidebarPanel,
   );
+
+  const showBackButton = activePanel.value !== activeSidebarPanel;
 
   return (
     <WindowWrapper
@@ -70,8 +75,13 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
               <button
                 key={category.id}
                 type="button"
-                className={category.id === activePanel ? "active" : ""}
-                onClick={() => setActivePanel(category.id)}
+                className={category.id === activeSidebarPanel ? "active" : ""}
+                onClick={() =>
+                  setActiveSidebarPanel({
+                    labelKey: category.labelKey,
+                    value: category.id,
+                  })
+                }
               >
                 <li className={getSidebarIconSizeClass(sidebarIconSize)}>
                   <img
@@ -89,7 +99,22 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
     >
       <div className="w-settings__content">
         <div className="w-settings__content_header drag-handler">
-          <h3>{t(selectedCategory?.labelKey || "")}</h3>
+          {showBackButton && (
+            <button
+              type="button"
+              className="w-settings__content_backButton no-drag"
+              onClick={() => {
+                if (!activeSidebarCategory) return;
+                setActivePanel({
+                  labelKey: activeSidebarCategory.labelKey,
+                  value: activeSidebarCategory.id,
+                });
+              }}
+            >
+              <ChevronLeft />
+            </button>
+          )}
+          <h3>{t(activePanel.labelKey)}</h3>
         </div>
         {renderPanelByCategoryId()}
       </div>

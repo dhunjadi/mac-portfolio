@@ -1,14 +1,20 @@
 import { create } from "zustand";
 import { wallpaperOptions, wallpaperPreviews } from "../data/wallpapers";
 import { persist } from "zustand/middleware";
-import type { SettingsCategoryPanel, SidebarIconSize } from "../types";
+import type {
+  SettingsPanel,
+  SettingsSidebarCategoryId,
+  SettingsSidebarPanel,
+  SidebarIconSize,
+} from "../types";
 import { colorOptions } from "../data/colorOptions";
 
 type DockPosition = "left" | "bottom" | "right";
 type ThemePreference = "light" | "dark" | "auto";
 
 type SettingsActions = {
-  setActivePanel: (activePanel: SettingsCategoryPanel) => void;
+  setActivePanel: (activePanel: SettingsPanel) => void;
+  setActiveSidebarPanel: (activePanel: SettingsSidebarPanel) => void;
   setWallpaper: (wallpaper: string) => void;
   setThemePreference: (value: ThemePreference) => void;
   setAccentColor: (value: string) => void;
@@ -21,7 +27,8 @@ type SettingsActions = {
 };
 
 type SettingsStore = {
-  activePanel: SettingsCategoryPanel;
+  activePanel: SettingsPanel;
+  activeSidebarPanel: SettingsSidebarCategoryId;
   themePreference: ThemePreference;
   accentColor: string;
   highlightColor: string;
@@ -42,7 +49,11 @@ const isHexColor = (value: string) => /^#[0-9a-fA-F]{6}$/.test(value);
 const useSettingsStore = create<SettingsStore>()(
   persist(
     (set) => ({
-      activePanel: "appearance",
+      activePanel: {
+        labelKey: "windows.settings.categories.appearance.title",
+        value: "appearance",
+      },
+      activeSidebarPanel: "appearance",
       themePreference: "auto",
       accentColor: colorOptions[0].value,
       highlightColor: colorOptions[0].value,
@@ -56,6 +67,11 @@ const useSettingsStore = create<SettingsStore>()(
       sidebarIconSize: "medium",
       actions: {
         setActivePanel: (activePanel) => set(() => ({ activePanel })),
+        setActiveSidebarPanel: (activePanel) =>
+          set(() => ({
+            activePanel,
+            activeSidebarPanel: activePanel.value,
+          })),
 
         setThemePreference: (value) =>
           set(() => ({
@@ -107,6 +123,9 @@ const useSettingsStore = create<SettingsStore>()(
 
 export const useActiveSettingsPanel = () =>
   useSettingsStore((state) => state.activePanel);
+
+export const useActiveSettingsSidebarPanel = () =>
+  useSettingsStore((state) => state.activeSidebarPanel);
 
 export const useThemePreference = () =>
   useSettingsStore((state) => state.themePreference);

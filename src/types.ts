@@ -49,6 +49,21 @@ export type SettingsCategoryPanel =
   | "language"
   | "general";
 
+export type SettingsSidebarCategoryId = Exclude<
+  SettingsCategoryPanel,
+  "language"
+>;
+
+export type SettingsPanel = {
+  labelKey: string;
+  value: SettingsCategoryPanel;
+};
+
+export type SettingsSidebarPanel = {
+  labelKey: string;
+  value: SettingsSidebarCategoryId;
+};
+
 type Category = {
   labelKey: string;
   icon: ComponentType<SVGProps<SVGSVGElement>> | string;
@@ -59,7 +74,7 @@ export type FinderCategory = Category & {
 };
 
 export type SettingsCategory = Category & {
-  id: SettingsCategoryPanel;
+  id: SettingsSidebarCategoryId;
 };
 
 export type SidebarIconSize = "small" | "medium" | "large";

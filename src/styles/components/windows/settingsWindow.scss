@@ -137,10 +137,8 @@
       color: var(--text-primary);
       cursor: pointer;
       padding: 0.5rem 0.8rem;
-      /* font-size: var(--fs-body-lg); */
 
       @include respond(sm) {
-        /* font-size: var(--fs-caption); */
         gap: 4px;
         padding: 5px 8px;
       }
@@ -203,6 +201,21 @@
 
       h3 {
         font-size: 14px;
+      }
+    }
+
+    &_backButton {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: none;
+      padding: 0.1rem;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(var(--text-primary-rgb) / 0.1);
       }
     }
   }

@@ -9,7 +9,12 @@ const GeneralPanel = () => {
       <div className="c-generalPanel__group">
         <button
           className="c-generalPanel__group_button"
-          onClick={() => setActivePanel("language")}
+          onClick={() =>
+            setActivePanel({
+              labelKey: "windows.settings.categories.language.title",
+              value: "language",
+            })
+          }
         >
           <span>Language & Region</span>
 
