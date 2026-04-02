@@ -24,6 +24,7 @@ type SettingsActions = {
   setDockIconScale: (value: number) => void;
   setBrightness: (value: number) => void;
   setSidebarIconSize: (value: SidebarIconSize) => void;
+  setShow24HourTime: (value: boolean) => void;
 };
 
 type SettingsStore = {
@@ -40,6 +41,7 @@ type SettingsStore = {
   wallpaperOptions: readonly string[];
   wallpaperPreviews: readonly string[];
   sidebarIconSize: SidebarIconSize;
+  show24HourTime: boolean;
   actions: SettingsActions;
 };
 
@@ -65,6 +67,7 @@ const useSettingsStore = create<SettingsStore>()(
       wallpaperOptions,
       wallpaperPreviews,
       sidebarIconSize: "medium",
+      show24HourTime: true,
       actions: {
         setActivePanel: (activePanel) => set(() => ({ activePanel })),
         setActiveSidebarPanel: (activePanel) =>
@@ -102,6 +105,9 @@ const useSettingsStore = create<SettingsStore>()(
 
         setSidebarIconSize: (iconSize) =>
           set(() => ({ sidebarIconSize: iconSize })),
+
+        setShow24HourTime: (value) =>
+          set(() => ({ show24HourTime: value })),
       },
     }),
     {
@@ -116,6 +122,7 @@ const useSettingsStore = create<SettingsStore>()(
         dockIconScale: state.dockIconScale,
         brightness: state.brightness,
         sidebarIconSize: state.sidebarIconSize,
+        show24HourTime: state.show24HourTime,
       }),
     },
   ),
@@ -152,6 +159,9 @@ export const useBrightness = () =>
 
 export const useSidebarIconSize = () =>
   useSettingsStore((state) => state.sidebarIconSize);
+
+export const useShow24HourTime = () =>
+  useSettingsStore((state) => state.show24HourTime);
 
 export const useWallpaperOptions = () =>
   useSettingsStore((state) => state.wallpaperOptions);

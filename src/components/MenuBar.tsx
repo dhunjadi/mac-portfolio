@@ -11,6 +11,7 @@ import controlCenterIcon from "/icons/control-center.png";
 import ControlCenterDropdown from "./ControlCenterDropdown";
 import { useTranslation } from "react-i18next";
 import { getMenuBarWindowLabels, isWindowId } from "../data/windowData";
+import { useShow24HourTime } from "../stores/settingsStore";
 
 type MenuBarProps = {
   hideAppleLogo?: boolean;
@@ -23,6 +24,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
   const { openWindow, closeWindow } = useWindowActions();
   const { setIsSleeping } = usePowerActions();
   const activeWindowId = useActiveWindowId();
+  const show24HourTime = useShow24HourTime();
 
   const [isAppleMenuOpen, setIsAppleMenuOpen] = useState(false);
   const [isWindowMenuOpen, setIsWindowMenuOpen] = useState(false);
@@ -99,6 +101,9 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
   const dayLabel = dayLabels[now.day()] ?? "";
   const monthLabel = monthLabels[now.month()] ?? "";
   const dateLabel = `${dayLabel} ${now.format("D")} ${monthLabel}`;
+  const timeLabel = show24HourTime
+    ? now.format("HH:mm")
+    : now.format("h:mm A");
 
   const handleAppleMenuSelect = (item: AppleMenuDropdownItem) => {
     if (item === "sleep") {
@@ -198,7 +203,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
         </div>
         <strong className="c-menuBar__date">
           <span className="c-menuBar__date_dayMonth">{dateLabel}</span>
-          <span className="c-menuBar__dateTime">{now.format("HH:mm")}</span>
+          <span className="c-menuBar__dateTime">{timeLabel}</span>
         </strong>
       </div>
     </div>

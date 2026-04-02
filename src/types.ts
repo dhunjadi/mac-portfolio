@@ -47,11 +47,12 @@ export type SettingsCategoryPanel =
   | "wallpaper"
   | "dock"
   | "language"
+  | "dateAndTime"
   | "general";
 
 export type SettingsSidebarCategoryId = Exclude<
   SettingsCategoryPanel,
-  "language"
+  "language" | "dateAndTime"
 >;
 
 export type SettingsPanel = {

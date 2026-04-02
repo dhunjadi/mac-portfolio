@@ -1,7 +1,7 @@
 import appearanceIcon from "/icons/appearance-icon.svg";
 import wallpaperIcon from "/icons/wallpaper-icon.svg";
 import dockIcon from "/icons/dock.svg";
-import globeIcon from "/icons/globe.svg";
+import gearIcon from "/icons/gear.svg";
 import type { SettingsCategory } from "../types";
 
 export const settingsCategories: SettingsCategory[] = [
@@ -24,6 +24,6 @@ export const settingsCategories: SettingsCategory[] = [
   {
     id: "general",
     labelKey: "windows.settings.categories.general.title",
-    icon: globeIcon,
+    icon: gearIcon,
   },
 ];

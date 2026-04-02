@@ -20,6 +20,20 @@ const GeneralPanel = () => {
 
           <ChevronRight className="c-generalPanel__group_chevron" />
         </button>
+
+        <button
+          className="c-generalPanel__group_button"
+          onClick={() =>
+            setActivePanel({
+              labelKey: "windows.settings.categories.dateAndTime.title",
+              value: "dateAndTime",
+            })
+          }
+        >
+          <span>Date & time</span>
+
+          <ChevronRight className="c-generalPanel__group_chevron" />
+        </button>
       </div>
     </div>
   );

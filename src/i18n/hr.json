@@ -40,6 +40,11 @@
           "englishLabel": "English",
           "croatianLabel": "Hrvatski"
         },
+        "dateAndTime": {
+          "title": "Datum i vrijeme",
+          "dateAndTimeLabel": "Datum i vrijeme",
+          "show24Hour": "24-satni prikaz"
+        },
         "general": {
           "title": "Općenito"
         }

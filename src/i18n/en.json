@@ -40,6 +40,11 @@
           "englishLabel": "English",
           "croatianLabel": "Hrvatski"
         },
+        "dateAndTime": {
+          "title": "Date & Time",
+          "dateAndTimeLabel": "Date and time",
+          "show24Hour": "24-hour time"
+        },
         "general": {
           "title": "General"
         }
