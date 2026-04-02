@@ -1,6 +1,9 @@
 import { useSettingsActions } from "../../../../stores/settingsStore";
 import ChevronRight from "../../../../assets/icons/chevron-right.svg?react";
 import { useTranslation } from "react-i18next";
+import CalendarIcon from "/icons/calendar.svg";
+import GlobeIcon from "/icons/globe.svg";
+import LaptopIcon from "/icons/laptop.svg";
 
 const GeneralPanel = () => {
   const { t } = useTranslation();
@@ -18,14 +21,17 @@ const GeneralPanel = () => {
             })
           }
         >
-          <span>{t("windows.settings.categories.general.about")}</span>
+          <div>
+            <img src={LaptopIcon} alt="laptop icon" />
+            <span>{t("windows.settings.categories.general.about")}</span>
+          </div>
 
           <ChevronRight className="c-generalPanel__group_chevron" />
         </button>
       </div>
       <div className="c-generalPanel__group">
         <button
-          className="c-generalPanel__group_button"
+          className="c-generalPanel__group_button c-generalPanel__group_button--blueIcon"
           onClick={() =>
             setActivePanel({
               labelKey: "windows.settings.categories.language.title",
@@ -33,13 +39,18 @@ const GeneralPanel = () => {
             })
           }
         >
-          <span>{t("windows.settings.categories.general.languageRegion")}</span>
+          <div>
+            <img src={GlobeIcon} alt="globe icon" />
+            <span>
+              {t("windows.settings.categories.general.languageRegion")}
+            </span>
+          </div>
 
           <ChevronRight className="c-generalPanel__group_chevron" />
         </button>
 
         <button
-          className="c-generalPanel__group_button"
+          className="c-generalPanel__group_button c-generalPanel__group_button--blueIcon"
           onClick={() =>
             setActivePanel({
               labelKey: "windows.settings.categories.dateAndTime.title",
@@ -47,7 +58,10 @@ const GeneralPanel = () => {
             })
           }
         >
-          <span>{t("windows.settings.categories.general.dateAndTime")}</span>
+          <div>
+            <img src={CalendarIcon} alt="calendar icon" />
+            <span>{t("windows.settings.categories.general.dateAndTime")}</span>
+          </div>
 
           <ChevronRight className="c-generalPanel__group_chevron" />
         </button>

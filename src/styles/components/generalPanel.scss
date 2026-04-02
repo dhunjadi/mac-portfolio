@@ -19,7 +19,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.75rem 1rem;
+      padding: 1rem;
       font-size: var(--fs-body-sm);
       color: var(--text-primary);
       background: none;
@@ -28,6 +28,10 @@
       text-align: left;
       width: 100%;
       transition: background-color 0.15s ease;
+
+      @include respond(md) {
+        padding: 0.5rem;
+      }
 
       &:hover {
         background-color: rgb(var(--text-primary-rgb) / 0.05);
@@ -42,6 +46,12 @@
         border-top: 1px solid var(--glass-border);
       }
 
+      div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
       svg {
         fill: #494a4a;
         width: 1.4rem;
@@ -51,6 +61,17 @@
           width: 14px;
           height: 14px;
         }
+      }
+
+      img {
+        width: 20px;
+        padding: 2px;
+        border-radius: 4px;
+        background-color: #b8b8bc;
+      }
+
+      &--blueIcon img {
+        background-color: #0b84ff;
       }
     }
   }
