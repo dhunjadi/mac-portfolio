@@ -1,11 +1,28 @@
 import { useSettingsActions } from "../../../../stores/settingsStore";
 import ChevronRight from "../../../../assets/icons/chevron-right.svg?react";
+import { useTranslation } from "react-i18next";
 
 const GeneralPanel = () => {
+  const { t } = useTranslation();
   const { setActivePanel } = useSettingsActions();
 
   return (
     <div className="c-generalPanel">
+      <div className="c-generalPanel__group">
+        <button
+          className="c-generalPanel__group_button"
+          onClick={() =>
+            setActivePanel({
+              labelKey: "windows.settings.categories.about.title",
+              value: "about",
+            })
+          }
+        >
+          <span>{t("windows.settings.categories.general.about")}</span>
+
+          <ChevronRight className="c-generalPanel__group_chevron" />
+        </button>
+      </div>
       <div className="c-generalPanel__group">
         <button
           className="c-generalPanel__group_button"
@@ -16,7 +33,7 @@ const GeneralPanel = () => {
             })
           }
         >
-          <span>Language & Region</span>
+          <span>{t("windows.settings.categories.general.languageRegion")}</span>
 
           <ChevronRight className="c-generalPanel__group_chevron" />
         </button>
@@ -30,7 +47,7 @@ const GeneralPanel = () => {
             })
           }
         >
-          <span>Date & time</span>
+          <span>{t("windows.settings.categories.general.dateAndTime")}</span>
 
           <ChevronRight className="c-generalPanel__group_chevron" />
         </button>

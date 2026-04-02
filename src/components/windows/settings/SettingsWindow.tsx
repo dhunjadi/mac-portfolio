@@ -6,6 +6,7 @@ import WallpaperPanel from "./panels/WallpaperPanel";
 import DockPanel from "./panels/DockPanel";
 import LanguagePanel from "./panels/LanguagePanel";
 import DateAndTimePanel from "./panels/DateAndTimePanel";
+import AboutPanel from "./panels/AboutPanel";
 import avatarPicture from "/avatar.jpg";
 import { useTranslation } from "react-i18next";
 import {
@@ -38,6 +39,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
     if (activePanel.value === "dock") return <DockPanel />;
     if (activePanel.value === "language") return <LanguagePanel />;
     if (activePanel.value === "dateAndTime") return <DateAndTimePanel />;
+    if (activePanel.value === "about") return <AboutPanel />;
     return <></>;
   };
 

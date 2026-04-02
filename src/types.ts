@@ -48,11 +48,12 @@ export type SettingsCategoryPanel =
   | "dock"
   | "language"
   | "dateAndTime"
+  | "about"
   | "general";
 
 export type SettingsSidebarCategoryId = Exclude<
   SettingsCategoryPanel,
-  "language" | "dateAndTime"
+  "language" | "dateAndTime" | "about"
 >;
 
 export type SettingsPanel = {

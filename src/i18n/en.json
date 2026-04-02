@@ -45,8 +45,24 @@
           "dateAndTimeLabel": "Date and time",
           "show24Hour": "24-hour time"
         },
+        "about": {
+          "title": "About",
+          "nameLabel": "Name",
+          "locationLabel": "Location",
+          "titleLabel": "Title",
+          "linkedinLabel": "LinkedIn",
+          "githubLabel": "GitHub",
+          "nameValue": "Dario Hunjadi",
+          "locationValue": "Zagreb, Croatia",
+          "titleValue": "Software Developer",
+          "linkedinValue": "linkedin.com/in/dario-hunjadi",
+          "githubValue": "github.com/dhunjadi"
+        },
         "general": {
-          "title": "General"
+          "title": "General",
+          "about": "About the Developer",
+          "languageRegion": "Language & Region",
+          "dateAndTime": "Date & time"
         }
       }
     },
