@@ -146,3 +146,21 @@
     }
   }
 }
+
+:root[data-dock-position="left"] .c-launchpad__grid {
+  padding-left: 5rem;
+}
+
+:root[data-dock-position="right"] .c-launchpad__grid {
+  padding-right: 5rem;
+}
+
+@include respond(sm) {
+  :root[data-dock-position="left"] .c-launchpad__grid {
+    padding-left: 0;
+  }
+
+  :root[data-dock-position="right"] .c-launchpad__grid {
+    padding-right: 0;
+  }
+}
