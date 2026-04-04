@@ -155,6 +155,7 @@
   &__sideBar {
     display: flex;
     flex-direction: column;
+    height: 100%;
     @include glass-sidebar;
 
     &_header {

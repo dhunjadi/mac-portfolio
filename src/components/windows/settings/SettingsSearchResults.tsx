@@ -10,6 +10,8 @@ import type {
   SettingsPanel,
   SettingsSidebarPanel,
 } from "../../../types";
+import { useSidebarIconSize } from "../../../stores/settingsStore";
+import { getSidebarIconSizeClass } from "../../../utils";
 
 type SettingsSearchResultsProps = {
   searchText: string;
@@ -33,6 +35,7 @@ const SettingsSearchResults = ({
   setActiveSidebarPanel,
 }: SettingsSearchResultsProps) => {
   const { t } = useTranslation();
+  const sidebarIconSize = useSidebarIconSize();
   const normalizedSearchText = searchText.trim();
   const isSearching = normalizedSearchText.length > 0;
 
@@ -168,7 +171,29 @@ const SettingsSearchResults = ({
       {groupedSearchResults.map((group) => (
         <div key={group.id} className="c-settingsSearchResults__searchGroup">
           <p className="c-settingsSearchResults__searchGroup_title">
-            {group.label}
+            {(() => {
+              const exactCategory = settingsCategories.find(
+                (category) => category.id === group.id,
+              );
+              const generalCategory = settingsCategories.find(
+                (category) => category.id === "general",
+              );
+              const icon =
+                exactCategory?.icon ?? generalCategory?.icon ?? null;
+              if (!icon) {
+                return group.label;
+              }
+              return (
+                <>
+                  <img
+                    src={icon as string}
+                    alt="group icon"
+                    className={getSidebarIconSizeClass(sidebarIconSize)}
+                  />
+                  <span>{group.label}</span>
+                </>
+              );
+            })()}
           </p>
           <div className="c-settingsSearchResults__searchGroup_list">
             {group.items.map((item) => (
