@@ -1,0 +1,202 @@
+import type {
+  SettingsCategoryPanel,
+  SettingsSidebarCategoryId,
+} from "../types";
+
+type SettingsSearchItem = {
+  id: string;
+  labelKey: string;
+  panelId: SettingsCategoryPanel;
+  groupPanelId: SettingsCategoryPanel;
+  sidebarCategoryId: SettingsSidebarCategoryId;
+  keywordsKey?: string;
+};
+
+export const settingsPanelLabelKeys: Record<SettingsCategoryPanel, string> = {
+  appearance: "windows.settings.categories.appearance.title",
+  wallpaper: "windows.settings.categories.wallpaper.title",
+  dock: "windows.settings.categories.dock.title",
+  general: "windows.settings.categories.general.title",
+  language: "windows.settings.categories.language.title",
+  dateAndTime: "windows.settings.categories.dateAndTime.title",
+  about: "windows.settings.categories.about.title",
+};
+
+export const settingsSearchItems: SettingsSearchItem[] = [
+  {
+    id: "appearance-theme-light",
+    labelKey: "windows.settings.categories.appearance.themeLightLabel",
+    panelId: "appearance",
+    groupPanelId: "appearance",
+    sidebarCategoryId: "appearance",
+    keywordsKey: "windows.settings.searchKeywords.appearance.themeLight",
+  },
+  {
+    id: "appearance-theme-dark",
+    labelKey: "windows.settings.categories.appearance.themeDarkLabel",
+    panelId: "appearance",
+    groupPanelId: "appearance",
+    sidebarCategoryId: "appearance",
+    keywordsKey: "windows.settings.searchKeywords.appearance.themeDark",
+  },
+  {
+    id: "appearance-theme-auto",
+    labelKey: "windows.settings.categories.appearance.themeAutoLabel",
+    panelId: "appearance",
+    groupPanelId: "appearance",
+    sidebarCategoryId: "appearance",
+    keywordsKey: "windows.settings.searchKeywords.appearance.themeAuto",
+  },
+  {
+    id: "appearance-accent-color",
+    labelKey: "windows.settings.categories.appearance.accentColorLabel",
+    panelId: "appearance",
+    groupPanelId: "appearance",
+    sidebarCategoryId: "appearance",
+    keywordsKey: "windows.settings.searchKeywords.appearance.accentColor",
+  },
+  {
+    id: "appearance-highlight-color",
+    labelKey: "windows.settings.categories.appearance.highlightColorLabel",
+    panelId: "appearance",
+    groupPanelId: "appearance",
+    sidebarCategoryId: "appearance",
+    keywordsKey: "windows.settings.searchKeywords.appearance.highlightColor",
+  },
+  {
+    id: "appearance-sidebar-icon-size",
+    labelKey: "windows.settings.categories.appearance.sidebarIconSize.label",
+    panelId: "appearance",
+    groupPanelId: "appearance",
+    sidebarCategoryId: "appearance",
+    keywordsKey: "windows.settings.searchKeywords.appearance.sidebarIconSize",
+  },
+  {
+    id: "wallpaper",
+    labelKey: "windows.settings.categories.wallpaper.title",
+    panelId: "wallpaper",
+    groupPanelId: "wallpaper",
+    sidebarCategoryId: "wallpaper",
+    keywordsKey: "windows.settings.searchKeywords.wallpaper.wallpaper",
+  },
+  {
+    id: "dock-position",
+    labelKey: "windows.settings.categories.dock.positionLabel",
+    panelId: "dock",
+    groupPanelId: "dock",
+    sidebarCategoryId: "dock",
+    keywordsKey: "windows.settings.searchKeywords.dock.position",
+  },
+  {
+    id: "dock-icon-size",
+    labelKey: "windows.settings.categories.dock.iconSizeLabel",
+    panelId: "dock",
+    groupPanelId: "dock",
+    sidebarCategoryId: "dock",
+    keywordsKey: "windows.settings.searchKeywords.dock.iconSize",
+  },
+  {
+    id: "dock-icon-scale",
+    labelKey: "windows.settings.categories.dock.iconScaleLabel",
+    panelId: "dock",
+    groupPanelId: "dock",
+    sidebarCategoryId: "dock",
+    keywordsKey: "windows.settings.searchKeywords.dock.iconScale",
+  },
+  {
+    id: "general-about",
+    labelKey: "windows.settings.categories.general.about",
+    panelId: "about",
+    groupPanelId: "general",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.general.about",
+  },
+  {
+    id: "general-language-region",
+    labelKey: "windows.settings.categories.general.languageRegion",
+    panelId: "language",
+    groupPanelId: "general",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.general.languageRegion",
+  },
+  {
+    id: "general-date-time",
+    labelKey: "windows.settings.categories.general.dateAndTime",
+    panelId: "dateAndTime",
+    groupPanelId: "general",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.general.dateAndTime",
+  },
+  {
+    id: "language-english",
+    labelKey: "windows.settings.categories.language.englishLabel",
+    panelId: "language",
+    groupPanelId: "language",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.language.english",
+  },
+  {
+    id: "language-croatian",
+    labelKey: "windows.settings.categories.language.croatianLabel",
+    panelId: "language",
+    groupPanelId: "language",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.language.croatian",
+  },
+  {
+    id: "date-time-label",
+    labelKey: "windows.settings.categories.dateAndTime.dateAndTimeLabel",
+    panelId: "dateAndTime",
+    groupPanelId: "dateAndTime",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.dateAndTime.dateAndTime",
+  },
+  {
+    id: "date-time-24-hour",
+    labelKey: "windows.settings.categories.dateAndTime.show24Hour",
+    panelId: "dateAndTime",
+    groupPanelId: "dateAndTime",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.dateAndTime.show24Hour",
+  },
+  {
+    id: "about-name",
+    labelKey: "windows.settings.categories.about.nameLabel",
+    panelId: "about",
+    groupPanelId: "about",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.about.name",
+  },
+  {
+    id: "about-location",
+    labelKey: "windows.settings.categories.about.locationLabel",
+    panelId: "about",
+    groupPanelId: "about",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.about.location",
+  },
+  {
+    id: "about-title",
+    labelKey: "windows.settings.categories.about.titleLabel",
+    panelId: "about",
+    groupPanelId: "about",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.about.title",
+  },
+  {
+    id: "about-linkedin",
+    labelKey: "windows.settings.categories.about.linkedinLabel",
+    panelId: "about",
+    groupPanelId: "about",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.about.linkedin",
+  },
+  {
+    id: "about-github",
+    labelKey: "windows.settings.categories.about.githubLabel",
+    panelId: "about",
+    groupPanelId: "about",
+    sidebarCategoryId: "general",
+    keywordsKey: "windows.settings.searchKeywords.about.github",
+  },
+];

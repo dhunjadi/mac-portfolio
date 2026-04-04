@@ -2,6 +2,45 @@
   "windows": {
     "settings": {
       "searchPlaceholder": "Search",
+      "searchNoResults": "No results for \"{{query}}\"",
+      "searchKeywords": {
+        "appearance": {
+          "accentColor": ["color", "colour", "accent", "theme"],
+          "highlightColor": ["color", "colour", "highlight", "accent"],
+          "sidebarIconSize": ["sidebar", "icon", "size"],
+          "themeLight": ["light", "theme"],
+          "themeDark": ["dark", "theme"],
+          "themeAuto": ["auto", "automatic", "theme"]
+        },
+        "wallpaper": {
+          "wallpaper": ["wallpaper", "background", "desktop"]
+        },
+        "dock": {
+          "position": ["position", "left", "right", "bottom"],
+          "iconSize": ["icon", "size", "dock"],
+          "iconScale": ["icon", "scale", "dock"]
+        },
+        "general": {
+          "about": ["about", "developer", "profile"],
+          "languageRegion": ["language", "region", "locale"],
+          "dateAndTime": ["date", "time", "clock"]
+        },
+        "language": {
+          "english": ["english", "en"],
+          "croatian": ["croatian", "hr", "hrvatski"]
+        },
+        "dateAndTime": {
+          "dateAndTime": ["date", "time", "clock"],
+          "show24Hour": ["24", "24-hour", "clock", "time"]
+        },
+        "about": {
+          "name": ["name"],
+          "location": ["location"],
+          "title": ["title"],
+          "linkedin": ["linkedin"],
+          "github": ["github"]
+        }
+      },
       "categories": {
         "appearance": {
           "title": "Appearance",

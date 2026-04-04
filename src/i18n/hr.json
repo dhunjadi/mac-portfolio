@@ -2,6 +2,45 @@
   "windows": {
     "settings": {
       "searchPlaceholder": "Pretraži",
+      "searchNoResults": "Nema rezultata za \"{{query}}\"",
+      "searchKeywords": {
+        "appearance": {
+          "accentColor": ["boja", "naglasna", "naglasak", "tema"],
+          "highlightColor": ["boja", "isticanje", "naglasak"],
+          "sidebarIconSize": ["bočna", "traka", "ikona", "veličina"],
+          "themeLight": ["svijetla", "tema"],
+          "themeDark": ["tamna", "tema"],
+          "themeAuto": ["automatski", "tema"]
+        },
+        "wallpaper": {
+          "wallpaper": ["pozadina", "slika", "desktop"]
+        },
+        "dock": {
+          "position": ["položaj", "lijevo", "desno", "dolje"],
+          "iconSize": ["ikona", "veličina", "dock"],
+          "iconScale": ["ikona", "skala", "dock"]
+        },
+        "general": {
+          "about": ["developer", "o", "profil"],
+          "languageRegion": ["jezik", "regija", "lokacija"],
+          "dateAndTime": ["datum", "vrijeme", "sat"]
+        },
+        "language": {
+          "english": ["english", "engleski", "en"],
+          "croatian": ["hrvatski", "hr"]
+        },
+        "dateAndTime": {
+          "dateAndTime": ["datum", "vrijeme", "sat"],
+          "show24Hour": ["24", "24-satni", "sat", "vrijeme"]
+        },
+        "about": {
+          "name": ["ime"],
+          "location": ["lokacija"],
+          "title": ["titula"],
+          "linkedin": ["linkedin"],
+          "github": ["github"]
+        }
+      },
       "categories": {
         "appearance": {
           "title": "Izgled",
