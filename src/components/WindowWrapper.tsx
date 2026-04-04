@@ -196,7 +196,7 @@ const WindowWrapper = ({
         layout === "sidebar" ? "drag-handler" : "c-windowWrapper__titleBar"
       }
       enableResizing={disableResizing || isMaximized ? false : true}
-      disableDragging={isMaximized}
+      disableDragging={false}
       cancel={
         layout === "sidebar"
           ? ".--close, .--minimize, .--maximize, .no-drag"
