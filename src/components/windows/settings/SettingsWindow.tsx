@@ -1,10 +1,6 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import WindowWrapper from "../../WindowWrapper";
 import { settingsCategories } from "../../../data/settingsCategories";
-import {
-  settingsPanelLabelKeys,
-  settingsSearchItems,
-} from "../../../data/settingsSearchItems";
 import AppearancePanel from "./panels/AppearancePanel";
 import WallpaperPanel from "./panels/WallpaperPanel";
 import DockPanel from "./panels/DockPanel";
@@ -22,6 +18,7 @@ import {
 import { getSidebarIconSizeClass } from "../../../utils";
 import GeneralPanel from "./panels/GeneralPanel";
 import ChevronLeft from "../../../assets/icons/chevron-left.svg?react";
+import SettingsSearchResults from "./SettingsSearchResults";
 
 type SettingsWindowProps = {
   onClose: () => void;
@@ -39,130 +36,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
     null,
   );
 
-  const normalizedSearchText = searchText.trim();
-  const isSearching = normalizedSearchText.length > 0;
-
-  const normalizeForSearch = (value: string) =>
-    value
-      .toLocaleLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
-
-  const searchResults = useMemo(() => {
-    if (!isSearching) {
-      return [];
-    }
-
-    const query = normalizeForSearch(normalizedSearchText);
-    if (!query) {
-      return [];
-    }
-
-    const results = settingsSearchItems
-      .map((item) => {
-        const label = t(item.labelKey);
-        const groupLabel = t(settingsPanelLabelKeys[item.groupPanelId]);
-        const keywordValuesRaw = item.keywordsKey
-          ? t(item.keywordsKey, {
-              returnObjects: true,
-              defaultValue: [],
-            })
-          : [];
-        const keywordValues = Array.isArray(keywordValuesRaw)
-          ? keywordValuesRaw
-          : [];
-
-        const normalizedLabel = normalizeForSearch(label);
-        const normalizedGroupLabel = normalizeForSearch(groupLabel);
-        const normalizedKeywords = keywordValues.map(normalizeForSearch);
-
-        let score = 0;
-        if (normalizedLabel.startsWith(query)) {
-          score = 3;
-        } else if (normalizedLabel.includes(query)) {
-          score = 2;
-        } else if (
-          normalizedKeywords.some((keyword) => keyword.includes(query))
-        ) {
-          score = 1;
-        } else if (normalizedGroupLabel.includes(query)) {
-          score = 1;
-        }
-
-        if (score === 0) {
-          return null;
-        }
-
-        return {
-          id: item.id,
-          label,
-          panelId: item.panelId,
-          sidebarCategoryId: item.sidebarCategoryId,
-          groupPanelId: item.groupPanelId,
-          groupLabel,
-          score,
-        };
-      })
-      .filter((item): item is NonNullable<typeof item> => item !== null)
-      .sort((a, b) => {
-        if (a.score !== b.score) {
-          return b.score - a.score;
-        }
-        return a.label.localeCompare(b.label);
-      });
-    return results;
-  }, [isSearching, normalizedSearchText, t]);
-
-  const groupedSearchResults = useMemo(() => {
-    if (!searchResults.length) {
-      return [];
-    }
-
-    const groups = new Map<
-      string,
-      {
-        id: string;
-        label: string;
-        items: typeof searchResults;
-        orderIndex: number;
-      }
-    >();
-    const groupOrder = [
-      "appearance",
-      "wallpaper",
-      "dock",
-      "general",
-      "language",
-      "dateAndTime",
-      "about",
-    ];
-
-    searchResults.forEach((item) => {
-      const groupId = item.groupPanelId;
-      if (!groups.has(groupId)) {
-        groups.set(groupId, {
-          id: groupId,
-          label: item.groupLabel,
-          items: [],
-          orderIndex: groupOrder.indexOf(groupId),
-        });
-      }
-      groups.get(groupId)?.items.push(item);
-    });
-
-    return Array.from(groups.values()).sort((a, b) => {
-      if (a.orderIndex === -1 && b.orderIndex === -1) {
-        return a.label.localeCompare(b.label);
-      }
-      if (a.orderIndex === -1) {
-        return 1;
-      }
-      if (b.orderIndex === -1) {
-        return -1;
-      }
-      return a.orderIndex - b.orderIndex;
-    });
-  }, [searchResults]);
+  const isSearching = searchText.trim().length > 0;
 
   const renderPanelByCategoryId = () => {
     if (activePanel.value === "general") return <GeneralPanel />;
@@ -234,54 +108,13 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
                 </button>
               ))}
           </ul>
-          {isSearching && (
-            <div className="w-settings__sideBar_searchResults">
-              {groupedSearchResults.length === 0 && (
-                <p className="w-settings__sideBar_searchEmpty">
-                  {t("windows.settings.searchNoResults", {
-                    query: normalizedSearchText,
-                  })}
-                </p>
-              )}
-              {groupedSearchResults.map((group) => (
-                <div key={group.id} className="w-settings__sideBar_searchGroup">
-                  <p className="w-settings__sideBar_searchGroupTitle">
-                    {group.label}
-                  </p>
-                  <div className="w-settings__sideBar_searchGroupList">
-                    {group.items.map((item) => (
-                      <button
-                        key={item.id}
-                        type="button"
-                        className={`w-settings__sideBar_searchItem${
-                          item.id === activeSearchItemId ? " active" : ""
-                        }`}
-                        onClick={() => {
-                          setActiveSearchItemId(item.id);
-                          const sidebarCategory = settingsCategories.find(
-                            (category) =>
-                              category.id === item.sidebarCategoryId,
-                          );
-                          if (sidebarCategory) {
-                            setActiveSidebarPanel({
-                              labelKey: sidebarCategory.labelKey,
-                              value: sidebarCategory.id,
-                            });
-                          }
-                          setActivePanel({
-                            labelKey: settingsPanelLabelKeys[item.panelId],
-                            value: item.panelId,
-                          });
-                        }}
-                      >
-                        <span>{item.label}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <SettingsSearchResults
+            searchText={searchText}
+            activeSearchItemId={activeSearchItemId}
+            onActiveSearchItemChange={setActiveSearchItemId}
+            setActivePanel={setActivePanel}
+            setActiveSidebarPanel={setActiveSidebarPanel}
+          />
         </div>
       }
     >

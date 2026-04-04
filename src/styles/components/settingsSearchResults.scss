@@ -1,0 +1,62 @@
+.c-settingsSearchResults {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+  padding-bottom: 1rem;
+  box-sizing: border-box;
+  scrollbar-color: #707075 transparent;
+  scrollbar-width: thin;
+
+  &:hover {
+    scrollbar-color: #a5a6aa transparent;
+  }
+
+  &__noResults {
+    color: var(--text-secondary);
+    font-size: var(--fs-caption);
+    padding: 0.25rem 0.5rem;
+  }
+
+  &__searchGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__searchGroup_title {
+    color: var(--text-secondary);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0 0.5rem;
+  }
+
+  &__searchGroup_list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+
+    > button {
+      width: 100%;
+      text-align: left;
+      color: var(--text-primary);
+      padding: 0.35rem 0.5rem;
+      border-radius: 6px;
+      font-size: var(--fs-body);
+      transition: background-color 0.15s ease;
+
+      &:hover {
+        background-color: rgb(var(--text-primary-rgb) / 0.1);
+      }
+
+      &.active {
+        background-color: var(--accent-500);
+      }
+    }
+  }
+}
