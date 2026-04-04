@@ -28,7 +28,7 @@ type SettingsWindowProps = {
 };
 
 const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const sidebarIconSize = useSidebarIconSize();
   const activePanel = useActiveSettingsPanel();
   const activeSidebarPanel = useActiveSettingsSidebarPanel();
@@ -81,7 +81,9 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
           score = 3;
         } else if (normalizedLabel.includes(query)) {
           score = 2;
-        } else if (normalizedKeywords.some((keyword) => keyword.includes(query))) {
+        } else if (
+          normalizedKeywords.some((keyword) => keyword.includes(query))
+        ) {
           score = 1;
         } else if (normalizedGroupLabel.includes(query)) {
           score = 1;
@@ -101,9 +103,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
           score,
         };
       })
-      .filter(
-        (item): item is NonNullable<typeof item> => item !== null,
-      )
+      .filter((item): item is NonNullable<typeof item> => item !== null)
       .sort((a, b) => {
         if (a.score !== b.score) {
           return b.score - a.score;
@@ -111,7 +111,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
         return a.label.localeCompare(b.label);
       });
     return results;
-  }, [isSearching, normalizedSearchText, t, i18n.language]);
+  }, [isSearching, normalizedSearchText, t]);
 
   const groupedSearchResults = useMemo(() => {
     if (!searchResults.length) {
@@ -244,10 +244,7 @@ const SettingsWindow = ({ onClose }: SettingsWindowProps) => {
                 </p>
               )}
               {groupedSearchResults.map((group) => (
-                <div
-                  key={group.id}
-                  className="w-settings__sideBar_searchGroup"
-                >
+                <div key={group.id} className="w-settings__sideBar_searchGroup">
                   <p className="w-settings__sideBar_searchGroupTitle">
                     {group.label}
                   </p>
