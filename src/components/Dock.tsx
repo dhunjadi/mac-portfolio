@@ -16,8 +16,9 @@ import {
 } from "../stores/dockStore";
 import { useDockIconMaxSize, useDockPosition } from "../stores/settingsStore";
 import { clampDockIconSize, getDockIconSizeLimits } from "../utils/dockSizing";
-import type { WindowId } from "../types";
+import type { DockIconId } from "../types";
 import { getDockTooltipLabel } from "../data/windowData";
+import { useLaunchpadActions, useLaunchpadOpen } from "../stores/launchpadStore";
 import { useTranslation } from "react-i18next";
 
 type DockProps = {
@@ -28,6 +29,8 @@ const Dock = ({ ref }: DockProps) => {
   const { t } = useTranslation();
   const isLoggedIn = useLogin();
   const { openWindow } = useWindowActions();
+  const isLaunchpadOpen = useLaunchpadOpen();
+  const { toggleLaunchpad, closeLaunchpad } = useLaunchpadActions();
 
   const icons = useDockIcons();
   const { moveIcon } = useDockActions();
@@ -85,7 +88,12 @@ const Dock = ({ ref }: DockProps) => {
     return () => window.removeEventListener("resize", handleResize);
   }, [mouseBottom, mouseLeft, mouseRight, mouseTop, mouseX, mouseY]);
 
-  const handleIconClick = (iconId: WindowId) => {
+  const handleIconClick = (iconId: DockIconId) => {
+    if (iconId === "launchpad") {
+      toggleLaunchpad();
+      return;
+    }
+    if (isLaunchpadOpen) closeLaunchpad();
     openWindow(iconId);
   };
 

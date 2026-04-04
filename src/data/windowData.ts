@@ -4,9 +4,11 @@ import infoIcon from "/icons/info.svg";
 import settingsIcon from "/icons/settings.svg";
 import weatherIcon from "/icons/weather.png";
 import textEditorIcon from "/icons/text-editor.png";
+import launchpadIcon from "/icons/launchpad.png";
 import type {
   AppleMenuActionId,
   AppleMenuDropdownItem,
+  DockIconId,
   WindowId,
 } from "../types";
 
@@ -82,10 +84,10 @@ export type AppleMenuItem =
 export const APPLE_MENU_ITEMS: AppleMenuItem[] = [
   { type: "window", id: "about" },
   { type: "divider", id: "divider-1" },
+  { type: "window", id: "settings" },
   { type: "window", id: "calculator" },
   { type: "window", id: "text-editor" },
   { type: "window", id: "weather" },
-  { type: "window", id: "settings" },
   { type: "divider", id: "divider-2" },
   { type: "action", id: "sleep" },
   { type: "window", id: "restart" },
@@ -109,7 +111,8 @@ export const getMenuBarWindowLabels = (t: Translate) =>
     {} as Partial<Record<WindowId, string>>,
   );
 
-export const getDockTooltipLabel = (id: WindowId, t: Translate) => {
+export const getDockTooltipLabel = (id: DockIconId, t: Translate) => {
+  if (id === "launchpad") return t("dock.launchpad");
   const labelKey = WINDOW_INFO[id].dockLabelKey;
   return labelKey ? t(labelKey) : t("dock.iconAlt");
 };
@@ -127,15 +130,33 @@ export const isWindowId = (value: AppleMenuDropdownItem): value is WindowId =>
   value in WINDOW_INFO;
 
 export const DEFAULT_DOCK_ICONS = (
-  [
-    "finder",
-    "about",
-    "calculator",
-    "settings",
-    "weather",
-    "text-editor",
-  ] as const
-).map((id) => ({
-  id,
-  icon: WINDOW_INFO[id].dockIcon ?? "",
-}));
+  ["finder", "launchpad", "about", "weather", "text-editor"] as const
+).map((id) => {
+  if (id === "launchpad") {
+    return {
+      id,
+      icon: launchpadIcon,
+    };
+  }
+
+  return {
+    id,
+    icon: WINDOW_INFO[id].dockIcon ?? "",
+  };
+});
+
+export const LAUNCHPAD_APP_IDS: WindowId[] = [
+  "finder",
+  "about",
+  "calculator",
+  "settings",
+  "weather",
+  "text-editor",
+];
+
+export const getLaunchpadApps = (t: Translate) =>
+  LAUNCHPAD_APP_IDS.map((id) => ({
+    id,
+    label: getDockTooltipLabel(id, t),
+    icon: WINDOW_INFO[id].dockIcon ?? "",
+  }));

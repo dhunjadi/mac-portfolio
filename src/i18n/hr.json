@@ -247,6 +247,7 @@
     "brightnessAlt": "svjetlina"
   },
   "dock": {
+    "launchpad": "Launchpad",
     "finder": "Finder",
     "about": "O developeru",
     "calculator": "Kalkulator",
@@ -254,6 +255,9 @@
     "weather": "Vrijeme",
     "textEditor": "Uređivač teksta",
     "iconAlt": "ikona docka"
+  },
+  "launchpad": {
+    "closeLabel": "Zatvori Launchpad"
   },
   "login": {
     "passwordPlaceholder": "Unesite bilo što...",

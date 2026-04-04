@@ -1,10 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { WindowId } from "../types";
+import type { DockIconId } from "../types";
 import { DEFAULT_DOCK_ICONS } from "../data/windowData";
 
 export type DockIcon = {
-  id: WindowId;
+  id: DockIconId;
   icon: string;
 };
 
@@ -15,6 +15,14 @@ type DockActions = {
 type DockStore = {
   icons: DockIcon[];
   actions: DockActions;
+};
+
+// Ensures Launchpad dock icon is always present
+// since dock is the only place where user can open Launchpad
+const ensureLaunchpadIcon = (icons: DockIcon[]) => {
+  const hasLaunchpad = icons.some((icon) => icon.id === "launchpad");
+  if (hasLaunchpad) return icons;
+  return [DEFAULT_DOCK_ICONS[0], ...icons];
 };
 
 const useDockStore = create<DockStore>()(
@@ -30,6 +38,15 @@ const useDockStore = create<DockStore>()(
       partialize: (state) => ({
         icons: state.icons,
       }),
+      merge: (persisted, current) => {
+        const persistedIcons =
+          (persisted as DockStore | undefined)?.icons ?? current.icons;
+        return {
+          ...current,
+          ...(persisted as DockStore | undefined),
+          icons: ensureLaunchpadIcon(persistedIcons),
+        };
+      },
     },
   ),
 );

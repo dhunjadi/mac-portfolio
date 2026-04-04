@@ -9,12 +9,12 @@ import { useRef, memo } from "react";
 import { Tooltip } from "react-tooltip";
 import { useOpenedWindows } from "../stores/windowStore";
 import { useDockIconScale } from "../stores/settingsStore";
-import type { WindowId } from "../types";
+import type { DockIconId } from "../types";
 import { useTranslation } from "react-i18next";
 
 type DockIconProps = {
   icon: string;
-  id: WindowId;
+  id: DockIconId;
   mouseX: MotionValue<number>;
   mouseY: MotionValue<number>;
   dockPosition: "left" | "bottom" | "right";
@@ -40,7 +40,7 @@ const DockIcon = ({
   const openedWindows = useOpenedWindows();
   const dockIconScale = useDockIconScale();
 
-  const isWindowOpen = openedWindows.includes(id);
+  const isWindowOpen = id !== "launchpad" && openedWindows.includes(id);
   const showActiveIndicator = isWindowOpen || id === "finder";
 
   const distanceFromCursor = useTransform(
@@ -99,6 +99,11 @@ const DockIcon = ({
   };
 
   const handleClick = async () => {
+    if (id === "launchpad") {
+      onClick();
+      return;
+    }
+
     if (isWindowOpen) {
       onClick();
       return;
@@ -109,12 +114,12 @@ const DockIcon = ({
 
     const bounceKeyframes =
       dockPosition === "bottom"
-        ? { y: [0, bounceDistance, 0, bounceDistance, 0, bounceDistance, 0] }
-        : { x: [0, bounceDistance, 0, bounceDistance, 0, bounceDistance, 0] };
+        ? { y: [0, bounceDistance, 0, bounceDistance, 0] }
+        : { x: [0, bounceDistance, 0, bounceDistance, 0] };
 
     await controls.start({
       ...bounceKeyframes,
-      transition: { duration: 3, ease: "easeInOut" },
+      transition: { duration: 2, ease: "easeInOut" },
     });
     onClick();
   };

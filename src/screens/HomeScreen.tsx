@@ -5,6 +5,7 @@ import resumePreviewIcon from "/resume-preview.jpg";
 import {
   useAccentColor,
   useHighlightColor,
+  useDockPosition,
   useThemePreference,
   useWallpaper,
 } from "../stores/settingsStore";
@@ -16,6 +17,7 @@ import Icon from "../components/DesktopIcon";
 const LoginOverlay = lazy(() => import("../components/LoginOverlay"));
 
 const ShutDownOverlay = lazy(() => import("../components/ShutDownOverlay"));
+const LaunchpadOverlay = lazy(() => import("../components/LaunchpadOverlay"));
 
 const AboutThisDevWindow = lazy(
   () => import("../components/windows/AboutThisDevWindow"),
@@ -83,6 +85,7 @@ const HomeScreen = () => {
   const accentColor = useAccentColor();
   const highlightColor = useHighlightColor();
   const themePreference = useThemePreference();
+  const dockPosition = useDockPosition();
   const isLoggedIn = useLogin();
   const isShutDown = useShutDown();
   const { closeWindow, openWindow } = useWindowActions();
@@ -169,6 +172,10 @@ const HomeScreen = () => {
   }, [themePreference]);
 
   useEffect(() => {
+    document.documentElement.dataset.dockPosition = dockPosition;
+  }, [dockPosition]);
+
+  useEffect(() => {
     if (wallpaper === displayedWallpaper) return;
 
     let isCancelled = false;
@@ -195,6 +202,7 @@ const HomeScreen = () => {
       <LoginOverlay />
 
       <ShutDownOverlay />
+      <LaunchpadOverlay />
       <BrightnessOverlay />
 
       <MenuBar ref={menuBarRef} />

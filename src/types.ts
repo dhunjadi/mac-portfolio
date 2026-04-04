@@ -11,6 +11,8 @@ export type WindowId =
   | "restart"
   | "shut-down";
 
+export type DockIconId = WindowId | "launchpad";
+
 export type AppleMenuActionId = "sleep";
 
 export type AppleMenuDropdownItem = WindowId | AppleMenuActionId;

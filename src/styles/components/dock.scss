@@ -10,7 +10,7 @@
   --icon-min-size: 28px;
   --dock-outer-margin: 12px;
   --dock-available-width: calc(100svw - (var(--dock-outer-margin) * 2));
-  z-index: 100;
+  z-index: 111;
 
   width: fit-content;
   max-width: var(--dock-available-width);

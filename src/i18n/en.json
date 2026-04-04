@@ -247,6 +247,7 @@
     "brightnessAlt": "brightness"
   },
   "dock": {
+    "launchpad": "Launchpad",
     "finder": "Finder",
     "about": "About",
     "calculator": "Calculator",
@@ -254,6 +255,9 @@
     "weather": "Weather",
     "textEditor": "Text Editor",
     "iconAlt": "dock icon"
+  },
+  "launchpad": {
+    "closeLabel": "Close Launchpad"
   },
   "login": {
     "passwordPlaceholder": "Enter anything...",
