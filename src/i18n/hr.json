@@ -200,6 +200,7 @@
   "menuBar": {
     "appleMenuLabel": "Apple izbornik",
     "controlCenterLabel": "Centar kontrole",
+    "spotlightLabel": "Spotlight pretraga",
     "windowMenuLabel": "{{window}} izbornik",
     "closeWindow": "Zatvori {{window}}",
     "windowLabels": {
@@ -258,6 +259,12 @@
   },
   "launchpad": {
     "closeLabel": "Zatvori Launchpad"
+  },
+  "spotlight": {
+    "placeholder": "Spotlight pretraga",
+    "inputLabel": "Spotlight polje za pretragu",
+    "hint": "Počni tipkati za pretragu Launchpad aplikacija.",
+    "noResults": "Nema odgovarajućih aplikacija."
   },
   "login": {
     "passwordPlaceholder": "Unesite bilo što...",

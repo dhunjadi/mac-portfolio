@@ -13,11 +13,15 @@ import { lazy, useCallback, useEffect, useRef, useState } from "react";
 import { useLogin } from "../stores/loginStore";
 import { useShutDown } from "../stores/powerStore";
 import Icon from "../components/DesktopIcon";
+import { useSpotlightOpen } from "../stores/spotlightStore";
 
 const LoginOverlay = lazy(() => import("../components/LoginOverlay"));
 
 const ShutDownOverlay = lazy(() => import("../components/ShutDownOverlay"));
 const LaunchpadOverlay = lazy(() => import("../components/LaunchpadOverlay"));
+const SpotlightSearch = lazy(
+  () => import("../components/SpotlightSearch"),
+);
 
 const AboutThisDevWindow = lazy(
   () => import("../components/windows/AboutThisDevWindow"),
@@ -88,6 +92,7 @@ const HomeScreen = () => {
   const dockPosition = useDockPosition();
   const isLoggedIn = useLogin();
   const isShutDown = useShutDown();
+  const isSpotlightOpen = useSpotlightOpen();
   const { closeWindow, openWindow } = useWindowActions();
 
   const menuBarRef = useRef<HTMLDivElement>(null);
@@ -203,6 +208,7 @@ const HomeScreen = () => {
 
       <ShutDownOverlay />
       <LaunchpadOverlay />
+      {isSpotlightOpen && <SpotlightSearch />}
       <BrightnessOverlay />
 
       <MenuBar ref={menuBarRef} />

@@ -8,10 +8,15 @@ import AppleMenuDropdown from "./AppleMenuDropdown";
 import type { AppleMenuDropdownItem, WindowId } from "../types";
 import { usePowerActions } from "../stores/powerStore";
 import controlCenterIcon from "/icons/control-center.png";
+import searchIcon from "/icons/search-icon.svg";
 import ControlCenterDropdown from "./ControlCenterDropdown";
 import { useTranslation } from "react-i18next";
 import { getMenuBarWindowLabels, isWindowId } from "../data/windowData";
 import { useShow24HourTime } from "../stores/settingsStore";
+import {
+  useSpotlightActions,
+  useSpotlightOpen,
+} from "../stores/spotlightStore";
 
 type MenuBarProps = {
   hideAppleLogo?: boolean;
@@ -25,6 +30,8 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
   const { setIsSleeping } = usePowerActions();
   const activeWindowId = useActiveWindowId();
   const show24HourTime = useShow24HourTime();
+  const isSpotlightOpen = useSpotlightOpen();
+  const { openSpotlight, closeSpotlight } = useSpotlightActions();
 
   const [isAppleMenuOpen, setIsAppleMenuOpen] = useState(false);
   const [isWindowMenuOpen, setIsWindowMenuOpen] = useState(false);
@@ -101,9 +108,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
   const dayLabel = dayLabels[now.day()] ?? "";
   const monthLabel = monthLabels[now.month()] ?? "";
   const dateLabel = `${dayLabel} ${now.format("D")} ${monthLabel}`;
-  const timeLabel = show24HourTime
-    ? now.format("HH:mm")
-    : now.format("h:mm A");
+  const timeLabel = show24HourTime ? now.format("HH:mm") : now.format("h:mm A");
 
   const handleAppleMenuSelect = (item: AppleMenuDropdownItem) => {
     if (item === "sleep") {
@@ -131,6 +136,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
               onClick={() => {
                 setIsWindowMenuOpen(false);
                 setIsControlCenterOpen(false);
+                closeSpotlight();
                 setIsAppleMenuOpen((prev) => !prev);
               }}
             >
@@ -155,6 +161,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
                   setIsAppleMenuOpen(false);
                   setIsWindowMenuOpen((prev) => !prev);
                   setIsControlCenterOpen(false);
+                  closeSpotlight();
                 }}
               >
                 {activeWindowLabel}
@@ -185,6 +192,27 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
         </div>
       )}
       <div className="c-menuBar__right">
+        <div className="c-menuBar__right_spotlight">
+          <button
+            type="button"
+            className={`${isSpotlightOpen ? "active" : ""}`}
+            aria-label={t("menuBar.spotlightLabel")}
+            aria-expanded={isSpotlightOpen}
+            data-spotlight-trigger
+            onClick={() => {
+              setIsAppleMenuOpen(false);
+              setIsWindowMenuOpen(false);
+              setIsControlCenterOpen(false);
+              if (isSpotlightOpen) {
+                closeSpotlight();
+                return;
+              }
+              openSpotlight();
+            }}
+          >
+            <img src={searchIcon} alt="magnifier" />
+          </button>
+        </div>
         <div className="c-menuBar__right_controlCenter" ref={controlCenterRef}>
           <button
             type="button"
@@ -194,6 +222,7 @@ const MenuBar = ({ hideAppleLogo, ref }: MenuBarProps) => {
             onClick={() => {
               setIsAppleMenuOpen(false);
               setIsWindowMenuOpen(false);
+              closeSpotlight();
               setIsControlCenterOpen((prev) => !prev);
             }}
           >

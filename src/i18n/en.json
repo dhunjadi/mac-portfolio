@@ -200,6 +200,7 @@
   "menuBar": {
     "appleMenuLabel": "Apple menu",
     "controlCenterLabel": "Control center menu",
+    "spotlightLabel": "Spotlight search",
     "windowMenuLabel": "{{window}} menu",
     "closeWindow": "Close {{window}}",
     "windowLabels": {
@@ -258,6 +259,12 @@
   },
   "launchpad": {
     "closeLabel": "Close Launchpad"
+  },
+  "spotlight": {
+    "placeholder": "Spotlight Search",
+    "inputLabel": "Spotlight search input",
+    "hint": "Start typing to search Launchpad apps.",
+    "noResults": "No matching apps."
   },
   "login": {
     "passwordPlaceholder": "Enter anything...",
