@@ -8,6 +8,7 @@ Live demo: https://dhunjadi.github.io/mac-portfolio/
 
 - Boot, login, sleep, restart, and shutdown flow (`/turn-on` -> `/` -> `/turn-off`)
 - Desktop UI with menu bar, control center, dock, draggable windows, and overlays
+- Launchpad overlay with an app grid for quick window launching (Dock icon + ESC to close)
 - Window management with focus, z-index stacking, minimize/restore, maximize, and resizing
 - Dock with magnification, drag-to-reorder, active indicators, and left/bottom/right positioning
 - Settings window with theme preference (light/dark/auto)
