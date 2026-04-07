@@ -4,7 +4,7 @@ import WallpaperPanel from "../../../../../components/windows/settings/panels/Wa
 
 const mockSetWallpaper = vi.fn();
 
-vi.mock("../../stores/settingsStore", () => ({
+vi.mock("../../../../../stores/settingsStore", () => ({
   useWallpaper: () => "/wall-1.jpg",
   useWallpaperPreviews: () => ["/previews/wall-1.jpg", "/previews/wall-2.jpg"],
   useSettingsActions: () => ({

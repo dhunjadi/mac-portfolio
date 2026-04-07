@@ -27,6 +27,13 @@ vi.mock("framer-motion", () => ({
   useMotionValue: () => ({
     set: mockMotionSet,
   }),
+  useTransform: (value: unknown) => value,
+  useSpring: (value: unknown) => value,
+  motion: {
+    div: ({ children, ...props }: { children: ReactNode }) => (
+      <div {...props}>{children}</div>
+    ),
+  },
   Reorder: {
     Group: ({ children, ...props }: { children: ReactNode }) => {
       const { _, ...rest } = props as Record<string, unknown>;
@@ -75,9 +82,10 @@ describe("Dock", () => {
     render(<Dock />);
 
     expect(screen.getByTestId("dock-icon-finder")).toBeInTheDocument();
+    expect(screen.getByTestId("dock-icon-launchpad")).toBeInTheDocument();
     expect(screen.getByTestId("dock-icon-about")).toBeInTheDocument();
-    expect(screen.getByTestId("dock-icon-calculator")).toBeInTheDocument();
-    expect(screen.getByTestId("dock-icon-settings")).toBeInTheDocument();
+    expect(screen.getByTestId("dock-icon-weather")).toBeInTheDocument();
+    expect(screen.getByTestId("dock-icon-text-editor")).toBeInTheDocument();
   });
 
   it("hides dock when user is not logged in", () => {
@@ -94,14 +102,15 @@ describe("Dock", () => {
     render(<Dock />);
 
     await user.click(screen.getByTestId("dock-icon-finder"));
+    await user.click(screen.getByTestId("dock-icon-launchpad"));
     await user.click(screen.getByTestId("dock-icon-about"));
-    await user.click(screen.getByTestId("dock-icon-calculator"));
-    await user.click(screen.getByTestId("dock-icon-settings"));
+    await user.click(screen.getByTestId("dock-icon-weather"));
+    await user.click(screen.getByTestId("dock-icon-text-editor"));
 
     expect(openWindow).toHaveBeenCalledTimes(3);
     expect(openWindow).toHaveBeenNthCalledWith(1, "about");
-    expect(openWindow).toHaveBeenNthCalledWith(2, "calculator");
-    expect(openWindow).toHaveBeenNthCalledWith(3, "settings");
+    expect(openWindow).toHaveBeenNthCalledWith(2, "weather");
+    expect(openWindow).toHaveBeenNthCalledWith(3, "text-editor");
   });
 
   it("updates motion value on mouse move on desktop", () => {

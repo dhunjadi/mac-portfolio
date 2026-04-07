@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import SettingsWindow from "../../../../components/windows/settings/SettingsWindow";
@@ -33,18 +33,18 @@ describe("SettingsWindow", () => {
     expect(searchBar).toHaveValue("abc");
   });
 
-  it("renders appearance panel and changes theme, fill and blur", async () => {
+  it("renders appearance panel and changes theme", async () => {
     render(<SettingsWindow onClose={mockOnClose} />);
 
     const appearanceTab = screen.getAllByRole("button")[0];
 
     await user.click(appearanceTab);
 
-    const panelTitle = screen.getByText(/appearance/i, { selector: "h2" });
+    const panelTitle = screen.getByText(/appearance/i, { selector: "h3" });
     expect(panelTitle).toBeInTheDocument();
 
     const themeGroup = screen.getByRole("radiogroup", {
-      name: i18n.t("windows.settings.categories.appearance.themeLabel"),
+      name: i18n.t("windows.settings.categories.appearance.appearance"),
     });
     const themeButtons = within(themeGroup).getAllByRole("radio");
     expect(themeButtons.length).toBe(3);
@@ -53,24 +53,6 @@ describe("SettingsWindow", () => {
 
     expect(themeButtons[1]).toHaveAttribute("aria-checked", "true");
 
-    const colorFillSlider = screen.getByLabelText(
-      /color fill:/i,
-    ) as HTMLInputElement;
-    expect(colorFillSlider.value).toBe("0.25");
-    expect(screen.getByText("Color fill: 25%")).toBeInTheDocument();
-
-    fireEvent.change(colorFillSlider, { target: { value: "0.50" } });
-
-    expect(colorFillSlider.value).toBe("0.5");
-    expect(screen.getByText("Color fill: 50%")).toBeInTheDocument();
-
-    const blurSlider = screen.getByLabelText(/blur:/i) as HTMLInputElement;
-    expect(blurSlider.value).toBe("16");
-    expect(screen.getByText("Blur: 16")).toBeInTheDocument();
-
-    fireEvent.change(blurSlider, { target: { value: "70" } });
-
-    expect(blurSlider.value).toBe("70");
-    expect(screen.getByText("Blur: 70")).toBeInTheDocument();
+    expect(screen.getByLabelText(/sidebar icon size/i)).toBeInTheDocument();
   });
 });

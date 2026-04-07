@@ -6,7 +6,7 @@ const mockSetDockPosition = vi.fn();
 const mockSetDockIconMaxSize = vi.fn();
 const mockSetDockIconScale = vi.fn();
 
-vi.mock("../../stores/settingsStore", () => ({
+vi.mock("../../../../../stores/settingsStore", () => ({
   useDockPosition: () => "bottom",
   useDockIconMaxSize: () => 56,
   useDockIconScale: () => 1.5,
@@ -17,7 +17,7 @@ vi.mock("../../stores/settingsStore", () => ({
   }),
 }));
 
-vi.mock("../../utils/dockSizing", () => ({
+vi.mock("../../../../../utils/dockSizing", () => ({
   getDockIconSizeLimits: () => ({ min: 32, max: 64 }),
   clampDockIconSize: (value: number) => value,
 }));

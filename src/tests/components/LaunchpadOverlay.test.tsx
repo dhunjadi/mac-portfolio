@@ -48,9 +48,11 @@ describe("LaunchpadOverlay", () => {
   it("renders launchpad apps when open", () => {
     render(<LaunchpadOverlay />);
 
-    expect(screen.getByRole("button", { name: "Finder" })).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "Calculator" }),
+      screen.getByRole("button", { name: /finder/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /calculator/i }),
     ).toBeInTheDocument();
   });
 
@@ -67,7 +69,7 @@ describe("LaunchpadOverlay", () => {
     const user = userEvent.setup();
     render(<LaunchpadOverlay />);
 
-    await user.click(screen.getByRole("button", { name: "Calculator" }));
+    await user.click(screen.getByRole("button", { name: /calculator/i }));
 
     expect(openWindow).toHaveBeenCalledWith("calculator");
     expect(closeLaunchpad).toHaveBeenCalledTimes(1);

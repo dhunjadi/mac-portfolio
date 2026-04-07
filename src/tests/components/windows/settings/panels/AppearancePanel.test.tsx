@@ -4,24 +4,21 @@ import AppearancePanel from "../../../../../components/windows/settings/panels/A
 import { colorOptions } from "../../../../../data/colorOptions";
 import i18n from "../../../../../i18n";
 
-const mockSetGlassAlpha = vi.fn();
-const mockSetBlur = vi.fn();
 const mockSetThemePreference = vi.fn();
 const mockSetAccentColor = vi.fn();
 const mockSetHighlightColor = vi.fn();
+const mockSetSidebarIconSize = vi.fn();
 
-vi.mock("../../stores/settingsStore", () => ({
-  useGlassAlpha: () => 0.4,
-  useBlur: () => 12,
+vi.mock("../../../../../stores/settingsStore", () => ({
   useAccentColor: () => "#AF52DE",
   useHighlightColor: () => "#FF9F0A",
   useThemePreference: () => "auto",
+  useSidebarIconSize: () => "medium",
   useSettingsActions: () => ({
-    setGlassAlpha: mockSetGlassAlpha,
-    setBlur: mockSetBlur,
     setThemePreference: mockSetThemePreference,
     setAccentColor: mockSetAccentColor,
     setHighlightColor: mockSetHighlightColor,
+    setSidebarIconSize: mockSetSidebarIconSize,
   }),
 }));
 
@@ -30,7 +27,7 @@ describe("AppearancePanel", () => {
     render(<AppearancePanel />);
 
     const themeLabel = i18n.t(
-      "windows.settings.categories.appearance.themeLabel",
+      "windows.settings.categories.appearance.appearance",
     );
     const themeGroup = screen.getByRole("radiogroup", {
       name: themeLabel,
@@ -46,52 +43,50 @@ describe("AppearancePanel", () => {
   it("updates accent color on selection", () => {
     render(<AppearancePanel />);
 
-    const firstColor = colorOptions[2].value;
-    const accentLabel = i18n.t(
-      "windows.settings.categories.appearance.accentColorLabel",
-    );
-    const accentGroup = screen.getByRole("radiogroup", {
-      name: accentLabel,
-    });
-    const button = within(accentGroup).getByRole("radio", {
-      name: `${accentLabel}: ${firstColor}`,
-    });
+    const firstColor = colorOptions[2];
+    const groups = screen.getAllByRole("radiogroup");
+    const accentGroup = groups[1];
+    const button = within(accentGroup)
+      .getAllByRole("radio")
+      .find((node) => node.getAttribute("data-color") === firstColor.label);
+
+    if (!button) {
+      throw new Error("Accent color button not found");
+    }
 
     fireEvent.click(button);
-    expect(mockSetAccentColor).toHaveBeenCalledWith(firstColor.toLowerCase());
+    expect(mockSetAccentColor).toHaveBeenCalledWith(
+      firstColor.value.toLowerCase(),
+    );
   });
 
   it("updates highlight color on selection", () => {
     render(<AppearancePanel />);
 
-    const firstColor = colorOptions[1].value;
-    const highlightLabel = i18n.t(
-      "windows.settings.categories.appearance.highlightColorLabel",
-    );
-    const highlightGroup = screen.getByRole("radiogroup", {
-      name: highlightLabel,
-    });
-    const button = within(highlightGroup).getByRole("radio", {
-      name: `${highlightLabel}: ${firstColor}`,
-    });
+    const firstColor = colorOptions[1];
+    const groups = screen.getAllByRole("radiogroup");
+    const highlightGroup = groups[2];
+    const button = within(highlightGroup)
+      .getAllByRole("radio")
+      .find((node) => node.getAttribute("data-color") === firstColor.label);
+
+    if (!button) {
+      throw new Error("Highlight color button not found");
+    }
 
     fireEvent.click(button);
     expect(mockSetHighlightColor).toHaveBeenCalledWith(
-      firstColor.toLowerCase(),
+      firstColor.value.toLowerCase(),
     );
   });
 
-  it("updates alpha and blur from sliders", () => {
+  it("updates sidebar icon size from dropdown", () => {
     render(<AppearancePanel />);
 
-    fireEvent.change(screen.getByLabelText(/Color fill/i), {
-      target: { value: "0.7" },
-    });
-    fireEvent.change(screen.getByLabelText(/Blur/i), {
-      target: { value: "42" },
+    fireEvent.change(screen.getByLabelText(/sidebar icon size/i), {
+      target: { value: "large" },
     });
 
-    expect(mockSetGlassAlpha).toHaveBeenCalledWith(0.7);
-    expect(mockSetBlur).toHaveBeenCalledWith(42);
+    expect(mockSetSidebarIconSize).toHaveBeenCalledWith("large");
   });
 });
