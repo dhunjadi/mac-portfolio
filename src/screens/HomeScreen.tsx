@@ -9,7 +9,7 @@ import {
   useThemePreference,
   useWallpaper,
 } from "../stores/settingsStore";
-import { lazy, useCallback, useEffect, useRef, useState } from "react";
+import { Suspense, lazy, useCallback, useEffect, useRef, useState } from "react";
 import { useLogin } from "../stores/loginStore";
 import { useShutDown } from "../stores/powerStore";
 import Icon from "../components/DesktopIcon";
@@ -204,50 +204,56 @@ const HomeScreen = () => {
       className="s-home"
       style={{ backgroundImage: `url(${displayedWallpaper})` }}
     >
-      <LoginOverlay />
+      <Suspense fallback={null}>
+        <LoginOverlay />
 
-      <ShutDownOverlay />
-      <LaunchpadOverlay />
-      {isSpotlightOpen && <SpotlightSearch />}
-      <BrightnessOverlay />
+        <ShutDownOverlay />
+        <LaunchpadOverlay />
+        {isSpotlightOpen && <SpotlightSearch />}
+        <BrightnessOverlay />
 
-      <MenuBar ref={menuBarRef} />
-      <main>
-        {isLoggedIn && !isShutDown && (
-          <Icon
-            label="Resume.pdf"
-            imgSrc={resumePreviewIcon}
-            onOpen={() => openWindow("pdf")}
-            xPosition={24}
-            yPosition={72}
-          />
-        )}
+        <MenuBar ref={menuBarRef} />
+        <main>
+          {isLoggedIn && !isShutDown && (
+            <Icon
+              label="Resume.pdf"
+              imgSrc={resumePreviewIcon}
+              onOpen={() => openWindow("pdf")}
+              xPosition={24}
+              yPosition={72}
+            />
+          )}
 
-        {isAboutWindowOpen && <AboutThisDevWindow onClose={handleCloseAbout} />}
+          {isAboutWindowOpen && (
+            <AboutThisDevWindow onClose={handleCloseAbout} />
+          )}
 
-        {isCalculatorWindowOpen && (
-          <CalculatorWindow onClose={handleCloseCalculator} />
-        )}
+          {isCalculatorWindowOpen && (
+            <CalculatorWindow onClose={handleCloseCalculator} />
+          )}
 
-        {isShutDownModalOpen && <ShutDownModal />}
+          {isShutDownModalOpen && <ShutDownModal />}
 
-        {isRestartModalOpen && <RestartModal />}
+          {isRestartModalOpen && <RestartModal />}
 
-        {isSettingsWindowOpen && (
-          <SettingsWindow onClose={handleCloseSettings} />
-        )}
+          {isSettingsWindowOpen && (
+            <SettingsWindow onClose={handleCloseSettings} />
+          )}
 
-        {isFinderWindowOpen && <FinderWindow onClose={handleCloseFinder} />}
+          {isFinderWindowOpen && <FinderWindow onClose={handleCloseFinder} />}
 
-        {isPdfWindowOpen && <PdfWindow onClose={handleClosePdf} />}
+          {isPdfWindowOpen && <PdfWindow onClose={handleClosePdf} />}
 
-        {isWeatherWindowOpen && <WeatherWindow onClose={handleCloseWeather} />}
+          {isWeatherWindowOpen && (
+            <WeatherWindow onClose={handleCloseWeather} />
+          )}
 
-        {isTextEditorWindowOpen && (
-          <TextEditorWindow onClose={handleCloseTextEditor} />
-        )}
-      </main>
-      <Dock ref={dockRef} />
+          {isTextEditorWindowOpen && (
+            <TextEditorWindow onClose={handleCloseTextEditor} />
+          )}
+        </main>
+        <Dock ref={dockRef} />
+      </Suspense>
     </div>
   );
 };
