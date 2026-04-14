@@ -26,6 +26,7 @@ import {
 } from "../stores/spotlightStore";
 import SpotlightSearch from "../components/SpotlightSearch";
 import { useHotkey } from "@tanstack/react-hotkeys";
+import Spinner from "../components/Spinner";
 
 const LoginOverlay = lazy(() => import("../components/LoginOverlay"));
 
@@ -110,6 +111,7 @@ const HomeScreen = () => {
 
   const [displayedWallpaper, setDisplayedWallpaper] = useState(wallpaper);
 
+  // macOS opens native Spotlight search with Mod+Space so I put Mod+B
   useHotkey("Mod+B", () => openSpotlight());
 
   const handleCloseAbout = useCallback(
@@ -216,26 +218,25 @@ const HomeScreen = () => {
       className="s-home"
       style={{ backgroundImage: `url(${displayedWallpaper})` }}
     >
-      <Suspense fallback={<>dsafsd</>}>
-        <LoginOverlay />
+      <LoginOverlay />
 
-        <ShutDownOverlay />
-        <LaunchpadOverlay />
-        {isSpotlightOpen && <SpotlightSearch />}
-        <BrightnessOverlay />
+      <ShutDownOverlay />
+      <LaunchpadOverlay />
+      {isSpotlightOpen && <SpotlightSearch />}
+      <BrightnessOverlay />
 
-        <MenuBar ref={menuBarRef} />
-        <main>
-          {isLoggedIn && !isShutDown && (
-            <Icon
-              label="Resume.pdf"
-              imgSrc={resumePreviewIcon}
-              onOpen={() => openWindow("pdf")}
-              xPosition={24}
-              yPosition={72}
-            />
-          )}
-
+      <MenuBar ref={menuBarRef} />
+      <main>
+        {isLoggedIn && !isShutDown && (
+          <Icon
+            label="Resume.pdf"
+            imgSrc={resumePreviewIcon}
+            onOpen={() => openWindow("pdf")}
+            xPosition={24}
+            yPosition={72}
+          />
+        )}
+        <Suspense fallback={<Spinner />}>
           {isAboutWindowOpen && (
             <AboutThisDevWindow onClose={handleCloseAbout} />
           )}
@@ -263,9 +264,9 @@ const HomeScreen = () => {
           {isTextEditorWindowOpen && (
             <TextEditorWindow onClose={handleCloseTextEditor} />
           )}
-        </main>
-        <Dock ref={dockRef} />
-      </Suspense>
+        </Suspense>
+      </main>
+      <Dock ref={dockRef} />
     </div>
   );
 };
