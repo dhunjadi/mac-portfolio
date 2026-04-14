@@ -9,19 +9,28 @@ import {
   useThemePreference,
   useWallpaper,
 } from "../stores/settingsStore";
-import { Suspense, lazy, useCallback, useEffect, useRef, useState } from "react";
+import {
+  Suspense,
+  lazy,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useLogin } from "../stores/loginStore";
 import { useShutDown } from "../stores/powerStore";
 import Icon from "../components/DesktopIcon";
-import { useSpotlightOpen } from "../stores/spotlightStore";
+import {
+  useSpotlightActions,
+  useSpotlightOpen,
+} from "../stores/spotlightStore";
+import SpotlightSearch from "../components/SpotlightSearch";
+import { useHotkey } from "@tanstack/react-hotkeys";
 
 const LoginOverlay = lazy(() => import("../components/LoginOverlay"));
 
 const ShutDownOverlay = lazy(() => import("../components/ShutDownOverlay"));
 const LaunchpadOverlay = lazy(() => import("../components/LaunchpadOverlay"));
-const SpotlightSearch = lazy(
-  () => import("../components/SpotlightSearch"),
-);
 
 const AboutThisDevWindow = lazy(
   () => import("../components/windows/AboutThisDevWindow"),
@@ -94,11 +103,14 @@ const HomeScreen = () => {
   const isShutDown = useShutDown();
   const isSpotlightOpen = useSpotlightOpen();
   const { closeWindow, openWindow } = useWindowActions();
+  const { openSpotlight } = useSpotlightActions();
 
   const menuBarRef = useRef<HTMLDivElement>(null);
   const dockRef = useRef<HTMLUListElement>(null);
 
   const [displayedWallpaper, setDisplayedWallpaper] = useState(wallpaper);
+
+  useHotkey("Mod+B", () => openSpotlight());
 
   const handleCloseAbout = useCallback(
     () => closeWindow("about"),
@@ -204,7 +216,7 @@ const HomeScreen = () => {
       className="s-home"
       style={{ backgroundImage: `url(${displayedWallpaper})` }}
     >
-      <Suspense fallback={null}>
+      <Suspense fallback={<>dsafsd</>}>
         <LoginOverlay />
 
         <ShutDownOverlay />
