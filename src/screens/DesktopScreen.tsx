@@ -85,7 +85,7 @@ const mixHex = (baseHex: string, mixHexValue: string, amount: number) => {
   return `#${channels.join("")}`.toUpperCase();
 };
 
-const HomeScreen = () => {
+const DesktopScreen = () => {
   const isAboutWindowOpen = useOpenedWindow("about");
   const isCalculatorWindowOpen = useOpenedWindow("calculator");
   const isShutDownModalOpen = useOpenedWindow("shut-down");
@@ -215,7 +215,7 @@ const HomeScreen = () => {
 
   return (
     <div
-      className="s-home"
+      className="s-desktop"
       style={{ backgroundImage: `url(${displayedWallpaper})` }}
     >
       <LoginOverlay />
@@ -271,4 +271,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default DesktopScreen;

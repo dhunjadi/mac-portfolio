@@ -1,5 +1,5 @@
 export const appRoutes = {
-  home: "/",
+  desktop: "/",
   turnOn: "/turn-on",
   turnOff: "/turn-off",
 } as const;

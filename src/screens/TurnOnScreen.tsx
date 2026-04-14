@@ -12,7 +12,7 @@ const TurnOnScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       turnOn();
-      navigate(appRoutes.home);
+      navigate(appRoutes.desktop);
     }, 3500);
 
     return () => clearTimeout(timer);
